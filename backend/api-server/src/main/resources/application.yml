@@ -1,0 +1,14 @@
+logging:
+  level:
+    root: info
+  file:
+    name: ./logs/api.log
+server:
+  address: 127.0.0.1
+  port: 8888
+  servlet:
+    encoding:
+      # Charset of HTTP request and responses.
+      charset: UTF-8
+      # Enable HTTP encoding support.
+      enabled: true
