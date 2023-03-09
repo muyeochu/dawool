@@ -6,9 +6,7 @@ import App from "./App";
 
 ReactDOM.render(
   <RecoilRoot>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App />
   </RecoilRoot>,
   document.getElementById("root")
 );
