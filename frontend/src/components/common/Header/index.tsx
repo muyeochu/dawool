@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+
+// type
 
 // styles
 import {
@@ -14,6 +16,7 @@ import {
 import { ReactComponent as LogoIc } from "../../../assets/icon/logoIc.svg";
 import { ReactComponent as SearchIc } from "../../../assets/icon/searchIc.svg";
 import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
+import { ReactComponent as PersonIc } from "../../../assets/icon/personIc.svg";
 
 interface Props {
   searchBar?: boolean;
@@ -92,12 +95,11 @@ const Header = ({
 
         <MicIc />
 
-        <Link to="/tourspot">
-          <span>관광지</span>
-        </Link>
+        <Link to="/tourspot">관광지</Link>
         <Link to="/restaurant">식당</Link>
         <Link to="/accommodation">숙박</Link>
-        <span>마이페이지</span>
+
+        <PersonIc />
       </HeaderContainer>
     </header>
   );
