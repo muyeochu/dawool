@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class KakaoUserResDto {
+public class UserResDto {
 
     private String nickName;
     private String email;
