@@ -13,11 +13,11 @@ import {
   TourSpotPage,
 } from "./pages/index";
 import Header from "./components/common/Header";
-import { GridContainer } from "./styles/appStyles";
+import { AppContainer, GridContainer } from "./styles/appStyles";
 
 function App() {
   return (
-    <div>
+    <AppContainer>
       <GridContainer>
         <BrowserRouter>
           <Header />
@@ -35,7 +35,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </GridContainer>
-    </div>
+    </AppContainer>
   );
 }
 

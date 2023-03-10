@@ -1,12 +1,14 @@
-import styled from 'styled-components';
-import React from 'react';
+import styled from "styled-components";
 
-const FooterSetting = styled.div`
-    background-color:#D7D7D7;
-    text-align:center;
-    padding: 5px 0px;
+export const FooterContainer = styled.div``;
+
+export const FooterSetting = styled.div`
+  background-color: #d7d7d7;
+  height: 155px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 `;
-
-export {FooterSetting};
-//footer 배경색 바꾸기
-
