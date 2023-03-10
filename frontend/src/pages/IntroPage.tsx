@@ -1,7 +1,11 @@
+import MainFirst from "../components/main/index";
+import MainSecond from "../components/main2/index";
+
 const IntroPage = () => {
   return (
     <div>
-      <h1>Intro 페이지입니다.</h1>
+      <MainFirst />
+      <MainSecond />
     </div>
   );
 };
