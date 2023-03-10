@@ -6,10 +6,16 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 // styles
 import {
   HeaderContainer,
+  GridItems,
+  ElementContainer,
+  LogoToMic,
+  ListToMy,
   LogoIcContainer,
   SearchBarContainer,
   SearchBarInput,
   SearchIcContainer,
+  NavStyle,
+  PersonIcContainer,
 } from "./styles";
 
 // icon
@@ -70,36 +76,39 @@ const Header = ({
   return (
     <header>
       <HeaderContainer>
-        {/* <NavLink to="/">
-          <LogoIcContainer>
-            <LogoIc />
-          </LogoIcContainer>
-        </NavLink> */}
+        <GridItems>
+          <ElementContainer>
+            <LogoToMic>
+              <LogoIcContainer onClick={clickLogoIc}>
+                <LogoIc />
+              </LogoIcContainer>
 
-        <LogoIcContainer onClick={clickLogoIc}>
-          <LogoIc />
-        </LogoIcContainer>
+              <SearchBarContainer>
+                <SearchBarInput
+                  placeholder="여행지를 검색해보세요"
+                  type="text"
+                  value={search}
+                  onChange={handleSearchInput}
+                  onKeyDown={(e) => onCheckEnter(e)}
+                />
+                <SearchIcContainer onClick={handleSearchIc}>
+                  <SearchIc />
+                </SearchIcContainer>
+              </SearchBarContainer>
 
-        <SearchBarContainer>
-          <SearchBarInput
-            placeholder="여행지를 검색해보세요"
-            type="text"
-            value={search}
-            onChange={handleSearchInput}
-            onKeyDown={(e) => onCheckEnter(e)}
-          />
-          <SearchIcContainer onClick={handleSearchIc}>
-            <SearchIc />
-          </SearchIcContainer>
-        </SearchBarContainer>
+              <MicIc />
+            </LogoToMic>
+            <ListToMy>
+              <NavStyle to="/tourspot">관광지</NavStyle>
+              <NavStyle to="/restaurant">식당</NavStyle>
+              <NavStyle to="/accommodation">숙박</NavStyle>
 
-        <MicIc />
-
-        <Link to="/tourspot">관광지</Link>
-        <Link to="/restaurant">식당</Link>
-        <Link to="/accommodation">숙박</Link>
-
-        <PersonIc />
+              <PersonIcContainer>
+                <PersonIc />
+              </PersonIcContainer>
+            </ListToMy>
+          </ElementContainer>
+        </GridItems>
       </HeaderContainer>
     </header>
   );
