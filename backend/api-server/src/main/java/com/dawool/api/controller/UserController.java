@@ -3,6 +3,7 @@ package com.dawool.api.controller;
 
 import com.dawool.api.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,22 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/api/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
     // 카카오 로그인
-    @GetMapping("/kakao")
+    @GetMapping("/kakao/callback")
     public Map<String, String> kakaoLogin(@RequestParam("code") String code) {
         Map<String, String> result = userService.getKakaoAccessToken(code);
         return result;
     }
 
-    @GetMapping("/kakao/userinfo")
-    public void userInfo() {
-        System.out.println("KAKAO INFO");
-        userService.getUserInfoByToken();
-    }
+//    @GetMapping("/kakao/userinfo")
+//    public void userInfo() {
+//        System.out.println("KAKAO INFO");
+//        userService.getUserInfoByToken();
+//    }
 }
