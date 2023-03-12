@@ -57,13 +57,13 @@ public class UserService {
         result.put("accessToken", accessToken);
         result.put("refreshToken", refreshToken);
 
-        getUserInfoByToken(accessToken);
+        getKakaoUserInfoByToken(accessToken);
 
         return result;
     }
     
     // 토큰으로 카카오 회원 정보 확인.
-    public String getUserInfoByToken(String token) {
+    public String getKakaoUserInfoByToken(String token) {
         Mono<String> mono = WebClient.builder().baseUrl("https://kapi.kakao.com")
                 .build()
                 .post()
@@ -74,9 +74,26 @@ public class UserService {
 
         JSONObject info = new JSONObject(mono.block());
 
-        System.out.println(info);
-        User user = new User();
-        userRepository.save(user);
+        JSONObject kakaoAccount = info.getJSONObject("kakao_account");
+
+        long kakaoId = info.getLong("id");
+
+        if(!userRepository.existsByKakaoId(kakaoId)) {
+            String nickName = kakaoAccount.getJSONObject("profile").getString("nickname");
+            String email = kakaoAccount.getString("email");
+            int ageRange = Integer.parseInt(kakaoAccount.getString("age_range").split("~")[0]);
+            String gender = kakaoAccount.getString("gender");
+
+            User user = User.builder()
+                    .kakaoId(kakaoId)
+                    .nickName(nickName)
+                    .email(email)
+                    .ageRange(ageRange)
+                    .gender(gender)
+                    .build();
+            userRepository.save(user);
+        }
+
         return null;
     }
 }
