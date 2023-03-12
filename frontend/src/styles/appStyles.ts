@@ -15,6 +15,8 @@ export const BoxMainContainer = styled.div`
   flex-direction: column;
 `;
 
-export const AppContainer = styled.div``;
+export const AppContainer = styled.div`
+    min-height:100%;
+`;
 
 export const FooterStyle = styled.footer``;
