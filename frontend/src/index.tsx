@@ -7,9 +7,7 @@ import Footer from "./components/common/Footer";
 
 ReactDOM.render(
   <RecoilRoot>
-    <BrowserRouter>
       <App />
-    </BrowserRouter>
     <Footer/>
   </RecoilRoot>,
   document.getElementById("root")
