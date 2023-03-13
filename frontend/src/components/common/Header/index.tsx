@@ -14,6 +14,7 @@ import {
   SearchBarContainer,
   SearchBarInput,
   SearchIcContainer,
+  MicIcContainer,
   NavStyle,
   PersonIcContainer,
 } from "./styles";
@@ -23,6 +24,7 @@ import { ReactComponent as LogoIc } from "../../../assets/icon/logoIc.svg";
 import { ReactComponent as SearchIc } from "../../../assets/icon/searchIc.svg";
 import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
 import { ReactComponent as PersonIc } from "../../../assets/icon/personIc.svg";
+import { ReactComponent as PersonIc2 } from "../../../assets/icon/person2Ic.svg";
 
 interface Props {
   searchBar?: boolean;
@@ -45,9 +47,8 @@ const Header = ({
   let currentUrl = window.location.pathname;
 
   const [search, setSearch] = useState("");
-
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [headerColor, setHeaderColor] = useState("#ffffff"); // 초기값 설정
+  const [headerColor, setHeaderColor] = useState("#ffffff");
 
   // Scroll 위치를 감지
   const updateScroll = () => {
@@ -67,7 +68,7 @@ const Header = ({
     } else {
       setHeaderColor("#ffffff"); // 그 외의 경우에는 초기값으로 변경
     }
-  }, [scrollPosition]);
+  }, [scrollPosition, currentUrl]);
 
   // 검색창
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,7 +102,7 @@ const Header = ({
   return (
     <HeaderFont>
       {currentUrl !== "/" && <InvisibleBox />}
-      <HeaderContainer headerColor={headerColor}>
+      <HeaderContainer headercolor={headerColor}>
         <GridItems>
           <ElementContainer>
             <LogoToMic>
@@ -111,18 +112,23 @@ const Header = ({
 
               <SearchBarContainer>
                 <SearchBarInput
+                  headercolor={headerColor}
                   placeholder="여행지를 검색해보세요"
                   type="text"
                   value={search}
                   onChange={handleSearchInput}
                   onKeyDown={(e) => onCheckEnter(e)}
                 />
-                <SearchIcContainer onClick={handleSearchIc}>
+                <SearchIcContainer
+                  headercolor={headerColor}
+                  onClick={handleSearchIc}
+                >
                   <SearchIc />
                 </SearchIcContainer>
               </SearchBarContainer>
-
-              <MicIc />
+              <MicIcContainer headercolor={headerColor}>
+                <MicIc />
+              </MicIcContainer>
             </LogoToMic>
             <ListToMy>
               <NavStyle to="/tourspot">관광지</NavStyle>

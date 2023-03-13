@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { NavLink } from "react-router-dom";
 
 import { ReactComponent as LogoIc } from "../../../assets/icon/logoIc.svg";
@@ -10,7 +10,7 @@ export const HeaderFont = styled.div`
   font-weight: 500;
 `;
 
-export const HeaderContainer = styled.div<{ headerColor: string }>`
+export const HeaderContainer = styled.div<{ headercolor: string }>`
   display: grid;
   grid-template-columns: 1fr 6fr 1fr;
 
@@ -20,10 +20,10 @@ export const HeaderContainer = styled.div<{ headerColor: string }>`
   height: 60px;
   z-index: 99999;
 
-  background-color: ${(props) => props.headerColor};
+  background-color: ${(props) => props.headercolor};
   transition: background-color 0.2s ease-out;
   box-shadow: ${(props) =>
-    props.headerColor !== "transparent"
+    props.headercolor !== "transparent"
       ? "0 2px 8px rgba(0, 0, 0, 0.1)"
       : "none"};
 `;
@@ -68,7 +68,7 @@ export const LogoIcContainer = styled(LogoIc)`
   }
 `;
 
-export const SearchBarInput = styled.input`
+export const SearchBarInput = styled.input<{ headercolor: string }>`
   width: 335px;
   height: 37px;
   border: 2px solid #959595;
@@ -78,6 +78,12 @@ export const SearchBarInput = styled.input`
   &:focus {
     outline: none;
   }
+
+  ${(props) =>
+    props.headercolor === "transparent" &&
+    css`
+      border-color: #000000;
+    `}
 `;
 
 export const SearchBarContainer = styled.div`
@@ -86,7 +92,7 @@ export const SearchBarContainer = styled.div`
   margin-right: 12px;
 `;
 
-export const SearchIcContainer = styled(SearchIc)`
+export const SearchIcContainer = styled(SearchIc)<{ headercolor: string }>`
   fill: #959595;
   width: 17.38px;
   height: 18px;
@@ -95,14 +101,21 @@ export const SearchIcContainer = styled(SearchIc)`
   right: 16px;
   top: 12px;
 
+  ${(props) =>
+    props.headercolor === "transparent" &&
+    css`
+      fill: #000000;
+    `}
+
   &:hover {
     fill: #006083;
     cursor: pointer;
   }
 `;
 
-export const MicIcContainer = styled(MicIc)`
-  position: absolute;
+export const MicIcContainer = styled(MicIc)<{ headercolor: string }>`
+  fill: ${(props) =>
+    props.headercolor === "transparent" ? "#000000" : "#00769B"};
 `;
 
 export const NavStyle = styled(NavLink)`
