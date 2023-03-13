@@ -1,5 +1,6 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { useState } from "react";
+
 import {
   AccommodationPage,
   DetailPage,
@@ -22,13 +23,18 @@ import {
 } from "./styles/appStyles";
 
 function App() {
+  console.log(window.location);
   return (
     <AppContainer>
-      <GridContainer>
-        <BrowserRouter>
-          <Header />
-          <BoxMainContainer>
-            <InvisibleBox />
+      <BrowserRouter>
+        <Header />
+        <BoxMainContainer>
+          {/* {current === "http://localhost:3000/" ? null : (
+            <>
+              <InvisibleBox />
+            </>
+          )} */}
+          <GridContainer>
             <Routes>
               <Route path="/" element={<IntroPage />} />
               <Route path="/detail" element={<DetailPage />} />
@@ -42,9 +48,9 @@ function App() {
               <Route path="/tourspot" element={<TourSpotPage />} />
               <Route path="/waiting" element={<Waiting/>}/>
             </Routes>
-          </BoxMainContainer>
-        </BrowserRouter>
-      </GridContainer>
+          </GridContainer>
+        </BoxMainContainer>
+      </BrowserRouter>
     </AppContainer>
   );
 }
