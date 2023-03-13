@@ -14,9 +14,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Mono;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -63,7 +61,7 @@ public class UserService {
     }
     
     // 토큰으로 카카오 회원 정보 확인.
-    public String getKakaoUserInfoByToken(String token) {
+    public void getKakaoUserInfoByToken(String token) {
         Mono<String> mono = WebClient.builder().baseUrl("https://kapi.kakao.com")
                 .build()
                 .post()
@@ -93,7 +91,5 @@ public class UserService {
                     .build();
             userRepository.save(user);
         }
-
-        return null;
     }
 }
