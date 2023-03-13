@@ -9,6 +9,7 @@ import "./index.css";
 ReactDOM.render(
   <RecoilRoot>
     <App />
+    <Footer />
   </RecoilRoot>,
   document.getElementById("root")
 );
