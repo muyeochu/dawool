@@ -13,39 +13,31 @@ import {
   TourSpotPage,
 } from "./pages/index";
 import Header from "./components/common/Header";
-import {
-  AppContainer,
-  GridContainer,
-  InvisibleBox,
-  BoxMainContainer,
-} from "./styles/appStyles";
+import { GridContainer } from "./styles/appStyles";
 import { Waiting } from "./pages/LoginPage/waiting";
 
 function App() {
   return (
-    <AppContainer>
+    <div>
       <GridContainer>
         <BrowserRouter>
           <Header />
-          <BoxMainContainer>
-            <InvisibleBox />
-            <Routes>
-              <Route path="/" element={<IntroPage />} />
-              <Route path="/detail" element={<DetailPage />} />
-              <Route path="/interest" element={<InterestPage />} />
-              <Route path="/accommodation" element={<AccommodationPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/mycourse" element={<MyCoursePage />} />
-              <Route path="/restaurant" element={<RestaurantPage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/survey" element={<SurveyPage />} />
-              <Route path="/tourspot" element={<TourSpotPage />} />
-              <Route path="/waiting" element={<Waiting/>}/>
-            </Routes>
-          </BoxMainContainer>
+          <Routes>
+            <Route path="/" element={<IntroPage />} />
+            <Route path="/detail" element={<DetailPage />} />
+            <Route path="/interest" element={<InterestPage />} />
+            <Route path="/accommodation" element={<AccommodationPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/mycourse" element={<MyCoursePage />} />
+            <Route path="/restaurant" element={<RestaurantPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/survey" element={<SurveyPage />} />
+            <Route path="/tourspot" element={<TourSpotPage />} />
+            <Route path="/waiting" element={<Waiting/>}/>
+          </Routes>
         </BrowserRouter>
       </GridContainer>
-    </AppContainer>
+    </div>
   );
 }
 
