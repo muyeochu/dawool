@@ -14,7 +14,6 @@ import lombok.Setter;
 public class UserResDto {
 
     private String nickName;
-    private String email;
-    private int ageRange;
-    private String gender;
+    private String accessToken;
+    private String refreshToken;
 }
