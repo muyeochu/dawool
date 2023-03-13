@@ -6,15 +6,25 @@ import { ReactComponent as SearchIc } from "../../../assets/icon/searchIc.svg";
 import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
 import { ReactComponent as PersonIc } from "../../../assets/icon/personIc.svg";
 
+export const HeaderFont = styled.div`
+  font-weight: 500;
+`;
+
 export const HeaderContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 6fr 1fr;
 
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   height: 60px;
   background-color: pink;
+  z-index: 99999;
+`;
+
+export const InvisibleBox = styled.div`
+  height: 60px;
+  visibility: hidden;
 `;
 
 export const GridItems = styled.div`

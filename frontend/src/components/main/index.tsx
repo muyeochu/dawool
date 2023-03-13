@@ -1,11 +1,17 @@
-import { LandingContainer } from "./styles";
+import { convertCompilerOptionsFromJson } from "typescript";
+import { GridItemsBox, MainVideo } from "./styles";
 
 const MainFirst = () => {
   return (
-    <>
-      <h2>첫번째 메인페이지</h2>
-      <LandingContainer></LandingContainer>
-    </>
+    <GridItemsBox>
+      <MainVideo
+        src={process.env.PUBLIC_URL + "/videos/pexels-cottonbro-10435533.mp4"}
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+    </GridItemsBox>
   );
 };
 

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 
-// type
-
 // styles
 import {
+  HeaderFont,
   HeaderContainer,
+  InvisibleBox,
   GridItems,
   ElementContainer,
   LogoToMic,
@@ -43,6 +43,8 @@ const Header = ({
 }: Props) => {
   const navigate = useNavigate();
 
+  console.log("현재 주소는?", window.location.href);
+
   const [search, setSearch] = useState("");
 
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +76,8 @@ const Header = ({
   };
 
   return (
-    <header>
+    <HeaderFont>
+      <InvisibleBox />
       <HeaderContainer>
         <GridItems>
           <ElementContainer>
@@ -110,7 +113,7 @@ const Header = ({
           </ElementContainer>
         </GridItems>
       </HeaderContainer>
-    </header>
+    </HeaderFont>
   );
 };
 
