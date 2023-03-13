@@ -24,10 +24,4 @@ public class UserController {
         Map<String, String> result = userService.getKakaoAccessToken(code);
         return result;
     }
-
-//    @GetMapping("/kakao/userinfo")
-//    public void userInfo() {
-//        System.out.println("KAKAO INFO");
-//        userService.getUserInfoByToken();
-//    }
 }
