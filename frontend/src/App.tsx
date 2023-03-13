@@ -13,6 +13,7 @@ import {
   TourSpotPage,
 } from "./pages/index";
 import Header from "./components/common/Header";
+import { Waiting } from "./pages/LoginPage/waiting";
 import {
   AppContainer,
   GridContainer,
@@ -39,6 +40,7 @@ function App() {
               <Route path="/search" element={<SearchPage />} />
               <Route path="/survey" element={<SurveyPage />} />
               <Route path="/tourspot" element={<TourSpotPage />} />
+              <Route path="/waiting" element={<Waiting/>}/>
             </Routes>
           </BoxMainContainer>
         </BrowserRouter>
@@ -46,5 +48,6 @@ function App() {
     </AppContainer>
   );
 }
+
 
 export default App;
