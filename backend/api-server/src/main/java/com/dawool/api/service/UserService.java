@@ -66,7 +66,7 @@ public class UserService {
                 .build()
                 .post()
                 .uri("/v2/user/me")
-                .header("Authorization", "Bearer ")
+                .header("Authorization", "Bearer "+token)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .exchangeToMono(response -> response.bodyToMono(String.class));
 
