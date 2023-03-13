@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-import {ReactComponent as BackImg} from "../../assets/images/BackImg.svg";
+import BackImg from "../../assets/images/loginBackImg.png";
 
-export const BackgroundContainer = styled(BackImg)`
+export const BackgroundContainer = styled.div`
+    background-image:url(${BackImg});
     width:100%;
     height:100%;
 `
