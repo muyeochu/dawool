@@ -4,7 +4,6 @@ import com.dawool.api.entity.User;
 import com.dawool.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class UserService {
     private final UserRepository userRepository;
     @Value("${kakao.restapi.key}")
     private String kakaoAPIKey;
-    
+
     // 카카오 토큰 발급 후 회원가입 확인
     public Map<String, String> getKakaoAccessToken(String code) {
         String accessToken = "";
@@ -36,7 +35,7 @@ public class UserService {
         data.add("grant_type", "authorization_code");
         data.add("client_id", kakaoAPIKey);
         data.add("redirect_uri", redirectURI);
-        data.add("code",code);
+        data.add("code", code);
 
         // 카카오 로그인으로 받아온 code로 토큰 발급.
         Mono<String> mono = WebClient.builder().baseUrl("https://kauth.kakao.com")
@@ -45,6 +44,8 @@ public class UserService {
                 .uri("/oauth/token")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(BodyInserters.fromFormData(data))
+//                .retrieve()
+//                .bodyToMono(String.class);
                 .exchangeToMono(response -> response.bodyToMono(String.class));
 
         JSONObject info = new JSONObject(mono.block());
@@ -52,21 +53,22 @@ public class UserService {
         accessToken = info.getString("access_token");
         refreshToken = info.getString("refresh_token");
 
+        String nickName = getKakaoUserInfoByToken(accessToken);
+
         result.put("accessToken", accessToken);
         result.put("refreshToken", refreshToken);
-
-        getKakaoUserInfoByToken(accessToken);
+        result.put("nickName",nickName);
 
         return result;
     }
-    
+
     // 토큰으로 카카오 회원 정보 확인.
-    public void getKakaoUserInfoByToken(String token) {
+    public String getKakaoUserInfoByToken(String token) {
         Mono<String> mono = WebClient.builder().baseUrl("https://kapi.kakao.com")
                 .build()
                 .post()
                 .uri("/v2/user/me")
-                .header("Authorization", "Bearer "+token)
+                .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .exchangeToMono(response -> response.bodyToMono(String.class));
 
@@ -75,9 +77,9 @@ public class UserService {
         JSONObject kakaoAccount = info.getJSONObject("kakao_account");
 
         long kakaoId = info.getLong("id");
+        String nickName = kakaoAccount.getJSONObject("profile").getString("nickname");
 
-        if(!userRepository.existsByKakaoId(kakaoId)) {
-            String nickName = kakaoAccount.getJSONObject("profile").getString("nickname");
+        if (!userRepository.existsByKakaoId(kakaoId)) {
             String email = kakaoAccount.getString("email");
             int ageRange = Integer.parseInt(kakaoAccount.getString("age_range").split("~")[0]);
             String gender = kakaoAccount.getString("gender");
@@ -91,5 +93,6 @@ public class UserService {
                     .build();
             userRepository.save(user);
         }
+        return nickName;
     }
 }
