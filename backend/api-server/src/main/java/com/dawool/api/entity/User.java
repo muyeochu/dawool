@@ -19,7 +19,7 @@ public class User {
     @Id
     private String id;
 
-    private Long kakaoId;
+    private long kakaoId;
     private String nickName;
     private String email;
     private int ageRange;
