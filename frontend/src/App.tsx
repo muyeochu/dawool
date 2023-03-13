@@ -14,6 +14,7 @@ import {
 } from "./pages/index";
 import Header from "./components/common/Header";
 import { GridContainer } from "./styles/appStyles";
+import { Waiting } from "./pages/LoginPage/waiting";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/survey" element={<SurveyPage />} />
             <Route path="/tourspot" element={<TourSpotPage />} />
+            <Route path="/waiting" element={<Waiting/>}/>
           </Routes>
         </BrowserRouter>
       </GridContainer>
