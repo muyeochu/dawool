@@ -10,7 +10,7 @@ export const HeaderFont = styled.div`
   font-weight: 500;
 `;
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div<{ headerColor: string }>`
   display: grid;
   grid-template-columns: 1fr 6fr 1fr;
 
@@ -18,8 +18,14 @@ export const HeaderContainer = styled.div`
   top: 0;
   width: 100vw;
   height: 60px;
-  background-color: pink;
   z-index: 99999;
+
+  background-color: ${(props) => props.headerColor};
+  transition: background-color 0.2s ease-out;
+  box-shadow: ${(props) =>
+    props.headerColor !== "transparent"
+      ? "0 2px 8px rgba(0, 0, 0, 0.1)"
+      : "none"};
 `;
 
 export const InvisibleBox = styled.div`

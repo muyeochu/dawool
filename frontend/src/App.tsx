@@ -23,7 +23,6 @@ import {
 } from "./styles/appStyles";
 
 function App() {
-  console.log(window.location);
   return (
     <AppContainer>
       <BrowserRouter>
@@ -46,7 +45,7 @@ function App() {
               <Route path="/search" element={<SearchPage />} />
               <Route path="/survey" element={<SurveyPage />} />
               <Route path="/tourspot" element={<TourSpotPage />} />
-              <Route path="/waiting" element={<Waiting/>}/>
+              <Route path="/waiting" element={<Waiting />} />
             </Routes>
           </GridContainer>
         </BoxMainContainer>
@@ -54,6 +53,5 @@ function App() {
     </AppContainer>
   );
 }
-
 
 export default App;

@@ -4,7 +4,6 @@ export const GridItemsBox = styled.div`
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  background-color: red;
 `;
 
 export const MainVideo = styled.video`

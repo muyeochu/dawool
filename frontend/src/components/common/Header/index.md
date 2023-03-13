@@ -47,29 +47,13 @@ const Header = ({
   const [search, setSearch] = useState("");
 
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [headerColor, setHeaderColor] = useState("#ffffff"); // 초기값 설정
-
-  // Scroll 위치를 감지
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
-
   useEffect(() => {
     window.addEventListener("scroll", updateScroll);
-    return () => {
-      window.removeEventListener("scroll", updateScroll);
-    };
-  }, []);
+  });
 
-  useEffect(() => {
-    if (currentUrl === "/" && scrollPosition < 100) {
-      setHeaderColor("transparent"); // scrollPosition이 100보다 크면 headerColor를 변경
-    } else {
-      setHeaderColor("#ffffff"); // 그 외의 경우에는 초기값으로 변경
-    }
-  }, [scrollPosition]);
-
-  // 검색창
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
@@ -98,44 +82,49 @@ const Header = ({
     }
   };
 
+  // {currentUrl === "/" ? null : <InvisibleBox />
+
   return (
     <HeaderFont>
-      {currentUrl !== "/" && <InvisibleBox />}
-      <HeaderContainer headerColor={headerColor}>
-        <GridItems>
-          <ElementContainer>
-            <LogoToMic>
-              <LogoIcContainer onClick={clickLogoIc}>
-                <LogoIc />
-              </LogoIcContainer>
+      {scrollPosition < 100 ? (
+        <>
+          <HeaderContainer>
+            <GridItems>
+              <ElementContainer>
+                <LogoToMic>
+                  <LogoIcContainer onClick={clickLogoIc}>
+                    <LogoIc />
+                  </LogoIcContainer>
 
-              <SearchBarContainer>
-                <SearchBarInput
-                  placeholder="여행지를 검색해보세요"
-                  type="text"
-                  value={search}
-                  onChange={handleSearchInput}
-                  onKeyDown={(e) => onCheckEnter(e)}
-                />
-                <SearchIcContainer onClick={handleSearchIc}>
-                  <SearchIc />
-                </SearchIcContainer>
-              </SearchBarContainer>
+                  <SearchBarContainer>
+                    <SearchBarInput
+                      placeholder="여행지를 검색해보세요"
+                      type="text"
+                      value={search}
+                      onChange={handleSearchInput}
+                      onKeyDown={(e) => onCheckEnter(e)}
+                    />
+                    <SearchIcContainer onClick={handleSearchIc}>
+                      <SearchIc />
+                    </SearchIcContainer>
+                  </SearchBarContainer>
 
-              <MicIc />
-            </LogoToMic>
-            <ListToMy>
-              <NavStyle to="/tourspot">관광지</NavStyle>
-              <NavStyle to="/restaurant">식당</NavStyle>
-              <NavStyle to="/accommodation">숙박</NavStyle>
+                  <MicIc />
+                </LogoToMic>
+                <ListToMy>
+                  <NavStyle to="/tourspot">관광지</NavStyle>
+                  <NavStyle to="/restaurant">식당</NavStyle>
+                  <NavStyle to="/accommodation">숙박</NavStyle>
 
-              <PersonIcContainer>
-                <PersonIc />
-              </PersonIcContainer>
-            </ListToMy>
-          </ElementContainer>
-        </GridItems>
-      </HeaderContainer>
+                  <PersonIcContainer>
+                    <PersonIc />
+                  </PersonIcContainer>
+                </ListToMy>
+              </ElementContainer>
+            </GridItems>
+          </HeaderContainer>
+        </>
+      ) : null}
     </HeaderFont>
   );
 };
