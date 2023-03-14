@@ -4,8 +4,6 @@ import { ReactComponent as Main2Img } from "../../assets/images/main2Img.svg";
 
 export const MainSecondContainer = styled.div`
   height: 100vh;
-  display: flex;
-  align-items: center;
   position: relative;
 `;
 
