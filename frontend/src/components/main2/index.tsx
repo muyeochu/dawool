@@ -1,11 +1,26 @@
-import { LandingContainer } from "./styles";
+import {
+  MainSecondContainer,
+  Main2ImgStyle,
+  FontContainer,
+  MainFontStyle,
+  SideFontStyle,
+} from "./styles";
 
 const MainSecond = () => {
   return (
-    <div>
-      <h2>두번째 메인페이지</h2>
-      <LandingContainer></LandingContainer>
-    </div>
+    <MainSecondContainer id="main-second">
+      <Main2ImgStyle></Main2ImgStyle>
+      <FontContainer>
+        <MainFontStyle>무장애 여행은요</MainFontStyle>
+        <SideFontStyle>
+          신체적 제약 때문에 관광활동을 자유롭게 하지 못하는
+          <br /> 관광약자를 대상으로 한 여행을 말해요.
+          <br />즉 <b>장애인</b>뿐 아니라 <b>노약자</b>, <b>임산부</b>,
+          <b>어린이</b> 등의 <br />
+          다양한 관광약자가 무장애 여행의 대상이 될 수 있어요.
+        </SideFontStyle>
+      </FontContainer>
+    </MainSecondContainer>
   );
 };
 
