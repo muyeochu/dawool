@@ -18,10 +18,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
     @Id
     private String id;
-
     private long kakaoId;
     private String nickName;
     private String email;
     private int ageRange;
     private String gender;
+    private String role;
 }
