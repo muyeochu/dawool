@@ -1,11 +1,15 @@
 package com.dawool.api.service;
 
+import com.dawool.api.dto.TokenResDto;
+import com.dawool.api.dto.UserResDto;
 import com.dawool.api.entity.User;
 import com.dawool.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -92,7 +96,19 @@ public class UserService {
                     .gender(gender)
                     .build();
             userRepository.save(user);
+
+
         }
+        User user = userRepository.findByKakaoId(kakaoId);
+        String userObjectId = user.getId();
+        System.out.println(userObjectId);
         return nickName;
+    }
+
+    // 토큰 생성
+    public TokenResDto createToken(String nickName, String objectId) {
+
+//        Authentication authentication = new UsernamePasswordAuthenticationToken();
+        return null;
     }
 }
