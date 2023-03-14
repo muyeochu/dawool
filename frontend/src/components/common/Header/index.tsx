@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // styles
 import {
@@ -131,7 +131,7 @@ const Header = ({
               </MicIcContainer>
             </LogoToMic>
             <ListToMy>
-              <NavStyle to="/tourspot">관광지</NavStyle>
+              <NavStyle to="/tourspot">즐길거리</NavStyle>
               <NavStyle to="/restaurant">식당</NavStyle>
               <NavStyle to="/accommodation">숙박</NavStyle>
 

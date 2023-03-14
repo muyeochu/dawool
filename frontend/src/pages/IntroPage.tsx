@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import MainFirst from "../components/main/index";
 import MainSecond from "../components/main2/index";
 import styled from "styled-components";

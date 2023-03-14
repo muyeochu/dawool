@@ -1,5 +1,4 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import {
   AccommodationPage,
@@ -18,7 +17,6 @@ import { Waiting } from "./pages/LoginPage/waiting";
 import {
   AppContainer,
   GridContainer,
-  InvisibleBox,
   BoxMainContainer,
 } from "./styles/appStyles";
 
@@ -28,11 +26,6 @@ function App() {
       <BrowserRouter>
         <Header />
         <BoxMainContainer>
-          {/* {current === "http://localhost:3000/" ? null : (
-            <>
-              <InvisibleBox />
-            </>
-          )} */}
           <GridContainer>
             <Routes>
               <Route path="/" element={<IntroPage />} />
