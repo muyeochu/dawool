@@ -1,6 +1,18 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import { ReactComponent as DownArrowIc } from "../../assets/icon/downarrowIc.svg";
+
+const bounce = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
 
 export const MainFirstContainer = styled.div`
   height: 100vh;
@@ -32,6 +44,7 @@ export const MainFontStyle = styled.div`
   font-weight: 700;
   font-size: 100px;
   line-height: 125px;
+  letter-spacing: 0.02em;
 
   color: white;
 `;
@@ -58,8 +71,11 @@ export const DonwArrowIcContainer = styled.div`
 export const DonwArrowIcStyle = styled(DownArrowIc)`
   transition: transform 0.2s ease-in-out;
 
+  animation: ${bounce} 1s linear infinite;
+
   &:hover {
     cursor: pointer;
     transform: scale(1.2);
+    animation: none;
   }
 `;
