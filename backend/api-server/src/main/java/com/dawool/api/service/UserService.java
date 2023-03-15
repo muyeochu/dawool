@@ -1,5 +1,6 @@
 package com.dawool.api.service;
 
+import com.dawool.api.dto.ReissueTokenReqDto;
 import com.dawool.api.dto.TokenResDto;
 import com.dawool.api.dto.UserResDto;
 import com.dawool.api.entity.User;
@@ -31,7 +32,7 @@ public class UserService {
     private String kakaoAPIKey;
 
     // 카카오 토큰 발급 후 회원가입 확인
-    public Map<String, String> getKakaoAccessToken(String code) {
+    public TokenResDto getKakaoAccessToken(String code) {
         String accessToken = "";
         String refreshToken = "";
         String redirectURI = "http://localhost:8888/api/user/kakao/callback";
@@ -59,17 +60,13 @@ public class UserService {
         accessToken = info.getString("access_token");
         refreshToken = info.getString("refresh_token");
 
-        String nickName = getKakaoUserInfoByToken(accessToken);
-
-        result.put("accessToken", accessToken);
-        result.put("refreshToken", refreshToken);
-        result.put("nickName",nickName);
-
-        return result;
+        TokenResDto resDto = this.getKakaoUserInfoByToken(accessToken);
+        System.out.println(resDto.getAccessToken());
+        return resDto;
     }
 
     // 토큰으로 카카오 회원 정보 확인.
-    public String getKakaoUserInfoByToken(String token) {
+    public TokenResDto getKakaoUserInfoByToken(String token) {
         Mono<String> mono = WebClient.builder().baseUrl("https://kapi.kakao.com")
                 .build()
                 .post()
@@ -103,21 +100,39 @@ public class UserService {
         }
         User user = userRepository.findByKakaoId(kakaoId);
         String userObjectId = user.getId();
-        TokenResDto result = createToken(nickName, userObjectId);
+        TokenResDto result = this.createToken(userObjectId);
+        user.setRefreshToken(result.getRefreshToken());
+        userRepository.save(user);
 
-        System.out.println(userObjectId);
-        System.out.println(result.getGrantType());
-        System.out.println(result.getAccessToken());
-        System.out.println(result.getRefreshToken());
-        System.out.println(result.getAccessTokenExpiresIn());
+        result.setNickName(nickName);
 
-        return nickName;
+        return result;
     }
 
-    // 토큰 생성
-    public TokenResDto createToken(String nickName, String objectId) {
+    /**
+     * 토큰 생성
+     *
+     * @param objectId
+     * @return
+     */
+    public TokenResDto createToken(String objectId) {
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(objectId, "", null);
-        return jwtTokenProvider.generateToken(authentication);
+        TokenResDto result = jwtTokenProvider.generateToken(authentication);
+        return result;
+    }
+
+    /**
+     * 액세스 토큰 재발급
+     * @param reqDto
+     * @return 액세스 토큰
+     */
+    public String reissueAccessToken(ReissueTokenReqDto reqDto) {
+        boolean isExpired = jwtTokenProvider.isExpired(reqDto.getRefreshToken());
+        User user =
+        if (!isExpired) {
+
+        }
+        return "다시 로그인 해주세요";
     }
 }

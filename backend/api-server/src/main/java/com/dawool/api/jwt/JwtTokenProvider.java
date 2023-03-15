@@ -77,8 +77,20 @@ public class JwtTokenProvider {
                 .build();
     }
 
+    public Claims getClaimsByToken(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+    // 토큰 만료 여부 확인
+    public boolean isExpired(String token) {
+        return this.getClaimsByToken(token).getExpiration().before(new Date());
+    }
+
     public Authentication getAuthentication(String token) {
-        Claims claims = getTokenClaims(token);
+        Claims claims = getClaimsByToken(token);
         if (claims != null) {
 //            Collection<? extends GrantedAuthority> authorities =
 //                    Arrays.stream(new String[]{claims.get(AUTHORITIES_KEY).toString()})
@@ -92,13 +104,9 @@ public class JwtTokenProvider {
         return null;
     }
 
-    public Claims getTokenClaims(String token) {
+    public Claims validateToken(String token) {
         try {
-            return Jwts.parserBuilder()
-                    .setSigningKey(key)
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody(); // token의 Body가 하기 exception들로 인해 유효하지 않으면 각각에 해당하는 로그 콘솔에 찍음
+            return this.getClaimsByToken(token); // token의 Body가 하기 exception들로 인해 유효하지 않으면 각각에 해당하는 로그 콘솔에 찍음
         } catch (SecurityException e) {
             log.info("Invalid JWT signature.");
         } catch (MalformedJwtException e) {
