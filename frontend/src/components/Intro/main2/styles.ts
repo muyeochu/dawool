@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { ReactComponent as Main2Img } from "../../assets/images/main2Img.svg";
+import { ReactComponent as Main2Img } from "../../../assets/images/main2Img.svg";
 
 export const MainSecondContainer = styled.div`
   height: 100vh;

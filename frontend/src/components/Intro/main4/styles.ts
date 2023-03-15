@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mainColor, blue } from "../../../styles/Colors";
 
 export const MainFourthContainer = styled.div`
   height: 95vh;
@@ -50,15 +51,21 @@ export const CardOutFontStyle = styled.div`
 `;
 
 export const CardStyle = styled.div`
+  transition: transform 0.2s ease-in-out;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
   width: 309px;
   height: 128px;
-  background: #b7dde8;
+  background: ${blue[100]};
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
   border-radius: 18px;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const CardInFontStyle = styled.div`
@@ -69,5 +76,5 @@ export const CardInFontStyle = styled.div`
 `;
 
 export const ColorFont = styled.span`
-  color: #00769b;
+  color: ${mainColor};
 `;

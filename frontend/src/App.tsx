@@ -1,5 +1,4 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import KakaoAuthHandle from "./components/auth/KakaoAuthHandle";
 import {
   AccommodationPage,
@@ -14,25 +13,21 @@ import {
   TourSpotPage,
 } from "./pages/index";
 import Header from "./components/common/Header";
+import ScrollToTop from "./components/utils/ScrollToTop";
+
 import {
   AppContainer,
   GridContainer,
-  InvisibleBox,
   BoxMainContainer,
 } from "./styles/appStyles";
 
 function App() {
-  console.log(window.location);
   return (
     <AppContainer>
       <BrowserRouter>
+        <ScrollToTop />
         <Header />
         <BoxMainContainer>
-          {/* {current === "http://localhost:3000/" ? null : (
-            <>
-              <InvisibleBox />
-            </>
-          )} */}
           <GridContainer>
             <Routes>
               <Route path="/" element={<IntroPage />} />
@@ -40,7 +35,10 @@ function App() {
               <Route path="/interest" element={<InterestPage />} />
               <Route path="/accommodation" element={<AccommodationPage />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/api/user/kakao/callback" element={<KakaoAuthHandle/>}></Route>
+              <Route
+                path="/api/user/kakao/callback"
+                element={<KakaoAuthHandle />}
+              ></Route>
               <Route path="/mycourse" element={<MyCoursePage />} />
               <Route path="/restaurant" element={<RestaurantPage />} />
               <Route path="/search" element={<SearchPage />} />
@@ -53,6 +51,5 @@ function App() {
     </AppContainer>
   );
 }
-
 
 export default App;

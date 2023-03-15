@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 
-import { ReactComponent as DownArrowIc } from "../../assets/icon/downarrowIc.svg";
+import { ReactComponent as DownArrowIc } from "../../../assets/icon/downarrowIc.svg";
 
 const bounce = keyframes`
   0% {

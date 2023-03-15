@@ -64,7 +64,7 @@ const Header = ({
 
   useEffect(() => {
     if (currentUrl === "/" && scrollPosition < 100) {
-      setHeaderColor("transparent"); // scrollPosition이 100보다 크면 headerColor를 변경
+      setHeaderColor("transparent"); // scrollPosition이 100보다 작으면 headerColor를 변경
     } else {
       setHeaderColor("#ffffff"); // 그 외의 경우에는 초기값으로 변경
     }
@@ -147,5 +147,3 @@ const Header = ({
 };
 
 export default Header;
-
-Header.defaultProps = {};

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-import { ReactComponent as Main3Img } from "../../assets/images/main3Img.svg";
+import { ReactComponent as Main3Img } from "../../../assets/images/main3Img.svg";
+import { blue } from "../../../styles/Colors";
 
 export const MainThirdContainer = styled.div`
   height: 95vh;
@@ -8,7 +9,7 @@ export const MainThirdContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #b7dde8;
+  background-color: ${blue[100]};
 `;
 
 export const FontContainer = styled.div`
