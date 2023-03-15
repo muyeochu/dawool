@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests()
-                .antMatchers("/api/user/kakao/callback").permitAll() // kakao 로그인 토큰 받기 언제나 가능
+                .antMatchers("/api/user/kakao/callback", "/api/user/token-reissue").permitAll() // kakao 로그인 토큰 받기 언제나 가능
                 .antMatchers("/api/**").authenticated()
                 .and()
                 .sessionManagement()
