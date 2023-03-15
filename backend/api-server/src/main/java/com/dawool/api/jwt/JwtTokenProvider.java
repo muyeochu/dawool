@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -76,14 +77,14 @@ public class JwtTokenProvider {
     public Authentication getAuthentication(String token) {
         Claims claims = getTokenClaims(token);
         if (claims != null) {
-            Collection<? extends GrantedAuthority> authorities =
-                    Arrays.stream(new String[]{claims.get(AUTHORITIES_KEY).toString()})
-                            .map(SimpleGrantedAuthority::new)
-                            .collect(Collectors.toList());
+//            Collection<? extends GrantedAuthority> authorities =
+//                    Arrays.stream(new String[]{claims.get(AUTHORITIES_KEY).toString()})
+//                            .map(SimpleGrantedAuthority::new)
+//                            .collect(Collectors.toList());
 
-            User principal = new User(claims.getSubject(), "", authorities);
+            User principal = new User(claims.getSubject(), "", Collections.EMPTY_LIST);
 
-            return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+            return new UsernamePasswordAuthenticationToken(principal, token, null);
         }
         return null;
     }
