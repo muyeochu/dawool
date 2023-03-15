@@ -14,6 +14,7 @@ import {
 } from "./pages/index";
 import Header from "./components/common/Header";
 import ScrollToTop from "./components/utils/ScrollToTop";
+import Modal from "./components/common/Modal";
 
 import {
   AppContainer,
@@ -29,6 +30,7 @@ function App() {
         <Header />
         <BoxMainContainer>
           <GridContainer>
+            <Modal />
             <Routes>
               <Route path="/" element={<IntroPage />} />
               <Route path="/detail" element={<DetailPage />} />
