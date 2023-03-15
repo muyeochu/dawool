@@ -24,4 +24,5 @@ public class User {
     private int ageRange;
     private String gender;
     private String role;
+    private String refreshToken;
 }
