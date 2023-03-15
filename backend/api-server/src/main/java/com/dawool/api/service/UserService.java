@@ -3,6 +3,7 @@ package com.dawool.api.service;
 import com.dawool.api.dto.TokenResDto;
 import com.dawool.api.dto.UserResDto;
 import com.dawool.api.entity.User;
+import com.dawool.api.jwt.JwtTokenProvider;
 import com.dawool.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
@@ -25,6 +26,7 @@ import java.util.Map;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final JwtTokenProvider jwtTokenProvider;
     @Value("${kakao.restapi.key}")
     private String kakaoAPIKey;
 
@@ -101,14 +103,21 @@ public class UserService {
         }
         User user = userRepository.findByKakaoId(kakaoId);
         String userObjectId = user.getId();
+        TokenResDto result = createToken(nickName, userObjectId);
+
         System.out.println(userObjectId);
+        System.out.println(result.getGrantType());
+        System.out.println(result.getAccessToken());
+        System.out.println(result.getRefreshToken());
+        System.out.println(result.getAccessTokenExpiresIn());
+
         return nickName;
     }
 
     // 토큰 생성
     public TokenResDto createToken(String nickName, String objectId) {
 
-//        Authentication authentication = new UsernamePasswordAuthenticationToken();
-        return null;
+        Authentication authentication = new UsernamePasswordAuthenticationToken(objectId, "", null);
+        return jwtTokenProvider.generateToken(authentication);
     }
 }
