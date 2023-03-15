@@ -6,6 +6,8 @@ import { ReactComponent as SearchIc } from "../../../assets/icon/searchIc.svg";
 import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
 import { ReactComponent as PersonIc } from "../../../assets/icon/personIc.svg";
 
+import { mainColor, blue, grey } from "../../../styles/Colors";
+
 export const HeaderFont = styled.div`
   font-weight: 500;
 `;
@@ -71,7 +73,7 @@ export const LogoIcContainer = styled(LogoIc)`
 export const SearchBarInput = styled.input<{ headercolor: string }>`
   width: 335px;
   height: 37px;
-  border: 2px solid #959595;
+  border: 2px solid ${grey[300]};
   border-radius: 17px;
   padding-left: 15px;
 
@@ -93,7 +95,7 @@ export const SearchBarContainer = styled.div`
 `;
 
 export const SearchIcContainer = styled(SearchIc)<{ headercolor: string }>`
-  fill: #959595;
+  fill: ${grey[300]};
   width: 17.38px;
   height: 18px;
 
@@ -108,14 +110,14 @@ export const SearchIcContainer = styled(SearchIc)<{ headercolor: string }>`
     `}
 
   &:hover {
-    fill: #006083;
+    fill: ${blue[500]};
     cursor: pointer;
   }
 `;
 
 export const MicIcContainer = styled(MicIc)<{ headercolor: string }>`
   fill: ${(props) =>
-    props.headercolor === "transparent" ? "#000000" : "#00769B"};
+    props.headercolor === "transparent" ? "#000000" : mainColor};
 `;
 
 export const NavStyle = styled(NavLink)`
@@ -129,12 +131,12 @@ export const NavStyle = styled(NavLink)`
   }
 
   &:hover {
-    color: #00769b;
+    color: ${mainColor};
     transition: color 0.3s;
   }
 
   &.active {
-    color: #00769b;
+    color: ${mainColor};
   }
 `;
 
