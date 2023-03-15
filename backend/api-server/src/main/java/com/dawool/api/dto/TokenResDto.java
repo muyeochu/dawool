@@ -14,6 +14,8 @@ import lombok.Setter;
 public class TokenResDto {
 
     private String nickName;
+    private String grantType;
     private String accessToken;
     private String refreshToken;
+    private long accessTokenExpiresIn;
 }
