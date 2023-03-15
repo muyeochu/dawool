@@ -31,7 +31,6 @@ export default function Button({ children, imageSrc }: ButtonProps) {
 
   return (
     <StyledButton onClick={handleClick} isClicked={isClicked}>
-      {/* icon color 바뀌지가 않음.. 이거 해결해야함 */}
       <ButtonIcon src={imageSrc} isClicked={isClicked} />
       <ButtonText isClicked={isClicked}>
         {children}

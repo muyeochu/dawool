@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { blue, grey } from "../../../styles/Colors";
+import { white, blue, grey } from "../../../styles/Colors";
 
 interface ContainerProps {
   isOpen: boolean;
@@ -17,23 +17,50 @@ export const AccordionListContainer = styled.div`
 
 // accordion item 감싸는 container
 export const AccordionItemContainer = styled.div<ContainerProps>`
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 21px;
   overflow: hidden;
   transition: height 0.3s ease-in-out;
-  height: ${(props) => (props.isOpen ? "auto" : "50px")};
+  height: ${(props) => (props.isOpen ? "auto" : "68px")};
 `;
 
-export const Header = styled.div`
-  background-color: ${blue[100]};
-  color: #333;
+// accordion header
+export const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: ${white};
+  color: "black";
   cursor: pointer;
   font-size: 24px;
   font-weight: bold;
   padding: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover:enabled {
+    background-color: ${blue[500]};
+    border: 10px solid ${blue[500]};
+    color: "black";
+  }
 `;
 
+export const HeaderText = styled.span`
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: "black";
+`;
+
+export const HeaderIcon = styled.img`
+  background: ${grey[100]};
+`;
+
+// accordion body
 export const Body = styled.div`
   padding: 10px;
 `;
