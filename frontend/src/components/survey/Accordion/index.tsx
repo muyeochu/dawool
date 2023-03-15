@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { accordionState } from './state';
-import { Container, Header, Body } from './styles';
+import { AccordionItemContainer, Header, Body } from './styles';
 
 interface AccordionProps {
   title: string;
@@ -18,10 +18,10 @@ const Accordion = ({ title, children }: AccordionProps) => {
   };
 
   return (
-    <Container isOpen={isOpen}>
+    <AccordionItemContainer isOpen={isOpen}>
       <Header onClick={handleClick}>{title}</Header>
       <Body>{children}</Body>
-    </Container>
+    </AccordionItemContainer>
   );
 };
 
