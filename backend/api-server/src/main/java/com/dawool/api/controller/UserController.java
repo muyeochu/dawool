@@ -5,6 +5,7 @@ import com.dawool.api.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,5 +24,10 @@ public class UserController {
     public Map<String, String> kakaoLogin(@RequestParam("code") String code) {
         Map<String, String> result = userService.getKakaoAccessToken(code);
         return result;
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<?> tokenTest() {
+        return ResponseEntity.ok("TEST COMPLETE");
     }
 }
