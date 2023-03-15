@@ -30,10 +30,11 @@ import java.util.stream.Collectors;
 public class JwtTokenProvider {
 
     private final Key key;
-
+    private final String TYP = "typ";
+    private final String JWT = "JWT";
     private final String AUTHORITIES_KEY = "Authentication";
     // Access Token 시간
-    private static final long ACCESS_EXPIRE_TIME = 1 * 60 * 60 * 1000L; //
+    private static final long ACCESS_EXPIRE_TIME = 1 * 1 * 60 * 1000L; //
 
     // Refresh Token 시간
     private static final long REFRESH_EXPIRE_TIME = 30 * 24 * 60 * 1000L;
@@ -53,6 +54,7 @@ public class JwtTokenProvider {
         long now = (new Date()).getTime();
 
         String accessToken = Jwts.builder()
+                .setHeaderParam(TYP,JWT)
                 .setSubject(authentication.getName())
 //                .claim(AUTHORITIES_KEY, authorities)
                 .setIssuedAt(new Date(now))
@@ -61,6 +63,7 @@ public class JwtTokenProvider {
                 .compact();
 
         String refreshToken = Jwts.builder()
+                .setHeaderParam(TYP,JWT)
                 .setExpiration(new Date(now + REFRESH_EXPIRE_TIME))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
