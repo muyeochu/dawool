@@ -1,12 +1,20 @@
 import React from "react";
-import Accordion from "../components/survey/Accordion/index"
+import { SurveyTitle } from "../components/survey/SurveyTitle/styles";
+import { AccordionListContainer } from "../components/survey/Accordion/styles";
+import Accordion from "../components/survey/Accordion/index";
+import styled from "styled-components";
+
+// grid 설정
+const MainGridItems = styled.div`
+  grid-column: 2 / span 1;
+`;
 
 const SurveyPage = () => {
   return (
-    <div className="SurveyPage">
-      <h1>취향설문</h1>
+    <MainGridItems>
+      <SurveyTitle>취향설문</SurveyTitle>
 
-      <div>
+      <AccordionListContainer>
         <Accordion title="누구와 여행을 할 계획인가요?">
           <p>Content for section 1 goes here</p>
         </Accordion>
@@ -28,8 +36,8 @@ const SurveyPage = () => {
         <Accordion title="어디서 출발하나요?">
           <p>Content for section 2 goes here</p>
         </Accordion>
-      </div>
-    </div>
+      </AccordionListContainer>
+    </MainGridItems>
   );
 };
 
