@@ -34,7 +34,7 @@ public class JwtTokenProvider {
     private final String JWT = "JWT";
     private final String AUTHORITIES_KEY = "Authentication";
     // Access Token 시간
-    private static final long ACCESS_EXPIRE_TIME = 1 * 1 * 60 * 1000L; //
+    private static final long ACCESS_EXPIRE_TIME = 1 * 60 * 60 * 1000L; //
 
     // Refresh Token 시간
     private static final long REFRESH_EXPIRE_TIME = 30 * 24 * 60 * 1000L;
@@ -47,27 +47,15 @@ public class JwtTokenProvider {
 
     // 토큰 생성 설정
     public TokenResDto generateToken(Authentication authentication) {
-//        String authorities = authentication.getAuthorities().stream()
-//                .map(GrantedAuthority::getAuthority)
-//                .collect(Collectors.joining(","));
+        String authorities = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
 
         long now = (new Date()).getTime();
 
-        String accessToken = Jwts.builder()
-                .setHeaderParam(TYP,JWT)
-                .setSubject(authentication.getName())
-//                .claim(AUTHORITIES_KEY, authorities)
-                .setIssuedAt(new Date(now))
-                .setExpiration(new Date(now + ACCESS_EXPIRE_TIME))
-                .signWith(key, SignatureAlgorithm.HS256)
-                .compact();
+        String accessToken = createAccessToken(authentication.getName(), now);
 
-        String refreshToken = Jwts.builder()
-                .setHeaderParam(TYP,JWT)
-                .setExpiration(new Date(now + REFRESH_EXPIRE_TIME))
-                .signWith(key, SignatureAlgorithm.HS256)
-                .compact();
-
+        String refreshToken = createRefreshToken(authentication.getName(), now);
 
         return TokenResDto.builder()
                 .grantType("Bearer")
@@ -75,6 +63,27 @@ public class JwtTokenProvider {
                 .refreshToken(refreshToken)
                 .accessTokenExpiresIn(now+ACCESS_EXPIRE_TIME)
                 .build();
+    }
+
+    public String createAccessToken(String name, long now) {
+
+        return Jwts.builder()
+                .setHeaderParam(TYP,JWT)
+                .setSubject(name)
+                .claim(AUTHORITIES_KEY, "USER")
+                .setIssuedAt(new Date(now))
+                .setExpiration(new Date(now + ACCESS_EXPIRE_TIME))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    public String createRefreshToken(String name, long now) {
+        return Jwts.builder()
+                .setHeaderParam(TYP,JWT)
+                .setSubject(name)
+                .setExpiration(new Date(now + REFRESH_EXPIRE_TIME))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
     }
 
     public Claims getClaimsByToken(String token) {
@@ -92,14 +101,14 @@ public class JwtTokenProvider {
     public Authentication getAuthentication(String token) {
         Claims claims = getClaimsByToken(token);
         if (claims != null) {
-//            Collection<? extends GrantedAuthority> authorities =
-//                    Arrays.stream(new String[]{claims.get(AUTHORITIES_KEY).toString()})
-//                            .map(SimpleGrantedAuthority::new)
-//                            .collect(Collectors.toList());
+            Collection<? extends GrantedAuthority> authorities =
+                    Arrays.stream(new String[]{claims.get(AUTHORITIES_KEY).toString()})
+                            .map(SimpleGrantedAuthority::new)
+                            .collect(Collectors.toList());
 
-            User principal = new User(claims.getSubject(), "", Collections.EMPTY_LIST);
+            User principal = new User(claims.getSubject(), "", authorities);
 
-            return new UsernamePasswordAuthenticationToken(principal, token, null);
+            return new UsernamePasswordAuthenticationToken(principal, token, authorities);
         }
         return null;
     }
