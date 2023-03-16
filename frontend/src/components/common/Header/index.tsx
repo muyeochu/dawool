@@ -49,6 +49,7 @@ const Header = ({
   const [search, setSearch] = useState("");
   const [scrollPosition, setScrollPosition] = useState(0);
   const [headerColor, setHeaderColor] = useState("#ffffff");
+  const [isMyPageOpen, setIsMyPageOpen] = useState(false);
 
   // Scroll 위치를 감지
   const updateScroll = () => {
@@ -70,13 +71,14 @@ const Header = ({
     }
   }, [scrollPosition, currentUrl]);
 
+  // 로고 클릭시 Intro 페이지로 이동
+  const clickLogoIc = (e: React.MouseEvent) => {
+    window.location.href = "/";
+  };
+
   // 검색창
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-  };
-
-  const clickLogoIc = (e: React.MouseEvent) => {
-    window.location.href = "/";
   };
 
   const handleSearchIc = (
@@ -92,11 +94,15 @@ const Header = ({
     navigate("/search", { state: search });
   };
 
-  // 엔터키 확인
   const onCheckEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSearchIc(e);
     }
+  };
+
+  // 마이페이지 띄우기
+  const openMyPage = () => {
+    setIsMyPageOpen(true);
   };
 
   return (
@@ -136,7 +142,7 @@ const Header = ({
               <NavStyle to="/accommodation">숙박</NavStyle>
 
               <PersonIcContainer>
-                <PersonIc />
+                <PersonIc onClick={openMyPage} />
               </PersonIcContainer>
             </ListToMy>
           </ElementContainer>
