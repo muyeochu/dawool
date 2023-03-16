@@ -1,17 +1,19 @@
 package com.dawool.api.service;
 
 import com.dawool.api.dto.ReissueTokenReqDto;
+import com.dawool.api.dto.ReissueTokenResDto;
 import com.dawool.api.dto.TokenResDto;
-import com.dawool.api.dto.UserResDto;
 import com.dawool.api.entity.User;
 import com.dawool.api.jwt.JwtTokenProvider;
 import com.dawool.api.repository.UserRepository;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -19,6 +21,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Mono;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,11 +64,17 @@ public class UserService {
         refreshToken = info.getString("refresh_token");
 
         TokenResDto resDto = this.getKakaoUserInfoByToken(accessToken);
-        System.out.println(resDto.getAccessToken());
+        System.out.println("Access Token : "+ resDto.getAccessToken());
+        System.out.println("Refresh Token : "+ resDto.getRefreshToken());
         return resDto;
     }
 
-    // 토큰으로 카카오 회원 정보 확인.
+    /**
+     * 토큰으로 카카오 회원 정보 확인.
+     *
+     * @param token
+     * @return
+     */
     public TokenResDto getKakaoUserInfoByToken(String token) {
         Mono<String> mono = WebClient.builder().baseUrl("https://kapi.kakao.com")
                 .build()
@@ -127,12 +136,29 @@ public class UserService {
      * @param reqDto
      * @return 액세스 토큰
      */
-    public String reissueAccessToken(ReissueTokenReqDto reqDto) {
-        boolean isExpired = jwtTokenProvider.isExpired(reqDto.getRefreshToken());
-        User user =
-        if (!isExpired) {
+    public ReissueTokenResDto reissueAccessToken(ReissueTokenReqDto reqDto) throws Exception {
+        String grantType = reqDto.getGrantType();
+        String refreshToken = reqDto.getRefreshToken();
+        Claims claims = jwtTokenProvider.validateToken(refreshToken);
+        String accessToken = null;
 
+        if (grantType.equals("refreshToken") &&  claims != null) {
+            User user = userRepository.findById(claims.getSubject()).orElseThrow();
+            if (user.getRefreshToken().equals(refreshToken)) {
+                accessToken = jwtTokenProvider.createAccessToken(user.getId(), new Date().getTime());
+            }
         }
-        return "다시 로그인 해주세요";
+
+        return ReissueTokenResDto.builder()
+                .grantType("accessToken")
+                .accessToken(accessToken)
+                .build();
+    }
+
+    public User getLoginUser() throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String objectId = authentication.getName();
+
+        return userRepository.findById(objectId).orElseThrow(() -> new Exception("유저 정보가 없습니다."));
     }
 }

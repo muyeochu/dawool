@@ -2,16 +2,13 @@ package com.dawool.api.controller;
 
 
 import com.dawool.api.dto.ReissueTokenReqDto;
+import com.dawool.api.dto.ReissueTokenResDto;
 import com.dawool.api.dto.TokenResDto;
 import com.dawool.api.service.UserService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,13 +24,15 @@ public class UserController {
     }
 
     @GetMapping("/test")
-    public ResponseEntity<?> tokenTest() {
+    public ResponseEntity<?> tokenTest() throws Exception {
+        userService.getLoginUser();
+
         return ResponseEntity.ok("TEST COMPLETE");
     }
 
     @PostMapping("/token-reissue")
-    public ResponseEntity<?> reissueAccessToken(@RequestBody ReissueTokenReqDto reqDto) {
-        userService.reissueAccessToken(reqDto);
-        return null;
+    public ResponseEntity<?> reissueAccessToken(@RequestBody ReissueTokenReqDto reqDto) throws Exception {
+        ReissueTokenResDto result = userService.reissueAccessToken(reqDto);
+        return ResponseEntity.ok(result);
     }
 }
