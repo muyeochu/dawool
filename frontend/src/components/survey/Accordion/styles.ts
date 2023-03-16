@@ -61,6 +61,7 @@ export const HeaderIcon = styled.img`
 `;
 
 // accordion body
-export const Body = styled.div`
-  padding: 10px;
+export const BodyContainer = styled.div`
+  width: auto;
+  height: auto;
 `;
