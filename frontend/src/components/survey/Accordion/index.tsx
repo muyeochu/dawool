@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { accordionState } from './state';
-import { AccordionItemContainer, HeaderContainer, HeaderText,HeaderIcon, Body } from './styles';
+import { AccordionItemContainer, HeaderContainer, HeaderText,HeaderIcon, BodyContainer } from './styles';
 
 // icon
 import {ReactComponent as CheckIc } from '../../../assets/icon/checkIc.svg';
@@ -37,7 +37,7 @@ const Accordion: React.FC<AccordionProps> = ({ title, children }) => {
         <UpdownIc />
       </HeaderContainer>
 
-      <Body>{children}</Body>
+      <BodyContainer>{children}</BodyContainer>
     </AccordionItemContainer>
   );
 };
