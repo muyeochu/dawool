@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import { ReactComponent as LogoIc } from "../../../assets/icon/logoIc.svg";
 import { ReactComponent as SearchIc } from "../../../assets/icon/searchIc.svg";
 import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
-import { ReactComponent as PersonIc } from "../../../assets/icon/personIc.svg";
 
 import { mainColor, blue, grey } from "../../../styles/Colors";
 
@@ -140,7 +139,11 @@ export const NavStyle = styled(NavLink)`
   }
 `;
 
-export const PersonIcContainer = styled(PersonIc)`
+export const PersonIcContainer = styled.div`
   width: 33px;
   height: 33px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
