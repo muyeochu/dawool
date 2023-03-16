@@ -1,9 +1,9 @@
 import styled from "styled-components";
-
+import {grey} from "../../../styles/Colors"
 export const FooterContainer = styled.div``;
 
 export const FooterSetting = styled.div`
-  background-color: #d7d7d7;
+  background-color: ${grey[100]};
   height: 155px;
   width: 100%;
 
