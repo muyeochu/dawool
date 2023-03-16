@@ -26,6 +26,9 @@ import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
 import { ReactComponent as PersonIc } from "../../../assets/icon/personIc.svg";
 import { ReactComponent as PersonIc2 } from "../../../assets/icon/person2Ic.svg";
 
+// sidebar
+import SideBar from "../../personal";
+
 interface Props {
   searchBar?: boolean;
   mike?: boolean;
@@ -49,6 +52,7 @@ const Header = ({
   const [search, setSearch] = useState("");
   const [scrollPosition, setScrollPosition] = useState(0);
   const [headerColor, setHeaderColor] = useState("#ffffff");
+  const [isOpen, setIsOpen] = useState(false);
 
   // Scroll 위치를 감지
   const updateScroll = () => {
@@ -70,13 +74,14 @@ const Header = ({
     }
   }, [scrollPosition, currentUrl]);
 
+  // 로고 클릭시 Intro 페이지로 이동
+  const clickLogoIc = () => {
+    window.location.href = "/";
+  };
+
   // 검색창
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-  };
-
-  const clickLogoIc = (e: React.MouseEvent) => {
-    window.location.href = "/";
   };
 
   const handleSearchIc = (
@@ -92,11 +97,15 @@ const Header = ({
     navigate("/search", { state: search });
   };
 
-  // 엔터키 확인
   const onCheckEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSearchIc(e);
     }
+  };
+
+  // 마이페이지 띄우기
+  const openMyPage = () => {
+    setIsOpen(true);
   };
 
   return (
@@ -135,12 +144,13 @@ const Header = ({
               <NavStyle to="/restaurant">식당</NavStyle>
               <NavStyle to="/accommodation">숙박</NavStyle>
 
-              <PersonIcContainer>
-                <PersonIc />
+              <PersonIcContainer onClick={openMyPage}>
+                {headerColor === "transparent" ? <PersonIc2 /> : <PersonIc />}
               </PersonIcContainer>
             </ListToMy>
           </ElementContainer>
         </GridItems>
+        <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
       </HeaderContainer>
     </HeaderFont>
   );
