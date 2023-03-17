@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Q1Button from "../../Button";
 import { ButtonListContainer } from "./styles";
 import { buttonState } from "../../Button/ButtonState";
@@ -8,6 +8,12 @@ const FirstQuestion = () => {
   const [clickedButtons, setClickedButtons] = useState<string[]>([]);
   // console.log(clickedButtons)
 
+  // const [isClickedList, setIsClickedList] = useState<boolean[]>([]);
+  // console.log(clickedButtons);
+  // useEffect(() => {
+  //   setIsClickedList()
+  // }, [clickedButtons]);
+
   const handleButtonClick = useCallback(
     (id: string) => {
       switch (id) {
@@ -16,7 +22,9 @@ const FirstQuestion = () => {
           break;
         default:
           setClickedButtons((prev) => {
-            const newClickedButtons = prev.filter((buttonId) => buttonId !== "btn1");
+            const newClickedButtons = prev.filter(
+              (buttonId) => buttonId !== "btn1"
+            );
             if (newClickedButtons.includes(id)) {
               return newClickedButtons.filter((buttonId) => buttonId !== id);
             } else {
@@ -31,9 +39,11 @@ const FirstQuestion = () => {
 
   const buttons = [
     { id: "btn1", label: "해당없음" },
-    { id: "btn2", label: "장애인" },
-    { id: "btn3", label: "노인" },
-    { id: "btn4", label: "영유아" },
+    { id: "btn2", label: "지체장애인" },
+    { id: "btn3", label: "시각장애인" },
+    { id: "btn4", label: "청각장애인" },
+    { id: "btn5", label: "노인" },
+    { id: "btn6", label: "영유아" },
   ];
 
   return (

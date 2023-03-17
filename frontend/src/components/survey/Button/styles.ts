@@ -11,11 +11,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
   justify-content: center;
   padding: 14px 34px;
-  gap: 16px;
   background-color: ${({ isClicked }) => (isClicked ? mainColor : "grey[50]")};
-  color: ${grey[500]};
-  font-size: 18px;   
-  font-weight: 500;
   border: none;
   border-radius: 20px;
   cursor: pointer;

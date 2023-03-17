@@ -5,7 +5,7 @@ interface ButtonState {
 }
 
 export const buttonState = atom<ButtonState>({
-  key: "buttonState",
+  key: "btnState",
   default: {
     clicked: false,
   },
