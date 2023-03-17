@@ -8,6 +8,7 @@ import com.dawool.api.jwt.JwtTokenProvider;
 import com.dawool.api.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -27,6 +28,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
@@ -64,8 +66,8 @@ public class UserService {
         refreshToken = info.getString("refresh_token");
 
         TokenResDto resDto = this.getKakaoUserInfoByToken(accessToken);
-        System.out.println("Access Token : "+ resDto.getAccessToken());
-        System.out.println("Refresh Token : "+ resDto.getRefreshToken());
+        log.info(resDto.getAccessToken());
+        log.info(resDto.getRefreshToken());
         return resDto;
     }
 
