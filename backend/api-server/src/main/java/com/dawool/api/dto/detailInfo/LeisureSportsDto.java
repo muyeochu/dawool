@@ -3,6 +3,7 @@ package com.dawool.api.dto.detailInfo;
 /**
  * 레포츠(28) 관련 정보
  *
+ * @author 김정은
  */
 
 public class LeisureSportsDto extends CommonInfoDto{
