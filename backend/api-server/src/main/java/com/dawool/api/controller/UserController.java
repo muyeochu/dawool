@@ -1,9 +1,9 @@
 package com.dawool.api.controller;
 
 
-import com.dawool.api.dto.ReissueTokenReqDto;
-import com.dawool.api.dto.ReissueTokenResDto;
-import com.dawool.api.dto.TokenResDto;
+import com.dawool.api.dto.user.ReissueTokenReqDto;
+import com.dawool.api.dto.user.ReissueTokenResDto;
+import com.dawool.api.dto.user.TokenResDto;
 import com.dawool.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
