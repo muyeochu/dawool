@@ -18,7 +18,7 @@ public class CommonInfo {
     private int contenttypeid;
     private String title;
     // 소분류
-    private String category;
+    private String cat3;
     // URL
     private String homepage;
     // 대표 이미지
