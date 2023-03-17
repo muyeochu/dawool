@@ -6,6 +6,8 @@ import { buttonState } from "../../Button/ButtonState";
 const FirstQuestion = () => {
   // clickedButtons : 각 버튼에 대한 ID 값으로 구성
   const [clickedButtons, setClickedButtons] = useState<string[]>([]);
+  console.log(clickedButtons)
+
   // const [isClickedList, setIsClickedList] = useState<boolean[]>([]);
   // console.log(clickedButtons);
   // useEffect(() => {
@@ -37,9 +39,11 @@ const FirstQuestion = () => {
 
   const buttons = [
     { id: "btn1", label: "해당없음" },
-    { id: "btn2", label: "장애인" },
-    { id: "btn3", label: "노인" },
-    { id: "btn4", label: "영유아" },
+    { id: "btn2", label: "지체장애인" },
+    { id: "btn3", label: "시각장애인" },
+    { id: "btn4", label: "청각장애인" },
+    { id: "btn5", label: "노인" },
+    { id: "btn6", label: "영유아" },
   ];
 
   return (

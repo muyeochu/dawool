@@ -5,10 +5,10 @@ export const ButtonListContainer = styled.div`
   border-radius: 3px;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   background-color: ${white};
-  gap: 40px;
+  gap: 20px;
 
   margin-top: 16px;
-  padding:16px 74px 16px 74px;
+  padding:16px 60px 16px 60px;
 `;
