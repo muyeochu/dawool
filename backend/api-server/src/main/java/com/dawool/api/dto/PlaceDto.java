@@ -29,6 +29,11 @@ public class PlaceDto {
     private String title;
     // 소분류
     private String category;
+    private int deaf;
+    private int visuallyImpaired;
+    private int mobilityWeak;
+    private int old;
+    private int infant;
     private boolean isLiked;
 
 }
