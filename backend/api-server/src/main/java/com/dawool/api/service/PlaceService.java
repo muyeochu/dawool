@@ -1,5 +1,7 @@
 package com.dawool.api.service;
 
+import com.dawool.api.code.Category;
+import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
 import com.dawool.api.entity.Entertainment;
 import com.dawool.api.repository.EntertainmentRepository;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,10 +22,21 @@ public class PlaceService {
 
     private final EntertainmentRepository entertainmentRepository;
 
-    public List<EntertainmentDto> getEntertainmentList(Pageable pageable){
-        List<Entertainment> entertainment = entertainmentRepository.findAll(pageable).toList();
-        System.out.println(entertainment.get(0).getContentid());
+    public List<PlaceDto> getEntertainmentList(int areaCode, Pageable pageable){
+        List<Entertainment> list = entertainmentRepository.findByAreacode(String.valueOf(areaCode), pageable);
 
-        return null;
+        List<PlaceDto> entertainmentList = new ArrayList<>();
+        for(Entertainment entertainment: list){
+            PlaceDto place = PlaceDto.builder()
+                    .spotId(entertainment.getId())
+                    .contentId(entertainment.getContentid())
+                    .contentTypeId(entertainment.getContenttypeid())
+                    .title(entertainment.getTitle())
+                    .category(Category.valueOf(entertainment.getCat3()).getCategory())
+                    .isLiked(false)
+                    .build();
+            entertainmentList.add(place);
+        }
+        return entertainmentList;
     }
 }

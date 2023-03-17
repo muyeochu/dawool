@@ -1,8 +1,10 @@
 package com.dawool.api.controller;
 
+import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
 import com.dawool.api.service.PlaceService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,16 +18,17 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/api/location")
 public class PlaceController {
 
     private final PlaceService placeService;
 
     @GetMapping("/list/spot")
-    public ResponseEntity<?> getEntertainmentList(Pageable pageable){
-        List<EntertainmentDto> entertainmentList = placeService.getEntertainmentList(pageable);
+    public ResponseEntity<?> getEntertainmentList(@RequestParam("area") int areaCode, Pageable pageable){
+        List<PlaceDto> entertainmentList = placeService.getEntertainmentList(areaCode, pageable);
 
-        Map<String, List<EntertainmentDto>> response = new HashMap<>();
+        Map<String, List<PlaceDto>> response = new HashMap<>();
         response.put("contents", entertainmentList);
         return ResponseEntity.ok(response);
     }
