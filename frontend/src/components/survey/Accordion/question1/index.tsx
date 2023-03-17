@@ -6,7 +6,7 @@ import { buttonState } from "../../Button/ButtonState";
 const FirstQuestion = () => {
   // clickedButtons : 각 버튼에 대한 ID 값으로 구성
   const [clickedButtons, setClickedButtons] = useState<string[]>([]);
-  console.log(clickedButtons)
+  // console.log(clickedButtons)
 
   // const [isClickedList, setIsClickedList] = useState<boolean[]>([]);
   // console.log(clickedButtons);
