@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,9 +38,14 @@ public class PlaceController {
      * @param pageable
      * @return
      */
-    @GetMapping("/list/spot")
-    public ResponseEntity<?> getEntertainmentList(@RequestParam("area") int areaCode, Pageable pageable){
-        List<PlaceDto> entertainmentList = placeService.getEntertainmentList(areaCode, pageable);
+    @GetMapping("/list/{type}")
+    public ResponseEntity<?> getEntertainmentList(
+            @PathVariable("type") int type,
+            @RequestParam("area") int areaCode,
+            @RequestParam("barrier") String barrier,
+            int page, int size){
+        List<PlaceDto> entertainmentList =
+                placeService.getEntertainmentList(type, areaCode, barrier, page, size);
 
         Map<String, List<PlaceDto>> response = new HashMap<>();
         response.put("contents", entertainmentList);
