@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import {userState} from "../../recoil/UserState"
+import {useRecoilState } from "recoil";
 
 import {
   MyPageDimmer,
@@ -27,6 +29,7 @@ interface Props {
 
 const SideBar = ({ isOpen, setIsOpen }: Props) => {
   const navigate = useNavigate();
+  const [user, setUser] = useRecoilState(userState);
 
   // 사이드바 닫기
   const closeSideBar = () => {
@@ -65,8 +68,7 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
               <LogoIcStyle />
               <UserContainer>
                 <PersonIcStyle />
-                {/* 로그인 여부에 따라 닉네임 다르게 표시되게 하기 */}
-                <UserFontStyle>예린님</UserFontStyle>
+                <UserFontStyle >{user["nickName"]===""?"로그인해주세요":user["nickName"]+"님"}</UserFontStyle>
               </UserContainer>
 
               <LineStyle />
