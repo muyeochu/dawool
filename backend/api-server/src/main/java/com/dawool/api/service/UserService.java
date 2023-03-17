@@ -163,6 +163,7 @@ public class UserService {
     }
 
     /**
+     * 로그인된 유저 정보 조회
      *
      * @return 로그인된 유저 정보.
      * @throws Exception 유저정보가 없을 때
