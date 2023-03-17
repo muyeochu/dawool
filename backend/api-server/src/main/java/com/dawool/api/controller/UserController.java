@@ -23,13 +23,6 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<?> tokenTest() throws Exception {
-        userService.getLoginUser();
-
-        return ResponseEntity.ok("TEST COMPLETE");
-    }
-
     @PostMapping("/token-reissue")
     public ResponseEntity<?> reissueAccessToken(@RequestBody ReissueTokenReqDto reqDto) throws Exception {
         ReissueTokenResDto result = userService.reissueAccessToken(reqDto);
