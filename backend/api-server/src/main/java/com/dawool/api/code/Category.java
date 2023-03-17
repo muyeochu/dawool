@@ -3,6 +3,12 @@ package com.dawool.api.code;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 카테고리
+ *
+ * @author 김정은
+ */
+
 @Getter
 @RequiredArgsConstructor
 public enum Category {

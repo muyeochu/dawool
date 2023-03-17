@@ -4,6 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
+/**
+ * 공통정보 Entity
+ *
+ * @author 김정은
+ */
+
 @Getter
 @Setter
 public class CommonInfo {

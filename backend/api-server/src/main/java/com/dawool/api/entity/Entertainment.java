@@ -4,6 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 관광지 Entity
+ *
+ * @author 김정은
+ */
+
 @Getter
 @Setter
 @Document(collection = "entertainment")

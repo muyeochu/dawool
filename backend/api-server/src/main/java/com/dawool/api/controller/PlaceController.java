@@ -16,6 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 장소 관련 Controller
+ *
+ * @author 김정은
+ */
+
 @Controller
 @RequiredArgsConstructor
 @Slf4j
