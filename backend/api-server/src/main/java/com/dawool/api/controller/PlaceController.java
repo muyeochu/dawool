@@ -34,8 +34,11 @@ public class PlaceController {
     /**
      * 관광지(12) 목록
      *
+     * @param type
      * @param areaCode
-     * @param pageable
+     * @param barrier
+     * @param page
+     * @param size
      * @return
      */
     @GetMapping("/list/{type}")

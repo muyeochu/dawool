@@ -28,7 +28,11 @@ public class PlaceService {
     /**
      * 지역 별로 관광지(12) 목록
      *
+     * @param type
      * @param areaCode
+     * @param barrierCode
+     * @param page
+     * @param size
      * @return
      */
     public List<PlaceDto> getEntertainmentList(int type, int areaCode, String barrierCode, int page, int size) {
@@ -57,6 +61,15 @@ public class PlaceService {
         return entertainmentList;
     }
 
+    /**
+     * 무장애 필터링
+     *
+     * @param areaCode
+     * @param barrierCode
+     * @param page
+     * @param size
+     * @return
+     */
     public List<Entertainment> getPlaceList(int areaCode, String[] barrierCode, int page, int size) {
         List<Entertainment> list;
         if (barrierCode[0].equals("1")) {
