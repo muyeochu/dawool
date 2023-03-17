@@ -56,8 +56,6 @@ public class UserService {
                 .uri("/oauth/token")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(BodyInserters.fromFormData(data))
-//                .retrieve()
-//                .bodyToMono(String.class);
                 .exchangeToMono(response -> response.bodyToMono(String.class));
 
         JSONObject info = new JSONObject(mono.block());
@@ -68,6 +66,7 @@ public class UserService {
         TokenResDto resDto = this.getKakaoUserInfoByToken(accessToken);
         log.info(resDto.getAccessToken());
         log.info(resDto.getRefreshToken());
+
         return resDto;
     }
 
@@ -106,16 +105,14 @@ public class UserService {
                     .gender(gender)
                     .build();
             userRepository.save(user);
-
-
         }
+
         User user = userRepository.findByKakaoId(kakaoId);
         String userObjectId = user.getId();
         TokenResDto result = this.createToken(userObjectId);
         user.setRefreshToken(result.getRefreshToken());
         userRepository.save(user);
-
-        result.setNickName(nickName);
+        result.setNickName(user.getNickName());
 
         return result;
     }
