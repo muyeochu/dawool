@@ -13,11 +13,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * JWT 토큰을 파싱하여 인증 정보를 추출하고, 추출된 정보를 이용해 사용자 인증을 수행
+ *
+ * @author 이준
+ */
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
 
+    /**
+     * 프론트에서 전달한 토큰 유효성 검사
+     *
+     * @param request
+     * @param response
+     * @param filterChain
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = getTokenFromHeader(request);
@@ -27,10 +41,15 @@ public class JwtFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
-
         filterChain.doFilter(request, response);
     }
 
+    /**
+     * 프론트에서 전달 받은 토큰 꺼내기
+     *
+     * @param request
+     * @return 토큰
+     */
     private String getTokenFromHeader(HttpServletRequest request) {
         // Authorization 헤더를 꺼냄
         String authorizationToken = request.getHeader("Authorization");

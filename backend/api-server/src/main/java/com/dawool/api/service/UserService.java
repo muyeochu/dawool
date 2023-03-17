@@ -23,9 +23,12 @@ import reactor.core.publisher.Mono;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
+/**
+ * 회원 Service
+ *
+ * @author 이준
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -36,14 +39,18 @@ public class UserService {
     @Value("${kakao.restapi.key}")
     private String kakaoAPIKey;
 
-    // 카카오 토큰 발급 후 회원가입 확인
+    /**
+     * 카카오로부터 액세스 토큰 발급.
+     *
+     * @param code
+     * @return TokenResDto
+     */
     public TokenResDto getKakaoAccessToken(String code) {
         String accessToken = "";
         String refreshToken = "";
         String redirectURI = "http://localhost:8888/api/user/kakao/callback";
 
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
-        Map<String, String> result = new HashMap<>();
         data.add("grant_type", "authorization_code");
         data.add("client_id", kakaoAPIKey);
         data.add("redirect_uri", redirectURI);
@@ -71,10 +78,10 @@ public class UserService {
     }
 
     /**
-     * 토큰으로 카카오 회원 정보 확인.
+     * 토큰으로 카카오 회원정보 확인 후 DB에 저장.
      *
      * @param token
-     * @return
+     * @return TokenResDto
      */
     public TokenResDto getKakaoUserInfoByToken(String token) {
         Mono<String> mono = WebClient.builder().baseUrl("https://kapi.kakao.com")
@@ -121,7 +128,7 @@ public class UserService {
      * 토큰 생성
      *
      * @param objectId
-     * @return
+     * @return TokenResDto
      */
     public TokenResDto createToken(String objectId) {
 
@@ -132,6 +139,7 @@ public class UserService {
 
     /**
      * 액세스 토큰 재발급
+     *
      * @param reqDto
      * @return 액세스 토큰
      */
@@ -154,6 +162,11 @@ public class UserService {
                 .build();
     }
 
+    /**
+     *
+     * @return 로그인된 유저 정보.
+     * @throws Exception 유저정보가 없을 때
+     */
     public User getLoginUser() throws Exception {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String objectId = authentication.getName();

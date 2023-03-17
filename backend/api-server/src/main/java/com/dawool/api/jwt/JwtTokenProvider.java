@@ -25,6 +25,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+/**
+ * JWT 토큰 생성 및 유효성 확인
+ *
+ * @author 이준
+ */
 @Component
 @Slf4j
 public class JwtTokenProvider {
@@ -39,13 +44,22 @@ public class JwtTokenProvider {
     // Refresh Token 시간
     private static final long REFRESH_EXPIRE_TIME = 30 * 24 * 60 * 1000L;
 
-    // secret key 값으로 토큰 생성
+    /**
+     * 생성자
+     *
+     * @param secretKey
+     */
     public JwtTokenProvider(@Value("${jwt.secret-key}") String secretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    // 토큰 생성 설정
+    /**
+     * 액세스, 리프래시 토큰 생성
+     *
+     * @param authentication 인증 객체
+     * @return 생성한 액세스, 리프래시 토큰
+     */
     public TokenResDto generateToken(Authentication authentication) {
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -65,11 +79,18 @@ public class JwtTokenProvider {
                 .build();
     }
 
-    public String createAccessToken(String name, long now) {
+    /**
+     * 액세스 토큰 생성
+     *
+     * @param userObjectId 회원 ObjectId
+     * @param now 현재시간
+     * @return 액세스 토큰
+     */
+    public String createAccessToken(String userObjectId, long now) {
 
         return Jwts.builder()
                 .setHeaderParam(TYP,JWT)
-                .setSubject(name)
+                .setSubject(userObjectId)
                 .claim(AUTHORITIES_KEY, "USER")
                 .setIssuedAt(new Date(now))
                 .setExpiration(new Date(now + ACCESS_EXPIRE_TIME))
@@ -77,15 +98,28 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String createRefreshToken(String name, long now) {
+    /**
+     * 리프래시 토큰 생성
+     *
+     * @param userObjectId
+     * @param now
+     * @return 리프래시 토큰
+     */
+    public String createRefreshToken(String userObjectId, long now) {
         return Jwts.builder()
                 .setHeaderParam(TYP,JWT)
-                .setSubject(name)
+                .setSubject(userObjectId)
                 .setExpiration(new Date(now + REFRESH_EXPIRE_TIME))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
+    /**
+     * 토큰 파싱
+     *
+     * @param token
+     * @return 파싱한 토큰
+     */
     public Claims getClaimsByToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
@@ -93,11 +127,23 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token)
                 .getBody();
     }
-    // 토큰 만료 여부 확인
+
+    /**
+     * 토큰 만료 여부
+     *
+     * @param token
+     * @return 토큰 만료 여부
+     */
     public boolean isExpired(String token) {
         return this.getClaimsByToken(token).getExpiration().before(new Date());
     }
 
+    /**
+     * 토큰의 권한과 유효한지 확인
+     *
+     * @param token
+     * @return 인증 객체
+     */
     public Authentication getAuthentication(String token) {
         Claims claims = getClaimsByToken(token);
         if (claims != null) {
@@ -113,6 +159,12 @@ public class JwtTokenProvider {
         return null;
     }
 
+    /**
+     * 토큰이 유효한지 검사
+     *
+     * @param token
+     * @return 파싱한 토큰
+     */
     public Claims validateToken(String token) {
         try {
             return this.getClaimsByToken(token); // token의 Body가 하기 exception들로 인해 유효하지 않으면 각각에 해당하는 로그 콘솔에 찍음
