@@ -1,4 +1,4 @@
-package com.dawool.api.dto;
+package com.dawool.api.dto.user;
 
 import lombok.*;
 
