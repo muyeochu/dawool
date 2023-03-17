@@ -1,12 +1,15 @@
 import { atom } from "recoil";
 
+
 interface ButtonState {
-  clicked: boolean;
+  activeButtonId: string;
+  buttons: { [key: string]: boolean };
 }
 
 export const buttonState = atom<ButtonState>({
   key: "buttonState",
   default: {
-    clicked: false,
+    activeButtonId: "btn1",
+    buttons: { "buttonState": false }
   },
 });

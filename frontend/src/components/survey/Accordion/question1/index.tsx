@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Q1Button from "../../Button";
 import { ButtonListContainer } from "./styles";
 import { buttonState } from "../../Button/ButtonState";
@@ -6,7 +6,11 @@ import { buttonState } from "../../Button/ButtonState";
 const FirstQuestion = () => {
   // clickedButtons : 각 버튼에 대한 ID 값으로 구성
   const [clickedButtons, setClickedButtons] = useState<string[]>([]);
-  // console.log(clickedButtons)
+  // const [isClickedList, setIsClickedList] = useState<boolean[]>([]);
+  // console.log(clickedButtons);
+  // useEffect(() => {
+  //   setIsClickedList()
+  // }, [clickedButtons]);
 
   const handleButtonClick = useCallback(
     (id: string) => {
@@ -16,7 +20,9 @@ const FirstQuestion = () => {
           break;
         default:
           setClickedButtons((prev) => {
-            const newClickedButtons = prev.filter((buttonId) => buttonId !== "btn1");
+            const newClickedButtons = prev.filter(
+              (buttonId) => buttonId !== "btn1"
+            );
             if (newClickedButtons.includes(id)) {
               return newClickedButtons.filter((buttonId) => buttonId !== id);
             } else {
