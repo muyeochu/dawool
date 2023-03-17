@@ -30,6 +30,13 @@ public class PlaceController {
 
     private final PlaceService placeService;
 
+    /**
+     * 관광지(12) 목록
+     *
+     * @param areaCode
+     * @param pageable
+     * @return
+     */
     @GetMapping("/list/spot")
     public ResponseEntity<?> getEntertainmentList(@RequestParam("area") int areaCode, Pageable pageable){
         List<PlaceDto> entertainmentList = placeService.getEntertainmentList(areaCode, pageable);
