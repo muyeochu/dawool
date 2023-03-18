@@ -1,11 +1,21 @@
 package com.dawool.api.dto.detailInfo;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *  관광정보의 공통적으로 존재하는 정보
  *
  * @author 김정은
  */
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CommonInfoDto {
 
     // 관광지의 고유번호
@@ -27,11 +37,53 @@ public class CommonInfoDto {
     private String addr1;
     private String addr2;
     // 경도
-    private int mapx;
+    private float mapx;
     // 위도
-    private int mapy;
+    private float mapy;
     // 지도 레벨
-    private int mlevel;
+    private float mlevel;
+    // 청각장애
+    private int deaf;
+    // 시각장애
+    private int visuallyImpaired;
+    // 지체장애
+    private int mobilityWeak;
+    // 노인
+    private int old;
+    // 영유아
+    private int infant;
+    private boolean isLiked;
     // 조회수
     private int hit;
+
+    // 무장애 정보
+    private String parking;
+    private String route;
+    private String publicTransport;
+    private String ticketOffice;
+    private String promotion;
+    private String wheelchair;
+    private String exit;
+    private String elevator;
+    private String restroom;
+    private String auditorium;
+    private String room;
+    private String handicapEtc;
+    private String braileBlock;
+    private String helpDog;
+    private String guideHuman;
+    private String audioGuide;
+    private String bigPrint;
+    private String brailePromotion;
+    private String guideSystem;
+    private String blindHandicapEtc;
+    private String signGuide;
+    private String videoGuide;
+    private String hearingRoom;
+    private String hearingHandicapEtc;
+    private String stroller;
+    private String lactationRoom;
+    private String babySpareChair;
+    private String infantsFamilyEtc;
+
 }
