@@ -54,6 +54,12 @@ public class PlaceController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * 관광지(12) 상세조회
+     *
+     * @param contentId
+     * @return
+     */
     @GetMapping("/12/{contentId}")
     public ResponseEntity<?> getEntertainmentInfo(@PathVariable("contentId") int contentId){
         EntertainmentDto entertainment = placeService.getEntertainmentInfo(contentId);
