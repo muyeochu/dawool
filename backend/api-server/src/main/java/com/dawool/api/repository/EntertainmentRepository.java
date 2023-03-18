@@ -24,7 +24,7 @@ public interface EntertainmentRepository extends MongoRepository<Entertainment, 
     List<Entertainment> findByAreacode(String areaCode);
 
     /**
-     * 지역 별 청각쟝애인 시설있는 관광지 목록
+     * 지역 별 청각장애인 시설있는 관광지 목록
      *
      * @param areaCode
      * @param Deaf
