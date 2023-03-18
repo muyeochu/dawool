@@ -2,7 +2,10 @@ package com.dawool.api.service;
 
 import com.dawool.api.code.Category;
 import com.dawool.api.dto.PlaceDto;
+import com.dawool.api.dto.detailInfo.EntertainmentDto;
+import com.dawool.api.entity.Barrier;
 import com.dawool.api.entity.Entertainment;
+import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.EntertainmentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +27,7 @@ import java.util.stream.Collectors;
 public class PlaceService {
 
     private final EntertainmentRepository entertainmentRepository;
+    private final BarrierRepository barrierRepository;
 
     /**
      * 지역 별로 관광지(12) 목록
@@ -42,6 +46,7 @@ public class PlaceService {
         List<Entertainment> list = getPlaceList(areaCode, barrier, page, size);
 
         List<PlaceDto> entertainmentList = new ArrayList<>();
+        // TODO: 이미지 추가하기
         for (Entertainment entertainment : list) {
             PlaceDto place = PlaceDto.builder()
                     .spotId(entertainment.getId())
@@ -107,5 +112,18 @@ public class PlaceService {
         } else{
             return new ArrayList<>();
         }
+    }
+
+    /**
+     * 관광지 상세정보 조보
+     *
+     * @param contentId
+     * @return
+     */
+    public EntertainmentDto getEntertainmentInfo(int contentId){
+        Entertainment entertainment = entertainmentRepository.findByContentid(String.valueOf(contentId));
+        Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
+
+        return new EntertainmentDto().of(entertainment, barrier);
     }
 }
