@@ -5,7 +5,6 @@ import com.dawool.api.dto.detailInfo.EntertainmentDto;
 import com.dawool.api.service.PlaceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,6 +51,21 @@ public class PlaceController {
 
         Map<String, List<PlaceDto>> response = new HashMap<>();
         response.put("contents", entertainmentList);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 관광지(12) 상세조회
+     *
+     * @param contentId
+     * @return
+     */
+    @GetMapping("/12/{contentId}")
+    public ResponseEntity<?> getEntertainmentInfo(@PathVariable("contentId") int contentId){
+        EntertainmentDto entertainment = placeService.getEntertainmentInfo(contentId);
+
+        Map<String, EntertainmentDto> response = new HashMap<>();
+        response.put("info", entertainment);
         return ResponseEntity.ok(response);
     }
 }
