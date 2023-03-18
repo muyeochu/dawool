@@ -19,7 +19,7 @@ import lombok.Setter;
 public class CommonInfoDto {
 
     // 관광지의 고유번호
-    private int contentid;
+    private int contentId;
     // 관광지 타입
     // 12: 관광지 14: 문화시설 15: 축제공연 25: 여행코스 28: 레포츠 32: 숙박 38: 쇼핑 39: 음식점
 //    private int contenttypeid;
@@ -29,19 +29,19 @@ public class CommonInfoDto {
     // URL
     private String homepage;
     // 대표 이미지
-    private String firstimage;
-    private String firstimage2;
+    private String firstImage;
+    private String firstImage2;
     // 지역 코드(특별시/광역시/도)
-    private int areacode;
+    private int areaCode;
     // 도로명 주소
     private String addr1;
     private String addr2;
     // 경도
-    private float mapx;
+    private float mapX;
     // 위도
-    private float mapy;
+    private float mapY;
     // 지도 레벨
-    private float mlevel;
+    private float mLevel;
     // 청각장애
     private int deaf;
     // 시각장애
