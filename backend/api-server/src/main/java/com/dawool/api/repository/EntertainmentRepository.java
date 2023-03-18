@@ -19,8 +19,9 @@ public interface EntertainmentRepository extends MongoRepository<Entertainment, 
      * 지역 별 관광지 목록
      *
      * @param areaCode
-     * @param pageable
      * @return
      */
-    List<Entertainment> findByAreacode(String areaCode, Pageable pageable);
+    List<Entertainment> findByAreacode(String areaCode);
+
+    List<Entertainment> findByAreacodeAndDeaf(String areaCode, String Deaf);
 }
