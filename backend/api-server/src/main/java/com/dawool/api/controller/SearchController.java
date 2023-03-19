@@ -1,5 +1,6 @@
 package com.dawool.api.controller;
 
+import com.dawool.api.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/search")
 public class SearchController {
 
+    private SearchService searchService;
     /**
      * 지역 검색
      *
@@ -28,8 +30,13 @@ public class SearchController {
      * @return
      */
     @GetMapping("/")
-    public ResponseEntity<?> searchRegion(@RequestParam("area") String area, Pageable pageable) {
-
+    public ResponseEntity<?> searchRegion(
+            @RequestParam("area") String area,
+            @RequestParam("type") int type,
+            @RequestParam("barrier") String barrier,
+            int page, int size
+    ) {
+        searchService.getSearchList(area, type, barrier, page, size);
         return null;
     }
 }
