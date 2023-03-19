@@ -4,6 +4,7 @@ import { AccordionListContainer } from "../components/survey/Accordion/styles";
 import Accordion from "../components/survey/Accordion/index";
 import FirstQuestion from "../components/survey/Accordion/question1"
 import styled from "styled-components";
+import ThirdQuestion from "../components/survey/Accordion/question3";
 
 // grid 설정
 const MainGridItems = styled.div`
@@ -25,7 +26,7 @@ const SurveyPage = () => {
         </Accordion>
 
         <Accordion title="선호하는 이동거리가 있나요?">
-          <p>Content for section 2 goes here</p>
+          <ThirdQuestion/>
         </Accordion>
 
         <Accordion title="인기있는 관광지에 방문하는 것을 선호하나요?">

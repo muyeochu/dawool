@@ -19,15 +19,6 @@ const Accordion: React.FC<AccordionProps> = ({ title, children }) => {
     setIsOpen(!isOpen);
   };
 
-// const Accordion = ({ title, children }: AccordionProps) => {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const [activeAccordion, setActiveAccordion] = useRecoilState(accordionState);
-
-//   const handleClick = () => {
-//     setIsOpen(!isOpen);
-//     setActiveAccordion(title);
-//   };
-
   return (
     <AccordionItemContainer isOpen={isOpen}>
 
