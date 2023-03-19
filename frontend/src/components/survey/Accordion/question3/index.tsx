@@ -15,7 +15,7 @@ const ThirdQuestion = () => {
         progress
         renderMark={(mark) => {
           if ([1, 2, 3, 4, 5].includes(mark)) {
-            return <span>{mark}시간</span>;
+            return <span>{mark} 시간</span>;
           }
           return null;
         }}
