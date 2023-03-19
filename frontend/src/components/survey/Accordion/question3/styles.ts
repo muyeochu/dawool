@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { white, blue, grey } from "../../../../styles/Colors";
+import { white } from "../../../../styles/Colors";
 
 export const SliderContainer = styled.div`
   border-radius: 3px;
