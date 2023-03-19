@@ -29,13 +29,14 @@ export const AccordionItemContainer = styled.div<ContainerProps>`
 export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   background-color: ${white};
   color: "black";
   cursor: pointer;
   font-size: 24px;
   font-weight: bold;
-  padding: 10px;
+  padding: 10px 20px;
   transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover:enabled {
@@ -43,6 +44,15 @@ export const HeaderContainer = styled.div`
     border: 10px solid ${blue[500]};
     color: "black";
   }
+`;
+
+export const HeaderCheckTextContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0px 4px;
+  gap: 30px;
 `;
 
 export const HeaderText = styled.span`
