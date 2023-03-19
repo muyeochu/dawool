@@ -27,6 +27,8 @@ public class PlaceDto {
     private int contentTypeId;
     // 제목
     private String title;
+    // 이미지 경로
+    private String imageUrl;
     // 소분류
     private String category;
     private int deaf;
