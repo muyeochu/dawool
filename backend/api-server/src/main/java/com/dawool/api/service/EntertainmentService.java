@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PlaceService {
+public class EntertainmentService {
 
     private final EntertainmentRepository entertainmentRepository;
     private final BarrierRepository barrierRepository;
@@ -46,13 +46,13 @@ public class PlaceService {
         List<Entertainment> list = getPlaceList(areaCode, barrier, page, size);
 
         List<PlaceDto> entertainmentList = new ArrayList<>();
-        // TODO: 이미지 추가하기
         for (Entertainment entertainment : list) {
             PlaceDto place = PlaceDto.builder()
                     .spotId(entertainment.getId())
                     .contentId(entertainment.getContentid())
                     .contentTypeId(entertainment.getContenttypeid())
                     .title(entertainment.getTitle())
+                    .imageUrl(entertainment.getFirstimage())
                     .category(Category.valueOf(entertainment.getCat3()).getCategory())
                     .deaf(entertainment.getDeaf())
                     .visuallyImpaired(entertainment.getVisually_impaired())
