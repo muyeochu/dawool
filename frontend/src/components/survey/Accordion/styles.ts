@@ -21,7 +21,7 @@ export const AccordionItemContainer = styled.div<ContainerProps>`
   border-radius: 5px;
   margin-bottom: 21px;
   overflow: hidden;
-  transition: height 0.3s ease-in-out;
+  transition: height 1s ease-in-out;
   height: ${(props) => (props.isOpen ? "auto" : "68px")};
 `;
 
@@ -61,6 +61,7 @@ export const HeaderIcon = styled.img`
 `;
 
 // accordion body
-export const Body = styled.div`
-  padding: 10px;
+export const BodyContainer = styled.div`
+  width: auto;
+  height: auto;
 `;
