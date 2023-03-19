@@ -2,7 +2,7 @@ package com.dawool.api.controller;
 
 import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
-import com.dawool.api.service.PlaceService;
+import com.dawool.api.service.EntertainmentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ import java.util.Map;
 @RequestMapping("/api/location")
 public class PlaceController {
 
-    private final PlaceService placeService;
+    private final EntertainmentService entertainmentService;
 
     /**
      * 관광지(12) 목록
@@ -47,7 +47,7 @@ public class PlaceController {
             @RequestParam("barrier") String barrier,
             int page, int size){
         List<PlaceDto> entertainmentList =
-                placeService.getEntertainmentList(type, areaCode, barrier, page, size);
+                entertainmentService.getEntertainmentList(type, areaCode, barrier, page, size);
 
         Map<String, List<PlaceDto>> response = new HashMap<>();
         response.put("contents", entertainmentList);
@@ -62,7 +62,7 @@ public class PlaceController {
      */
     @GetMapping("/12/{contentId}")
     public ResponseEntity<?> getEntertainmentInfo(@PathVariable("contentId") int contentId){
-        EntertainmentDto entertainment = placeService.getEntertainmentInfo(contentId);
+        EntertainmentDto entertainment = entertainmentService.getEntertainmentInfo(contentId);
 
         Map<String, EntertainmentDto> response = new HashMap<>();
         response.put("info", entertainment);
