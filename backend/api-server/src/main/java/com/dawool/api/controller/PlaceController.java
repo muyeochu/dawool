@@ -84,7 +84,7 @@ public class PlaceController {
      * @return
      */
     @GetMapping("/{type}/{contentId}")
-    public ResponseEntity<?> getEntertainmentInfo(@PathVariable("type") int type, @PathVariable("contentId") int contentId){
+    public ResponseEntity<?> getPlaceInfo(@PathVariable("type") int type, @PathVariable("contentId") int contentId){
         switch (type){
             case 12:
                 EntertainmentDto entertainment = entertainmentService.getEntertainmentInfo(contentId);
