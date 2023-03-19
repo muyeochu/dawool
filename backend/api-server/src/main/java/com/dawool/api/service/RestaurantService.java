@@ -1,9 +1,14 @@
 package com.dawool.api.service;
 
 import com.dawool.api.dto.PlaceDto;
+import com.dawool.api.dto.detailInfo.LodgingDto;
+import com.dawool.api.dto.detailInfo.RestaurantDto;
+import com.dawool.api.entity.Barrier;
 import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.CultureFacility;
+import com.dawool.api.entity.Lodging;
 import com.dawool.api.entity.Restaurant;
+import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.CultureFacilityRepository;
 import com.dawool.api.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +30,7 @@ import java.util.stream.Collectors;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+    private final BarrierRepository barrierRepository;
 
     /**
      * 지역 별로 식당(39) 목록
@@ -96,5 +102,18 @@ public class RestaurantService {
         } else{
             return new ArrayList<>();
         }
+    }
+
+    /**
+     * 숙박 상세정보 조회
+     *
+     * @param contentId
+     * @return
+     */
+    public RestaurantDto getRestaurantInfo(int contentId){
+        Restaurant restaurant = restaurantRepository.findByContentid(String.valueOf(contentId));
+        Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
+
+        return new RestaurantDto().of(restaurant, barrier);
     }
 }

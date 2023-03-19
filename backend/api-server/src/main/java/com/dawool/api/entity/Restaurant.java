@@ -1,15 +1,20 @@
 package com.dawool.api.entity;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 식당(39) 정보
  *
  * @author 김정은
  */
+@Getter
+@Setter
 public class Restaurant extends CommonInfo {
 
     // 신용카드 가능 여부
-    private String chkcreditcardfood;
+    private int chkcreditcardfood;
     // 대표메뉴
     private String firstmenu;
     // 문의 및 안내
@@ -17,7 +22,7 @@ public class Restaurant extends CommonInfo {
     // 어린이 놀이방 시설 여부
     private float kidsfacility;
     // 영업시간
-    private String opentim은efood;
+    private String opentimefood;
     // 포장 가능 여부
     private String packing;
     // 주차시설
