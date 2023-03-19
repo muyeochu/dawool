@@ -2,11 +2,13 @@ package com.dawool.api.controller;
 
 import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
+import com.dawool.api.dto.detailInfo.LodgingDto;
 import com.dawool.api.service.EntertainmentService;
 import com.dawool.api.service.LodgingService;
 import com.dawool.api.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,11 +59,14 @@ public class PlaceController {
             case 12:
                 placeList =
                     entertainmentService.getEntertainmentList(areaCode, barrier, page, size);
+                break;
             case 32:
                 placeList =
                     lodgingService.getLodgingList(areaCode, barrier, page, size);
+                break;
             case 39:
                 placeList = restaurantService.getRestaurantList(areaCode, barrier, page, size);
+                break;
 
 
         }
@@ -74,15 +79,24 @@ public class PlaceController {
     /**
      * 관광지(12) 상세조회
      *
+     * @param type
      * @param contentId
      * @return
      */
-    @GetMapping("/12/{contentId}")
-    public ResponseEntity<?> getEntertainmentInfo(@PathVariable("contentId") int contentId){
-        EntertainmentDto entertainment = entertainmentService.getEntertainmentInfo(contentId);
-
-        Map<String, EntertainmentDto> response = new HashMap<>();
-        response.put("info", entertainment);
-        return ResponseEntity.ok(response);
+    @GetMapping("/{type}/{contentId}")
+    public ResponseEntity<?> getPlaceInfo(@PathVariable("type") int type, @PathVariable("contentId") int contentId){
+        switch (type){
+            case 12:
+                EntertainmentDto entertainment = entertainmentService.getEntertainmentInfo(contentId);
+                Map<String, EntertainmentDto> entertainmentResponse = new HashMap<>();
+                entertainmentResponse.put("info", entertainment);
+                return ResponseEntity.ok(entertainmentResponse);
+            case 32:
+                LodgingDto lodging = lodgingService.getLodgingInfo(contentId);
+                Map<String, LodgingDto> lodgingResponse = new HashMap<>();
+                lodgingResponse.put("info", lodging);
+                return ResponseEntity.ok(lodgingResponse);
+        }
+        return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
     }
 }

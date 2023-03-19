@@ -102,7 +102,7 @@ public class EntertainmentService {
     }
 
     /**
-     * 관광지 상세정보 조보
+     * 관광지 상세정보 조회
      *
      * @param contentId
      * @return
