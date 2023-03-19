@@ -57,33 +57,6 @@ public class CommonInfoDto {
     private int hit;
 
     // 무장애 정보
-    private String parking;
-    private String route;
-    private String publicTransport;
-    private String ticketOffice;
-    private String promotion;
-    private String wheelchair;
-    private String exit;
-    private String elevator;
-    private String restroom;
-    private String auditorium;
-    private String room;
-    private String handicapEtc;
-    private String braileBlock;
-    private String helpDog;
-    private String guideHuman;
-    private String audioGuide;
-    private String bigPrint;
-    private String brailePromotion;
-    private String guideSystem;
-    private String blindHandicapEtc;
-    private String signGuide;
-    private String videoGuide;
-    private String hearingRoom;
-    private String hearingHandicapEtc;
-    private String stroller;
-    private String lactationRoom;
-    private String babySpareChair;
-    private String infantsFamilyEtc;
+    private BarrierDto barrier;
 
 }

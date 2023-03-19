@@ -1,10 +1,16 @@
 package com.dawool.api.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 숙박(32) 관련 정보
  *
  * @author 김정은
  */
+
+@Getter
+@Setter
 public class Lodging extends CommonInfo{
 
     // 입실시간

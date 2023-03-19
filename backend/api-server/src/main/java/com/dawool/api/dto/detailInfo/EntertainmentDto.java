@@ -47,15 +47,10 @@ public class EntertainmentDto extends CommonInfoDto{
     @Builder
     public EntertainmentDto(int contentId, String title, String category, String homepage, String firstImage, String firstImage2,
                             int areaCode, String addr1, String addr2, float mapX, float mapY, float mLevel,
-                            int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit,
-                            String parking, String route, String publicTransport, String ticketOffice, String promotion,
-                            String wheelchair, String exit, String elevator, String restroom, String auditorium, String room, String handicapEtc,
-                            String braileBlock, String helpDog, String guideHuman, String audioGuide, String bigPrint, String brailePromotion, String guideSystem, String blindHandicapEtc,
-                            String signGuide, String videoGuide, String hearingRoom, String hearingHandicapEtc,
-                            String stroller, String lactationRoom, String babySpareChair, String infantsFamilyEtc,
+                            int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
                             int isBabyCarriage, int isPet, String expAgeRange, String expGuide, float heritage1, float heritage2, float heritage3,
                             String infoCenter, String commonParking, String restDate, String useSeason, String useTime) {
-        super(contentId, title, category, homepage, firstImage, firstImage2, areaCode, addr1, addr2, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, parking, route, publicTransport, ticketOffice, promotion, wheelchair, exit, elevator, restroom, auditorium, room, handicapEtc, braileBlock, helpDog, guideHuman, audioGuide, bigPrint, brailePromotion, guideSystem, blindHandicapEtc, signGuide, videoGuide, hearingRoom, hearingHandicapEtc, stroller, lactationRoom, babySpareChair, infantsFamilyEtc);
+        super(contentId, title, category, homepage, firstImage, firstImage2, areaCode, addr1, addr2, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, barrier);
         this.isBabyCarriage = isBabyCarriage;
         this.isPet = isPet;
         this.expAgeRange = expAgeRange;
@@ -78,7 +73,7 @@ public class EntertainmentDto extends CommonInfoDto{
      * @return
      */
     public EntertainmentDto of(Entertainment entertainment, Barrier barrier){
-        EntertainmentDto dto = EntertainmentDto.builder()
+        return EntertainmentDto.builder()
                 // 공통정보
                 .contentId(entertainment.getContentid())
                 .addr1(entertainment.getAddr1())
@@ -95,6 +90,7 @@ public class EntertainmentDto extends CommonInfoDto{
                 .mapX(entertainment.getMapx())
                 .mapY(entertainment.getMapy())
                 .mLevel(entertainment.getMlevel())
+                .barrier(new BarrierDto().of(barrier))
                 // 상세정보
                 .isBabyCarriage(entertainment.getChkbabycarriage())
                 .isPet(entertainment.getChkpet())
@@ -108,40 +104,6 @@ public class EntertainmentDto extends CommonInfoDto{
                 .restDate(entertainment.getRestdate())
                 .useSeason(entertainment.getUseseason())
                 .useTime(entertainment.getUsetime())
-                // 무장애 정보
-                .parking(barrier.getParking())
-                .route(barrier.getRoute())
-                .publicTransport(barrier.getPublictransport())
-                .ticketOffice(barrier.getTicketoffice())
-                .promotion(barrier.getPromotion())
-                .wheelchair(barrier.getWheelchair())
-                .exit(barrier.getExit())
-                .elevator(barrier.getElevator())
-                .restroom(barrier.getRestroom())
-                .auditorium(barrier.getAuditorium())
-                .room(barrier.getRoom())
-                .handicapEtc(barrier.getHandicapetc())
-
-                .braileBlock(barrier.getBraileblock())
-                .helpDog(barrier.getHelpdog())
-                .guideHuman(barrier.getGuidehuman())
-                .audioGuide(barrier.getAudioguide())
-                .bigPrint(barrier.getBigprint())
-                .brailePromotion(barrier.getBrailepromotion())
-                .guideSystem(barrier.getGuidesystem())
-                .blindHandicapEtc(barrier.getBlindhandicapetc())
-
-                .signGuide(barrier.getSignguide())
-                .videoGuide(barrier.getVideoguide())
-                .hearingRoom(barrier.getHearingroom())
-                .hearingHandicapEtc(barrier.getHearinghandicapetc())
-
-                .stroller(barrier.getStroller())
-                .lactationRoom(barrier.getLactationroom())
-                .babySpareChair(barrier.getBabysparechair())
-                .infantsFamilyEtc(barrier.getInfantsfamilyetc())
-                .babySpareChair(barrier.getBabysparechair())
                 .build();
-        return dto;
     }
 }

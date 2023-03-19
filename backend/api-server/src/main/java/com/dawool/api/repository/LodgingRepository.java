@@ -1,6 +1,7 @@
 package com.dawool.api.repository;
 
 import com.dawool.api.entity.Lodging;
+import com.dawool.api.entity.Restaurant;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -29,4 +30,12 @@ public interface LodgingRepository extends MongoRepository<Lodging, String> {
      * @return
      */
     List<Lodging> findByAreacodeAndDeaf(String areaCode, String Deaf);
+
+    /**
+     * 장소 상세조회
+     *
+     * @param contentId
+     * @return
+     */
+    Lodging findByContentid(String contentId);
 }
