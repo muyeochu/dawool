@@ -1,9 +1,9 @@
 package com.dawool.api.service;
 
-import com.dawool.api.code.Category;
 import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
 import com.dawool.api.entity.Barrier;
+import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.Entertainment;
 import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.EntertainmentRepository;
@@ -32,35 +32,21 @@ public class EntertainmentService {
     /**
      * 지역 별로 관광지(12) 목록
      *
-     * @param type
      * @param areaCode
      * @param barrierCode
      * @param page
      * @param size
      * @return
      */
-    public List<PlaceDto> getEntertainmentList(int type, int areaCode, String barrierCode, int page, int size) {
+    public List<PlaceDto> getEntertainmentList(int areaCode, String barrierCode, int page, int size) {
 
         String[] barrier = barrierCode.split("");
 
         List<Entertainment> list = getPlaceList(areaCode, barrier, page, size);
 
         List<PlaceDto> entertainmentList = new ArrayList<>();
-        for (Entertainment entertainment : list) {
-            PlaceDto place = PlaceDto.builder()
-                    .spotId(entertainment.getId())
-                    .contentId(entertainment.getContentid())
-                    .contentTypeId(entertainment.getContenttypeid())
-                    .title(entertainment.getTitle())
-                    .imageUrl(entertainment.getFirstimage())
-                    .category(Category.valueOf(entertainment.getCat3()).getCategory())
-                    .deaf(entertainment.getDeaf())
-                    .visuallyImpaired(entertainment.getVisually_impaired())
-                    .mobilityWeak(entertainment.getMobility_weak())
-                    .old(entertainment.getOld())
-                    .infant(entertainment.getInfant())
-                    .isLiked(false)
-                    .build();
+        for (CommonInfo entertainment : list) {
+            PlaceDto place = new PlaceDto().of(entertainment);
             entertainmentList.add(place);
         }
         return entertainmentList;
@@ -106,9 +92,10 @@ public class EntertainmentService {
                     .collect(Collectors.toList());
         }
 
-        if(list.size() > 0) {
-            int startIndex = page * size;
-            return list.subList(startIndex, startIndex + size);
+        int startIndex = page * size;
+        int endIndex = Math.min(startIndex + size, list.size());
+        if(list.size() > 0 && startIndex <= list.size()) {
+            return list.subList(startIndex, endIndex);
         } else{
             return new ArrayList<>();
         }
