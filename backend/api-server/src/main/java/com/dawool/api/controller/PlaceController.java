@@ -3,6 +3,7 @@ package com.dawool.api.controller;
 import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
 import com.dawool.api.dto.detailInfo.LodgingDto;
+import com.dawool.api.dto.detailInfo.RestaurantDto;
 import com.dawool.api.service.EntertainmentService;
 import com.dawool.api.service.LodgingService;
 import com.dawool.api.service.RestaurantService;
@@ -96,6 +97,11 @@ public class PlaceController {
                 Map<String, LodgingDto> lodgingResponse = new HashMap<>();
                 lodgingResponse.put("info", lodging);
                 return ResponseEntity.ok(lodgingResponse);
+            case 39:
+                RestaurantDto restaurant = restaurantService.getRestaurantInfo(contentId);
+                Map<String, RestaurantDto> restaurantResponse = new HashMap<>();
+                restaurantResponse.put("info", restaurant);
+                return ResponseEntity.ok(restaurantResponse);
         }
         return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
     }
