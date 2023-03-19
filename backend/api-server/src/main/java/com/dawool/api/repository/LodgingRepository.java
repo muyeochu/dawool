@@ -29,4 +29,6 @@ public interface LodgingRepository extends MongoRepository<Lodging, String> {
      * @return
      */
     List<Lodging> findByAreacodeAndDeaf(String areaCode, String Deaf);
+
+    List<Lodging> findByAddr1RegexAndAddr2Regex();
 }

@@ -39,4 +39,6 @@ public interface EntertainmentRepository extends MongoRepository<Entertainment, 
      * @return
      */
     Entertainment findByContentid(String contentId);
+
+    List<Entertainment> findByAddr1RegexAndAddr2Regex();
 }

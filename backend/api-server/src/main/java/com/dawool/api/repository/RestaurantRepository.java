@@ -1,6 +1,5 @@
 package com.dawool.api.repository;
 
-import com.dawool.api.entity.CultureFacility;
 import com.dawool.api.entity.Restaurant;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -30,4 +29,6 @@ public interface RestaurantRepository extends MongoRepository<Restaurant, String
      * @return
      */
     List<Restaurant> findByAreacodeAndDeaf(String areaCode, String Deaf);
+
+    List<Restaurant> findByAddr1RegexAndAddr2Regex();
 }
