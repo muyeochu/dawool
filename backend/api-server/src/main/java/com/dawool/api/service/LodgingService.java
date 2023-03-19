@@ -1,10 +1,11 @@
 package com.dawool.api.service;
 
 import com.dawool.api.dto.PlaceDto;
+import com.dawool.api.dto.detailInfo.LodgingDto;
+import com.dawool.api.entity.Barrier;
 import com.dawool.api.entity.CommonInfo;
-import com.dawool.api.entity.CultureFacility;
 import com.dawool.api.entity.Lodging;
-import com.dawool.api.repository.CultureFacilityRepository;
+import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.LodgingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 public class LodgingService {
 
     private final LodgingRepository lodgingRepository;
+    private final BarrierRepository barrierRepository;
 
     /**
      * 지역 별로 숙박(32) 목록
@@ -96,5 +98,18 @@ public class LodgingService {
         } else{
             return new ArrayList<>();
         }
+    }
+
+    /**
+     * 숙박 상세정보 조회
+     *
+     * @param contentId
+     * @return
+     */
+    public LodgingDto getLodgingInfo(int contentId){
+        Lodging lodging = lodgingRepository.findByContentid(String.valueOf(contentId));
+        Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
+
+        return new LodgingDto().of(lodging, barrier);
     }
 }
