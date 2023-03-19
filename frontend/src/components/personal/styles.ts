@@ -65,7 +65,6 @@ export const UserContainer = styled.div`
   align-items: center;
   gap: 13px;
   margin-top: 50px;
-  margin-right: 120px;
 `;
 
 export const PersonIcStyle = styled(PersonIc)`

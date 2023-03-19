@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import {userState} from "../../recoil/UserState"
+import {useRecoilState } from "recoil";
 
 import {
   MyPageDimmer,
@@ -27,6 +29,7 @@ interface Props {
 
 const SideBar = ({ isOpen, setIsOpen }: Props) => {
   const navigate = useNavigate();
+  const [user, setUser] = useRecoilState(userState);
 
   // 사이드바 닫기
   const closeSideBar = () => {
@@ -35,16 +38,19 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
 
   // 취향 설문 수정으로 이동
   const goSurvey = () => {
+    if(!checkLogin())
     navigate("/survey");
   };
 
   // 내 코스 관리로 이동
   const goMyCours = () => {
+    if(!checkLogin())
     navigate("/mycourse");
   };
 
   // 관심 여행지 관리로 이동
   const goInterest = () => {
+    if(!checkLogin())
     navigate("/interest");
   };
 
@@ -54,6 +60,14 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
     alert("로그아웃 되었습니다!");
     navigate("/");
   };
+
+  const checkLogin=()=>{
+    if(user===null){
+      alert("로그인이 필요한 서비스입니다.");
+      navigate("/login");
+      return true;
+    }else return false;
+  }
 
   return (
     <>
@@ -65,18 +79,11 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
               <LogoIcStyle />
               <UserContainer>
                 <PersonIcStyle />
-                {/* 로그인 여부에 따라 닉네임 다르게 표시되게 하기 */}
-                <UserFontStyle>예린님</UserFontStyle>
+                <UserFontStyle >{user===null?"로그인해주세요":user["nickName"]+"님"}</UserFontStyle>
               </UserContainer>
 
               <LineStyle />
-              {/* 로그인 여부에 따라 각 메뉴를 클릭했을때의 로직이 다름 */}
-              {/* 1. 로그인o: 각 페이지로 보내기 */}
-              {/* 2. 로그인x
-                    1) 로그인이 필요한 서비스입니다 alert 띄우기
-                    2) 로그인 화면으로 보내기
-                    3) 사이드바 닫기
-              */}
+      
               <MenuContainer>
                 <IconMenuContainer
                   onClick={() => {
@@ -102,7 +109,7 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
                 >
                   <InterestIcStyle /> <MenuFont>관심 여행지 관리</MenuFont>
                 </IconMenuContainer>
-                {/* 로그인 상태일때만 로그아웃 버튼이 나타난다. */}
+                {user!==null &&
                 <LogoutContainer
                   onClick={() => {
                     handleLogout();
@@ -113,6 +120,7 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
                     <LogoutIcStyle /> <MenuFont>로그아웃</MenuFont>
                   </IconMenuContainer>
                 </LogoutContainer>
+                }
               </MenuContainer>
             </SidebarContainer>
           </SidebarStyle>
