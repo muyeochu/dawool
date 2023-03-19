@@ -4,6 +4,7 @@ import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
 import com.dawool.api.service.EntertainmentService;
 import com.dawool.api.service.LodgingService;
+import com.dawool.api.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,7 @@ public class PlaceController {
 
     private final EntertainmentService entertainmentService;
     private final LodgingService lodgingService;
+    private final RestaurantService restaurantService;
 
     /**
      * 타입별 장소 목록
@@ -58,6 +60,9 @@ public class PlaceController {
             case 32:
                 placeList =
                     lodgingService.getLodgingList(areaCode, barrier, page, size);
+            case 39:
+                placeList = restaurantService.getRestaurantList(areaCode, barrier, page, size);
+
 
         }
 
