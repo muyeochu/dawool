@@ -6,6 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * 숙박(32) 관련 Repository
+ *
+ * @author 김정은
+ */
 @Repository
 public interface LodgingRepository extends MongoRepository<Lodging, String> {
     /**

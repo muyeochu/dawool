@@ -40,6 +40,12 @@ public class PlaceDto {
     private int infant;
     private boolean isLiked;
 
+    /**
+     * CommonInfo Entity -> PlaceDto
+     *
+     * @param info
+     * @return
+     */
     public PlaceDto of(CommonInfo info){
         return PlaceDto.builder()
                 .spotId(info.getId())

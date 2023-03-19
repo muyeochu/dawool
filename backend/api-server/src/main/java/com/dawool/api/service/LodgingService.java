@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 숙박(32) 관련 Service
+ *
+ * @author 김정은
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
