@@ -3,6 +3,7 @@ package com.dawool.api.controller;
 import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
 import com.dawool.api.service.EntertainmentService;
+import com.dawool.api.service.LodgingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +31,10 @@ import java.util.Map;
 public class PlaceController {
 
     private final EntertainmentService entertainmentService;
+    private final LodgingService lodgingService;
 
     /**
-     * 관광지(12) 목록
+     * 타입별 장소 목록
      *
      * @param type
      * @param areaCode
@@ -41,16 +44,25 @@ public class PlaceController {
      * @return
      */
     @GetMapping("/list/{type}")
-    public ResponseEntity<?> getEntertainmentList(
+    public ResponseEntity<?> getPlaceList(
             @PathVariable("type") int type,
             @RequestParam("area") int areaCode,
             @RequestParam("barrier") String barrier,
             int page, int size){
-        List<PlaceDto> entertainmentList =
-                entertainmentService.getEntertainmentList(type, areaCode, barrier, page, size);
+
+        List<PlaceDto> placeList = new ArrayList<>();
+        switch (type){
+            case 12:
+                placeList =
+                    entertainmentService.getEntertainmentList(areaCode, barrier, page, size);
+            case 32:
+                placeList =
+                    lodgingService.getLodgingList(areaCode, barrier, page, size);
+
+        }
 
         Map<String, List<PlaceDto>> response = new HashMap<>();
-        response.put("contents", entertainmentList);
+        response.put("contents", placeList);
         return ResponseEntity.ok(response);
     }
 
