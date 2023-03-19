@@ -1,5 +1,7 @@
 package com.dawool.api.dto;
 
+import com.dawool.api.code.Category;
+import com.dawool.api.entity.CommonInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,5 +39,22 @@ public class PlaceDto {
     private int old;
     private int infant;
     private boolean isLiked;
+
+    public PlaceDto of(CommonInfo info){
+        return PlaceDto.builder()
+                .spotId(info.getId())
+                .contentId(info.getContentid())
+                .contentTypeId(info.getContenttypeid())
+                .title(info.getTitle())
+                .imageUrl(info.getFirstimage())
+                .category(Category.valueOf(info.getCat3()).getCategory())
+                .deaf(info.getDeaf())
+                .visuallyImpaired(info.getVisually_impaired())
+                .mobilityWeak(info.getMobility_weak())
+                .old(info.getOld())
+                .infant(info.getInfant())
+                .isLiked(false)
+                .build();
+    }
 
 }
