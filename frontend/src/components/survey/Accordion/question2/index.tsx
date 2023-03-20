@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { RadioButtonContainer } from "./styles";
 import RadioButtonGroup from "../../../common/RadioButton/RadioButtonGroup";
 
-const FourthQuestion = () => {
+const SecondQuestion = () => {
   const responses = [
     {
-      label: "예",
+      label: "지역 선택하기",
       name: "button-types",
     },
     {
-      label: "아니오",
+      label: "현재 위치정보 가져오기",
       name: "button-types",
     },
   ];
@@ -37,4 +37,5 @@ const FourthQuestion = () => {
   );
 };
 
-export default FourthQuestion;
+export default SecondQuestion;
+
