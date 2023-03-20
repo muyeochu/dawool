@@ -1,9 +1,13 @@
 package com.dawool.api.service;
 
 import com.dawool.api.dto.PlaceDto;
+import com.dawool.api.dto.detailInfo.CultureFacilityDto;
+import com.dawool.api.dto.detailInfo.LeisureSportsDto;
+import com.dawool.api.entity.Barrier;
 import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.CultureFacility;
 import com.dawool.api.entity.LeisureSports;
+import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.CultureFacilityRepository;
 import com.dawool.api.repository.LeisureSportsRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +29,7 @@ import java.util.stream.Collectors;
 public class LeisureSportsService {
 
     private final LeisureSportsRepository leisureSportsRepository;
+    private final BarrierRepository barrierRepository;
 
     /**
      * 지역 별로 레포츠(28) 목록
@@ -96,5 +101,18 @@ public class LeisureSportsService {
         } else{
             return new ArrayList<>();
         }
+    }
+
+    /**
+     * 레포츠 상세정보 조회
+     *
+     * @param contentId
+     * @return
+     */
+    public LeisureSportsDto getLeisureSportsInfo(int contentId){
+        LeisureSports leisureSports = leisureSportsRepository.findByContentid(String.valueOf(contentId));
+        Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
+
+        return new LeisureSportsDto().of(leisureSports, barrier);
     }
 }
