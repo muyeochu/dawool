@@ -22,9 +22,9 @@ public class LeisureSportsDto extends CommonInfoDto{
     // 수용인원
     private String accomCount;
     // 유모차 대여 여부
-    private boolean isBabyCarriage;
+    private float isBabyCarriage;
     // 애완동물 동반 여부
-    private boolean isPet;
+    private float isPet;
     // 체험 연령
     private String expAgeRange;
     // 문의 및 안내
@@ -45,7 +45,11 @@ public class LeisureSportsDto extends CommonInfoDto{
     private String useTime;
 
     @Builder
-    public LeisureSportsDto(int contentId, String title, String category, String homepage, String firstImage, String firstImage2, int areaCode, String addr1, String addr2, float mapX, float mapY, float mLevel, int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier, String accomCount, boolean isBabyCarriage, boolean isPet, String expAgeRange, String infoCenter, String openPeriod, String parkingFee, String commonParking, String reservation, String restDate, String useFee, String useTime) {
+    public LeisureSportsDto(int contentId, String title, String category, String homepage, String firstImage, String firstImage2,
+                            int areaCode, String addr1, String addr2, float mapX, float mapY, float mLevel,
+                            int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
+                            String accomCount, float isBabyCarriage, float isPet, String expAgeRange, String infoCenter, String openPeriod,
+                            String parkingFee, String commonParking, String reservation, String restDate, String useFee, String useTime) {
         super(contentId, title, category, homepage, firstImage, firstImage2, areaCode, addr1, addr2, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, barrier);
         this.accomCount = accomCount;
         this.isBabyCarriage = isBabyCarriage;
