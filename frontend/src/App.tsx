@@ -11,6 +11,9 @@ import {
   SearchPage,
   SurveyPage,
   TourSpotPage,
+  CulturePage,
+  LeportsPage,
+  ShoppingPage,
   ModalTest,
 } from "./pages/index";
 import Header from "./components/common/Header";
@@ -47,6 +50,9 @@ function App() {
               <Route path="/search" element={<SearchPage />} />
               <Route path="/survey" element={<SurveyPage />} />
               <Route path="/tourspot" element={<TourSpotPage />} />
+              <Route path="/culture" element={<CulturePage />} />
+              <Route path="/leports" element={<LeportsPage />} />
+              <Route path="/shopping" element={<ShoppingPage />} />
 
               <Route path="/modaltest" element={<ModalTest />} />
             </Routes>

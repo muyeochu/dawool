@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 // styles
 import {
@@ -16,6 +16,10 @@ import {
   SearchIcContainer,
   MicIcContainer,
   NavStyle,
+  DropDownIcContainer,
+  DropDownIcStyle,
+  DropDownContainer,
+  DropDownContent,
   PersonIcContainer,
 } from "./styles";
 
@@ -29,30 +33,16 @@ import { ReactComponent as PersonIc2 } from "../../../assets/icon/person2Ic.svg"
 // sidebar
 import SideBar from "../../personal";
 
-interface Props {
-  searchBar?: boolean;
-  mike?: boolean;
-  tourSpot?: boolean;
-  restaurant?: boolean;
-  accommodation?: boolean;
-  myPage?: boolean;
-}
-
-const Header = ({
-  searchBar,
-  mike,
-  tourSpot,
-  restaurant,
-  accommodation,
-  myPage,
-}: Props) => {
+const Header = () => {
   const navigate = useNavigate();
+  const ref = useRef<HTMLDivElement>(null);
   let currentUrl = window.location.pathname;
 
   const [search, setSearch] = useState("");
   const [scrollPosition, setScrollPosition] = useState(0);
   const [headerColor, setHeaderColor] = useState("#ffffff");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isPageOpen, setIsPageOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Scroll 위치를 감지
   const updateScroll = () => {
@@ -103,9 +93,42 @@ const Header = ({
     }
   };
 
-  // 마이페이지 띄우기
-  const openMyPage = () => {
-    setIsOpen(true);
+  // 드롭다운 메뉴 이외 공간 클릭 탐지
+  useEffect(() => {
+    const handleClickOutside: EventListener = (e: Event) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setIsMenuOpen(!isMenuOpen);
+      }
+    };
+
+    if (isMenuOpen) {
+      window.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  // 즐길거리 각 페이지로 이동
+  const goTourSpot = () => {
+    navigate("/tourspot");
+    setIsMenuOpen(false);
+  };
+
+  const goCulture = () => {
+    navigate("/culture");
+    setIsMenuOpen(false);
+  };
+
+  const goLeports = () => {
+    navigate("/leports");
+    setIsMenuOpen(false);
+  };
+
+  const goShopping = () => {
+    navigate("/shopping");
+    setIsMenuOpen(false);
   };
 
   return (
@@ -140,17 +163,35 @@ const Header = ({
               </MicIcContainer>
             </LogoToMic>
             <ListToMy>
-              <NavStyle to="/tourspot">즐길거리</NavStyle>
+              <DropDownIcContainer
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                ismenuopen={isMenuOpen.toString()}
+              >
+                즐길거리
+                <DropDownIcStyle ismenuopen={isMenuOpen.toString()} />
+              </DropDownIcContainer>
+
+              {isMenuOpen === true && (
+                <DropDownContainer ref={ref}>
+                  <DropDownContent>
+                    <li onClick={goTourSpot}>관광지</li>
+                    <li onClick={goCulture}>문화시설</li>
+                    <li onClick={goLeports}>레포츠</li>
+                    <li onClick={goShopping}>쇼핑</li>
+                  </DropDownContent>
+                </DropDownContainer>
+              )}
+
               <NavStyle to="/restaurant">식당</NavStyle>
               <NavStyle to="/accommodation">숙박</NavStyle>
 
-              <PersonIcContainer onClick={openMyPage}>
+              <PersonIcContainer onClick={() => setIsPageOpen(true)}>
                 {headerColor === "transparent" ? <PersonIc2 /> : <PersonIc />}
               </PersonIcContainer>
             </ListToMy>
           </ElementContainer>
         </GridItems>
-        <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
+        <SideBar isOpen={isPageOpen} setIsOpen={setIsPageOpen} />
       </HeaderContainer>
     </HeaderFont>
   );
