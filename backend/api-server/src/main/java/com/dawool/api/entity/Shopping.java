@@ -1,8 +1,8 @@
 package com.dawool.api.entity;
 
-import com.dawool.api.dto.detailInfo.CommonInfoDto;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * 쇼핑(38) 관련 정보
@@ -12,6 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Document(collection="shopping")
 public class Shopping extends CommonInfo {
 
     // 유모차 대여 여부
