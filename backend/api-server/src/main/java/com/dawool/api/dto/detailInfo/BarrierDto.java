@@ -44,6 +44,7 @@ public class BarrierDto {
     private String infantsFamilyEtc;
 
     public BarrierDto of(Barrier barrier){
+        if(barrier == null) return null;
         return BarrierDto.builder()
                 // 무장애 정보
                 .parking(barrier.getParking())
