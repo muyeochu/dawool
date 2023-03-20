@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * 문화시설(14) 관련 Repository
+ * 쇼핑(38) 관련 Repository
  *
  * @author 김정은
  */

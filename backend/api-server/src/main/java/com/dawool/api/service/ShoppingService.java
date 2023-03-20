@@ -25,7 +25,7 @@ public class ShoppingService {
     private final ShoppingRepository shoppingRepository;
 
     /**
-     * 지역 별로 문화시설(14) 목록
+     * 지역 별로 쇼핑(38) 목록
      *
      * @param areaCode
      * @param barrierCode
