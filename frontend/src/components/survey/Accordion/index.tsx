@@ -29,10 +29,10 @@ const Accordion: React.FC<AccordionProps> = ({ title, children }) => {
 
   return (
     <AccordionItemContainer isOpen={isOpen}>
-      <HeaderContainer isOpen={isOpen}>
+      <HeaderContainer onClick={toggleAccordion} isOpen={isOpen}>
         <HeaderCheckTextContainer>
           <CheckIc />
-          <HeaderText onClick={toggleAccordion}>{title}</HeaderText>
+          <HeaderText>{title}</HeaderText>
         </HeaderCheckTextContainer>
 
         <UpdownIcStyle isOpen={isOpen}/>
