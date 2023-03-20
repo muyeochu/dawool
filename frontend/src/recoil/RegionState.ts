@@ -1196,12 +1196,12 @@ const districts: District[] = [
   },
 ];
 
-export const citiesState = atom({
-  key: "citiesState",
+export const cityState = atom({
+  key: "cityState",
   default: cities,
 });
 
-export const districtsState = atom({
-  key: "districtsState",
+export const districtState = atom({
+  key: "districtState",
   default: districts,
 });
