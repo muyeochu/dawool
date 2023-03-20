@@ -14,8 +14,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "culture_facility")
 public class CultureFacility extends CommonInfo{
 
-    private boolean chkbabycarriageculture;
-    private boolean chkpetculture;
+    private float chkbabycarriageculture;
+    private float chkpetculture;
     private String discountinfo;
     private String infocenterculture;
     private String parkingculture;
