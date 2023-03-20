@@ -8,6 +8,7 @@ const SideItem = styled.div`
   width: 27%;
   height: 100vh;
   float: left;
+  box-shadow: 10px 0px 20px rgba(0, 0, 0, 0.25);
 `
 const MapItem = styled.div`
   width: 73%;
