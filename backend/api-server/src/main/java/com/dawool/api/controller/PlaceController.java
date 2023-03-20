@@ -1,9 +1,12 @@
 package com.dawool.api.controller;
 
 import com.dawool.api.dto.PlaceDto;
+import com.dawool.api.dto.detailInfo.CultureFacilityDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
+import com.dawool.api.dto.detailInfo.LeisureSportsDto;
 import com.dawool.api.dto.detailInfo.LodgingDto;
 import com.dawool.api.dto.detailInfo.RestaurantDto;
+import com.dawool.api.dto.detailInfo.ShoppingDto;
 import com.dawool.api.service.CultureFacilityService;
 import com.dawool.api.service.EntertainmentService;
 import com.dawool.api.service.LeisureSportsService;
@@ -111,11 +114,26 @@ public class PlaceController {
                 Map<String, EntertainmentDto> entertainmentResponse = new HashMap<>();
                 entertainmentResponse.put("info", entertainment);
                 return ResponseEntity.ok(entertainmentResponse);
+            case 14:
+                CultureFacilityDto cultureFacility = cultureFacilityService.getCultureFacilityInfo(contentId);
+                Map<String, CultureFacilityDto> cultureFacilityResponse = new HashMap<>();
+                cultureFacilityResponse.put("info", cultureFacility);
+                return ResponseEntity.ok(cultureFacilityResponse);
+            case 28:
+                LeisureSportsDto leisureSports = leisureSportsService.getLeisureSportsInfo(contentId);
+                Map<String, LeisureSportsDto> leisureSportsResponse = new HashMap<>();
+                leisureSportsResponse.put("info", leisureSports);
+                return ResponseEntity.ok(leisureSportsResponse);
             case 32:
                 LodgingDto lodging = lodgingService.getLodgingInfo(contentId);
                 Map<String, LodgingDto> lodgingResponse = new HashMap<>();
                 lodgingResponse.put("info", lodging);
                 return ResponseEntity.ok(lodgingResponse);
+            case 38:
+                ShoppingDto shopping = shoppingService.getShoppingInfo(contentId);
+                Map<String, ShoppingDto> shoppingResponse = new HashMap<>();
+                shoppingResponse.put("info", shopping);
+                return ResponseEntity.ok(shoppingResponse);
             case 39:
                 RestaurantDto restaurant = restaurantService.getRestaurantInfo(contentId);
                 Map<String, RestaurantDto> restaurantResponse = new HashMap<>();

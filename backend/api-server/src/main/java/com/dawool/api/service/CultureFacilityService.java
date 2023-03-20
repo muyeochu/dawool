@@ -1,8 +1,13 @@
 package com.dawool.api.service;
 
 import com.dawool.api.dto.PlaceDto;
+import com.dawool.api.dto.detailInfo.CultureFacilityDto;
+import com.dawool.api.dto.detailInfo.EntertainmentDto;
+import com.dawool.api.entity.Barrier;
 import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.CultureFacility;
+import com.dawool.api.entity.Entertainment;
+import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.CultureFacilityRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +28,7 @@ import java.util.stream.Collectors;
 public class CultureFacilityService {
 
     private final CultureFacilityRepository cultureFacilityRepository;
+    private final BarrierRepository barrierRepository;
 
     /**
      * 지역 별로 문화시설(14) 목록
@@ -94,5 +100,18 @@ public class CultureFacilityService {
         } else{
             return new ArrayList<>();
         }
+    }
+
+    /**
+     * 문화시설 상세정보 조회
+     *
+     * @param contentId
+     * @return
+     */
+    public CultureFacilityDto getCultureFacilityInfo(int contentId){
+        CultureFacility cultureFacility = cultureFacilityRepository.findByContentid(String.valueOf(contentId));
+        Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
+
+        return new CultureFacilityDto().of(cultureFacility, barrier);
     }
 }

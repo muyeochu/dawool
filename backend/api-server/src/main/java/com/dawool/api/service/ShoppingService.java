@@ -1,8 +1,14 @@
 package com.dawool.api.service;
 
 import com.dawool.api.dto.PlaceDto;
+import com.dawool.api.dto.detailInfo.CultureFacilityDto;
+import com.dawool.api.dto.detailInfo.LeisureSportsDto;
+import com.dawool.api.dto.detailInfo.ShoppingDto;
+import com.dawool.api.entity.Barrier;
 import com.dawool.api.entity.CommonInfo;
+import com.dawool.api.entity.LeisureSports;
 import com.dawool.api.entity.Shopping;
+import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.ShoppingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +29,7 @@ import java.util.stream.Collectors;
 public class ShoppingService {
 
     private final ShoppingRepository shoppingRepository;
+    private final BarrierRepository barrierRepository;
 
     /**
      * 지역 별로 쇼핑(38) 목록
@@ -94,5 +101,18 @@ public class ShoppingService {
         } else{
             return new ArrayList<>();
         }
+    }
+
+    /**
+     * 레포츠 상세정보 조회
+     *
+     * @param contentId
+     * @return
+     */
+    public ShoppingDto getShoppingInfo(int contentId){
+        Shopping shopping = shoppingRepository.findByContentid(String.valueOf(contentId));
+        Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
+
+        return new ShoppingDto().of(shopping, barrier);
     }
 }

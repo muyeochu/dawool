@@ -39,8 +39,8 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests()
-                .antMatchers("/api/user/kakao/callback", "/api/user/token-reissue").permitAll() // kakao 로그인 토큰 받기 언제나 가능
-                .antMatchers("/api/**").authenticated()
+                .antMatchers("/api/user/my-course", "/api/user/interest").authenticated() // kakao 로그인 토큰 받기 언제나 가능
+                .antMatchers("/api/**").permitAll()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt 사용하는 경우 사용

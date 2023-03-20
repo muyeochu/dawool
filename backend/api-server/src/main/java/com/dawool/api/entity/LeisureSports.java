@@ -18,9 +18,9 @@ public class LeisureSports extends CommonInfo {
     // 수용인원
     private String accomcountleports;
     // 유모차 대여 여부
-    private boolean chkbabycarriageleports;
+    private float chkbabycarriageleports;
     // 애완동물 동반 여부
-    private boolean chkpetleports;
+    private float chkpetleports;
     // 체험 연령
     private String expagerangeleports;
     // 문의 및 안내
