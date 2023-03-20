@@ -4,6 +4,7 @@ import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
 import com.dawool.api.dto.detailInfo.LodgingDto;
 import com.dawool.api.dto.detailInfo.RestaurantDto;
+import com.dawool.api.service.CultureFacilityService;
 import com.dawool.api.service.EntertainmentService;
 import com.dawool.api.service.LodgingService;
 import com.dawool.api.service.RestaurantService;
@@ -35,6 +36,7 @@ import java.util.Map;
 public class PlaceController {
 
     private final EntertainmentService entertainmentService;
+    private final CultureFacilityService  cultureFacilityService;
     private final LodgingService lodgingService;
     private final RestaurantService restaurantService;
 
@@ -60,6 +62,10 @@ public class PlaceController {
             case 12:
                 placeList =
                     entertainmentService.getEntertainmentList(areaCode, barrier, page, size);
+                break;
+            case 14:
+                placeList =
+                        cultureFacilityService.getCultureFacilityList(areaCode, barrier, page, size);
                 break;
             case 32:
                 placeList =
