@@ -80,10 +80,12 @@ public class PlaceController {
                         lodgingService.getLodgingList(areaCode, barrier, page, size);
                 break;
             case 38:
-                placeList = shoppingService.getShoppingList(areaCode, barrier, page, size);
+                placeList =
+                        shoppingService.getShoppingList(areaCode, barrier, page, size);
                 break;
             case 39:
-                placeList = restaurantService.getRestaurantList(areaCode, barrier, page, size);
+                placeList =
+                        restaurantService.getRestaurantList(areaCode, barrier, page, size);
                 break;
 
 
