@@ -8,6 +8,9 @@ import RestaurantPage from "./RestaurantPage";
 import SearchPage from "./SearchPage";
 import SurveyPage from "./SurveyPage";
 import TourSpotPage from "./TourSpotPage";
+import CulturePage from "./CulturePage";
+import LeportsPage from "./LeportsPage";
+import ShoppingPage from "./ShoppingPage";
 import ModalTest from "./TestPage/ModalTest";
 
 export {
@@ -21,5 +24,8 @@ export {
   SearchPage,
   SurveyPage,
   TourSpotPage,
+  CulturePage,
+  LeportsPage,
+  ShoppingPage,
   ModalTest,
 };
