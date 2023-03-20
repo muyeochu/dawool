@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 레포츠(28) 관련 Service
+ *
+ * @author 김정은
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -22,7 +27,7 @@ public class LeisureSportsService {
     private final LeisureSportsRepository leisureSportsRepository;
 
     /**
-     * 지역 별로 문화시설(14) 목록
+     * 지역 별로 레포츠(28) 목록
      *
      * @param areaCode
      * @param barrierCode

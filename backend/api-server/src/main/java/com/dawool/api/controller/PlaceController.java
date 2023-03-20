@@ -90,7 +90,7 @@ public class PlaceController {
     }
 
     /**
-     * 관광지(12) 상세조회
+     * 타입별 상세조회
      *
      * @param type
      * @param contentId

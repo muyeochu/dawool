@@ -1,6 +1,5 @@
 package com.dawool.api.service;
 
-import com.dawool.api.code.Category;
 import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.CultureFacility;
@@ -13,6 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 문화시설(14) 관련 Service
+ *
+ * @author 김정은
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
