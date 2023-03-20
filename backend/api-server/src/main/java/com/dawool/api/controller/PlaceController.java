@@ -6,6 +6,7 @@ import com.dawool.api.dto.detailInfo.LodgingDto;
 import com.dawool.api.dto.detailInfo.RestaurantDto;
 import com.dawool.api.service.CultureFacilityService;
 import com.dawool.api.service.EntertainmentService;
+import com.dawool.api.service.LeisureSportsService;
 import com.dawool.api.service.LodgingService;
 import com.dawool.api.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,7 @@ public class PlaceController {
 
     private final EntertainmentService entertainmentService;
     private final CultureFacilityService  cultureFacilityService;
+    private final LeisureSportsService leisureSportsService;
     private final LodgingService lodgingService;
     private final RestaurantService restaurantService;
 
@@ -67,9 +69,13 @@ public class PlaceController {
                 placeList =
                         cultureFacilityService.getCultureFacilityList(areaCode, barrier, page, size);
                 break;
+            case 28:
+                placeList =
+                        leisureSportsService.getLeisureSportsList(areaCode, barrier, page, size);
+                break;
             case 32:
                 placeList =
-                    lodgingService.getLodgingList(areaCode, barrier, page, size);
+                        lodgingService.getLodgingList(areaCode, barrier, page, size);
                 break;
             case 39:
                 placeList = restaurantService.getRestaurantList(areaCode, barrier, page, size);
