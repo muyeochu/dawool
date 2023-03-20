@@ -4,7 +4,8 @@ import { useRecoilState } from "recoil";
 import { modalState } from "../../recoil/ModalState";
 
 interface OpenModalType {
-  title: string;
+  type: string;
+  title?: string;
   content: JSX.Element | string;
   callback?: () => any;
 }
@@ -21,8 +22,9 @@ const useModal = () => {
   );
 
   const openModal = useCallback(
-    ({ title, content, callback }: OpenModalType) =>
+    ({ type, title = "", content, callback }: OpenModalType) =>
       setModalDataState({
+        type: type,
         isOpen: true,
         title: title,
         content: content,
