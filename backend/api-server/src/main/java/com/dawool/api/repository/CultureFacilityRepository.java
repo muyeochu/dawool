@@ -38,4 +38,8 @@ public interface CultureFacilityRepository extends MongoRepository<CultureFacili
      * @return
      */
     CultureFacility findByContentid(String contentId);
+
+    List<CultureFacility> findByTitleLike(String title);
+
+    List<CultureFacility> findByTitleContains(String title);
 }

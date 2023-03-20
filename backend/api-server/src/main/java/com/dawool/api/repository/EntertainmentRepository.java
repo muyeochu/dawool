@@ -40,5 +40,13 @@ public interface EntertainmentRepository extends MongoRepository<Entertainment, 
      */
     Entertainment findByContentid(String contentId);
 
-    List<Entertainment> findByAddr1RegexAndAddr2Regex();
+    /**
+     * 검색어 한개 입력
+     * 
+     * @param title
+     * @return
+     */
+    List<Entertainment> findByTitleEquals(String title);
+
+    List<Entertainment> findByTitleContains(String title);
 }

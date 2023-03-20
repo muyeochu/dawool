@@ -38,4 +38,8 @@ public interface LeisureSportsRepository extends MongoRepository<LeisureSports, 
      * @return
      */
     LeisureSports findByContentid(String contentId);
+
+    List<LeisureSports> findByTitleLike(String title);
+
+    List<LeisureSports> findByTitleContains(String title);
 }

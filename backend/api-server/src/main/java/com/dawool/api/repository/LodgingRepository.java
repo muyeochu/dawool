@@ -1,5 +1,6 @@
 package com.dawool.api.repository;
 
+import com.dawool.api.entity.CultureFacility;
 import com.dawool.api.entity.Lodging;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -37,4 +38,8 @@ public interface LodgingRepository extends MongoRepository<Lodging, String> {
      * @return
      */
     Lodging findByContentid(String contentId);
+
+    List<Lodging> findByTitleLike(String title);
+
+    List<Lodging> findByTitleContains(String title);
 }

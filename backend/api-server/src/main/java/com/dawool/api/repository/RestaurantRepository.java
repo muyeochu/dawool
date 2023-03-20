@@ -38,4 +38,8 @@ public interface RestaurantRepository extends MongoRepository<Restaurant, String
      * @return
      */
     Restaurant findByContentid(String contentId);
+
+    List<Restaurant> findByTitleLike(String title);
+
+    List<Restaurant> findByTitleContains(String title);
 }

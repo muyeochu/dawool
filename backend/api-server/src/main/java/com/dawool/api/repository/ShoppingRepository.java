@@ -38,4 +38,8 @@ public interface ShoppingRepository extends MongoRepository<Shopping, String> {
      * @return
      */
     Shopping findByContentid(String contentId);
+
+    List<Shopping> findByTitleLike(String title);
+
+    List<Shopping> findByTitleContains(String title);
 }
