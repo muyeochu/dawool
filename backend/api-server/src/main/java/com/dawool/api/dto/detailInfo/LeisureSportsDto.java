@@ -86,8 +86,8 @@ public class LeisureSportsDto extends CommonInfoDto{
                 .barrier(new BarrierDto().of(barrier))
                 // 상세정보
                 .accomCount(leisureSports.getAccomcountleports())
-                .isBabyCarriage(leisureSports.isChkbabycarriageleports())
-                .isPet(leisureSports.isChkpetleports())
+                .isBabyCarriage(leisureSports.getChkbabycarriageleports())
+                .isPet(leisureSports.getChkpetleports())
                 .expAgeRange(leisureSports.getExpagerangeleports())
                 .commonParking(leisureSports.getParkingleports())
                 .parkingFee(leisureSports.getParkingfeeleports())
