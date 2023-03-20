@@ -11,6 +11,7 @@ import {
   SearchPage,
   SurveyPage,
   TourSpotPage,
+  ModalTest,
 } from "./pages/index";
 import Header from "./components/common/Header";
 import ScrollToTop from "./components/utils/ScrollToTop";
@@ -46,6 +47,8 @@ function App() {
               <Route path="/search" element={<SearchPage />} />
               <Route path="/survey" element={<SurveyPage />} />
               <Route path="/tourspot" element={<TourSpotPage />} />
+
+              <Route path="/modaltest" element={<ModalTest />} />
             </Routes>
           </GridContainer>
         </BoxMainContainer>

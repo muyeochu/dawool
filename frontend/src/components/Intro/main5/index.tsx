@@ -5,8 +5,8 @@ import {
   Main5ImgStyle,
   MainFontStyle,
   ColorFontStyle,
-  ButtonStyle,
-  ButtonFontStyle,
+  BtnStyle,
+  BtnFontStyle,
   SideFontStyle,
 } from "./styles";
 
@@ -32,9 +32,9 @@ const MainFifth = () => {
         <br />
         <ColorFontStyle>지금 시작해보세요</ColorFontStyle>
       </MainFontStyle>
-      <ButtonStyle>
-        <ButtonFontStyle onClick={wantRec}>추천받기</ButtonFontStyle>
-      </ButtonStyle>
+      <BtnStyle>
+        <BtnFontStyle onClick={wantRec}>추천받기</BtnFontStyle>
+      </BtnStyle>
       <SideFontStyle onClick={justLookAround}>그냥 둘러볼래요</SideFontStyle>
     </MainFifthContainer>
   );
