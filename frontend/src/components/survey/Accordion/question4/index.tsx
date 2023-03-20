@@ -24,7 +24,7 @@ const FourthQuestion = () => {
   }
 
   useEffect(() => {
-    // console.log(selectedValue);
+    console.log(selectedValue);
   }, [selectedValue]);
 
   return (

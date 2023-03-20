@@ -48,7 +48,7 @@ export const Radio = styled.input`
     }
   }
   :focus {
-    outline: 1.5px solid ${blue[200]};
+    outline: 3px solid ${blue[200]};
   }
   :hover {
     ::after {
