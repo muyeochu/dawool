@@ -4,9 +4,12 @@ import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
 import com.dawool.api.dto.detailInfo.LodgingDto;
 import com.dawool.api.dto.detailInfo.RestaurantDto;
+import com.dawool.api.service.CultureFacilityService;
 import com.dawool.api.service.EntertainmentService;
+import com.dawool.api.service.LeisureSportsService;
 import com.dawool.api.service.LodgingService;
 import com.dawool.api.service.RestaurantService;
+import com.dawool.api.service.ShoppingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -35,7 +38,10 @@ import java.util.Map;
 public class PlaceController {
 
     private final EntertainmentService entertainmentService;
+    private final CultureFacilityService  cultureFacilityService;
+    private final LeisureSportsService leisureSportsService;
     private final LodgingService lodgingService;
+    private final ShoppingService shoppingService;
     private final RestaurantService restaurantService;
 
     /**
@@ -61,12 +67,25 @@ public class PlaceController {
                 placeList =
                     entertainmentService.getEntertainmentList(areaCode, barrier, page, size);
                 break;
+            case 14:
+                placeList =
+                        cultureFacilityService.getCultureFacilityList(areaCode, barrier, page, size);
+                break;
+            case 28:
+                placeList =
+                        leisureSportsService.getLeisureSportsList(areaCode, barrier, page, size);
+                break;
             case 32:
                 placeList =
-                    lodgingService.getLodgingList(areaCode, barrier, page, size);
+                        lodgingService.getLodgingList(areaCode, barrier, page, size);
+                break;
+            case 38:
+                placeList =
+                        shoppingService.getShoppingList(areaCode, barrier, page, size);
                 break;
             case 39:
-                placeList = restaurantService.getRestaurantList(areaCode, barrier, page, size);
+                placeList =
+                        restaurantService.getRestaurantList(areaCode, barrier, page, size);
                 break;
 
 
@@ -78,7 +97,7 @@ public class PlaceController {
     }
 
     /**
-     * 관광지(12) 상세조회
+     * 타입별 상세조회
      *
      * @param type
      * @param contentId
