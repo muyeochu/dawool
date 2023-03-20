@@ -1,5 +1,6 @@
 import styled from "styled-components";
-
+import { white,mainColor } from "../styles/Colors";
+import { ReactComponent as MapIc } from "../assets/icon/mapIc.svg";
 const CourseContainer=styled.div`
   grid-column: 1/4;
 `
@@ -13,12 +14,17 @@ const MapItem = styled.div`
   height:100vh;
   float: left;
 `
+const SideHeader = styled.h1`
+  color:${white};
+  background-color:${mainColor};
+  text-align: center;
+`
 
 const MyCoursePage = () => {
   return (
     <CourseContainer>
     <SideItem>
-        <h1>내 코스 관리</h1>
+        <SideHeader><MapIc/> 내 코스 관리</SideHeader>
     </SideItem>
     <MapItem></MapItem>
     </CourseContainer>
