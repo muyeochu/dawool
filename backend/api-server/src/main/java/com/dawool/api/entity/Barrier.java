@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @ToString
-@Document(collection = "barrier_free_store")
+@Document(collection = "barrier")
 public class Barrier {
     @Id
     private String id;
