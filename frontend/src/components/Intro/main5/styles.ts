@@ -28,7 +28,7 @@ export const ColorFontStyle = styled.div`
   color: ${blue[600]};
 `;
 
-export const ButtonStyle = styled.button`
+export const BtnStyle = styled.button`
   transition: transform 0.2s ease-in-out;
 
   width: 330px;
@@ -47,7 +47,7 @@ export const ButtonStyle = styled.button`
   }
 `;
 
-export const ButtonFontStyle = styled.div`
+export const BtnFontStyle = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 40px;
