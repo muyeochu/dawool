@@ -1,5 +1,6 @@
 package com.dawool.api.repository;
 
+import com.dawool.api.entity.CultureFacility;
 import com.dawool.api.entity.Shopping;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,12 @@ public interface ShoppingRepository extends MongoRepository<Shopping, String> {
      * @return
      */
     List<Shopping> findByAreacodeAndDeaf(String areaCode, String Deaf);
+
+    /**
+     * 장소 상세조회
+     *
+     * @param contentId
+     * @return
+     */
+    Shopping findByContentid(String contentId);
 }
