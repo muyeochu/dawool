@@ -9,6 +9,7 @@ import com.dawool.api.service.EntertainmentService;
 import com.dawool.api.service.LeisureSportsService;
 import com.dawool.api.service.LodgingService;
 import com.dawool.api.service.RestaurantService;
+import com.dawool.api.service.ShoppingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,7 @@ public class PlaceController {
     private final CultureFacilityService  cultureFacilityService;
     private final LeisureSportsService leisureSportsService;
     private final LodgingService lodgingService;
+    private final ShoppingService shoppingService;
     private final RestaurantService restaurantService;
 
     /**
@@ -76,6 +78,9 @@ public class PlaceController {
             case 32:
                 placeList =
                         lodgingService.getLodgingList(areaCode, barrier, page, size);
+                break;
+            case 38:
+                placeList = shoppingService.getShoppingList(areaCode, barrier, page, size);
                 break;
             case 39:
                 placeList = restaurantService.getRestaurantList(areaCode, barrier, page, size);
