@@ -1,35 +1,102 @@
 package com.dawool.api.dto.detailInfo;
 
+import com.dawool.api.code.Category;
+import com.dawool.api.entity.Barrier;
+import com.dawool.api.entity.LeisureSports;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * 레포츠(28) 관련 정보
  *
  * @author 김정은
  */
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class LeisureSportsDto extends CommonInfoDto{
 
     // 수용인원
-    private String accomcountleports;
+    private String accomCount;
     // 유모차 대여 여부
-    private boolean chkbabycarriageleports;
+    private float isBabyCarriage;
     // 애완동물 동반 여부
-    private boolean chkpetleports;
+    private float isPet;
     // 체험 연령
-    private String expagerangeleports;
+    private String expAgeRange;
     // 문의 및 안내
-    private String infocenterleports;
+    private String infoCenter;
     // 개장기간
-    private String openperiod;
+    private String openPeriod;
     // 주차요금
-    private String parkingfeeleports;
+    private String parkingFee;
     // 주차시설
-    private String parkingleports;
+    private String commonParking;
     // 예약안내
     private String reservation;
     // 쉬는 날
-    private String restdateleports;
+    private String restDate;
     // 이용 요금
-    private String usefeeleports;
+    private String useFee;
     // 운영 시간
-    private String usetimeleports;
+    private String useTime;
+
+    @Builder
+    public LeisureSportsDto(int contentId, String title, String category, String homepage, String firstImage, String firstImage2,
+                            int areaCode, String addr1, String addr2, float mapX, float mapY, float mLevel,
+                            int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
+                            String accomCount, float isBabyCarriage, float isPet, String expAgeRange, String infoCenter, String openPeriod,
+                            String parkingFee, String commonParking, String reservation, String restDate, String useFee, String useTime) {
+        super(contentId, title, category, homepage, firstImage, firstImage2, areaCode, addr1, addr2, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, barrier);
+        this.accomCount = accomCount;
+        this.isBabyCarriage = isBabyCarriage;
+        this.isPet = isPet;
+        this.expAgeRange = expAgeRange;
+        this.infoCenter = infoCenter;
+        this.openPeriod = openPeriod;
+        this.parkingFee = parkingFee;
+        this.commonParking = commonParking;
+        this.reservation = reservation;
+        this.restDate = restDate;
+        this.useFee = useFee;
+        this.useTime = useTime;
+    }
+
+    public LeisureSportsDto of(LeisureSports leisureSports, Barrier barrier){
+        return LeisureSportsDto.builder()
+                // 공통정보
+                .contentId(leisureSports.getContentid())
+                .addr1(leisureSports.getAddr1())
+                .title(leisureSports.getTitle())
+                .category(Category.valueOf(leisureSports.getCat3()).getCategory())
+                .deaf(leisureSports.getDeaf())
+                .visuallyImpaired(leisureSports.getVisually_impaired())
+                .mobilityWeak(leisureSports.getMobility_weak())
+                .old(leisureSports.getOld())
+                .infant(leisureSports.getInfant())
+                .isLiked(false)
+                .firstImage(leisureSports.getFirstimage())
+                .homepage(leisureSports.getHomepage())
+                .mapX(leisureSports.getMapx())
+                .mapY(leisureSports.getMapy())
+                .mLevel(leisureSports.getMlevel())
+                .barrier(new BarrierDto().of(barrier))
+                // 상세정보
+                .accomCount(leisureSports.getAccomcountleports())
+                .isBabyCarriage(leisureSports.getChkbabycarriageleports())
+                .isPet(leisureSports.getChkpetleports())
+                .expAgeRange(leisureSports.getExpagerangeleports())
+                .commonParking(leisureSports.getParkingleports())
+                .parkingFee(leisureSports.getParkingfeeleports())
+                .infoCenter(leisureSports.getInfocenterleports())
+                .openPeriod(leisureSports.getOpenperiod())
+                .reservation(leisureSports.getReservation())
+                .restDate(leisureSports.getRestdateleports())
+                .useFee(leisureSports.getUsefeeleports())
+                .useTime(leisureSports.getUsetimeleports())
+                .build();
+    }
 }

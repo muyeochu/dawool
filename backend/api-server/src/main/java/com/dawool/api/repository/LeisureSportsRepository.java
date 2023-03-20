@@ -1,5 +1,6 @@
 package com.dawool.api.repository;
 
+import com.dawool.api.entity.CultureFacility;
 import com.dawool.api.entity.LeisureSports;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,12 @@ public interface LeisureSportsRepository extends MongoRepository<LeisureSports, 
      * @return
      */
     List<LeisureSports> findByAreacodeAndDeaf(String areaCode, String Deaf);
+
+    /**
+     * 장소 상세조회
+     *
+     * @param contentId
+     * @return
+     */
+    LeisureSports findByContentid(String contentId);
 }

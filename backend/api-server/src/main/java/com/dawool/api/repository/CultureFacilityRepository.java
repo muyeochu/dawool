@@ -30,4 +30,12 @@ public interface CultureFacilityRepository extends MongoRepository<CultureFacili
      * @return
      */
     List<CultureFacility> findByAreacodeAndDeaf(String areaCode, String Deaf);
+
+    /**
+     * 장소 상세조회
+     *
+     * @param contentId
+     * @return
+     */
+    CultureFacility findByContentid(String contentId);
 }
