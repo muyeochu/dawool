@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { white } from "../../../../styles/Colors";
 
-export const RadioButtonContainer = styled.div`
+// 설문 문항 전체 감싸는 container
+export const HangjungdongContanier = styled.div`
   border-radius: 3px;
   display: flex;
   flex-direction: row;
