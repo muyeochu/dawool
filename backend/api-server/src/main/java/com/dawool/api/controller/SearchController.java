@@ -31,12 +31,12 @@ public class SearchController {
      */
     @GetMapping("/")
     public ResponseEntity<?> searchRegion(
-            @RequestParam("area") String area,
+            @RequestParam("title") String title,
             @RequestParam("type") int type,
             @RequestParam("barrier") String barrier,
             int page, int size
     ) {
-        searchService.getSearchList(area, type, barrier, page, size);
+        searchService.getSearchList(title, type, barrier, page, size);
         return null;
     }
 }
