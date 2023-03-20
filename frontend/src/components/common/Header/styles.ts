@@ -4,8 +4,9 @@ import { NavLink } from "react-router-dom";
 import { ReactComponent as LogoIc } from "../../../assets/icon/logoIc.svg";
 import { ReactComponent as SearchIc } from "../../../assets/icon/searchIc.svg";
 import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
+import { ReactComponent as DropDownIc } from "../../../assets/icon/ddIc.svg";
 
-import { mainColor, blue, grey } from "../../../styles/Colors";
+import { mainColor, blue, grey, white, black } from "../../../styles/Colors";
 
 export const HeaderFont = styled.div`
   font-weight: 500;
@@ -58,6 +59,9 @@ export const ListToMy = styled.div`
   justify-content: center;
   align-items: center;
   gap: 50px;
+  font-size: 15px;
+  line-height: 19px;
+  color: black;
 `;
 
 export const LogoIcContainer = styled(LogoIc)`
@@ -99,8 +103,8 @@ export const SearchIcContainer = styled(SearchIc)<{ headercolor: string }>`
   height: 18px;
 
   position: absolute;
-  right: 16px;
-  top: 12px;
+  right: 14px;
+  top: 9px;
 
   ${(props) =>
     props.headercolor === "transparent" &&
@@ -136,6 +140,71 @@ export const NavStyle = styled(NavLink)`
 
   &.active {
     color: ${mainColor};
+  }
+`;
+
+export const DropDownIcContainer = styled.div<{ ismenuopen: string }>`
+  position: relative;
+  margin-right: 15px;
+
+  fill: ${(props) => (props.ismenuopen === "false" ? "black" : mainColor)};
+  color: ${(props) => (props.ismenuopen === "false" ? "black" : mainColor)};
+
+  &:hover {
+    color: ${mainColor};
+    fill: ${mainColor};
+    transition: color 0.3s;
+    cursor: pointer;
+  }
+`;
+
+export const DropDownIcStyle = styled(DropDownIc)<{ ismenuopen: string }>`
+  position: absolute;
+  width: 14px;
+  height: 20px;
+  left: 55px;
+  bottom: 0.5px;
+
+  transition: transform 0.1s ease-in-out;
+
+  transform: ${(props) =>
+    props.ismenuopen === "false" ? "rotate(180deg)" : "none"};
+`;
+
+export const DropDownContainer = styled.div`
+  position: absolute;
+  top: 90%;
+  right: 400px;
+  text-align: center;
+  overflow: hidden;
+`;
+
+export const DropDownContent = styled.ul`
+  list-style: none;
+  background-color: ${white};
+  width: 120px;
+  padding: 8px 0 8px 0;
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+  @keyframes dropdown {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  animation: dropdown 0.5s ease;
+
+  li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    &:hover {
+      background-color: ${blue[100]};
+      cursor: pointer;
+    }
   }
 `;
 
