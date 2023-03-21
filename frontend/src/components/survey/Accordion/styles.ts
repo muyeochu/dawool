@@ -4,7 +4,7 @@ import { white, blue, grey } from "../../../styles/Colors";
 import { ReactComponent as UpdownIc } from "../../../assets/icon/updownIc.svg";
 
 interface ContainerProps {
-  isOpen: boolean;
+  isopen: string;
 }
 
 // accordion list 감싸는 container
@@ -27,7 +27,7 @@ export const AccordionItemContainer = styled.div<ContainerProps>`
   margin-bottom: 21px;
   overflow: hidden;
   transition: height 1s ease-in-out;
-  height: ${(props) => (props.isOpen ? "auto" : "68px")};
+  height: ${(props) => (props.isopen === "true" ? "auto" : "68px")};
 `;
 
 // accordion header
@@ -36,7 +36,7 @@ export const HeaderContainer = styled.div<ContainerProps>`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: ${(props) => (props.isOpen ? blue[100] : "white")};
+  background-color: ${(props) => (props.isopen === "true" ? blue[100] : "white")};
   color: "black";
   cursor: pointer;
   font-size: 24px;
@@ -71,17 +71,23 @@ export const HeaderText = styled.span`
   color: "black";
 `;
 
-export const HeaderIcon = styled.img`
-  background: ${grey[100]};
-`;
-
 export const UpdownIcStyle = styled(UpdownIc)<ContainerProps>`
   transition: transform 0.2s ease-in-out;
-  transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "none")};
+  transform: ${(props) => (props.isopen ==="true" ? "rotate(180deg)" : "none")};
 `;
 
 // accordion body
 export const BodyContainer = styled.div`
   width: auto;
   height: auto;
+
+  /* @keyframes accordion {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  animation: accordion 0.8s ease; */
 `;

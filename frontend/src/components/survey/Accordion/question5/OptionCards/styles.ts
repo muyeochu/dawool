@@ -8,6 +8,8 @@ import {
 } from "../../../../../styles/Colors";
 
 export const CardListContainer = styled.div`
+  margin-top: 40px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -16,7 +18,7 @@ export const CardListContainer = styled.div`
   gap: 26px;
 `;
 
-export const CardContainer = styled.div<{isSelected: boolean}>`
+export const CardContainer = styled.div<{ isSelected: boolean }>`
   width: 200px;
   height: 292px;
   filter: drop-shadow(0px 5.53633px 5.53633px rgba(0, 0, 0, 0.4));
@@ -27,13 +29,15 @@ export const CardContainer = styled.div<{isSelected: boolean}>`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  outline: ${({ isSelected }) => isSelected ? `10px solid ${blue[200]}` : "none"};
+
+  outline: ${({ isSelected }) =>
+    isSelected ? `8px solid ${blue[300]}` : "none"};
 `;
 
 export const CardImage = styled.img`
   width: 120%;
   height: 120%;
-  filter: brightness(70%); 
+  filter: brightness(70%);
   object-fit: cover;
 `;
 
