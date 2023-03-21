@@ -39,7 +39,7 @@ export const HeaderContainer = styled.div<ContainerProps>`
   font-size: 24px;
   font-weight: bold;
   padding: 10px 20px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.2s ease;
 
   &:hover:enabled {
     background-color: ${blue[500]};
