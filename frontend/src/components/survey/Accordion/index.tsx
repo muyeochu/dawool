@@ -6,14 +6,12 @@ import {
   HeaderContainer,
   HeaderText,
   HeaderCheckTextContainer,
-  HeaderIcon,
   BodyContainer,
   UpdownIcStyle,
 } from "./styles";
 
 // icon
 import { ReactComponent as CheckIc } from "../../../assets/icon/checkIc.svg";
-import { ReactComponent as UpdownIc } from "../../../assets/icon/updownIc.svg";
 
 interface AccordionProps {
   title: string;
@@ -25,20 +23,21 @@ const Accordion: React.FC<AccordionProps> = ({ title, children }) => {
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
+    // console.log(isOpen)
   };
 
   return (
-    <AccordionItemContainer isOpen={isOpen}>
-      <HeaderContainer onClick={toggleAccordion} isOpen={isOpen}>
+    <AccordionItemContainer isopen={isOpen.toString()}>
+      <HeaderContainer onClick={toggleAccordion} isopen={isOpen.toString()}>
         <HeaderCheckTextContainer>
           <CheckIc />
           <HeaderText>{title}</HeaderText>
         </HeaderCheckTextContainer>
 
-        <UpdownIcStyle isOpen={isOpen}/>
+        <UpdownIcStyle isopen={isOpen.toString()}/>
       </HeaderContainer>
 
-      <BodyContainer>{children}</BodyContainer>
+      {isOpen && <BodyContainer>{children}</BodyContainer>}
     </AccordionItemContainer>
   );
 };
