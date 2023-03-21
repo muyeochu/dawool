@@ -5,7 +5,7 @@ import { buttonState } from "../../../recoil/ButtonState";
 
 // children -> 하나의 자식 노드만 전달
 interface ButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
   children: React.ReactNode;
   imageSrc?: string;
@@ -32,9 +32,7 @@ export default function Button({ children, imageSrc }: ButtonProps) {
   return (
     <StyledButton onClick={handleClick} isClicked={isClicked}>
       <ButtonIcon src={imageSrc} isClicked={isClicked} />
-      <ButtonText isClicked={isClicked}>
-        {children}
-      </ButtonText>
+      <ButtonText isClicked={isClicked}>{children}</ButtonText>
     </StyledButton>
   );
 }

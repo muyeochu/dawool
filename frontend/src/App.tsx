@@ -37,7 +37,7 @@ function App() {
             <Modal />
             <Routes>
               <Route path="/" element={<IntroPage />} />
-              <Route path="/detail" element={<DetailPage />} />
+              <Route path="/detail/:id" element={<DetailPage />} />
               <Route path="/interest" element={<InterestPage />} />
               <Route path="/accommodation" element={<AccommodationPage />} />
               <Route path="/login" element={<LoginPage />} />

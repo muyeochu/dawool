@@ -1,5 +1,5 @@
 import AccommodationPage from "./AccommodationPage";
-import DetailPage from "./DetailPage";
+import DetailPage from "./DetailPage/index";
 import InterestPage from "./InterestPage";
 import IntroPage from "./IntroPage";
 import LoginPage from "./LoginPage";
