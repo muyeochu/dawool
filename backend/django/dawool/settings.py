@@ -76,27 +76,37 @@ WSGI_APPLICATION = 'dawool.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# 몽고db 설치시 설정
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': "djongo",
-#         'NAME': "", # 몽고db의 DB 명이 들어가면 됩니다.
-#         'CLIENT': {
-#             "host": "", # 해당 host는 공유기 내부망 주소입니다. 
-#             			  # 제 경우에는 가상머신 주소에 해당합니다.
-#             "port": 27017
-#         }
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
+# 몽고db 설치시 설정
+'''
+data:
+    mongodb:
+      database: S08P22D105
+      uri: mongodb+srv://S08P22D105:Cw7h8LqfQd@ssafy.ngivl.mongodb.net/S08P22D105?authSource=admin
+#      host: 18.183.199.218
+#      port: 27017
+#      username: dawool
+#      password: dawool
+
+'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME':'S08P22D105',
+        'CLIENT': {
+            'host': 'mongodb+srv://S08P22D105:Cw7h8LqfQd@ssafy.ngivl.mongodb.net/S08P22D105?',
+            'authSource': 'admin',
+            'authMechanism': 'SCRAM-SHA-1'
+        }
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
