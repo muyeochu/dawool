@@ -1,9 +1,12 @@
 package com.dawool.api.service;
 
 import com.dawool.api.dto.AddressDto;
+import com.dawool.api.repository.CultureFacilityRepository;
 import com.dawool.api.repository.EntertainmentRepository;
+import com.dawool.api.repository.LeisureSportsRepository;
 import com.dawool.api.repository.LodgingRepository;
 import com.dawool.api.repository.RestaurantRepository;
+import com.dawool.api.repository.ShoppingRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,6 +23,9 @@ import java.util.List;
 public class SearchService {
 
     private final EntertainmentRepository entertainmentRepository;
+    private final CultureFacilityRepository cultureFacilityRepository;
+    private final LeisureSportsRepository leisureSportsRepository;
+    private final ShoppingRepository shoppingRepository;
     private final LodgingRepository lodgingRepository;
     private final RestaurantRepository restaurantRepository;
 
@@ -28,45 +34,62 @@ public class SearchService {
         if (titleLength == 1) {
             switch (type) {
                 case 12:
-                    entertainmentRepository.findByTitleEquals(title);
+                    entertainmentRepository.findByTitle(title);
                     break;
                 case 14:
+                    cultureFacilityRepository.findByTitle(title);
                     break;
                 case 28:
+                    leisureSportsRepository.findByTitle(title);
                     break;
                 case 32:
+                    lodgingRepository.findByTitle(title);
                     break;
                 case 38:
+                    shoppingRepository.findByTitle(title);
                     break;
                 case 39:
+                    restaurantRepository.findByTitle(title);
                     break;
-
                 default:
+                    entertainmentRepository.findByTitle(title);
+                    cultureFacilityRepository.findByTitle(title);
+                    leisureSportsRepository.findByTitle(title);
+                    lodgingRepository.findByTitle(title);
+                    shoppingRepository.findByTitle(title);
+                    restaurantRepository.findByTitle(title);
                     break;
             }
         }
 
-        else if (queryLength > 1) {
+        else if (titleLength > 1) {
+            title = ".*"+ title +".*";
             switch (type) {
                 case 12:
-                    entertainmentRepository.findByTitle(title);
+                    entertainmentRepository.findByTitleRegex(title);
                     break;
                 case 14:
+                    cultureFacilityRepository.findByTitleRegex(title);
                     break;
                 case 28:
+                    leisureSportsRepository.findByTitleRegex(title);
                     break;
                 case 32:
-                    lodgingRepository.findByAddr1RegexAndAddr2Regex();
+                    lodgingRepository.findByTitleRegex(title);
                     break;
                 case 38:
+                    shoppingRepository.findByTitleRegex(title);
                     break;
                 case 39:
-                    restaurantRepository.findByAddr1RegexAndAddr2Regex();
+                    restaurantRepository.findByTitleRegex(title);
                     break;
                 default:
-                    entertainmentRepository.findByAddr1RegexAndAddr2Regex();
-                    lodgingRepository.findByAddr1RegexAndAddr2Regex();
-                    restaurantRepository.findByAddr1RegexAndAddr2Regex();
+                    entertainmentRepository.findByTitleRegex(title);
+                    cultureFacilityRepository.findByTitleRegex(title);
+                    leisureSportsRepository.findByTitleRegex(title);
+                    lodgingRepository.findByTitleRegex(title);
+                    shoppingRepository.findByTitleRegex(title);
+                    restaurantRepository.findByTitleRegex(title);
                     break;
 
             }
