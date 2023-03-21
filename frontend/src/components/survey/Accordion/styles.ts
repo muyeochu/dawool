@@ -73,7 +73,7 @@ export const HeaderIcon = styled.img`
 `;
 
 export const UpdownIcStyle = styled(UpdownIc)<ContainerProps>`
-  transition: transform 0.1s ease-in-out;
+  transition: transform 0.2s ease-in-out;
   transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "none")};
 `;
 
