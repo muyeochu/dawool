@@ -15,6 +15,9 @@ export const AccordionListContainer = styled.div`
   margin-bottom: 138px;
   background: ${grey[50]};
   border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 // accordion item 감싸는 container

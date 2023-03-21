@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
-import Q1Button from "../../Button";
+import Q1Button from "./Button";
 import { ButtonListContainer } from "./styles";
-import { buttonState } from "../../Button/ButtonState";
+import { buttonState } from "./Button/ButtonState";
 
 const FirstQuestion = () => {
   // clickedButtons : 각 버튼에 대한 ID 값으로 구성

@@ -1,5 +1,11 @@
 import styled from "styled-components";
-import { white, black, mainColor, grey, blue } from "../../../styles/Colors";
+import {
+  white,
+  black,
+  mainColor,
+  grey,
+  blue,
+} from "../../../../../styles/Colors";
 
 interface StyledButtonProps {
   isClicked: boolean;
