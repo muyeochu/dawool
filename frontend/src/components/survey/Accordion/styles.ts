@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { white, blue, grey } from "../../../styles/Colors";
 
+import { ReactComponent as UpdownIc } from "../../../assets/icon/updownIc.svg";
+
 interface ContainerProps {
   isOpen: boolean;
 }
@@ -26,18 +28,18 @@ export const AccordionItemContainer = styled.div<ContainerProps>`
 `;
 
 // accordion header
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div<ContainerProps>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: ${white};
+  background-color: ${(props) => (props.isOpen ? blue[100] : "white")};
   color: "black";
   cursor: pointer;
   font-size: 24px;
   font-weight: bold;
   padding: 10px 20px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.2s ease;
 
   &:hover:enabled {
     background-color: ${blue[500]};
@@ -68,6 +70,11 @@ export const HeaderText = styled.span`
 
 export const HeaderIcon = styled.img`
   background: ${grey[100]};
+`;
+
+export const UpdownIcStyle = styled(UpdownIc)<ContainerProps>`
+  transition: transform 0.2s ease-in-out;
+  transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "none")};
 `;
 
 // accordion body

@@ -8,6 +8,7 @@ import {
   HeaderCheckTextContainer,
   HeaderIcon,
   BodyContainer,
+  UpdownIcStyle,
 } from "./styles";
 
 // icon
@@ -28,13 +29,13 @@ const Accordion: React.FC<AccordionProps> = ({ title, children }) => {
 
   return (
     <AccordionItemContainer isOpen={isOpen}>
-      <HeaderContainer>
+      <HeaderContainer onClick={toggleAccordion} isOpen={isOpen}>
         <HeaderCheckTextContainer>
           <CheckIc />
-          <HeaderText onClick={toggleAccordion}>{title}</HeaderText>
+          <HeaderText>{title}</HeaderText>
         </HeaderCheckTextContainer>
 
-        <UpdownIc />
+        <UpdownIcStyle isOpen={isOpen}/>
       </HeaderContainer>
 
       <BodyContainer>{children}</BodyContainer>
