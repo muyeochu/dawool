@@ -73,28 +73,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'dawool.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 # 몽고db 설치시 설정
-'''
-data:
-    mongodb:
-      database: S08P22D105
-      uri: mongodb+srv://S08P22D105:Cw7h8LqfQd@ssafy.ngivl.mongodb.net/S08P22D105?authSource=admin
-#      host: 18.183.199.218
-#      port: 27017
-#      username: dawool
-#      password: dawool
-
-'''
 
 DATABASES = {
     'default': {
