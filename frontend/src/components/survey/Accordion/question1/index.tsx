@@ -7,18 +7,19 @@ import { surveyState } from "../../../../recoil/SurveyState";
 const FirstQuestion = () => {
   // surveyState와 그 값을 가져와서 클릭 이벤트가 발생할 때마다 클릭한 버튼의 id 값을 surveyState에 저장
   const [clickedButtons, setClickedButtons] = useRecoilState(surveyState);
-  console.log(clickedButtons)
+
+  // console.log(clickedButtons)
 
   const handleButtonClick = useCallback(
-    (id: string) => {
+    (id: number) => {
       switch (id) {
-        case "1":
-          setClickedButtons(clickedButtons.includes("1") ? [] : [id]);
+        case 1:
+          setClickedButtons(clickedButtons.includes(1) ? [] : [id]);
           break;
         default:
           setClickedButtons((prev) => {
             const newClickedButtons = prev.filter(
-              (buttonId) => buttonId !== "1"
+              (buttonId) => buttonId !== 1
             );
             if (newClickedButtons.includes(id)) {
               return newClickedButtons.filter((buttonId) => buttonId !== id);
@@ -33,12 +34,12 @@ const FirstQuestion = () => {
   );
 
   const buttons = [
-    { id: "1", label: "해당없음" },
-    { id: "2", label: "지체장애인" },
-    { id: "3", label: "시각장애인" },
-    { id: "4", label: "청각장애인" },
-    { id: "5", label: "노인" },
-    { id: "6", label: "영유아" },
+    { id: 1, label: "해당없음" },
+    { id: 2, label: "지체장애인" },
+    { id: 3, label: "시각장애인" },
+    { id: 4, label: "청각장애인" },
+    { id: 5, label: "노인" },
+    { id: 6, label: "영유아" },
   ];
 
   return (

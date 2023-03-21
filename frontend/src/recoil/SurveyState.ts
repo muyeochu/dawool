@@ -1,6 +1,9 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
+// import { recoilPersist } from 'recoil-persist';
 
-export const surveyState = atom<string[]>({
+// const { persistAtom } = recoilPersist();
+
+export const surveyState = atom<number[]>({
   key: 'surveyState',
   default: [],
 });
