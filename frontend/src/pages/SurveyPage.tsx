@@ -1,12 +1,17 @@
 import React from "react";
 import { SurveyTitle } from "../components/survey/SurveyTitle/styles";
 import { AccordionListContainer } from "../components/survey/Accordion/styles";
-import Accordion from "../components/survey/Accordion/index";
-import FirstQuestion from "../components/survey/Accordion/question1";
 import styled from "styled-components";
+import Accordion from "../components/survey/Accordion/index";
+
+// question 1~5
+import FirstQuestion from "../components/survey/Accordion/question1";
 import ThirdQuestion from "../components/survey/Accordion/question3";
 import FourthQuestion from "../components/survey/Accordion/question4";
 import SecondQuestion from "../components/survey/Accordion/question2";
+import FifthQuestion from "../components/survey/Accordion/question5";
+
+import SaveBtn from "../components/survey/SaveBtn";
 
 // grid 설정
 const MainGridItems = styled.div`
@@ -36,8 +41,10 @@ const SurveyPage = () => {
         </Accordion>
 
         <Accordion title="가봤거나 가보고 싶은 곳은 어디인가요?">
-          <p>Content for section 2 goes here</p>
+          <FifthQuestion />
         </Accordion>
+
+        <SaveBtn />
       </AccordionListContainer>
     </MainGridItems>
   );
