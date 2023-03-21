@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { white } from "../../../../styles/Colors";
 
-export const CardsListContainer = styled.div`
+export const FifthQuestionContainer = styled.div`
   border-radius: 3px;
   display: flex;
   flex-direction: row;
