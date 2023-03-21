@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { StyledButton, ButtonText } from "./styles";
-import { surveyState } from "../../../recoil/SurveyState";
+import { firstState } from "../../../recoil/SurveyState";
 
 export default function SaveBtn() {
-  const surveyData = useRecoilValue(surveyState)
+  // const surveyData = useRecoilValue(firstState)
 
   // const handleSubmit = () => {
   //   const dataToSend = { barrier: surveyData.barrier };
