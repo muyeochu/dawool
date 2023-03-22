@@ -4,6 +4,11 @@ import com.dawool.api.code.Category;
 import com.dawool.api.entity.CommonInfo;
 import lombok.*;
 
+/**
+ * 검색 결과 Dto
+ *
+ * @author 이준
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,13 +34,13 @@ public class SearchDto {
     private boolean isLiked;
 
     /**
-     * CommonInfo Entity -> PlaceDto
+     * CommonInfo Entity -> SearchDto
      *
      * @param info
      * @return
      */
-    public PlaceDto of(CommonInfo info){
-        return PlaceDto.builder()
+    public SearchDto of(CommonInfo info){
+        return SearchDto.builder()
                 .spotId(info.getId())
                 .contentId(info.getContentid())
                 .contentTypeId(info.getContenttypeid())
@@ -43,7 +48,7 @@ public class SearchDto {
                 .imageUrl(info.getFirstimage())
                 .category(Category.valueOf(info.getCat3()).getCategory())
                 .deaf(info.getDeaf())
-                .visuallyImpaired(info.getVisually_impaired())
+                .visuallyImpaired(info.getVisual_impaired())
                 .mobilityWeak(info.getMobility_weak())
                 .old(info.getOld())
                 .infant(info.getInfant())
