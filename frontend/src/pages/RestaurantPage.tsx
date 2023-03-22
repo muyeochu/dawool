@@ -5,12 +5,22 @@ import TripList from "../components/trip/tripList";
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
   background-color: grey;
-  height: 100vh;
+  height: 92vh;
 `;
 
 const TripListGridItems = styled.div`
   grid-column: 2 / span 1;
-  background-color: blue;
+`;
+
+export const RowGridContainer = styled.div`
+  display: grid;
+  grid-template-rows: 110px auto 110px;
+  width: 100%;
+  height: 100%;
+`;
+
+export const RowGridItems = styled.div`
+  grid-row: 2 / span 1;
 `;
 
 const RestaurantPage = () => {
@@ -23,7 +33,11 @@ const RestaurantPage = () => {
 
       {/* 식당 목록 list */}
       <TripListGridItems>
-        <TripList />
+        <RowGridContainer>
+          <RowGridItems>
+            <TripList titleType="restaurant"/>
+          </RowGridItems>
+        </RowGridContainer>
       </TripListGridItems>
     </>
   );
