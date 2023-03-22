@@ -5,6 +5,6 @@ from . import views
 
 app_name = 'recommend'
 urlpatterns = [
-    url(r'^tour/list/(?P<Page>\d*)/$', views.tour_list),
+    url(r'^spot/(?P<spot_id>\d+)', views.spot_list),
 ]
 
