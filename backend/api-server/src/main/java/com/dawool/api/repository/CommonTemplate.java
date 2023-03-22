@@ -6,11 +6,23 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.List;
 
+/**
+ * 조회 관련 template
+ *
+ * @author 이준
+ */
 @Component
 @RequiredArgsConstructor
 public class CommonTemplate {
+    /**
+     * 무장애 필터링 조회
+     * 
+     * @param areaCode
+     * @param title
+     * @param barrierCode
+     * @return Query
+      */
     public Query findByAreacodeAndBarrierFree(int areaCode, String title, String[] barrierCode) {
         System.out.println(Arrays.toString(barrierCode));
         Criteria criteria = new Criteria();
@@ -27,9 +39,9 @@ public class CommonTemplate {
 
         }
 
-        criteria.and("deaf").gte(barrierCode[0])
+        criteria.and("mobility_weak").gte(barrierCode[0])
                 .and("visual_impaired").gte(barrierCode[1])
-                .and("mobility_weak").gte(barrierCode[2])
+                .and("deaf").gte(barrierCode[2])
                 .and("old").gte(barrierCode[3])
                 .and("infant").gte(barrierCode[4]);
         
