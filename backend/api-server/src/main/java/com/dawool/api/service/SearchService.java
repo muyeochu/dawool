@@ -1,6 +1,14 @@
 package com.dawool.api.service;
 
-import com.dawool.api.dto.AddressDto;
+import com.dawool.api.dto.PlaceDto;
+import com.dawool.api.entity.CommonInfo;
+import com.dawool.api.entity.CultureFacility;
+import com.dawool.api.entity.Entertainment;
+import com.dawool.api.entity.LeisureSports;
+import com.dawool.api.entity.Lodging;
+import com.dawool.api.entity.Restaurant;
+import com.dawool.api.entity.Shopping;
+import com.dawool.api.repository.CommonTemplate;
 import com.dawool.api.repository.CultureFacilityRepository;
 import com.dawool.api.repository.EntertainmentRepository;
 import com.dawool.api.repository.LeisureSportsRepository;
@@ -8,16 +16,18 @@ import com.dawool.api.repository.LodgingRepository;
 import com.dawool.api.repository.RestaurantRepository;
 import com.dawool.api.repository.ShoppingRepository;
 import lombok.RequiredArgsConstructor;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 검색 서비스
+ *
+ * @author 이준
+ */
 @Service
 @RequiredArgsConstructor
 public class SearchService {
@@ -28,71 +38,95 @@ public class SearchService {
     private final ShoppingRepository shoppingRepository;
     private final LodgingRepository lodgingRepository;
     private final RestaurantRepository restaurantRepository;
+    private final CommonTemplate commonTemplate;
+    private final MongoTemplate mongoTemplate;
 
-    public void getSearchList(String title, int type, String barrier, int page, int size) {
-        int titleLength = title.length();
-        if (titleLength == 1) {
-            switch (type) {
-                case 12:
-                    entertainmentRepository.findByTitle(title);
-                    break;
-                case 14:
-                    cultureFacilityRepository.findByTitle(title);
-                    break;
-                case 28:
-                    leisureSportsRepository.findByTitle(title);
-                    break;
-                case 32:
-                    lodgingRepository.findByTitle(title);
-                    break;
-                case 38:
-                    shoppingRepository.findByTitle(title);
-                    break;
-                case 39:
-                    restaurantRepository.findByTitle(title);
-                    break;
-                default:
-                    entertainmentRepository.findByTitle(title);
-                    cultureFacilityRepository.findByTitle(title);
-                    leisureSportsRepository.findByTitle(title);
-                    lodgingRepository.findByTitle(title);
-                    shoppingRepository.findByTitle(title);
-                    restaurantRepository.findByTitle(title);
-                    break;
-            }
+    /**
+     * 타이틀을 카테고리, 무장애 필터링 적용하여 검색
+     *
+     * @param title
+     * @param type
+     * @param barrier
+     * @param page
+     * @param size
+     * @return
+     */
+    public List<?> getSearchList(String title, int type, String barrier, int page, int size) {
+        String[] barrierCode = barrier.split("");
+        List<? extends CommonInfo> list = new ArrayList<>();
+        List<PlaceDto> searchList = new ArrayList<>();
+        Query query = commonTemplate.findByAreacodeAndBarrierFree(0, title, barrierCode);
+
+        switch (type) {
+            case 12:
+                list = mongoTemplate.find(query, Entertainment.class);
+                searchList = getSeacrhResult(list);
+                break;
+            case 14:
+                list = mongoTemplate.find(query, CultureFacility.class);
+                searchList = getSeacrhResult(list);
+                break;
+            case 28:
+                list = mongoTemplate.find(query, LeisureSports.class);
+                searchList = getSeacrhResult(list);
+                break;
+            case 32:
+                list = mongoTemplate.find(query, Lodging.class);
+                searchList = getSeacrhResult(list);
+                break;
+            case 38:
+                list = mongoTemplate.find(query, Shopping.class);
+                searchList = getSeacrhResult(list);
+                break;
+            case 39:
+                list = mongoTemplate.find(query, Restaurant.class);
+                searchList = getSeacrhResult(list);
+                break;
+            default:
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Entertainment.class)));
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, CultureFacility.class)));
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, LeisureSports.class)));
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Lodging.class)));
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Shopping.class)));
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Restaurant.class)));
+                break;
         }
 
-        else if (titleLength > 1) {
-            title = ".*"+ title +".*";
-            switch (type) {
-                case 12:
-                    entertainmentRepository.findByTitleRegex(title);
-                    break;
-                case 14:
-                    cultureFacilityRepository.findByTitleRegex(title);
-                    break;
-                case 28:
-                    leisureSportsRepository.findByTitleRegex(title);
-                    break;
-                case 32:
-                    lodgingRepository.findByTitleRegex(title);
-                    break;
-                case 38:
-                    shoppingRepository.findByTitleRegex(title);
-                    break;
-                case 39:
-                    restaurantRepository.findByTitleRegex(title);
-                    break;
-                default:
-                    entertainmentRepository.findByTitleRegex(title);
-                    cultureFacilityRepository.findByTitleRegex(title);
-                    leisureSportsRepository.findByTitleRegex(title);
-                    lodgingRepository.findByTitleRegex(title);
-                    shoppingRepository.findByTitleRegex(title);
-                    restaurantRepository.findByTitleRegex(title);
-                    break;
+        return resultList(searchList, page, size);
+    }
 
-            }
+    /**
+     * Entity -> Dto
+     *
+     * @param searchList
+     * @return
+     */
+    public List<PlaceDto> getSeacrhResult(List<? extends CommonInfo> searchList) {
+        List<PlaceDto> searchResult= new ArrayList<>();
+
+        for (CommonInfo search : searchList) {
+            PlaceDto place = new PlaceDto().of(search);
+            searchResult.add(place);
+        }
+
+        return searchResult;
+    }
+
+    /**
+     * 페이지네이션
+     * 
+     * @param list
+     * @param page
+     * @param size
+     * @return
+     */
+    public List<?> resultList(List<?> list, int page, int size) {
+        int startIndex = page * size;
+        int endIndex = Math.min(startIndex + size, list.size());
+        if(list.size() > 0 && startIndex <= list.size()) {
+            return list.subList(startIndex, endIndex);
+        } else{
+            return new ArrayList<>();
         }
     }
 }
