@@ -3,14 +3,18 @@ import TripCardItem from "../tripCardItem";
 import { TripCardListContainer } from "./styles";
 import { EtcListType } from "../../../../types/tripListTypes";
 
-function TripCardList({list} : {list: EtcListType[]}) {
+interface TripCardListProps {
+  list: EtcListType[];
+}
+
+function TripCardList({ list }: TripCardListProps) {
   return (
     <TripCardListContainer>
-      {list.map(content => (
-        <TripCardItem content={content} />
+      {list.map((content) => (
+        <TripCardItem key={content.contentId} content={content} />
       ))}
     </TripCardListContainer>
-  )
+  );
 }
 
 export default TripCardList;

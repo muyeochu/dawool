@@ -1,20 +1,19 @@
 import React from "react";
 
-// 즐길거리(관광지, 문화시설, 레포츠, 쇼핑) 목록
-export type EntertainmentListType = {
-  spotId: String;
-  contentId: String;
-  contenttypeId: Number;
-  imageUrl: String;
-  title: String;
-  isLiked: Boolean;
+// 공통 항목
+export type EtcListType = {
+  contentId: number;
+  contenttypeId: number;
+  imageUrl: string;
+  title: string;
+  isLiked: boolean;
 };
 
-// 숙박, 식당 목록
-export type EtcListType = {
-  contentId: Number;
-  contenttypeId: Number;
-  imageUrl: String;
-  title: String;
-  isLiked: Boolean;
-};
+// 즐길거리 목록
+export type EntertainmentListType = EtcListType & {
+  spotId: string;
+}
+
+export type TripDataType = {
+  data: (EntertainmentListType | EtcListType)[]
+}
