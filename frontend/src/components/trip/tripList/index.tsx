@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { RecoilRoot } from "recoil";
 import Button from "../../common/Button";
 import { TripListContainer, TripListTitle, ButtonList } from "./styles";
+import TripCardList from "./tripCardList";
 
 interface TripListTitleProps {
   titleType: string;
@@ -43,6 +44,8 @@ export default function TripList({titleType}: TripListTitleProps) {
           영유아
         </Button>
       </ButtonList>
+
+      <TripCardList/>
 
 
     </TripListContainer>
