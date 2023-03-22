@@ -1,23 +1,14 @@
 import React from "react";
 import TripCardItem from "../tripCardItem";
 import { TripCardListContainer } from "./styles";
+import { EtcListType } from "../../../../types/tripListTypes";
 
-const TripCardList = () => {
+function TripCardList({list} : {list: EtcListType[]}) {
   return (
     <TripCardListContainer>
-      <TripCardItem/>
-      <TripCardItem/>
-      <TripCardItem/>
-      <TripCardItem/>
-      <TripCardItem/>
-      <TripCardItem/>
-      <TripCardItem/>
-      <TripCardItem/>
-      <TripCardItem/>
-      <TripCardItem/>
-      <TripCardItem/>
-      <TripCardItem/>
-      <TripCardItem/>
+      {list.map(content => (
+        <TripCardItem content={content} />
+      ))}
     </TripCardListContainer>
   )
 }

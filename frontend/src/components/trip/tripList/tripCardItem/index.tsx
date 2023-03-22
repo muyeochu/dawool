@@ -7,17 +7,21 @@ import {
   CardText,
   LikedIcStyle,
 } from "./styles";
+import { EtcListType } from "../../../../types/tripListTypes";
+
 // 임시 데이터
 import restaurantData from "../sample.json";
 
-const TripCardItem = () => {
+function TripCardItem({content}: {content: EtcListType}) {
+  const tripInfo = {...content};
+
   return (
     <CardContainer>
       <ImageContainer>
         <CardImage src="http://tong.visitkorea.or.kr/cms/resource/10/2684510_image2_1.jpg" />
       </ImageContainer>
       <CardBottomContainer>
-        <CardText>[백년가게]청해진</CardText>
+        <CardText>{content.title}</CardText>
         <LikedIcStyle />
       </CardBottomContainer>
     </CardContainer>
