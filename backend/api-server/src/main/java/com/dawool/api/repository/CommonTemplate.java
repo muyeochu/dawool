@@ -24,7 +24,6 @@ public class CommonTemplate {
      * @return Query
       */
     public Query findByAreacodeAndBarrierFree(int areaCode, String title, String[] barrierCode) {
-        System.out.println(Arrays.toString(barrierCode));
         Criteria criteria = new Criteria();
         String target;
         if (areaCode > 0) {

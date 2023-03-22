@@ -32,12 +32,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SearchService {
 
-    private final EntertainmentRepository entertainmentRepository;
-    private final CultureFacilityRepository cultureFacilityRepository;
-    private final LeisureSportsRepository leisureSportsRepository;
-    private final ShoppingRepository shoppingRepository;
-    private final LodgingRepository lodgingRepository;
-    private final RestaurantRepository restaurantRepository;
     private final CommonTemplate commonTemplate;
     private final MongoTemplate mongoTemplate;
 
