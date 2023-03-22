@@ -3,15 +3,23 @@ import { useRecoilState } from "recoil";
 import { StyledButton, ButtonText, ButtonIcon } from "./styles";
 import { buttonState } from "../../../recoil/ButtonState";
 
+// icon
+import bathchairIc from "../../../assets/icon/bathchairIc.svg"
+import eyeIc from "../../../assets/icon/eyeIc.svg"
+import earIc from "../../../assets/icon/earIc.svg"
+import oldmanIc from "../../../assets/icon/oldmanIc.svg"
+import toddlerIc from "../../../assets/icon/toddlerIc.svg"
+
+
 // children -> 하나의 자식 노드만 전달
 interface ButtonProps {
   onClick: () => void;
   disabled?: boolean;
   children: React.ReactNode;
-  imageSrc?: string;
+  icType?: string;
 }
 
-export default function Button({ children, imageSrc }: ButtonProps) {
+export default function Button({ children, icType }: ButtonProps) {
   // 'useState' hook -> 클릭여부 상태값 관리 (기본값 'false')
   const [isClicked, setIsClicked] = useState(false);
 
@@ -29,9 +37,22 @@ export default function Button({ children, imageSrc }: ButtonProps) {
     setIsClicked(!isClicked);
   }
 
+  let icSrc =
+    icType === "ear"
+      ? earIc
+      : icType === "eye"
+      ? eyeIc
+      : icType === "oldman"
+      ? oldmanIc
+      : icType === "bathchair"
+      ? bathchairIc
+      : icType === "toddler"
+      ? toddlerIc
+      : "none";
+
   return (
     <StyledButton onClick={handleClick} isClicked={isClicked}>
-      <ButtonIcon src={imageSrc} isClicked={isClicked} />
+      <ButtonIcon src={icSrc} isClicked={isClicked} />
       <ButtonText isClicked={isClicked}>
         {children}
       </ButtonText>
