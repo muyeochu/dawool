@@ -73,7 +73,7 @@ public class LeisureSportsDto extends CommonInfoDto{
                 .title(leisureSports.getTitle())
                 .category(Category.valueOf(leisureSports.getCat3()).getCategory())
                 .deaf(leisureSports.getDeaf())
-                .visuallyImpaired(leisureSports.getVisually_impaired())
+                .visuallyImpaired(leisureSports.getVisual_impaired())
                 .mobilityWeak(leisureSports.getMobility_weak())
                 .old(leisureSports.getOld())
                 .infant(leisureSports.getInfant())

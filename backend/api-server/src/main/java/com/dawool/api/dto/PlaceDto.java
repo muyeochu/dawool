@@ -55,7 +55,7 @@ public class PlaceDto {
                 .imageUrl(info.getFirstimage())
                 .category(Category.valueOf(info.getCat3()).getCategory())
                 .deaf(info.getDeaf())
-                .visuallyImpaired(info.getVisually_impaired())
+                .visuallyImpaired(info.getVisual_impaired())
                 .mobilityWeak(info.getMobility_weak())
                 .old(info.getOld())
                 .infant(info.getInfant())
