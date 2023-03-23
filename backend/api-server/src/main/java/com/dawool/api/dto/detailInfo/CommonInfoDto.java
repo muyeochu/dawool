@@ -18,11 +18,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CommonInfoDto {
 
+    // objectId
+    private String spotId;
     // 관광지의 고유번호
     private int contentId;
     // 관광지 타입
     // 12: 관광지 14: 문화시설 15: 축제공연 25: 여행코스 28: 레포츠 32: 숙박 38: 쇼핑 39: 음식점
-//    private int contenttypeid;
+    private int contentTypeId;
     private String title;
     // 소분류
     private String category;
@@ -30,14 +32,10 @@ public class CommonInfoDto {
     private String homepage;
     // 대표 이미지
     private String firstImage;
-    // TODO: DEL
-    private String firstImage2;
     // 지역 코드(특별시/광역시/도)
     private int areaCode;
     // 도로명 주소
     private String addr1;
-    // TODO: DEL
-    private String addr2;
     // 경도
     private float mapX;
     // 위도
