@@ -43,12 +43,12 @@ public class ShoppingDto extends CommonInfoDto{
     private String shopGuide;
 
     @Builder
-    public ShoppingDto(int contentId, String title, String category, String homepage, String firstImage, String firstImage2,
-                       int areaCode, String addr1, String addr2, float mapX, float mapY, float mLevel,
+    public ShoppingDto(String spotId, int contentId, int contentTypeId, String title, String category, String homepage, String firstImage,
+                       int areaCode, String addr1, float mapX, float mapY, float mLevel,
                        int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
                        int isBabyCarriage, String isCreditCard, int isPet, String fairDay, String infoCenter, String openTime,
                        String commonParking, String restDate, String restroom, String saleItem, String shopGuide) {
-        super(contentId, title, category, homepage, firstImage, firstImage2, areaCode, addr1, addr2, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, barrier);
+        super(spotId, contentId, contentTypeId, title, category, homepage, firstImage, areaCode, addr1, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, barrier);
         this.isBabyCarriage = isBabyCarriage;
         this.isCreditCard = isCreditCard;
         this.isPet = isPet;
@@ -64,6 +64,7 @@ public class ShoppingDto extends CommonInfoDto{
 
     public ShoppingDto of(Shopping shopping, Barrier barrier){
         return ShoppingDto.builder()
+                .spotId(shopping.getId())
                 // 공통정보
                 .contentId(shopping.getContentid())
                 .addr1(shopping.getAddr1())

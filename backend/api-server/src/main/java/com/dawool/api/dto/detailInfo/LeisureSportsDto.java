@@ -45,12 +45,11 @@ public class LeisureSportsDto extends CommonInfoDto{
     private String useTime;
 
     @Builder
-    public LeisureSportsDto(int contentId, String title, String category, String homepage, String firstImage, String firstImage2,
-                            int areaCode, String addr1, String addr2, float mapX, float mapY, float mLevel,
-                            int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
+    public LeisureSportsDto(String spotId, int contentId, int contentTypeId, String title, String category, String homepage, String firstImage,
+                            int areaCode, String addr1, float mapX, float mapY, float mLevel, int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
                             String accomCount, float isBabyCarriage, float isPet, String expAgeRange, String infoCenter, String openPeriod,
                             String parkingFee, String commonParking, String reservation, String restDate, String useFee, String useTime) {
-        super(contentId, title, category, homepage, firstImage, firstImage2, areaCode, addr1, addr2, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, barrier);
+        super(spotId, contentId, contentTypeId, title, category, homepage, firstImage, areaCode, addr1, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, barrier);
         this.accomCount = accomCount;
         this.isBabyCarriage = isBabyCarriage;
         this.isPet = isPet;
@@ -67,6 +66,7 @@ public class LeisureSportsDto extends CommonInfoDto{
 
     public LeisureSportsDto of(LeisureSports leisureSports, Barrier barrier){
         return LeisureSportsDto.builder()
+                .spotId(leisureSports.getId())
                 // 공통정보
                 .contentId(leisureSports.getContentid())
                 .addr1(leisureSports.getAddr1())
