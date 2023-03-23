@@ -48,7 +48,11 @@ function App() {
 
               <Route
                 path="/detail/accommodation/:id"
-                element={<AccommodationDetailPage />}
+                element={
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <AccommodationDetailPage />
+                  </Suspense>
+                }
               />
               <Route
                 path="/detail/culture/:id"

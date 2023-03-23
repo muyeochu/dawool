@@ -55,9 +55,7 @@ const AccommodationDetailPage = () => {
     <MainGridItems>
       <RowGridContainer>
         <RowGridItems>
-          <Suspense fallback={<div>Loading...</div>}>
-            <DetailComponent myData={myData} />
-          </Suspense>
+          <DetailComponent myData={myData} location={32} />
         </RowGridItems>
       </RowGridContainer>
     </MainGridItems>

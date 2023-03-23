@@ -7,6 +7,8 @@ import { DetailInfoTypes } from "../types/detailTypes";
 
 import { getDetailApi } from "./Api";
 
+import { temptTypes } from "../components/Detail";
+
 interface ParamType {
   contentId: number;
   location: number;
@@ -17,7 +19,7 @@ interface temptDataType {
   [key: string]: any;
 }
 
-export const getDataSelector = selectorFamily<temptDataType, ParamType>({
+export const getDataSelector = selectorFamily<temptTypes, ParamType>({
   key: "getDataSelector",
   get:
     ({ contentId, location }) =>

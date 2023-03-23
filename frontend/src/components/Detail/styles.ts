@@ -62,7 +62,7 @@ export const MainInfoContainer = styled.div`
 export const MainImgContainer = styled.div`
   width: 270px;
   height: 380px;
-  background-color: pink;
+
   border-radius: 12px;
   box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.25);
 `;
@@ -88,7 +88,7 @@ export const InfoBox = styled.div`
   border-radius: 12px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
 
-  padding: 10px 20px 10px 20px;
+  padding: 20px 30px 20px 30px;
 
   ul {
     padding-left: 0;
@@ -98,7 +98,7 @@ export const InfoBox = styled.div`
   li {
     list-style-type: none;
     margin-bottom: 4px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 18px;
     line-height: 30px;
   }
@@ -126,4 +126,9 @@ export const InfoBox = styled.div`
     background-color: #a8a8a8; /* 스크롤바 썸네일 배경색 */
     border-radius: 10px; /* 스크롤바 썸네일 테두리 반지름 */
   }
+`;
+
+export const InfoFontStyle = styled.span`
+  color: ${grey[600]};
+  margin-left: 20px;
 `;

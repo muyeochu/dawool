@@ -14,7 +14,9 @@ const DetailTestPage = () => {
     getDataSelector({ contentId: 1914920, location: 32 })
   );
 
-  return <div>{myData.info.barrier.braileBlock}</div>;
+  console.log("myData좀 확인하자", myData);
+
+  return <div></div>;
 };
 
 export default DetailTestPage;
