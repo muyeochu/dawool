@@ -10,7 +10,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   align-items: center;
   justify-content: center;
 
-  &.ButtonNon_default {
+  &.DetailBtn_default {
     padding: 12px 28px;
     gap: 5px;
     border: 3px solid ${mainColor};
@@ -19,7 +19,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     background-color: ${({ disable }) => (disable === "1" ? mainColor : white)};
   }
 
-  &.ButtonNon_info {
+  &.DetailBtn_info {
     padding: 10px 22px;
     gap: 5px;
     border: 3px solid ${blue[300]};

@@ -31,7 +31,7 @@ const DetailBtn = ({ type, text, icType, disable }: ButtonProps) => {
 
   return (
     <ButtonStyle
-      className={`ButtonNon_${btnType}`}
+      className={`DetailBtn_${btnType}`}
       disable={disable?.toString()}
     >
       {btnType === "default" && (
