@@ -67,7 +67,7 @@ public class EntertainmentService {
      */
     public List<Entertainment> getPlaceList(int areaCode, String[] barrierCode, int page, int size) {
         List<Entertainment> list;
-        Query query = commonTemplate.findByAreacodeAndBarrierFree(areaCode, "", barrierCode);
+        Query query = commonTemplate.findByAreacodeAndBarrierFree(areaCode, barrierCode);
         list = mongoTemplate.find(query, Entertainment.class);
 
         int startIndex = page * size;

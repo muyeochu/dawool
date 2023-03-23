@@ -66,7 +66,7 @@ public class ShoppingService {
      */
     public List<Shopping> getPlaceList(int areaCode, String[] barrierCode, int page, int size) {
         List<Shopping> list;
-        Query query = commonTemplate.findByAreacodeAndBarrierFree(areaCode, "", barrierCode);
+        Query query = commonTemplate.findByAreacodeAndBarrierFree(areaCode, barrierCode);
         list = mongoTemplate.find(query, Shopping.class);
 
         int startIndex = page * size;

@@ -66,7 +66,7 @@ public class RestaurantService {
      */
     public List<Restaurant> getPlaceList(int areaCode, String[] barrierCode, int page, int size) {
         List<Restaurant> list;
-        Query query = commonTemplate.findByAreacodeAndBarrierFree(areaCode, "", barrierCode);
+        Query query = commonTemplate.findByAreacodeAndBarrierFree(areaCode, barrierCode);
         list = mongoTemplate.find(query, Restaurant.class);
 
         int startIndex = page * size;

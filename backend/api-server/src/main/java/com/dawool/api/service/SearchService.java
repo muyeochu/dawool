@@ -43,7 +43,7 @@ public class SearchService {
         String[] barrierCode = barrier.split("");
         List<? extends CommonInfo> list = new ArrayList<>();
         List<SearchDto> searchList = new ArrayList<>();
-        Query query = commonTemplate.findByAreacodeAndBarrierFree(0, title, barrierCode);
+        Query query = commonTemplate.findByTitleAndBarrierFree(title, barrierCode);
 
         switch (type) {
             case 0 :

@@ -66,7 +66,7 @@ public class LodgingService {
      */
     public List<Lodging> getPlaceList(int areaCode, String[] barrierCode, int page, int size) {
         List<Lodging> list;
-        Query query = commonTemplate.findByAreacodeAndBarrierFree(areaCode, "", barrierCode);
+        Query query = commonTemplate.findByAreacodeAndBarrierFree(areaCode, barrierCode);
         list = mongoTemplate.find(query, Lodging.class);
 
         int startIndex = page * size;
