@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Suspense } from "react";
 import KakaoAuthHandle from "./components/auth/KakaoAuthHandle";
 import {
   AccommodationPage,
@@ -71,7 +72,14 @@ function App() {
               />
 
               <Route path="/interest" element={<InterestPage />} />
-              <Route path="/accommodation" element={<AccommodationPage />} />
+              <Route
+                path="/accommodation"
+                element={
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <AccommodationPage />
+                  </Suspense>
+                }
+              />
               <Route path="/login" element={<LoginPage />} />
               <Route
                 path="/api/user/kakao/callback"
@@ -89,7 +97,15 @@ function App() {
               {/* 테스트 페이지 */}
               <Route path="/modaltest" element={<ModalTest />} />
               <Route path="/btntest" element={<ButtonTest />} />
-              <Route path="/detailtest" element={<DetailTest />} />
+
+              <Route
+                path="/detailtest"
+                element={
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <DetailTest />
+                  </Suspense>
+                }
+              />
             </Routes>
           </GridContainer>
         </BoxMainContainer>

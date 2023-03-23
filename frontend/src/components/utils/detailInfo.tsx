@@ -1,5 +1,10 @@
 import { dummyData } from "../Detail/dummy";
 
+import { useRecoilValue } from "recoil";
+import { Suspense, useEffect } from "react";
+
+import { DetailInfoTypes } from "../../types/detailTypes";
+
 const DetailInfo = () => {
   interface BarrierFieldTypes {
     [key: string]: any;
@@ -88,6 +93,9 @@ const DetailInfo = () => {
     }
   }
   console.log(newBarrierData);
+
+  // const myGetData = useRecoilValue(getData);
+  // console.log(myGetData);
 
   return <div></div>;
 };

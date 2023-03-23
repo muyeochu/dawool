@@ -5,7 +5,14 @@ import {
 } from "../../types/accommodationTypes";
 import { dummyData } from "../../components/Detail/dummy";
 
+import { Suspense } from "react";
+
+import { useRecoilValue } from "recoil";
+import { getDataSelector } from "../../recoil/DetailSelectors";
+
 import { MainGridItems, RowGridContainer, RowGridItems } from "./styles";
+
+// import { temptTypes } from "../../components/Detail";
 
 const infoField: accommodationFieldTypes = {
   checkInTime: "입실 시간",
@@ -38,11 +45,19 @@ const AccommodationDetailPage = () => {
   //   result[value] = dummyData[key];
   // }
 
+  const myData = useRecoilValue(
+    getDataSelector({ contentId: 1914920, location: 32 })
+  );
+
+  console.log("myData 원본은?", myData);
+
   return (
     <MainGridItems>
       <RowGridContainer>
         <RowGridItems>
-          <DetailComponent />
+          <Suspense fallback={<div>Loading...</div>}>
+            <DetailComponent myData={myData} />
+          </Suspense>
         </RowGridItems>
       </RowGridContainer>
     </MainGridItems>
