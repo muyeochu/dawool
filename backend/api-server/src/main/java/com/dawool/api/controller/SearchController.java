@@ -45,8 +45,10 @@ public class SearchController {
             int page, int size
     ) {
         List<?> searchList = new ArrayList<>();
-        searchList = searchService.getSearchList(title, type, barrier, page, size);
         Map<String, List<?>> response = new HashMap<>();
+        if(title.length() != 0) {
+            searchList = searchService.getSearchList(title, type, barrier, page, size);
+        }
         response.put("contents", searchList);
         return ResponseEntity.ok(response);
     }

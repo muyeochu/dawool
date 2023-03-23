@@ -50,9 +50,7 @@ public class SearchService {
         List<? extends CommonInfo> list = new ArrayList<>();
         List<PlaceDto> searchList = new ArrayList<>();
         Query query = commonTemplate.findByAreacodeAndBarrierFree(0, title, barrierCode);
-        if (title.length() == 0) {
-            return searchList;
-        }
+
         switch (type) {
             case 0 :
                 searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Entertainment.class)));
