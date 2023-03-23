@@ -3,6 +3,7 @@ package com.dawool.api.controller;
 import com.dawool.api.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,9 +47,10 @@ public class SearchController {
     ) {
         List<?> searchList = new ArrayList<>();
         Map<String, List<?>> response = new HashMap<>();
-        if(title.length() != 0) {
-            searchList = searchService.getSearchList(title, type, barrier, page, size);
+        if(title.length() == 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Empty Title");
         }
+        searchList = searchService.getSearchList(title, type, barrier, page, size);
         response.put("contents", searchList);
         return ResponseEntity.ok(response);
     }
