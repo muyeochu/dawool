@@ -2,7 +2,11 @@ package com.dawool.api.dto;
 
 import com.dawool.api.code.Category;
 import com.dawool.api.entity.CommonInfo;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 검색 결과 Dto
