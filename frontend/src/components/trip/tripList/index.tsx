@@ -54,7 +54,7 @@ function TripList({ titleType, tripList }: TripListProps) {
       </ButtonList>
 
       {/* 오류 회피를 위해, tripList가 있을 때만 렌더링 */}
-      {tripList && <TripCardList list={tripList} />}
+      {/* {tripList && <TripCardList list={tripList} />} */}
     </TripListContainer>
   );
 }

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { RecoilRoot } from "recoil";
+// import { RecoilRoot } from "recoil";
 import Button from '../components/common/Button/index';
 
 const TourSpotPage = () => {

@@ -12,8 +12,8 @@ export type EtcListType = {
 // 즐길거리 목록
 export type EntertainmentListType = EtcListType & {
   spotId: string;
-}
+};
 
 export type TripDataType = {
-  data: (EntertainmentListType | EtcListType)[]
-}
+  data: (EntertainmentListType | EtcListType)[];
+};
