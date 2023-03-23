@@ -116,13 +116,15 @@ public class UserService {
             userRepository.save(user);
         }
 
-        // TODO: 취향 설문 조사 여부
         User user = userRepository.findByKakaoId(kakaoId);
         String userObjectId = user.getId();
         TokenResDto result = this.createToken(userObjectId);
         user.setRefreshToken(result.getRefreshToken());
         userRepository.save(user);
         result.setNickName(user.getNickName());
+
+        // 취향설문 조사 여부
+        result.setSurveyed(user.getSurvey() != null);
 
         return result;
     }
