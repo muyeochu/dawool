@@ -1,26 +1,6 @@
-import {
-  MainGridItems,
-  RowGridContainer,
-  RowGridItems,
-  VolumeIcStyle,
-  FolderIcStyle,
-  HeartIcStyle,
-  TitleContainer,
-  TitleIcContainer,
-  IcExpContainer,
-  MainInfoContainer,
-  MainImgContainer,
-  MainBtnContainer,
-} from "./styles";
+import { MainGridItems, RowGridContainer, RowGridItems } from "./styles";
 
-import Button from "../../components/common/Button";
-import ButtonNon from "../../components/common/ButtonNon";
-
-import earIc from "../../assets/icon/earIc.svg";
-import eyeIc from "../../assets/icon/eyeIc.svg";
-import oldmanIc from "../../assets/icon/oldmanIc.svg";
-import bathchairIc from "../../assets/icon/bathchairIc.svg";
-import toddlerIc from "../../assets/icon/toddlerIc.svg";
+import DetailComponent from "../../components/Detail";
 
 const dummyData = {
   info: {
@@ -62,43 +42,7 @@ const DetailPage = () => {
     <MainGridItems>
       <RowGridContainer>
         <RowGridItems>
-          <TitleContainer>
-            <TitleIcContainer>
-              <p>{dummyData.info?.title}</p>
-              <VolumeIcStyle />
-            </TitleIcContainer>
-            <TitleIcContainer>
-              <IcExpContainer>
-                <FolderIcStyle />
-                <p>코스 추가</p>
-              </IcExpContainer>
-              <IcExpContainer>
-                <HeartIcStyle />
-                <p>관심</p>
-              </IcExpContainer>
-            </TitleIcContainer>
-          </TitleContainer>
-
-          <MainInfoContainer>
-            <MainImgContainer></MainImgContainer>
-            <MainBtnContainer>
-              <Button disabled={true} imageSrc={bathchairIc}>
-                지체장애
-              </Button>
-              <ButtonNon
-                icSrc={earIc}
-                isIc={true}
-                text={"지체장애"}
-                disable={1}
-              />
-              <ButtonNon
-                icSrc={oldmanIc}
-                isIc={true}
-                text={"노인"}
-                disable={0}
-              />
-            </MainBtnContainer>
-          </MainInfoContainer>
+          <DetailComponent />
         </RowGridItems>
       </RowGridContainer>
     </MainGridItems>
