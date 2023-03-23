@@ -2,7 +2,9 @@ package com.dawool.api.service;
 
 import com.dawool.api.dto.ReissueTokenReqDto;
 import com.dawool.api.dto.ReissueTokenResDto;
+import com.dawool.api.dto.SurveyReqDto;
 import com.dawool.api.dto.TokenResDto;
+import com.dawool.api.entity.Survey;
 import com.dawool.api.entity.User;
 import com.dawool.api.jwt.JwtTokenProvider;
 import com.dawool.api.repository.UserRepository;
@@ -19,8 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
-import reactor.core.publisher.Mono;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.Date;
 
@@ -28,12 +30,12 @@ import java.util.Date;
  * 회원 Service
  *
  * @author 이준
+ * @author 김정은
  */
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class UserService {
-
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
     @Value("${kakao.restapi.key}")
@@ -121,6 +123,9 @@ public class UserService {
         userRepository.save(user);
         result.setNickName(user.getNickName());
 
+        // 취향설문 조사 여부
+        result.setSurveyed(user.getSurvey() != null);
+
         return result;
     }
 
@@ -165,13 +170,47 @@ public class UserService {
     /**
      * 로그인된 유저 정보 조회
      *
-     * @return 로그인된 유저 정보.
-     * @throws Exception 유저정보가 없을 때
+     * @return 로그인된 유저 정보 objectId
      */
-    public User getLoginUser() throws Exception {
+    public static String getLoginUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String objectId = authentication.getName();
 
-        return userRepository.findById(objectId).orElseThrow(() -> new Exception("유저 정보가 없습니다."));
+        return authentication.getName();
+    }
+
+    /**
+     * 취향 설문 저장
+     *
+     * @param survey
+     */
+    public void survey(SurveyReqDto survey){
+        String userId = UserService.getLoginUser();
+
+        // 무장애정보
+        String mobilityWeak = "0";
+        String visualImpaired = "0";
+        String deaf = "0";
+        String old = "0";
+        String infant = "0";
+        if(survey.getBarrier().contains("2")){
+            mobilityWeak = "1";
+        }
+        if(survey.getBarrier().contains("3")){
+            visualImpaired = "1";
+        }
+        if(survey.getBarrier().contains("4")){
+            deaf = "1";
+        }
+        if(survey.getBarrier().contains("5")){
+            old = "1";
+        }
+        if(survey.getBarrier().contains("6")){
+            infant = "1";
+        }
+        survey.setBarrier(mobilityWeak + deaf + visualImpaired + old + infant);
+
+        User user = userRepository.findById(userId).orElseThrow();
+        user.setSurvey(new Survey().of(survey));
+        userRepository.save(user);
     }
 }
