@@ -10,8 +10,8 @@ const MyCoursePage = () => {
             <SideHeaderText>
               <MapIcStyle /> 내 코스 관리
             </SideHeaderText>
-            <MyCourseSideBar/>
           </SideHeader>
+          <MyCourseSideBar/>
       </SideItem>
       <MapItem>
         <KakaoMap lat="33.450701" lng="126.570667" ></KakaoMap>
