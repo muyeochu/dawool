@@ -10,6 +10,7 @@ const KakaoAuthHandle = ()=>{
   const [nickName, setNickName] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
+  const [isSurvey, setIsSurvey] = useState(false);
   const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
 
