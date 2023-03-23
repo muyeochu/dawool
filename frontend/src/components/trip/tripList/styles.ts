@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { mainColor, white, grey, black, blue } from "../../../styles/Colors";
 
-export const TripListContainer = styled.div`
-`
+export const TripListContainer = styled.div``;
 
-export const TripListTitle = styled.div`
+export const TripListTitle = styled.h1`
   font-family: "SUIT";
   font-style: normal;
   font-weight: 700;
@@ -14,4 +13,12 @@ export const TripListTitle = styled.div`
   align-items: center;
 
   color: ${black};
+`;
+
+export const ButtonList = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  margin-top: 27px;
 `;
