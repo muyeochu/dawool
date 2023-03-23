@@ -1,6 +1,6 @@
 package com.dawool.api.service;
 
-import com.dawool.api.dto.PlaceDto;
+import com.dawool.api.dto.SearchDto;
 import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.CultureFacility;
 import com.dawool.api.entity.Entertainment;
@@ -9,12 +9,6 @@ import com.dawool.api.entity.Lodging;
 import com.dawool.api.entity.Restaurant;
 import com.dawool.api.entity.Shopping;
 import com.dawool.api.repository.CommonTemplate;
-import com.dawool.api.repository.CultureFacilityRepository;
-import com.dawool.api.repository.EntertainmentRepository;
-import com.dawool.api.repository.LeisureSportsRepository;
-import com.dawool.api.repository.LodgingRepository;
-import com.dawool.api.repository.RestaurantRepository;
-import com.dawool.api.repository.ShoppingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
@@ -48,7 +42,7 @@ public class SearchService {
     public List<?> getSearchList(String title, int type, String barrier, int page, int size) {
         String[] barrierCode = barrier.split("");
         List<? extends CommonInfo> list = new ArrayList<>();
-        List<PlaceDto> searchList = new ArrayList<>();
+        List<SearchDto> searchList = new ArrayList<>();
         Query query = commonTemplate.findByAreacodeAndBarrierFree(0, title, barrierCode);
 
         switch (type) {
@@ -97,11 +91,11 @@ public class SearchService {
      * @param searchList
      * @return
      */
-    public List<PlaceDto> getSeacrhResult(List<? extends CommonInfo> searchList) {
-        List<PlaceDto> searchResult= new ArrayList<>();
+    public List<SearchDto> getSeacrhResult(List<? extends CommonInfo> searchList) {
+        List<SearchDto> searchResult= new ArrayList<>();
 
         for (CommonInfo search : searchList) {
-            PlaceDto place = new PlaceDto().of(search);
+            SearchDto place = new SearchDto().of(search);
             searchResult.add(place);
         }
 

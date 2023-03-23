@@ -26,12 +26,11 @@ public class SearchDto {
     private String imageUrl;
     // 소분류
     private String category;
-    private int deaf;
-    private int visuallyImpaired;
     private int mobilityWeak;
+    private int visuallyImpaired;
+    private int deaf;
     private int old;
     private int infant;
-    private boolean isLiked;
 
     /**
      * CommonInfo Entity -> SearchDto
@@ -52,7 +51,6 @@ public class SearchDto {
                 .mobilityWeak(info.getMobility_weak())
                 .old(info.getOld())
                 .infant(info.getInfant())
-                .isLiked(false)
                 .build();
     }
 }
