@@ -4,16 +4,15 @@ import { StyledButton, ButtonText, ButtonIcon } from "./styles";
 import { buttonState } from "../../../recoil/ButtonState";
 
 // icon
-import bathchairIc from "../../../assets/icon/bathchairIc.svg"
-import eyeIc from "../../../assets/icon/eyeIc.svg"
-import earIc from "../../../assets/icon/earIc.svg"
-import oldmanIc from "../../../assets/icon/oldmanIc.svg"
-import toddlerIc from "../../../assets/icon/toddlerIc.svg"
-
+import bathchairIc from "../../../assets/icon/bathchairIc.svg";
+import eyeIc from "../../../assets/icon/eyeIc.svg";
+import earIc from "../../../assets/icon/earIc.svg";
+import oldmanIc from "../../../assets/icon/oldmanIc.svg";
+import toddlerIc from "../../../assets/icon/toddlerIc.svg";
 
 // children -> 하나의 자식 노드만 전달
 interface ButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
   children: React.ReactNode;
   icType?: string;
@@ -53,9 +52,7 @@ export default function Button({ children, icType }: ButtonProps) {
   return (
     <StyledButton onClick={handleClick} isClicked={isClicked}>
       <ButtonIcon src={icSrc} isClicked={isClicked} />
-      <ButtonText isClicked={isClicked}>
-        {children}
-      </ButtonText>
+      <ButtonText isClicked={isClicked}>{children}</ButtonText>
     </StyledButton>
   );
 }

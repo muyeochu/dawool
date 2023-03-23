@@ -185,7 +185,7 @@ export const DropDownContent = styled.ul`
   width: 120px;
   padding: 8px 0 8px 0;
   border-radius: 4px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
 
   @keyframes dropdown {
     0% {
