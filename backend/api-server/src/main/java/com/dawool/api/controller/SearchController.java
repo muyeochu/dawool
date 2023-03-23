@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class SearchController {
             @RequestParam("barrier") String barrier,
             int page, int size
     ) {
-        List<?> searchList;
+        List<?> searchList = new ArrayList<>();
         searchList = searchService.getSearchList(title, type, barrier, page, size);
         Map<String, List<?>> response = new HashMap<>();
         response.put("contents", searchList);

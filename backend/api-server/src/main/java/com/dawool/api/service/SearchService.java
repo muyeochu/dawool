@@ -50,8 +50,18 @@ public class SearchService {
         List<? extends CommonInfo> list = new ArrayList<>();
         List<PlaceDto> searchList = new ArrayList<>();
         Query query = commonTemplate.findByAreacodeAndBarrierFree(0, title, barrierCode);
-
+        if (title.length() == 0) {
+            return searchList;
+        }
         switch (type) {
+            case 0 :
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Entertainment.class)));
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, CultureFacility.class)));
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, LeisureSports.class)));
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Lodging.class)));
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Shopping.class)));
+                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Restaurant.class)));
+                break;
             case 12:
                 list = mongoTemplate.find(query, Entertainment.class);
                 searchList = getSeacrhResult(list);
@@ -77,13 +87,7 @@ public class SearchService {
                 searchList = getSeacrhResult(list);
                 break;
             default:
-                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Entertainment.class)));
-                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, CultureFacility.class)));
-                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, LeisureSports.class)));
-                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Lodging.class)));
-                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Shopping.class)));
-                searchList.addAll(getSeacrhResult(mongoTemplate.find(query, Restaurant.class)));
-                break;
+                return searchList;
         }
 
         return resultList(searchList, page, size);
