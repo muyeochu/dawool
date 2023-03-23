@@ -44,6 +44,7 @@ function App() {
             <Modal />
             <Routes>
               <Route path="/" element={<IntroPage />} />
+
               <Route
                 path="/detail/accommodation/:id"
                 element={<AccommodationDetailPage />}
@@ -68,6 +69,7 @@ function App() {
                 path="/detail/tourspot/:id"
                 element={<TourSpotDetailPage />}
               />
+
               <Route path="/interest" element={<InterestPage />} />
               <Route path="/accommodation" element={<AccommodationPage />} />
               <Route path="/login" element={<LoginPage />} />

@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+import { ReactComponent as VolumeIc } from "../../assets/icon/volumeIc.svg";
+import { ReactComponent as FolderIc } from "../../assets/icon/folderIc.svg";
+import { ReactComponent as HeartIc } from "../../assets/icon/heartIc.svg";
+
+import { mainColor, black, white, blue, grey } from "../../styles/Colors";
+
 export const MainGridItems = styled.div`
   grid-column: 2 / span 1;
   height: 100vh;

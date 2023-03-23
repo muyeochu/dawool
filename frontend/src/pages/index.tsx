@@ -1,10 +1,12 @@
 import AccommodationPage from "./AccommodationPage";
+
 import AccommodationDetailPage from "./DetailPage/AccommodationDetailPage";
 import CultureDetailPage from "./DetailPage/CultureDetailPage";
 import LeportsDetailPage from "./DetailPage/LeportsDetailPage";
 import RestaurantDetailPage from "./DetailPage/RestaurantDetailPage";
 import ShoppingDetailPage from "./DetailPage/ShoppingDetailPage";
 import TourSpotDetailPage from "./DetailPage/TourSpotDetailPage";
+
 import InterestPage from "./InterestPage";
 import IntroPage from "./IntroPage";
 import LoginPage from "./LoginPage";
