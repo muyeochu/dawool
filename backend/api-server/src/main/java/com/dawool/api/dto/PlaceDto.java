@@ -33,9 +33,9 @@ public class PlaceDto {
     private String imageUrl;
     // 소분류
     private String category;
-    private int deaf;
-    private int visuallyImpaired;
     private int mobilityWeak;
+    private int visuallyImpaired;
+    private int deaf;
     private int old;
     private int infant;
     private boolean isLiked;
@@ -54,9 +54,9 @@ public class PlaceDto {
                 .title(info.getTitle())
                 .imageUrl(info.getFirstimage())
                 .category(Category.valueOf(info.getCat3()).getCategory())
-                .deaf(info.getDeaf())
-                .visuallyImpaired(info.getVisual_impaired())
                 .mobilityWeak(info.getMobility_weak())
+                .visuallyImpaired(info.getVisual_impaired())
+                .deaf(info.getDeaf())
                 .old(info.getOld())
                 .infant(info.getInfant())
                 .isLiked(false)
