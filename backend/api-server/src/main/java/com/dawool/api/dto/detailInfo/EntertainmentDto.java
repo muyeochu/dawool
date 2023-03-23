@@ -80,7 +80,7 @@ public class EntertainmentDto extends CommonInfoDto{
                 .title(entertainment.getTitle())
                 .category(Category.valueOf(entertainment.getCat3()).getCategory())
                 .deaf(entertainment.getDeaf())
-                .visuallyImpaired(entertainment.getVisually_impaired())
+                .visuallyImpaired(entertainment.getVisual_impaired())
                 .mobilityWeak(entertainment.getMobility_weak())
                 .old(entertainment.getOld())
                 .infant(entertainment.getInfant())

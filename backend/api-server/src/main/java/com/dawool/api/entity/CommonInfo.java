@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
  * 공통정보 Entity
  *
  * @author 김정은
+ * @author 이준
  */
 
 @Getter
@@ -44,7 +45,7 @@ public class CommonInfo {
     // 청각장애
     private int deaf;
     // 시각장애
-    private int visually_impaired;
+    private int visual_impaired;
     // 지체장애
     private int mobility_weak;
     // 노인

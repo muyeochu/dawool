@@ -57,7 +57,7 @@ public class CultureFacilityDto extends CommonInfoDto{
                 .title(cultureFacility.getTitle())
                 .category(Category.valueOf(cultureFacility.getCat3()).getCategory())
                 .deaf(cultureFacility.getDeaf())
-                .visuallyImpaired(cultureFacility.getVisually_impaired())
+                .visuallyImpaired(cultureFacility.getVisual_impaired())
                 .mobilityWeak(cultureFacility.getMobility_weak())
                 .old(cultureFacility.getOld())
                 .infant(cultureFacility.getInfant())
