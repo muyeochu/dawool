@@ -16,20 +16,36 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class CommonTemplate {
     /**
-     * 무장애 필터링 조회
+     * 지역 목록 무장애 필터링 조회
      * 
      * @param areaCode
-     * @param title
      * @param barrierCode
      * @return Query
       */
-    public Query findByAreacodeAndBarrierFree(int areaCode, String title, String[] barrierCode) {
+    public Query findByAreacodeAndBarrierFree(int areaCode, String[] barrierCode) {
+        Criteria criteria = new Criteria();
+        criteria = Criteria.where("areacode").is(areaCode);
+        criteria.and("mobility_weak").gte(barrierCode[0])
+                .and("visual_impaired").gte(barrierCode[1])
+                .and("deaf").gte(barrierCode[2])
+                .and("old").gte(barrierCode[3])
+                .and("infant").gte(barrierCode[4]);
+        
+        Query query = new Query(criteria);
+        return query;
+    }
+
+    /**
+     * 타이틀 무장애 필터링 조회
+     *
+     * @param title
+     * @param barrierCode
+     * @return Query
+     */
+    public Query findByTitleAndBarrierFree(String title, String[] barrierCode) {
         Criteria criteria = new Criteria();
         String target;
-        if (areaCode > 0) {
-            target = String.valueOf(areaCode);
-            criteria = Criteria.where("areacode").is(target);
-        } else if (title.length() == 1) {
+        if (title.length() == 1) {
             target = title;
             criteria = Criteria.where("title").is(target);
         } else if (title.length() > 1) {
@@ -43,7 +59,7 @@ public class CommonTemplate {
                 .and("deaf").gte(barrierCode[2])
                 .and("old").gte(barrierCode[3])
                 .and("infant").gte(barrierCode[4]);
-        
+
         Query query = new Query(criteria);
         return query;
     }
