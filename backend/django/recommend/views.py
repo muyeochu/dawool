@@ -7,22 +7,64 @@ from rest_framework import status
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import logging
+import jwt
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from bson import ObjectId
+from pymongo import MongoClient
+
+
 # 12- 관광지, 14 -문화생활, 28-레포츠, 35-쇼핑
-@api_view(['POST'])
+@api_view(['GET'])
 def spot_list(request, spot_id):
     logger = logging.getLogger(__name__)
     logger.info('info message')
     # 나중에는 get으로 전부 바꿔야함 
-    if(request.method == 'POST'):
+    if(request.method == 'GET'):
         try:
-            request_data = request.data
-            contentid = request_data['contentid']
-            is_popular = request_data["is_popular"]
-            deaf = request_data["deaf"]
-            visual_impaired =  request_data["visual_impaired"]
-            mobility_weak = request_data["mobility_weak"]
-            old = request_data["old"]
-            infant = request_data["infant"]
+            # JWT 토큰 추출
+            print(request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1])
+
+            token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
+            # JWT 디코딩
+            user_id = decode_jwt(token)
+
+            print(user_id)
+
+            # print(user_id)
+
+            client = MongoClient('mongodb+srv://S08P22D105:Cw7h8LqfQd@ssafy.ngivl.mongodb.net/S08P22D105?')
+
+            db = client.S08P22D105 # 데이터베이스 이름을 알맞게 입력해주세요
+            collection = db.user # 컬렉션 이름을 알맞게 입력해주세요
+
+            user_id = '640ea69189a6515aecd44df8'
+
+            result = collection.find({'_id': ObjectId(user_id)})       
+            # 사용자 정보 
+            user = list(result)[0]
+            
+            # 선호 시간
+            preferredTime = user['survey']['preferredTime']
+            
+            # 무장애 타입 
+            barrier_type = user['survey']['barrier']
+            # 타입별 변수 할당 
+            deaf,visual_impaired,mobility_weak, old, infant = barrier_type
+
+            print(deaf,visual_impaired,mobility_weak, old, infant)
+
+            # 인기 관광지 여부 
+            is_popular = int(user['survey']['densePopulation']) -1
+
+            # 출발지 배열
+            departure = user['survey']['departure']
+
+            # 선호 관광지 배열 
+            visitLocation = user['survey']['visitLocation']
+            
+
+            print(preferredTime, barrier_type,is_popular, departure,visitLocation )
 
             spots = RecommendTour.objects.all()
             se = RecommendTourSerializer(spots, many=True)
@@ -34,12 +76,13 @@ def spot_list(request, spot_id):
 
             type_data = data[data['contenttypeid'] == int(spot_id)] 
 
-            target_data = data[data['contentid'] == contentid] 
+            target_data = data[data['contentid'] == int(visitLocation[0])] 
+            print(target_data)
             
-            # 무장애 여부
-            Barrier_data = Barrier_filter(deaf,visual_impaired, mobility_weak, old, infant, type_data, target_data)
+            # 무장애 여부 필터링 
+            Barrier_data = Barrier_filter(int(deaf),int(visual_impaired), int(mobility_weak), int(old), int(infant), type_data, target_data)
 
-            # 인기 관광지 여부 
+            # 인기 관광지 여부 필터링
             recommend_tour = popular_filter(is_popular, Barrier_data, target_data)
 
             # 추천 결과 
@@ -48,15 +91,33 @@ def spot_list(request, spot_id):
                 target_data = data[data['title'] == i[0]]
                 result_data = pd.concat([result_data,target_data])
             print(result_data)
+
             # firstimage 추가해야함!,is liked 여부도! 
-            selected_column = result_data[['contentid','contenttypeid', 'title','searchcount','deaf','visual_impaired','mobility_weak', 'old', 'infant']]
+            selected_column = result_data[['contentid','contenttypeid', 'title','searchcount','deaf','visual_impaired','mobility_weak', 'old', 'infant','firstimage']]
             dict_data = selected_column.to_dict(orient='records')
+
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         except Exception as e:
             print('error')
     
     return JsonResponse({'message': 'spot_list error'}, status=status.HTTP_404_NOT_FOUND)
+
+
+def decode_jwt(token):
+    # JWT decode에 사용할 secret key
+    SECRET_KEY = settings.JWT_SECRET_KEY
+    # JWT decode
+    print(SECRET_KEY)
+    decoded_payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+
+    print(decoded_payload)
+    # Payload에서 유저 정보 추출
+    # object_id = decoded_payload['sub']
+
+    return decoded_payload
+
+
 
 
 
