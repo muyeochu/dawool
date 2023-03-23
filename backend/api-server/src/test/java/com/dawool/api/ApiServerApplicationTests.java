@@ -2,8 +2,6 @@ package com.dawool.api;
 
 import com.dawool.api.entity.Shopping;
 import com.dawool.api.repository.CommonTemplate;
-import com.dawool.api.repository.RestaurantRepository;
-import com.dawool.api.repository.ShoppingRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,21 +14,12 @@ import java.util.List;
 class ApiServerApplicationTests {
 
 	@Autowired
-	private ShoppingRepository shoppingRepository;
-	@Autowired
-	private RestaurantRepository restaurantRepository;
-	@Autowired
 	private CommonTemplate commonTemplate;
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	@Test
 	void contextLoads() {
 		List<Shopping> list = null;
-//		list = shoppingRepository.findByTitleRegex(".*롯데.*");
-//
-//		for(Shopping l : list) {
-//			System.out.println("### Contains " + l.getTitle());
-//		}
 
 		String str = "10001";
 		String[] arr = str.split("");
