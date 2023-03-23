@@ -1,16 +1,19 @@
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
 import { useRecoilValue, RecoilRoot } from "recoil";
 import styled from "styled-components";
-import { TripDataType, EtcListType } from "../../../types/tripListTypes";
-import { RestaurantListSelector } from "../../../recoil/TripListSelector";
+import { TripDataType, ListType } from "../../../types/tripListTypes";
+import { TripListSelector } from "../../../recoil/TripListSelector";
 
 import Button from "../../common/Button";
 import { TripListContainer, TripListTitle, ButtonList } from "./styles";
 import TripCardList from "./tripCardList";
 
+type EtcTripDataType = {
+  data: ListType[];
+};
 interface TripListProps {
   titleType: string;
-  tripList: EtcListType[];
+  tripList: TripDataType["data"];
 }
 
 function TripList({ titleType, tripList }: TripListProps) {
@@ -27,8 +30,10 @@ function TripList({ titleType, tripList }: TripListProps) {
       ? "숙박"
       : "none";
 
-  // EtcListType[] 형식으로 반환되기 때문에 타입 변환은 필요 X
-  // const tripList = useRecoilValue(RestaurantListSelector);
+  const etcTripList = useRecoilValue<EtcTripDataType | undefined>(
+    TripListSelector
+  );
+  const processedTripList = etcTripList?.data || tripList;
   console.log(tripList);
 
   return (
@@ -54,7 +59,7 @@ function TripList({ titleType, tripList }: TripListProps) {
       </ButtonList>
 
       {/* 오류 회피를 위해, tripList가 있을 때만 렌더링 */}
-      {/* {tripList && <TripCardList list={tripList} />} */}
+      {processedTripList && <TripCardList list={processedTripList} />}
     </TripListContainer>
   );
 }
