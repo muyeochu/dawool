@@ -188,18 +188,18 @@ public class UserService {
 
         // 무장애정보
         String mobilityWeak = "0";
-        String deaf = "0";
         String visualImpaired = "0";
+        String deaf = "0";
         String old = "0";
         String infant = "0";
         if(survey.getBarrier().contains("2")){
             mobilityWeak = "1";
         }
         if(survey.getBarrier().contains("3")){
-            deaf = "1";
+            visualImpaired = "1";
         }
         if(survey.getBarrier().contains("4")){
-            visualImpaired = "1";
+            deaf = "1";
         }
         if(survey.getBarrier().contains("5")){
             old = "1";
