@@ -1,47 +1,55 @@
 import { atom, selector } from "recoil";
 import axios from "axios";
 import { customAxios } from "./customAxios";
-import { ListType, TripDataType } from "../types/tripListTypes";
+import { ListType } from "../types/tripListTypes";
 
 const getTripListData = (
-  contentTypeId: number,
-  area: number,
-  barrier: number,
-  page: number,
-  size: number
-): Promise<TripDataType> =>
+  contentTypeId: any,
+  area: any,
+  barrier: any,
+  page: any,
+  size: any,
+): Promise<ListType[]> =>
   customAxios
     .get(
-      `location/list/${contentTypeId}?area=${area}&barrier=${barrier}&page=${page}&size=${size}`
+      `/location/list/${contentTypeId}?area=${area}&barrier=${barrier}&page=${page}&size=${size}`
     )
-    .then((response) => response.data)
+    .then((response) => {
+      // console.log(response.data.contents);
+      return response.data.contents;
+    })
     .catch((error) => {
-      console.log(error);
+      console.log(error, "여기가 에러!");
     });
 
-// 요청이 실패하면 undefined, 성공하면 TripDataType, get 함수 호출에 실패하면 EtcListType 반환
-export const TripListSelector = selector<TripDataType>({
-  key: "TripListSelector",
+export const RestaurantListSelector = selector<ListType[]>({
+  key: "RestaurantListSelector",
   get: async () => {
-    console.log("들어옴!!");
+    // console.log("들어옴!!");
     try {
-      // 수정해야 할 부분..!! (일단 임시)
-      const [restaurantList, accommodationList] = await Promise.all([
-        getTripListData(39, 1, 10000, 0, 10),
-        getTripListData(32, 1, 10000, 0, 10),
-      ]);
+      const restaurantList = await getTripListData(39, 1, 10000, 0, 10);
+      console.log("식당 list!", restaurantList);
 
-      console.log("식당 list!");
-      console.log(restaurantList.contents);
-      console.log("숙박 list!");
-      console.log(accommodationList.contents);
-      console.log("들어오나?");
-
-      return { data: [...restaurantList.contents, ...accommodationList.contents] };
+      return restaurantList;
     } catch (err) {
-      console.log(err);
-      return { data: [] };
+      throw err;
+      // return [];
     }
   },
-  // filtering 부분.. 넣을 자리
+});
+
+export const AccommodationListSelector = selector<ListType[]>({
+  key: "AccommodationListSelector",
+  get: async () => {
+    try {
+      // 수정해야 할 부분..!! (일단 임시)
+      const accommodationList = await getTripListData(32, 1, 10000, 0, 10);
+      // console.log("숙박 list!", accommodationList);
+
+      return accommodationList;
+    } catch (err) {
+      console.log(err);
+      return [];
+    }
+  },
 });

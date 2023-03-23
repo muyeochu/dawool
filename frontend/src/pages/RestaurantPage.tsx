@@ -27,7 +27,7 @@ export const RowGridItems = styled.div`
 const RestaurantPage = () => {
   return (
     <>
-      <Suspense fallback={<Loading/>}>
+      <Suspense fallback={<Loading />}>
         {/* 추천 식당 */}
         <MainGridItems>
           <div>추천 부분</div>
@@ -37,7 +37,7 @@ const RestaurantPage = () => {
         <TripListGridItems>
           <RowGridContainer>
             <RowGridItems>
-              <TripList titleType="restaurant" tripList={[]} />
+              <TripList titleType="restaurant" />
             </RowGridItems>
           </RowGridContainer>
         </TripListGridItems>
