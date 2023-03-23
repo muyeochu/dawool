@@ -19,6 +19,7 @@ import lombok.Setter;
 public class TokenResDto {
 
     private String nickName;
+    private boolean isSurveyed;
     private String grantType;
     private String accessToken;
     private String refreshToken;
