@@ -13,6 +13,7 @@ import lombok.Setter;
  * 장소 목록 DTO
  *
  * @author 김정은
+ * @author 이준
  */
 
 @Getter

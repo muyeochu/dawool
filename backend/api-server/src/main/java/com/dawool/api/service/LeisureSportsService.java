@@ -21,6 +21,7 @@ import java.util.List;
  * 레포츠(28) 관련 Service
  *
  * @author 김정은
+ * @author 이준
  */
 @Service
 @Slf4j

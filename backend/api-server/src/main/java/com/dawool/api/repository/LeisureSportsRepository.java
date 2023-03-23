@@ -14,44 +14,5 @@ import java.util.List;
  */
 @Repository
 public interface LeisureSportsRepository extends CommonRepository<LeisureSports, String> {
-//    /**
-//     * 지역 별 관광지 목록
-//     *
-//     * @param areaCode
-//     * @return
-//     */
-//    List<LeisureSports> findByAreacode(String areaCode);
-//
-//    /**
-//     * 지역 별 청각장애인 시설있는 관광지 목록
-//     *
-//     * @param areaCode
-//     * @param Deaf
-//     * @return
-//     */
-//    List<LeisureSports> findByAreacodeAndDeaf(String areaCode, String Deaf);
-//
-//    /**
-//     * 장소 상세조회
-//     *
-//     * @param contentId
-//     * @return
-//     */
-//    LeisureSports findByContentid(String contentId);
-//
-//    /**
-//     * title이 포함된 장소 검색 - 한글자 검색
-//     *
-//     * @param title
-//     * @return
-//     */
-//    List<LeisureSports> findByTitle(String title);
-//
-//    /**
-//     * title이 포함된 장소 검색
-//     *
-//     * @param title
-//     * @return
-//     */
-//    List<LeisureSports> findByTitleRegex(String title);
+
 }

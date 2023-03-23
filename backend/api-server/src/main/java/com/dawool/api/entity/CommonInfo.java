@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
  * 공통정보 Entity
  *
  * @author 김정은
+ * @author 이준
  */
 
 @Getter

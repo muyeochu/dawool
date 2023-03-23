@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
  * 카테고리
  *
  * @author 김정은
+ * @author 이준
  */
 
 @Getter

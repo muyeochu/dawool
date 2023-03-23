@@ -21,6 +21,7 @@ import java.util.List;
  * 장소와 관련된 Service
  *
  * @author 김정은
+ * @author 이준
  */
 
 @Service
