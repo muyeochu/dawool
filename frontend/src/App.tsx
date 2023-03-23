@@ -42,7 +42,7 @@ function App() {
               <Route path="/accommodation" element={<AccommodationPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route
-                path="/api/user/kakao/callback"
+                path="/callback"
                 element={<KakaoAuthHandle />}
               ></Route>
               <Route path="/mycourse" element={<MyCoursePage />} />

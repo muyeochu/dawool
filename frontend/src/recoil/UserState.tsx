@@ -10,11 +10,13 @@ interface UserType{
     accessToken:String,
     nickName:String,
     refreshToken:String,
+    isSurvey:boolean
 }
 export const User:UserType={
     accessToken:"",
     nickName:"",
     refreshToken:"",
+    isSurvey:false
 }
 export const userState = atom({
     key:"userState",
