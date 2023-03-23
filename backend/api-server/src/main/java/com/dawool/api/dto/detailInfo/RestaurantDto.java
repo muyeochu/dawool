@@ -74,7 +74,7 @@ public class RestaurantDto extends CommonInfoDto{
                 .title(restaurant.getTitle())
                 .category(Category.valueOf(restaurant.getCat3()).getCategory())
                 .deaf(restaurant.getDeaf())
-                .visuallyImpaired(restaurant.getVisually_impaired())
+                .visuallyImpaired(restaurant.getVisual_impaired())
                 .mobilityWeak(restaurant.getMobility_weak())
                 .old(restaurant.getOld())
                 .infant(restaurant.getInfant())

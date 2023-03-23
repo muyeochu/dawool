@@ -13,30 +13,6 @@ import java.util.List;
  * @author 김정은
  */
 @Repository
-public interface EntertainmentRepository extends MongoRepository<Entertainment, String> {
+public interface EntertainmentRepository extends CommonRepository<Entertainment, String> {
 
-    /**
-     * 지역 별 관광지 목록
-     *
-     * @param areaCode
-     * @return
-     */
-    List<Entertainment> findByAreacode(String areaCode);
-
-    /**
-     * 지역 별 청각장애인 시설있는 관광지 목록
-     *
-     * @param areaCode
-     * @param Deaf
-     * @return
-     */
-    List<Entertainment> findByAreacodeAndDeaf(String areaCode, String Deaf);
-
-    /**
-     * 장소 상세조회
-     *
-     * @param contentId
-     * @return
-     */
-    Entertainment findByContentid(String contentId);
 }

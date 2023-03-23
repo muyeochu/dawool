@@ -106,7 +106,7 @@ public class LodgingDto extends CommonInfoDto{
                 .title(lodging.getTitle())
                 .category(Category.valueOf(lodging.getCat3()).getCategory())
                 .deaf(lodging.getDeaf())
-                .visuallyImpaired(lodging.getVisually_impaired())
+                .visuallyImpaired(lodging.getVisual_impaired())
                 .mobilityWeak(lodging.getMobility_weak())
                 .old(lodging.getOld())
                 .infant(lodging.getInfant())

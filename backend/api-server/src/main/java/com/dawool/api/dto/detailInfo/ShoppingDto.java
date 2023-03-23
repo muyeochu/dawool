@@ -71,7 +71,7 @@ public class ShoppingDto extends CommonInfoDto{
                 .title(shopping.getTitle())
                 .category(Category.valueOf(shopping.getCat3()).getCategory())
                 .deaf(shopping.getDeaf())
-                .visuallyImpaired(shopping.getVisually_impaired())
+                .visuallyImpaired(shopping.getVisual_impaired())
                 .mobilityWeak(shopping.getMobility_weak())
                 .old(shopping.getOld())
                 .infant(shopping.getInfant())

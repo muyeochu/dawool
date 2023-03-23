@@ -1,9 +1,9 @@
 package com.dawool.api.service;
 
-import com.dawool.api.dto.ReissueTokenReqDto;
-import com.dawool.api.dto.ReissueTokenResDto;
+import com.dawool.api.dto.user.ReissueTokenReqDto;
+import com.dawool.api.dto.user.ReissueTokenResDto;
+import com.dawool.api.dto.user.TokenResDto;
 import com.dawool.api.dto.SurveyReqDto;
-import com.dawool.api.dto.TokenResDto;
 import com.dawool.api.entity.Survey;
 import com.dawool.api.entity.User;
 import com.dawool.api.jwt.JwtTokenProvider;
@@ -21,8 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Date;
 
@@ -36,6 +36,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Slf4j
 public class UserService {
+
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
     @Value("${kakao.restapi.key}")
@@ -154,7 +155,7 @@ public class UserService {
         Claims claims = jwtTokenProvider.validateToken(refreshToken);
         String accessToken = null;
 
-        if (grantType.equals("refreshToken") &&  claims != null) {
+        if (grantType.equals("refreshToken") && claims != null) {
             User user = userRepository.findById(claims.getSubject()).orElseThrow();
             if (user.getRefreshToken().equals(refreshToken)) {
                 accessToken = jwtTokenProvider.createAccessToken(user.getId(), new Date().getTime());
@@ -172,7 +173,7 @@ public class UserService {
      *
      * @return 로그인된 유저 정보 objectId
      */
-    public static String getLoginUser(){
+    public static String getLoginUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         return authentication.getName();
@@ -183,7 +184,7 @@ public class UserService {
      *
      * @param survey
      */
-    public void survey(SurveyReqDto survey){
+    public void survey(SurveyReqDto survey) {
         String userId = UserService.getLoginUser();
 
         // 무장애정보
@@ -192,19 +193,19 @@ public class UserService {
         String deaf = "0";
         String old = "0";
         String infant = "0";
-        if(survey.getBarrier().contains("2")){
+        if (survey.getBarrier().contains("2")) {
             mobilityWeak = "1";
         }
-        if(survey.getBarrier().contains("3")){
+        if (survey.getBarrier().contains("3")) {
             visualImpaired = "1";
         }
-        if(survey.getBarrier().contains("4")){
+        if (survey.getBarrier().contains("4")) {
             deaf = "1";
         }
-        if(survey.getBarrier().contains("5")){
+        if (survey.getBarrier().contains("5")) {
             old = "1";
         }
-        if(survey.getBarrier().contains("6")){
+        if (survey.getBarrier().contains("6")) {
             infant = "1";
         }
         survey.setBarrier(mobilityWeak + deaf + visualImpaired + old + infant);
@@ -212,5 +213,6 @@ public class UserService {
         User user = userRepository.findById(userId).orElseThrow();
         user.setSurvey(new Survey().of(survey));
         userRepository.save(user);
+
     }
 }
