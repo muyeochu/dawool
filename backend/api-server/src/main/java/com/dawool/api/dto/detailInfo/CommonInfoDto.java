@@ -30,11 +30,13 @@ public class CommonInfoDto {
     private String homepage;
     // 대표 이미지
     private String firstImage;
+    // TODO: DEL
     private String firstImage2;
     // 지역 코드(특별시/광역시/도)
     private int areaCode;
     // 도로명 주소
     private String addr1;
+    // TODO: DEL
     private String addr2;
     // 경도
     private float mapX;
