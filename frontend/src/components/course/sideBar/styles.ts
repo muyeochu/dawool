@@ -11,5 +11,5 @@ export const SideInHeader = styled(SideHeader)`
 `
 export const SideInHeaderText = styled.h4`
   color:${black};
-  
+  margin-left: 5%;
 `
