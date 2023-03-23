@@ -13,29 +13,6 @@ import java.util.List;
  * @author 김정은
  */
 @Repository
-public interface CultureFacilityRepository extends MongoRepository<CultureFacility, String> {
-    /**
-     * 지역 별 관광지 목록
-     *
-     * @param areaCode
-     * @return
-     */
-    List<CultureFacility> findByAreacode(String areaCode);
+public interface CultureFacilityRepository extends CommonRepository<CultureFacility, String> {
 
-    /**
-     * 지역 별 청각장애인 시설있는 관광지 목록
-     *
-     * @param areaCode
-     * @param Deaf
-     * @return
-     */
-    List<CultureFacility> findByAreacodeAndDeaf(String areaCode, String Deaf);
-
-    /**
-     * 장소 상세조회
-     *
-     * @param contentId
-     * @return
-     */
-    CultureFacility findByContentid(String contentId);
 }

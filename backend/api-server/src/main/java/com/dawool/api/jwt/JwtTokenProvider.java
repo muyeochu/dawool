@@ -1,6 +1,6 @@
 package com.dawool.api.jwt;
 
-import com.dawool.api.dto.TokenResDto;
+import com.dawool.api.dto.user.TokenResDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
 

@@ -9,20 +9,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 관광지, 숙박, 식당 공통
- * 장소 목록 DTO
+ * 검색 결과 Dto
  *
- * @author 김정은
  * @author 이준
  */
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PlaceDto {
-
+public class SearchDto {
     // ObjectId
     private String spotId;
     private int contentId;
@@ -39,29 +35,26 @@ public class PlaceDto {
     private int deaf;
     private int old;
     private int infant;
-    private boolean isLiked;
 
     /**
-     * CommonInfo Entity -> PlaceDto
+     * CommonInfo Entity -> SearchDto
      *
      * @param info
      * @return
      */
-    public PlaceDto of(CommonInfo info){
-        return PlaceDto.builder()
+    public SearchDto of(CommonInfo info){
+        return SearchDto.builder()
                 .spotId(info.getId())
                 .contentId(info.getContentid())
                 .contentTypeId(info.getContenttypeid())
                 .title(info.getTitle())
                 .imageUrl(info.getFirstimage())
                 .category(Category.valueOf(info.getCat3()).getCategory())
-                .mobilityWeak(info.getMobility_weak())
-                .visuallyImpaired(info.getVisual_impaired())
                 .deaf(info.getDeaf())
+                .visuallyImpaired(info.getVisual_impaired())
+                .mobilityWeak(info.getMobility_weak())
                 .old(info.getOld())
                 .infant(info.getInfant())
-                .isLiked(false)
                 .build();
     }
-
 }
