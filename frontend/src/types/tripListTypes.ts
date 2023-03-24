@@ -1,10 +1,17 @@
 import React from "react";
 
 export interface TripListTitleType {
-  titleType: "restaurant" | "accommodation" | "etc";
+  titleType:
+    | "restaurant"
+    | "accommodation"
+    | "tourSpot"
+    | "culture"
+    | "leports"
+    | "shopping"
+    | "etc";
 }
 
-// 공통 항목
+// 목록 데이터 타입
 export interface ListType {
   spotId: string;
   contentId: number;
@@ -19,7 +26,6 @@ export interface ListType {
   infant: number;
   liked: boolean;
 }
-
 
 // 즐길거리 목록 혹은 식당(or 숙박) 목록
 // export type TripDataType = {

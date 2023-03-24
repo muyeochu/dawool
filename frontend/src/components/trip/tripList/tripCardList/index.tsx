@@ -3,10 +3,14 @@ import { useRecoilValue, selector } from "recoil";
 import {
   RestaurantListSelector,
   AccommodationListSelector,
+  TourSpotListSelector,
+  CultureListSelector,
+  LeportsListSelector,
+  ShoppingListSelector,
 } from "../../../../recoil/TripListSelector";
 import TripCardItem from "../tripCardItem";
 import { TripCardListContainer } from "./styles";
-import { TripListTitleType, ListType} from "../../../../types/tripListTypes";
+import { TripListTitleType, ListType } from "../../../../types/tripListTypes";
 
 const emptyListSelector = selector<ListType[]>({
   key: "emptyListSelector",
@@ -14,24 +18,22 @@ const emptyListSelector = selector<ListType[]>({
 });
 
 function TripCardList({ titleType }: TripListTitleType) {
-  // Recoil에서 식당 or 숙박 상태 가져옴
+
   let etcTripList = useRecoilValue<ListType[]>(
     titleType === "restaurant"
       ? RestaurantListSelector
       : titleType === "accommodation"
       ? AccommodationListSelector
+      : titleType === "tourSpot"
+      ? TourSpotListSelector
+      : titleType === "culture"
+      ? CultureListSelector
+      : titleType === "leports"
+      ? LeportsListSelector
+      : titleType === "shopping"
+      ? ShoppingListSelector
       : emptyListSelector
   );
-
-  // console.log(etcTripList)
-
-  // if (!Array.isArray(etcTripList)) {
-  //   console.error("etcTripList is not an array");
-  //   etcTripList = [etcTripList];
-  // }
-
-  // console.log(etcTripList)
-  
 
   return (
     <TripCardListContainer>
