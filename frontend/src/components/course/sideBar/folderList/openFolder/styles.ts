@@ -42,7 +42,6 @@ display: flex;
     border-bottom:1px solid ${grey[300]};
 `
 export const DeleteIc = styled(DeleteFolder)`
-    z-index: 100;
     position: absolute;
   text-align: center;
   overflow: hidden;
