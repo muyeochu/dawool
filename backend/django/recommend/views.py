@@ -27,7 +27,10 @@ def spot_list(request, spot_id):
             # JWT 디코딩
             user_id = decode_jwt(token)
 
-            client = MongoClient('mongodb+srv://S08P22D105:Cw7h8LqfQd@ssafy.ngivl.mongodb.net/S08P22D105?')
+            DATABASE_URL = settings.DATABASES['default']['CLIENT']['host']
+            print(DATABASE_URL)
+
+            client = MongoClient(DATABASE_URL)
 
             db = client.S08P22D105 # 데이터베이스 
             collection = db.user # 컬렉션 
@@ -48,7 +51,7 @@ def spot_list(request, spot_id):
             barrier_type = user['survey']['barrier']
 
             # 타입별 변수 할당 
-            deaf,visual_impaired,mobility_weak, old, infant = barrier_type
+            is_deaf, is_visual, is_mobility , is_old, is_infant = barrier_type
 
 
             # 인기 관광지 여부 
@@ -99,10 +102,13 @@ def spot_list(request, spot_id):
             type_data = result_df[result_df['contenttypeid'] == int(spot_id)] 
 
             # 선호 관광지  > 여러개로 바꾸기 
-            target_data = data[data['contentid'] == int(visitLocation[0])] 
+            target_data =  pd.DataFrame()
+            for visited in visitLocation:
+                target_one = data[data['contentid'] == int(visited)]
+                target_data = pd.concat([target_data, target_one], ignore_index=True)
             
             # 무장애 여부 필터링 
-            Barrier_data = Barrier_filter(int(deaf),int(visual_impaired), int(mobility_weak), int(old), int(infant), type_data, target_data)
+            Barrier_data = Barrier_filter(int(is_deaf),int(is_visual), int(is_mobility), int(is_old), int(is_infant), type_data, target_data)
 
             # 인기 관광지 여부 필터링
             recommend_tour = popular_filter(is_popular, Barrier_data, target_data)
@@ -113,7 +119,7 @@ def spot_list(request, spot_id):
                 target_data = result_df[result_df['title'] == i[0]]
                 result_data = pd.concat([result_data,target_data])
 
-            # firstimage 추가해야함!,is liked 여부도! 
+            # 나중에 컬럼 정리 
             selected_column = result_data[['contentid','contenttypeid', 'title','searchcount','deaf','visual_impaired','mobility_weak', 'old', 'infant','firstimage']]
             dict_data = selected_column.to_dict(orient='records')
 
@@ -136,7 +142,7 @@ def decode_jwt(token):
     return decoded_payload
 
 
-# 텍스트 유사도 추천 
+# 텍스트 유사도 추천 알고리즘 
 def tfidf_matrix(keyword_title,review_data):
   tfidf = TfidfVectorizer(max_features=500, stop_words='english')
   tfidf_matrix = tfidf.fit_transform(review_data['keyword_result'])
@@ -161,36 +167,53 @@ def tfidf_matrix(keyword_title,review_data):
 
 # 인기관광지 여부 
 def popular_filter(count, data, target_data):  
+    # count : 밀집도 선호도 1이면 인기관광지 
     if count == 1:
-        print("인기관광지임!!====================")
-        popular_data = data[data['searchcount'] > 0] #538개 
-        concat_data = pd.concat(objs=[popular_data, target_data], axis=0, ignore_index=True)
-        popular_index_reset = concat_data.reset_index(drop=True)
+        print("인기관광지 선택!!====================")
+        popular_data = data[data['searchcount'] > 0] 
+        # 인기관광지 검색건수가 4 보다 작다면 
+        if len(popular_data)<4:
+            print("인기 검색 건수 작아서 비인기 관광지로 변경!!====================")
+            no_popular_index_reset = popular_concat(data, target_data)
+            result_list = popular_recommend(no_popular_index_reset, target_data)
+            pass
+        # 인기관광지 검색건수가 4 보다 클때 
+        else:
+            popular_index_reset = popular_concat(popular_data, target_data)
+            result_list = popular_recommend(popular_index_reset, target_data)
 
-        recommend_result = []
-        for i in range(len(target_data)):
-            title = target_data['title'].values[i]
-            recommend_tour = tfidf_matrix(title, popular_index_reset)
-            recommend_result.append(recommend_tour)
-        
-        recommend_list = sum(recommend_result, [])
-        print(recommend_list)
-        result_list = sorted(recommend_list, key = lambda x: x[1], reverse=True)[0:4] # 유사도가 높은 순서대로 정렬 
+    # 비 인기관광지
     else:
-        print("인기관광지 아님!!==========================")
-        concat_data = pd.concat(objs=[data, target_data], axis=0, ignore_index=True)
-        no_popular_index_reset = concat_data.reset_index(drop=True)
-        recommend_result = []
-        for i in range(len(target_data)):
-            title = target_data['title'].values[i]
-            recommend_tour = tfidf_matrix(title, no_popular_index_reset)
-            recommend_result.append(recommend_tour)
-        
-        recommend_list = sum(recommend_result, [])
-        print(recommend_list)
-        result_list = sorted(recommend_list, key = lambda x: x[1], reverse=True)[0:4] # 유사도가 높은 순서대로 정렬 
+        print("비인기관광지 선택!!==========================")
+        no_popular_index_reset = popular_concat(data, target_data)
+        result_list = popular_recommend(no_popular_index_reset, target_data)
 
     return result_list
+
+# 인기 관광지 여부에 따라 데이터 합치기
+def popular_concat(data, target_data):
+    concat_data = pd.concat(objs=[data, target_data], axis=0, ignore_index=True)
+    is_popular = concat_data.reset_index(drop=True)
+    
+    return is_popular
+
+
+# 인기관광지 여부에 따라 추천 
+def popular_recommend(popular_data, target_data):
+    recommend_result = []
+    for i in range(len(target_data)):
+        title = target_data['title'].values[i]
+        recommend_tour = tfidf_matrix(title, popular_data)
+        recommend_result.append(recommend_tour)
+    
+    recommend_list = sum(recommend_result, [])
+    print(recommend_list)
+    # 유사도가 높은 순서대로 정렬 
+    result_list = sorted(recommend_list, key = lambda x: x[1], reverse=True)[0:4]
+
+    return result_list
+
+
 
 
 # 무장애 필터 
