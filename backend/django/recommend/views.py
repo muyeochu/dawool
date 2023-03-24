@@ -13,7 +13,7 @@ from bson import ObjectId
 from pymongo import MongoClient
 import base64
 
-# 12- 관광지, 14 -문화생활, 28-레포츠, 35-쇼핑
+# 12- 관광지, 14 -문화생활, 28-레포츠, 38-쇼핑
 @api_view(['GET'])
 def spot_list(request, spot_id):
     logging.basicConfig(level=logging.INFO)
