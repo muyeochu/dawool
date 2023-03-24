@@ -14,6 +14,7 @@ import {
 
 import AccommodationDetailInfo from "./AccommodationDetailInfo";
 import BarrierTag from "./BarrierTag";
+import Map from "./Map";
 import DetailBtn from "../common/DetailBtn";
 
 import logo from "../../assets/icon/logoIc.svg";
@@ -85,6 +86,7 @@ const DetailComponent = ({
       </MainInfoContainer>
 
       <BarrierTag barrierInfo={myData.info.barrier} />
+      {/* <Map MapInfo={myData.info.mapX, myData.info.mapY}/> */}
     </>
   );
 };
