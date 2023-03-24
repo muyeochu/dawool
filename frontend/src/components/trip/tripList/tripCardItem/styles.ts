@@ -45,12 +45,18 @@ export const CardText = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  display: flex;
-  align-items: center;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: ${black};
   cursor: pointer;
 `;
 
 export const LikedIcStyle = styled(likedIc)`
+  /* 크기 바뀌는 문제 해결하기! */
+  display: block;
+  width: 23px;
+  height: 23px;
   cursor: pointer;
 `;
