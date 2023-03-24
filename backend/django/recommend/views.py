@@ -9,10 +9,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 import logging
 import jwt
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from bson import ObjectId
 from pymongo import MongoClient
-
+import base64
 
 # 12- 관광지, 14 -문화생활, 28-레포츠, 35-쇼핑
 @api_view(['GET'])
@@ -23,44 +22,43 @@ def spot_list(request, spot_id):
     if(request.method == 'GET'):
         try:
             # JWT 토큰 추출
-            print(request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1])
-
             token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
+
             # JWT 디코딩
             user_id = decode_jwt(token)
-
-            print(user_id)
-
-            # print(user_id)
 
             client = MongoClient('mongodb+srv://S08P22D105:Cw7h8LqfQd@ssafy.ngivl.mongodb.net/S08P22D105?')
 
             db = client.S08P22D105 # 데이터베이스 이름을 알맞게 입력해주세요
             collection = db.user # 컬렉션 이름을 알맞게 입력해주세요
-
-            user_id = '640ea69189a6515aecd44df8'
-
-            result = collection.find({'_id': ObjectId(user_id)})       
-            # 사용자 정보 
-            user = list(result)[0]
+            tour_collection = db.recommend_tour
             
-            # 선호 시간
-            preferredTime = user['survey']['preferredTime']
+            object_id = user_id['sub']
+            print(object_id)
+
+            user_result = collection.find({'_id': ObjectId(object_id)})       
+            # 사용자 정보 
+            user = list(user_result)[0]
+            
+            # 선호 시간 > 1시간 50000
+            userTime = user['survey']['preferredTime']
+
+            preferredTime = int(userTime) * 50000
             
             # 무장애 타입 
             barrier_type = user['survey']['barrier']
+
             # 타입별 변수 할당 
             deaf,visual_impaired,mobility_weak, old, infant = barrier_type
 
-            print(deaf,visual_impaired,mobility_weak, old, infant)
 
             # 인기 관광지 여부 
             is_popular = int(user['survey']['densePopulation']) -1
 
-            # 출발지 배열
+            # 출발지 배열 > 출발지 배열 
             departure = user['survey']['departure']
 
-            # 선호 관광지 배열 
+            # 갔던곳, 선호 관광지 배열 > 여러 개 
             visitLocation = user['survey']['visitLocation']
             
 
@@ -68,14 +66,44 @@ def spot_list(request, spot_id):
 
             spots = RecommendTour.objects.all()
             se = RecommendTourSerializer(spots, many=True)
-            data = pd.DataFrame(se.data)    
+            data = pd.DataFrame(se.data) 
 
+
+            # 선호시간 거리 계산으로 목록 뽑기 
+            query = {
+                "location": {
+                    "$near": {
+                    "$geometry": {
+                        "type": "Point",
+                        "coordinates": departure
+                    },
+                    "$maxDistance": preferredTime 
+                    }
+                }
+            }
+
+            result = tour_collection.find(query)
+
+            
+            find_data = []
+            for document in result:
+                find_data.append(document)
+            
+
+            result_df = pd.DataFrame(find_data)
+            print(result_df)
+
+               
+            # 타입 int로 바꿔주기 
             columns_name = ['contentid','contenttypeid','deaf','visual_impaired','mobility_weak', 'old', 'infant','searchcount']
             for name in columns_name:
                 data[name] = data[name].apply(lambda x: int(float(x)))
 
-            type_data = data[data['contenttypeid'] == int(spot_id)] 
+            
+            # 관광지type >url로 넘어오는 spot_id
+            type_data = result_df[result_df['contenttypeid'] == int(spot_id)] 
 
+            # 선호 관광지  > 여러개로 바꾸기 
             target_data = data[data['contentid'] == int(visitLocation[0])] 
             print(target_data)
             
@@ -88,7 +116,7 @@ def spot_list(request, spot_id):
             # 추천 결과 
             result_data = pd.DataFrame()
             for i in recommend_tour:
-                target_data = data[data['title'] == i[0]]
+                target_data = result_df[result_df['title'] == i[0]]
                 result_data = pd.concat([result_data,target_data])
             print(result_data)
 
@@ -103,22 +131,17 @@ def spot_list(request, spot_id):
     
     return JsonResponse({'message': 'spot_list error'}, status=status.HTTP_404_NOT_FOUND)
 
-
+# 토큰 디코딩 
 def decode_jwt(token):
     # JWT decode에 사용할 secret key
     SECRET_KEY = settings.JWT_SECRET_KEY
     # JWT decode
     print(SECRET_KEY)
-    decoded_payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
-
-    print(decoded_payload)
-    # Payload에서 유저 정보 추출
-    # object_id = decoded_payload['sub']
-
+    encoded_secret_key = base64.b64decode(SECRET_KEY + '==')
+    
+    # payload
+    decoded_payload = jwt.decode(token, encoded_secret_key,algorithms=['HS256'])
     return decoded_payload
-
-
-
 
 
 # 텍스트 유사도 
@@ -151,14 +174,31 @@ def popular_filter(count, data, target_data):
         popular_data = data[data['searchcount'] > 0] #538개 
         concat_data = pd.concat(objs=[popular_data, target_data], axis=0, ignore_index=True)
         popular_index_reset = concat_data.reset_index(drop=True)
-        recommend_tour = tfidf_matrix(target_data['title'].values[0], popular_index_reset)
+
+        recommend_result = []
+        for i in range(len(target_data)):
+            title = target_data['title'].values[i]
+            recommend_tour = tfidf_matrix(title, popular_index_reset)
+            recommend_result.append(recommend_tour)
+        
+        recommend_list = sum(recommend_result, [])
+        print(recommend_list)
+        result_list = sorted(recommend_list, key = lambda x: x[1], reverse=True)[0:4] # 유사도가 높은 순서대로 정렬 
     else:
         print("인기관광지 아님!!==========================")
         concat_data = pd.concat(objs=[data, target_data], axis=0, ignore_index=True)
         no_popular_index_reset = concat_data.reset_index(drop=True)
-        recommend_tour = tfidf_matrix(target_data['title'].values[0], no_popular_index_reset)
+        recommend_result = []
+        for i in range(len(target_data)):
+            title = target_data['title'].values[i]
+            recommend_tour = tfidf_matrix(title, no_popular_index_reset)
+            recommend_result.append(recommend_tour)
+        
+        recommend_list = sum(recommend_result, [])
+        print(recommend_list)
+        result_list = sorted(recommend_list, key = lambda x: x[1], reverse=True)[0:4] # 유사도가 높은 순서대로 정렬 
 
-    return recommend_tour
+    return result_list
 
 
 # 무장애 필터 
