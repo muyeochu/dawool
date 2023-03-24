@@ -1,5 +1,4 @@
 import {atom, selector} from 'recoil';
-import { EtcListType } from '../types/tripListTypes';
 
 // 정렬할 떄 쓸 부분
 export const sortByState = atom({

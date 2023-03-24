@@ -7,20 +7,22 @@ import {
   CardText,
   LikedIcStyle,
 } from "./styles";
-import { EtcListType } from "../../../../types/tripListTypes";
+import { ListType } from "../../../../types/tripListTypes";
+import exampleImg from "../../../../assets/images/exampleImg.svg"
 
-// 임시 데이터
-// import restaurantData from "../sample.json";
+interface TripCardItemProps {
+  contents: ListType;
+}
 
-function TripCardItem({content}: {content: EtcListType}) {
+function TripCardItem({contents}: TripCardItemProps) {
 
   return (
     <CardContainer>
       <ImageContainer>
-        <CardImage src={content.imageUrl!} />
+        <CardImage src={contents.imageUrl || exampleImg} />
       </ImageContainer>
       <CardBottomContainer>
-        <CardText>{content.title}</CardText>
+        <CardText>{contents.title}</CardText>
         <LikedIcStyle />
       </CardBottomContainer>
     </CardContainer>
