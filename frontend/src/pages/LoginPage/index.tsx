@@ -2,7 +2,7 @@ import KakaoImg from "../../assets/images/kakao_login_large_wide.png"
 import { BackgroundContainer, LoginText, KakaoButton } from "./styles";
 
 const LoginPage = () => {
-  const REST_API_KEY = 'f9d7aca66b9d117f55a3c47a1f2f6eef';
+  const REST_API_KEY = process.env.REACT_APP_KAKAOMAP_API_KEY;
   const REDIRECT_URI = `http://localhost:3000/callback`;
   const KAKAO_AUTH_URL =`https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
   

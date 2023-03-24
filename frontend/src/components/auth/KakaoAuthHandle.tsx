@@ -16,9 +16,10 @@ const KakaoAuthHandle = ()=>{
 
   useEffect(()=>{
     let code = new URL(window.location.href).searchParams.get('code')
+    const baseURL = process.env.REACT_APP_API_BASE_URL;
     const kakaoLogin = async()=>{
       // await axios.get(`http://localhost:8888/api/user/kakao/callback?code=${code}`)
-      await axios.get(`http://j8d105.p.ssafy.io:8888/api/user/kakao/callback?code=${code}`)
+      await axios.get(baseURL+`/api/user/kakao/callback?code=${code}`)
       .then((res)=>{
         console.log(res);
         localStorage.setItem("token",res.data.accessToken);
