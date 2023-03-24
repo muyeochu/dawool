@@ -121,6 +121,7 @@ public class LodgingDto extends CommonInfoDto{
                 .checkInTime(lodging.getCheckintime())
                 .checkOutTime(lodging.getCheckouttime())
                 .isCooking(lodging.getChkcooking())
+                .foodPlace(lodging.getFoodplace())
                 .commonParking(lodging.getParkinglodging())
                 .infoCenter(lodging.getInfocenterlodging())
                 .fitness(lodging.getFitness())
