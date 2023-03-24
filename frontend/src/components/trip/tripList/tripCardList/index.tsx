@@ -37,7 +37,7 @@ function TripCardList({ titleType }: TripListTitleType) {
 
   return (
     <TripCardListContainer>
-      {etcTripList.map((item) => (
+      {etcTripList && etcTripList.map((item) => (
         <TripCardItem key={item.contentId} contents={item} />
       ))}
     </TripCardListContainer>
