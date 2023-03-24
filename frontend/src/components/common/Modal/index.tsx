@@ -47,6 +47,18 @@ const Modal = () => {
         </ModalDimmer>
       )}
 
+      {modalDataState.isOpen && modalDataState.type === "barrier" && (
+        <ModalDimmer>
+          <ModalContainer>
+            <ModalTitle>{modalDataState.title}</ModalTitle>
+            <ModalContents>{modalDataState.content}</ModalContents>
+            <ModalFooter>
+              <ModalBtn onClick={closeModal}>닫기</ModalBtn>
+            </ModalFooter>
+          </ModalContainer>
+        </ModalDimmer>
+      )}
+
       {modalDataState.isOpen && modalDataState.type === "survey" && (
         <ModalDimmer>
           <ModalLargeContainer>

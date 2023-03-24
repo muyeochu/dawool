@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { ReactComponent as VolumeIc } from "../../assets/icon/volumeIc.svg";
 import { ReactComponent as FolderIc } from "../../assets/icon/folderIc.svg";
@@ -24,14 +24,19 @@ export const HeartIcStyle = styled(HeartIc)`
   cursor: pointer;
 `;
 
-export const TitleContainer = styled.div`
+export const DetailContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const TitleContainer = styled.div<{ title: string }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   p {
+    font-size: ${(props) => (props.title.length >= 10 ? "32px" : "46px")};
     font-weight: 700;
-    font-size: 46px;
     line-height: 62px;
   }
 `;
@@ -57,14 +62,23 @@ export const MainInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 60px;
+  width: 100%;
+  gap: 22px;
 `;
 
 export const MainImgContainer = styled.div`
-  width: 270px;
+  width: 32%;
   height: 380px;
-  background-color: pink;
+
   border-radius: 12px;
   box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.25);
+`;
+
+export const MaingImgStyle = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
 `;
 
 export const MainBtnInfoContainer = styled.div`
@@ -80,15 +94,20 @@ export const MainBtnContainer = styled.div`
 `;
 
 export const InfoBox = styled.div`
-  width: 840px;
-  height: 315px;
+  width: 100%;
+  height: auto;
   max-height: 315px;
   overflow: auto;
   background-color: white;
   border-radius: 12px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
 
-  padding: 10px 20px 10px 20px;
+  padding: 20px 30px 20px 30px;
+
+  &.barrier {
+    min-height: 50px;
+    padding: 30px;
+  }
 
   ul {
     padding-left: 0;
@@ -98,32 +117,59 @@ export const InfoBox = styled.div`
   li {
     list-style-type: none;
     margin-bottom: 4px;
-    font-weight: 500;
-    font-size: 18px;
+    font-weight: 600;
+    font-size: 16px;
     line-height: 30px;
   }
 
-  /* 스크롤바 전체 스타일 지정 */
   ::-webkit-scrollbar {
-    width: 12px; /* 스크롤바 너비 */
+    width: 12px;
   }
 
-  /* 스크롤바 트랙 스타일 지정 */
   ::-webkit-scrollbar-track {
-    background-color: #f5f5f5; /* 스크롤바 트랙 배경색 */
-    border-radius: 10px; /* 스크롤바 트랙 테두리 반지름 */
+    background-color: #f5f5f5;
+    border-radius: 10px;
   }
 
-  /* 스크롤바 썸네일(바) 스타일 지정 */
   ::-webkit-scrollbar-thumb {
-    background-color: #c1c1c1; /* 스크롤바 썸네일 배경색 */
-    border-radius: 10px; /* 스크롤바 썸네일 테두리 반지름 */
-    border: 2px solid #f5f5f5; /* 스크롤바 썸네일 테두리 */
+    background-color: #c1c1c1;
+    border-radius: 10px;
+    border: 2px solid #f5f5f5;
   }
 
   /* 스크롤바 썸네일 마우스 오버 시 스타일 지정 */
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #a8a8a8; /* 스크롤바 썸네일 배경색 */
-    border-radius: 10px; /* 스크롤바 썸네일 테두리 반지름 */
+    background-color: #a8a8a8;
+    border-radius: 10px;
   }
+`;
+
+export const InfoFontStyle = styled.span`
+  color: ${grey[600]};
+  margin-left: 20px;
+`;
+
+export const BarrierContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+
+  p {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 30px;
+
+    &.exp {
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: ${grey[400]};
+    }
+  }
+`;
+
+export const BarrierBtnContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 `;

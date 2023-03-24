@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Suspense } from "react";
 import KakaoAuthHandle from "./components/auth/KakaoAuthHandle";
 import {
   AccommodationPage,
@@ -21,7 +22,6 @@ import {
   ShoppingPage,
   ModalTest,
   ButtonTest,
-  DetailTest,
 } from "./pages/index";
 import Header from "./components/common/Header";
 import ScrollToTop from "./components/utils/ScrollToTop";
@@ -47,7 +47,11 @@ function App() {
 
               <Route
                 path="/detail/accommodation/:id"
-                element={<AccommodationDetailPage />}
+                element={
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <AccommodationDetailPage />
+                  </Suspense>
+                }
               />
               <Route
                 path="/detail/culture/:id"
@@ -71,7 +75,14 @@ function App() {
               />
 
               <Route path="/interest" element={<InterestPage />} />
-              <Route path="/accommodation" element={<AccommodationPage />} />
+              <Route
+                path="/accommodation"
+                element={
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <AccommodationPage />
+                  </Suspense>
+                }
+              />
               <Route path="/login" element={<LoginPage />} />
               <Route
                 path="/callback"
@@ -89,7 +100,6 @@ function App() {
               {/* 테스트 페이지 */}
               <Route path="/modaltest" element={<ModalTest />} />
               <Route path="/btntest" element={<ButtonTest />} />
-              <Route path="/detailtest" element={<DetailTest />} />
             </Routes>
           </GridContainer>
         </BoxMainContainer>
