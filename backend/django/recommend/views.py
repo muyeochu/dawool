@@ -126,7 +126,7 @@ def spot_list(request, spot_id):
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         except Exception as e:
-            logging.error('error')
+            logging.error(str(e), exc_info=True)
     
     return JsonResponse({'message': 'spot_list error'}, status=status.HTTP_404_NOT_FOUND)
 
