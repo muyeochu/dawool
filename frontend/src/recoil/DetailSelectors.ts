@@ -5,7 +5,7 @@ import { getDetailApi } from "./Api";
 import { accommodationTypes } from "../types/accommodationTypes";
 
 interface ParamType {
-  contentId: number;
+  contentId: any;
   location: number;
   [key: string]: SerializableParam;
 }

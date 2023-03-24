@@ -1,7 +1,7 @@
 import { customAxios } from "./customAxios";
 
 export const getDetailApi = async (contentId: number, location: number) =>
-  await customAxios.get(`/api/location/${location}/${contentId}`, {
+  await customAxios.get(`location/${location}/${contentId}`, {
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
     },

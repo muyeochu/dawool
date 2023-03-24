@@ -94,7 +94,7 @@ export const MainBtnContainer = styled.div`
 `;
 
 export const InfoBox = styled.div`
-  width: 100%;
+  width: 850px;
   height: auto;
   max-height: 315px;
   overflow: auto;
@@ -106,6 +106,7 @@ export const InfoBox = styled.div`
 
   &.barrier {
     min-height: 50px;
+    width: 100%;
     padding: 30px;
   }
 
