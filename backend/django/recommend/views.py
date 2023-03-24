@@ -116,7 +116,7 @@ def spot_list(request, spot_id):
                 target_data = type_data[type_data['title'] == i[0]]
                 result_data = pd.concat([result_data,target_data])
 
-            # 나중에 컬럼 정리 
+            # 필요한 컬럼만 추출
             selected_column = result_data[['contentid','contenttypeid', 'title','firstimage']]
             selected_column = selected_column.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl'})
             selected_column["liked"] = False
