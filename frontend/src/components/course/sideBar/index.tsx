@@ -10,8 +10,7 @@ const MyCourseSideBar=()=>{
     {folderState.isOpen?
     <>
     {/* 폴더 클릭 시 파일 안으로 이동 */}
-        {/* <FolderInside>
-        </FolderInside>  */}
+        <FolderInside/>
     </>
     :<>
         <SideInHeader>
