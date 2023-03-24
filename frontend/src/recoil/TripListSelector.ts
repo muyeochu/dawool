@@ -15,7 +15,7 @@ const getTripListData = (
       `location/list/${contentTypeId}?area=${area}&barrier=${barrier}&page=${page}&size=${size}`
     )
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       return response.data.contents;
     })
     .catch((error) => {
@@ -28,7 +28,7 @@ export const RestaurantListSelector = selector<ListType[]>({
     // console.log("들어옴!!");
     try {
       const restaurantList = await getTripListData(39, 1, 10000, 0, 10);
-      console.log("식당 list!", restaurantList);
+      // console.log("식당 list!", restaurantList);
 
       return restaurantList;
     } catch (err) {
