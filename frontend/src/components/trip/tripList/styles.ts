@@ -15,10 +15,19 @@ export const TripListTitle = styled.h1`
   color: ${black};
 `;
 
+export const ButtonGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 27px;
+`;
+
 export const ButtonList = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 16px;
-  margin-top: 27px;
 `;
+
+

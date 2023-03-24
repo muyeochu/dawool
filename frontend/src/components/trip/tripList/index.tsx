@@ -1,8 +1,15 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import Button from "../../common/Button";
-import { TripListContainer, TripListTitle, ButtonList } from "./styles";
+import {
+  TripListContainer,
+  TripListTitle,
+  ButtonGroup,
+  ButtonList,
+} from "./styles";
 import TripCardList from "./tripCardList";
 import { TripListTitleType } from "../../../types/tripListTypes";
+import Dropdown from "../../common/Dropdown";
 
 function TripList({ titleType }: TripListTitleType) {
   const [isClicked, setIsClicked] = useState(false);
@@ -29,24 +36,28 @@ function TripList({ titleType }: TripListTitleType) {
   return (
     <TripListContainer>
       <TripListTitle>서울 {typeText} 목록</TripListTitle>
-
-      <ButtonList>
-        <Button onClick={handleClick} icType={"bathchair"}>
-          지체장애
-        </Button>
-        <Button onClick={handleClick} icType={"eye"}>
-          시각장애
-        </Button>
-        <Button onClick={handleClick} icType={"ear"}>
-          청각장애
-        </Button>
-        <Button onClick={handleClick} icType={"oldman"}>
-          노인
-        </Button>
-        <Button onClick={handleClick} icType={"toddler"}>
-          영유아
-        </Button>
-      </ButtonList>
+      <ButtonGroup>
+        <ButtonList>
+          <Button onClick={handleClick} icType={"bathchair"}>
+            지체장애
+          </Button>
+          <Button onClick={handleClick} icType={"eye"}>
+            시각장애
+          </Button>
+          <Button onClick={handleClick} icType={"ear"}>
+            청각장애
+          </Button>
+          <Button onClick={handleClick} icType={"oldman"}>
+            노인
+          </Button>
+          <Button onClick={handleClick} icType={"toddler"}>
+            영유아
+          </Button>
+        </ButtonList>
+        {/* <Dropdown data={[]} onClick={handleClick}>
+          <span>지역 선택</span>
+        </Dropdown> */}
+      </ButtonGroup>
 
       <TripCardList titleType={titleType} />
     </TripListContainer>

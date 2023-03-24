@@ -8,7 +8,7 @@ import {
   DropdownButton,
 } from "./styles";
 import { cityState, districtState } from "../../../../../recoil/RegionState";
-import { City, District } from "../../../../../types/cityTypes";
+import { City, District } from "../../../../../types/regionTypes";
 
 import { ReactComponent as DropdownkIc } from "../../../../../assets/icon/dropdownIc.svg";
 
@@ -56,29 +56,29 @@ const RegionDropdown = () => {
 
   return (
     <Container>
-        <DropdownContainer>
-          <Dropdown value={selectedCity?.id} onChange={handleCityChange}>
-            <option value="">광역시도</option>
-            {cities.map((city) => (
-              <option key={city.id} value={city.id}>
-                {city.name}
+      <DropdownContainer>
+        <Dropdown value={selectedCity?.id} onChange={handleCityChange}>
+          <option value="">광역시도</option>
+          {cities.map((city) => (
+            <option key={city.id} value={city.id}>
+              {city.name}
+            </option>
+          ))}
+        </Dropdown>
+        {selectedCity && (
+          <Dropdown
+            value={selectedDistrict?.id}
+            onChange={handleDistrictChange}
+          >
+            <option value="">시군구</option>
+            {filteredDistricts.map((district) => (
+              <option key={district.id} value={district.id}>
+                {district.name}
               </option>
             ))}
           </Dropdown>
-          {selectedCity && (
-            <Dropdown
-              value={selectedDistrict?.id}
-              onChange={handleDistrictChange}
-            >
-              <option value="">시군구</option>
-              {filteredDistricts.map((district) => (
-                <option key={district.id} value={district.id}>
-                  {district.name}
-                </option>
-              ))}
-            </Dropdown>
-          )}
-        </DropdownContainer>
+        )}
+      </DropdownContainer>
       {!selectedDistrict && <AlertMessage>시군구를 선택해주세요.</AlertMessage>}
     </Container>
   );

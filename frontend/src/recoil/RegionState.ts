@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { City, District } from "../types/cityTypes";
+import { City, District } from "../types/regionTypes";
 
 // 광역시도
 const cities: City[] = [
