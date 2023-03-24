@@ -1,4 +1,5 @@
 import DetailComponent from "../../components/Detail";
+import { useLocation } from "react-router-dom";
 
 import { useRecoilValue } from "recoil";
 import { getDataSelector } from "../../recoil/DetailSelectors";
@@ -8,10 +9,17 @@ import { useParams } from "react-router-dom";
 
 const AccommodationDetailPage = () => {
   // contentid
-  const { id } = useParams();
+  // const { contentId }: any = useParams();
+  // console.log("id는?", contentId);
+
+  const location = useLocation();
+  const pathArray = location.pathname.split("/");
+
+  // "accommodation/2528117"에서 "2528117"만 가져옴
+  const contentId = pathArray[pathArray.length - 1];
 
   const myData = useRecoilValue(
-    getDataSelector({ contentId: 143033, location: 32 })
+    getDataSelector({ contentId: contentId, location: 32 })
   );
 
   console.log("myData 원본은?", myData);
@@ -20,7 +28,7 @@ const AccommodationDetailPage = () => {
     <MainGridItems>
       <RowGridContainer>
         <RowGridItems>
-          <DetailComponent myData={myData} location={32} />
+          {myData && <DetailComponent myData={myData} location={32} />}
         </RowGridItems>
       </RowGridContainer>
     </MainGridItems>
