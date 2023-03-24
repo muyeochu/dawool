@@ -17,6 +17,7 @@ class RecommendTour(models.Model):
     mapy=models.TextField()
     deaf=models.TextField()
     old= models.TextField()
+    firstimage = models.TextField()
     visual_impaired=models.TextField()
     mobility_weak = models.TextField()
     infant=models.TextField()

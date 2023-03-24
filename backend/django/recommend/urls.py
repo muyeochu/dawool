@@ -1,14 +1,9 @@
-from rest_framework import routers
-from django.urls import path
+from django.conf.urls import url 
 from . import views
 
-router = routers.SimpleRouter()
-router.register('tour_list', views.RecommendTourList)
 
 app_name = 'recommend'
 urlpatterns = [
-
+    url(r'^spot/(?P<spot_id>\d+)', views.spot_list),
 ]
-
-urlpatterns += router.urls
 
