@@ -16,19 +16,17 @@ import base64
 # 12- 관광지, 14 -문화생활, 28-레포츠, 35-쇼핑
 @api_view(['GET'])
 def spot_list(request, spot_id):
-    logger = logging.getLogger(__name__)
-    logger.info('info message')
+    logging.basicConfig(level=logging.INFO)
+    logging.info('관광지 추천 시작')
     # 나중에는 get으로 전부 바꿔야함 
     if(request.method == 'GET'):
         try:
             # JWT 토큰 추출
             token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
-
             # JWT 디코딩
             user_id = decode_jwt(token)
 
             DATABASE_URL = settings.DATABASES['default']['CLIENT']['host']
-            print(DATABASE_URL)
 
             client = MongoClient(DATABASE_URL)
 
@@ -87,8 +85,7 @@ def spot_list(request, spot_id):
             find_data = []
             for document in result:
                 find_data.append(document)
-            
-
+        
             result_df = pd.DataFrame(find_data)
 
                
@@ -105,10 +102,10 @@ def spot_list(request, spot_id):
             target_data =  pd.DataFrame()
             for visited in visitLocation:
                 target_one = data[data['contentid'] == int(visited)]
-                target_data = pd.concat([target_data, target_one], ignore_index=True)
+                target_data = pd.concat([target_data, target_one])
             
             # 무장애 여부 필터링 
-            Barrier_data = Barrier_filter(int(is_deaf),int(is_visual), int(is_mobility), int(is_old), int(is_infant), type_data, target_data)
+            Barrier_data = Barrier_filter(int(is_deaf),int(is_visual), int(is_mobility), int(is_old), int(is_infant), type_data)
 
             # 인기 관광지 여부 필터링
             recommend_tour = popular_filter(is_popular, Barrier_data, target_data)
@@ -116,22 +113,27 @@ def spot_list(request, spot_id):
             # 추천 결과 
             result_data = pd.DataFrame()
             for i in recommend_tour:
-                target_data = result_df[result_df['title'] == i[0]]
+                target_data = type_data[type_data['title'] == i[0]]
                 result_data = pd.concat([result_data,target_data])
 
-            # 나중에 컬럼 정리 
-            selected_column = result_data[['contentid','contenttypeid', 'title','searchcount','deaf','visual_impaired','mobility_weak', 'old', 'infant','firstimage']]
+            # 필요한 컬럼만 추출
+            selected_column = result_data[['contentid','contenttypeid', 'title','firstimage']]
+            selected_column = selected_column.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl'})
+            selected_column["liked"] = False
             dict_data = selected_column.to_dict(orient='records')
+        
 
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         except Exception as e:
-            print('error')
+            logging.error('error')
     
     return JsonResponse({'message': 'spot_list error'}, status=status.HTTP_404_NOT_FOUND)
 
 # 토큰 디코딩 
 def decode_jwt(token):
+    logging.info("토큰 디코딩!============")
+
     # JWT decode에 사용할 secret key
     SECRET_KEY = settings.JWT_SECRET_KEY
     # JWT decode
@@ -162,6 +164,7 @@ def tfidf_matrix(keyword_title,review_data):
   sim_scores = [(i, c) for i, c in enumerate(cosine_matrix[idx]) if i != idx] # 자기 자신을 제외한 관광지들의 유사도 및 인덱스를 추출 
   sim_scores = sorted(sim_scores, key = lambda x: x[1], reverse=True) # 유사도가 높은 순서대로 정렬 
   sim_scores = [(title2idx[i], score) for i, score in sim_scores[0:4]]
+  logging.info("텍스트 유사도!============")
   
   return sim_scores
 
@@ -169,11 +172,11 @@ def tfidf_matrix(keyword_title,review_data):
 def popular_filter(count, data, target_data):  
     # count : 밀집도 선호도 1이면 인기관광지 
     if count == 1:
-        print("인기관광지 선택!!====================")
+        logging.info("인기관광지 선택!!====================")
         popular_data = data[data['searchcount'] > 0] 
         # 인기관광지 검색건수가 4 보다 작다면 
         if len(popular_data)<4:
-            print("인기 검색 건수 작아서 비인기 관광지로 변경!!====================")
+            logging.info("인기 검색 건수 작아서 비인기 관광지로 변경!!====================")
             no_popular_index_reset = popular_concat(data, target_data)
             result_list = popular_recommend(no_popular_index_reset, target_data)
             pass
@@ -184,7 +187,7 @@ def popular_filter(count, data, target_data):
 
     # 비 인기관광지
     else:
-        print("비인기관광지 선택!!==========================")
+        logging.info("비인기관광지 선택!!==========================")
         no_popular_index_reset = popular_concat(data, target_data)
         result_list = popular_recommend(no_popular_index_reset, target_data)
 
@@ -207,9 +210,9 @@ def popular_recommend(popular_data, target_data):
         recommend_result.append(recommend_tour)
     
     recommend_list = sum(recommend_result, [])
-    print(recommend_list)
     # 유사도가 높은 순서대로 정렬 
     result_list = sorted(recommend_list, key = lambda x: x[1], reverse=True)[0:4]
+    logging.info("유사도 높은 순서대로 추천!============")
 
     return result_list
 
@@ -217,9 +220,9 @@ def popular_recommend(popular_data, target_data):
 
 
 # 무장애 필터 
-def Barrier_filter(deaf, visual_impaired,mobility_weak,old,infant, data, target_data):
-    print(deaf, visual_impaired,mobility_weak,old,infant)
-    Barrier_data = data[(data['deaf'] >= deaf) & (data['visual_impaired'] >= visual_impaired) & (data['mobility_weak'] >= mobility_weak) & (data['old'] >= old) & (data['infant'] >= infant) ].reset_index(drop= True)
+def Barrier_filter(deaf, visual_impaired,mobility_weak,old,infant, type_data):
+    logging.info("무장애 필터 시작!=================")
+    Barrier_data = type_data[(type_data['deaf'] >= deaf) & (type_data['visual_impaired'] >= visual_impaired) & (type_data['mobility_weak'] >= mobility_weak) & (type_data['old'] >= old) & (type_data['infant'] >= infant) ].reset_index(drop= True)
 
     return Barrier_data
 
