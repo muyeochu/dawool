@@ -684,11 +684,11 @@ const districts: District[] = [
     name: "진천군",
     cityId: 33,
   },
-  {
-    id: 9,
-    name: "청원군",
-    cityId: 33,
-  },
+  // {
+  //   id: 9,
+  //   name: "청원군",
+  //   cityId: 33,
+  // },
   {
     id: 10,
     name: "청주시",
