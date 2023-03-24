@@ -4,11 +4,11 @@ import { customAxios } from "./customAxios";
 import { ListType } from "../types/tripListTypes";
 
 const getTripListData = (
-  contentTypeId: any,
-  area: any,
-  barrier: any,
-  page: any,
-  size: any,
+  contentTypeId: number,
+  area: number,
+  barrier: string,
+  page: number,
+  size: number
 ): Promise<ListType[]> =>
   customAxios
     .get(
@@ -19,37 +19,89 @@ const getTripListData = (
       return response.data.contents;
     })
     .catch((error) => {
-      console.log(error, "여기가 에러!");
+      console.log(error);
     });
 
+// 식당 목록
 export const RestaurantListSelector = selector<ListType[]>({
   key: "RestaurantListSelector",
   get: async () => {
-    // console.log("들어옴!!");
     try {
-      const restaurantList = await getTripListData(39, 1, 10000, 0, 10);
-      // console.log("식당 list!", restaurantList);
+      const restaurantList = await getTripListData(39, 1, "10000", 0, 10);
 
       return restaurantList;
     } catch (err) {
       throw err;
-      // return [];
     }
   },
 });
 
+// 숙박 목록
 export const AccommodationListSelector = selector<ListType[]>({
   key: "AccommodationListSelector",
   get: async () => {
     try {
-      // 수정해야 할 부분..!! (일단 임시)
-      const accommodationList = await getTripListData(32, 1, 10000, 0, 10);
-      // console.log("숙박 list!", accommodationList);
+      const accommodationList = await getTripListData(32, 1, "10000", 0, 10);
 
       return accommodationList;
     } catch (err) {
-      console.log(err);
-      return [];
+      throw err;
+    }
+  },
+});
+
+// 관광지 목록
+export const TourSpotListSelector = selector<ListType[]>({
+  key: "TourSpotListSelector",
+  get: async () => {
+    try {
+      const tourSpotList = await getTripListData(12, 1, "10000", 0, 10);
+
+      return tourSpotList;
+    } catch (err) {
+      throw err;
+    }
+  },
+});
+
+// 문화시설 목록
+export const CultureListSelector = selector<ListType[]>({
+  key: "CultureListSelector",
+  get: async () => {
+    try {
+      const cultureList = await getTripListData(14, 1, "10000", 0, 10);
+
+      return cultureList;
+    } catch (err) {
+      throw err;
+    }
+  },
+});
+
+// 레포츠 목록
+export const LeportsListSelector = selector<ListType[]>({
+  key: "LeportsListSelector",
+  get: async () => {
+    try {
+      const leportsList = await getTripListData(28, 1, "00000", 0, 10);
+
+      return leportsList;
+    } catch (err) {
+      throw err;
+    }
+  },
+});
+
+// 쇼핑 목록
+export const ShoppingListSelector = selector<ListType[]>({
+  key: "ShoppingListSelector",
+  get: async () => {
+    try {
+      const shoppingList = await getTripListData(38, 1, "00000", 0, 10);
+
+      return shoppingList;
+    } catch (err) {
+      throw err;
     }
   },
 });

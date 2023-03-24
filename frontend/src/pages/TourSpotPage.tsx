@@ -1,37 +1,47 @@
-import React, {useState} from 'react';
-// import { RecoilRoot } from "recoil";
-import Button from '../components/common/Button/index';
+import React, { Suspense } from "react";
+import styled from "styled-components";
+import TripList from "../components/trip/tripList";
+import Loading from "../components/common/Loading";
+
+const MainGridItems = styled.div`
+  grid-column: 1 / span 3;
+  background-color: grey;
+  height: 92vh;
+`;
+
+const TripListGridItems = styled.div`
+  grid-column: 2 / span 1;
+`;
+
+export const RowGridContainer = styled.div`
+  display: grid;
+  grid-template-rows: 110px auto 110px;
+  width: 100%;
+  height: 100%;
+`;
+
+export const RowGridItems = styled.div`
+  grid-row: 2 / span 1;
+`;
 
 const TourSpotPage = () => {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
-
+  
   return (
-    <div>
-      <h1>관광지 페이지입니다.</h1>
-      <h1>관광지 페이지입니다.</h1>
+    <>
+      <Suspense fallback={<Loading />}>
+        <MainGridItems>
+          <div>추천 부분</div>
+        </MainGridItems>
 
-      {/* 무장애 필터 button */}
-      <Button onClick={handleClick} icType={"bathchair"}>
-        지체장애
-      </Button>
-      <Button onClick={handleClick} icType={"eye"}>
-        시각장애
-      </Button>
-      <Button onClick={handleClick} icType={"ear"}>
-        청각장애
-      </Button>
-      <Button onClick={handleClick} icType={"oldman"}>
-        노인
-      </Button>
-      <Button onClick={handleClick} icType={"toddler"}>
-        영유아
-      </Button>
-
-    </div>
+        <TripListGridItems>
+          <RowGridContainer>
+            <RowGridItems>
+              <TripList titleType="tourSpot" />
+            </RowGridItems>
+          </RowGridContainer>
+        </TripListGridItems>
+      </Suspense>
+    </>
   );
 };
 

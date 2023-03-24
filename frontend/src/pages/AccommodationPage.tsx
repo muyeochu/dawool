@@ -28,12 +28,10 @@ const AccommodationPage = () => {
   return (
     <>
       <Suspense fallback={<Loading />}>
-        {/* 추천 식당 */}
         <MainGridItems>
           <div>추천 부분</div>
         </MainGridItems>
 
-        {/* 식당 목록 list */}
         <TripListGridItems>
           <RowGridContainer>
             <RowGridItems>
