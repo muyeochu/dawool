@@ -16,6 +16,14 @@ function TripList({ titleType }: TripListTitleType) {
       ? "식당"
       : titleType === "accommodation"
       ? "숙박"
+      : titleType === "tourSpot"
+      ? "관광지"
+      : titleType === "culture"
+      ? "문화시설"
+      : titleType === "leports"
+      ? "레포츠"
+      : titleType === "shopping"
+      ? "쇼핑"
       : "기타";
 
   return (

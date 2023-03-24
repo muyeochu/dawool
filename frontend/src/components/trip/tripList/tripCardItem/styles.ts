@@ -48,6 +48,7 @@ export const CardText = styled.div`
   display: flex;
   align-items: center;
   color: ${black};
+  cursor: pointer;
 `;
 
 export const LikedIcStyle = styled(likedIc)`
