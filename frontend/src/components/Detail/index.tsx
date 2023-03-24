@@ -7,23 +7,30 @@ import {
   IcExpContainer,
   MainInfoContainer,
   MainImgContainer,
+  MaingImgStyle,
   MainBtnInfoContainer,
   MainBtnContainer,
-  InfoBox,
 } from "./styles";
 
-import { accommodationFieldTypes } from "../../types/accommodationTypes";
-
-import { dummyData } from "./dummy";
-
+import AccommodationDetailInfo from "./AccommodationDetailInfo";
+import BarrierTag from "./BarrierTag";
+import Map from "./Map";
 import DetailBtn from "../common/DetailBtn";
 
-const DetailComponent = ({ infoField }: accommodationFieldTypes) => {
+import logo from "../../assets/icon/logoIc.svg";
+
+const DetailComponent = ({
+  myData,
+  location,
+}: {
+  myData: any;
+  location: number;
+}) => {
   return (
     <>
-      <TitleContainer>
+      <TitleContainer title={myData.info.title}>
         <TitleIcContainer>
-          <p>{dummyData.info?.title}</p>
+          <p>{myData.info.title}</p>
           <VolumeIcStyle />
         </TitleIcContainer>
         <TitleIcContainer>
@@ -39,40 +46,47 @@ const DetailComponent = ({ infoField }: accommodationFieldTypes) => {
       </TitleContainer>
 
       <MainInfoContainer>
-        <MainImgContainer></MainImgContainer>
+        <MainImgContainer>
+          {myData.info.firstImage === "0" ? (
+            <MaingImgStyle src={logo} alt={"로고 이미지"} />
+          ) : (
+            <MaingImgStyle src={myData.info.firstImage} alt={"대표 이미지"} />
+          )}
+        </MainImgContainer>
         <MainBtnInfoContainer>
           <MainBtnContainer>
-            <DetailBtn
-              icType={"bathchair"}
-              text={"지체장애"}
-              disable={dummyData.info.mobilityWeak}
-            />
-            <DetailBtn
-              icType={"eye"}
-              text={"시각장애"}
-              disable={dummyData.info.visuallyImpaired}
-            />
-            <DetailBtn
-              icType={"ear"}
-              text={"청각장애"}
-              disable={dummyData.info.deaf}
-            />
-            <DetailBtn
-              icType={"oldman"}
-              text={"노인"}
-              disable={dummyData.info.old}
-            />
-            <DetailBtn
-              icType={"toddler"}
-              text={"영유아"}
-              disable={dummyData.info.infant}
-            />
+            {myData.info.mobilityWeak ? (
+              <DetailBtn icType={"bathchair"} text={"지체장애"} disable={0} />
+            ) : (
+              <></>
+            )}
+            {myData.info.visuallyImpaired ? (
+              <DetailBtn icType={"eye"} text={"시각장애"} disable={0} />
+            ) : (
+              <></>
+            )}
+            {myData.info.deaf ? (
+              <DetailBtn icType={"ear"} text={"청각장애"} disable={0} />
+            ) : (
+              <></>
+            )}
+            {myData.info.old ? (
+              <DetailBtn icType={"oldman"} text={"노인"} disable={0} />
+            ) : (
+              <></>
+            )}
+            {myData.info.infant ? (
+              <DetailBtn icType={"toddler"} text={"영유아"} disable={0} />
+            ) : (
+              <></>
+            )}
           </MainBtnContainer>
-          <InfoBox>
-            <ul></ul>
-          </InfoBox>
+          {location === 32 && <AccommodationDetailInfo myData={myData} />}
         </MainBtnInfoContainer>
       </MainInfoContainer>
+
+      <BarrierTag barrierInfo={myData.info.barrier} />
+      {/* <Map MapInfo={myData.info.mapX, myData.info.mapY}/> */}
     </>
   );
 };

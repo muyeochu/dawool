@@ -20,9 +20,7 @@ const ShoppingDetailPage = () => {
   return (
     <MainGridItems>
       <RowGridContainer>
-        <RowGridItems>
-          <DetailComponent />
-        </RowGridItems>
+        <RowGridItems>{/* <DetailComponent /> */}</RowGridItems>
       </RowGridContainer>
     </MainGridItems>
   );
