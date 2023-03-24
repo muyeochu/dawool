@@ -68,6 +68,11 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
       return true;
     }else return false;
   }
+  const goLogin=()=>{
+    navigate("/login");
+    closeSideBar();
+    const bfLogin = document.getElementById("beforeLogin");
+  }
 
   return (
     <>
@@ -79,7 +84,9 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
               <LogoIcStyle />
               <UserContainer>
                 <PersonIcStyle />
-                <UserFontStyle >{user===null?"로그인해주세요":user["nickName"]+"님"}</UserFontStyle>
+                {user===null?
+                <UserFontStyle onClick={goLogin} style={{cursor:"pointer"}}>로그인해주세요</UserFontStyle>
+                :<UserFontStyle >{user["nickName"]}님</UserFontStyle>}
               </UserContainer>
 
               <LineStyle />
