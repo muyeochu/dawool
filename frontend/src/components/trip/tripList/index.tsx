@@ -54,9 +54,9 @@ function TripList({ titleType }: TripListTitleType) {
             영유아
           </Button>
         </ButtonList>
-        {/* <Dropdown data={[]} onClick={handleClick}>
+        <Dropdown data={[]} onClick={handleClick}>
           <span>지역 선택</span>
-        </Dropdown> */}
+        </Dropdown>
       </ButtonGroup>
 
       <TripCardList titleType={titleType} />
