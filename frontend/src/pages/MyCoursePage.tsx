@@ -1,8 +1,11 @@
 import {CourseContainer, SideItem, SideHeader, MapItem, SideHeaderText, MapIcStyle} from "../components/course/styles"
 import KakaoMap from "../components/course/map";
 import MyCourseSideBar from "../components/course/sideBar/index"
-
+import {FolderState} from "../recoil/CourseFolderState"
+import { useRecoilState } from "recoil";
+import {GuideManStyle, GuideText} from "../components/course/map/styles"
 const MyCoursePage = () => {
+  const [folderState, setFolderState] = useRecoilState(FolderState);
   return (
     <CourseContainer>
       <SideItem>
@@ -14,7 +17,12 @@ const MyCoursePage = () => {
           <MyCourseSideBar/>
       </SideItem>
       <MapItem>
-        <KakaoMap lat="33.450701" lng="126.570667" ></KakaoMap>
+        {/* 폴더 클릭 시 받아오는 위, 경도 중 첫째값을 recoil에 담아서 kakaomap 태그의 위, 경도 값으로 주기 */}
+        {folderState.isOpen?
+        <KakaoMap lat="33.450701" lng="126.570667" ></KakaoMap>:
+          <><GuideText>코스를 선택해주세요</GuideText>
+          <GuideManStyle/></>
+        }
       </MapItem>
     </CourseContainer>
   );
