@@ -30,14 +30,14 @@ export const ModalTitle = styled.div`
   // 상우하좌
   padding: 1.4rem 1.4rem 1.2rem 1.4rem;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
 `;
 
 export const ModalContents = styled.div`
   padding-left: 1.4rem;
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 15px;
   line-height: 20px;
   color: ${grey[500]};
 `;

@@ -21,7 +21,6 @@ import ShoppingPage from "./ShoppingPage";
 
 import ModalTest from "./TestPage/ModalTest";
 import ButtonTest from "./TestPage/ButtonTest";
-import DetailTest from "./TestPage/DetailTest";
 
 export {
   AccommodationPage,
@@ -44,5 +43,4 @@ export {
   ShoppingPage,
   ModalTest,
   ButtonTest,
-  DetailTest,
 };
