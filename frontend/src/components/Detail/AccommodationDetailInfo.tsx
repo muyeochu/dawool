@@ -22,12 +22,6 @@ const AccommodationDetailInfo = ({ myData }: any) => {
             {myData.info.isCooking === "0" ? "불가능" : "가능"}
           </InfoFontStyle>
         </li>
-        {/* <li>
-          <b>식음료장</b>
-          <InfoFontStyle>
-            {myData.info.foodPlace ? myData.info.foodPlace : "없음"}
-          </InfoFontStyle>
-        </li> */}
         <li>
           <b>한옥 여부</b>
           <InfoFontStyle>

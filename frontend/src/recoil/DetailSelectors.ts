@@ -1,13 +1,8 @@
 import { atom, selector, selectorFamily, SerializableParam } from "recoil";
-import axios from "axios";
-import { DetailInfoState } from "./DetailState";
-import { customAxios } from "./customAxios";
-
-import { DetailInfoTypes } from "../types/detailTypes";
 
 import { getDetailApi } from "./Api";
 
-import { temptTypes } from "../components/Detail";
+import { accommodationTypes } from "../types/accommodationTypes";
 
 interface ParamType {
   contentId: number;
@@ -15,11 +10,7 @@ interface ParamType {
   [key: string]: SerializableParam;
 }
 
-interface temptDataType {
-  [key: string]: any;
-}
-
-export const getDataSelector = selectorFamily<temptTypes, ParamType>({
+export const getDataSelector = selectorFamily<accommodationTypes, ParamType>({
   key: "getDataSelector",
   get:
     ({ contentId, location }) =>

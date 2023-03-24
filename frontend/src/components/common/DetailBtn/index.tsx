@@ -11,9 +11,10 @@ interface ButtonProps {
   disable?: number | undefined;
   text: string;
   icType?: string | undefined;
+  onClick?: (event: React.MouseEvent) => void;
 }
 
-const DetailBtn = ({ type, text, icType, disable }: ButtonProps) => {
+const DetailBtn = ({ type, text, icType, disable, onClick }: ButtonProps) => {
   const btnType = type === "info" ? type : "default";
 
   let icSrc =
@@ -33,6 +34,7 @@ const DetailBtn = ({ type, text, icType, disable }: ButtonProps) => {
     <ButtonStyle
       className={`DetailBtn_${btnType}`}
       disable={disable?.toString()}
+      onClick={onClick}
     >
       {btnType === "default" && (
         <ButtonIc src={icSrc} disable={disable?.toString()} />

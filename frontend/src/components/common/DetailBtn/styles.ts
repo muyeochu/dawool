@@ -20,6 +20,9 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   }
 
   &.DetailBtn_info {
+    min-width: 72px;
+    max-width: 269px;
+    max-height: 40px;
     padding: 10px 22px;
     gap: 5px;
     border: 3px solid ${blue[300]};

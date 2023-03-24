@@ -22,7 +22,6 @@ import {
   ShoppingPage,
   ModalTest,
   ButtonTest,
-  DetailTest,
 } from "./pages/index";
 import Header from "./components/common/Header";
 import ScrollToTop from "./components/utils/ScrollToTop";
@@ -101,15 +100,6 @@ function App() {
               {/* 테스트 페이지 */}
               <Route path="/modaltest" element={<ModalTest />} />
               <Route path="/btntest" element={<ButtonTest />} />
-
-              <Route
-                path="/detailtest"
-                element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <DetailTest />
-                  </Suspense>
-                }
-              />
             </Routes>
           </GridContainer>
         </BoxMainContainer>
