@@ -12,10 +12,10 @@ const getTripListData = (
 ): Promise<ListType[]> =>
   customAxios
     .get(
-      `/location/list/${contentTypeId}?area=${area}&barrier=${barrier}&page=${page}&size=${size}`
+      `location/list/${contentTypeId}?area=${area}&barrier=${barrier}&page=${page}&size=${size}`
     )
     .then((response) => {
-      // console.log(response.data.contents);
+      console.log(response.data);
       return response.data.contents;
     })
     .catch((error) => {
