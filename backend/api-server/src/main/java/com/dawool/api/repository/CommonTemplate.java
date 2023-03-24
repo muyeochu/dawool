@@ -24,7 +24,7 @@ public class CommonTemplate {
       */
     public Query findByAreacodeAndBarrierFree(int areaCode, String[] barrierCode) {
         Criteria criteria = new Criteria();
-        criteria = Criteria.where("areacode").is(areaCode);
+        criteria = Criteria.where("areacode").is(String.valueOf(areaCode));
         criteria.and("mobility_weak").gte(barrierCode[0])
                 .and("visual_impaired").gte(barrierCode[1])
                 .and("deaf").gte(barrierCode[2])
