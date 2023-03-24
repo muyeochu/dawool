@@ -45,8 +45,10 @@ export const CardText = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  display: flex;
-  align-items: center;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: ${black};
   cursor: pointer;
 `;
