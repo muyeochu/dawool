@@ -29,12 +29,11 @@ def spot_list(request, spot_id):
 
             client = MongoClient('mongodb+srv://S08P22D105:Cw7h8LqfQd@ssafy.ngivl.mongodb.net/S08P22D105?')
 
-            db = client.S08P22D105 # 데이터베이스 이름을 알맞게 입력해주세요
-            collection = db.user # 컬렉션 이름을 알맞게 입력해주세요
+            db = client.S08P22D105 # 데이터베이스 
+            collection = db.user # 컬렉션 
             tour_collection = db.recommend_tour
             
             object_id = user_id['sub']
-            print(object_id)
 
             user_result = collection.find({'_id': ObjectId(object_id)})       
             # 사용자 정보 
@@ -60,9 +59,6 @@ def spot_list(request, spot_id):
 
             # 갔던곳, 선호 관광지 배열 > 여러 개 
             visitLocation = user['survey']['visitLocation']
-            
-
-            print(preferredTime, barrier_type,is_popular, departure,visitLocation )
 
             spots = RecommendTour.objects.all()
             se = RecommendTourSerializer(spots, many=True)
@@ -91,7 +87,6 @@ def spot_list(request, spot_id):
             
 
             result_df = pd.DataFrame(find_data)
-            print(result_df)
 
                
             # 타입 int로 바꿔주기 
@@ -105,7 +100,6 @@ def spot_list(request, spot_id):
 
             # 선호 관광지  > 여러개로 바꾸기 
             target_data = data[data['contentid'] == int(visitLocation[0])] 
-            print(target_data)
             
             # 무장애 여부 필터링 
             Barrier_data = Barrier_filter(int(deaf),int(visual_impaired), int(mobility_weak), int(old), int(infant), type_data, target_data)
@@ -118,7 +112,6 @@ def spot_list(request, spot_id):
             for i in recommend_tour:
                 target_data = result_df[result_df['title'] == i[0]]
                 result_data = pd.concat([result_data,target_data])
-            print(result_data)
 
             # firstimage 추가해야함!,is liked 여부도! 
             selected_column = result_data[['contentid','contenttypeid', 'title','searchcount','deaf','visual_impaired','mobility_weak', 'old', 'infant','firstimage']]
@@ -136,7 +129,6 @@ def decode_jwt(token):
     # JWT decode에 사용할 secret key
     SECRET_KEY = settings.JWT_SECRET_KEY
     # JWT decode
-    print(SECRET_KEY)
     encoded_secret_key = base64.b64decode(SECRET_KEY + '==')
     
     # payload
@@ -144,7 +136,7 @@ def decode_jwt(token):
     return decoded_payload
 
 
-# 텍스트 유사도 
+# 텍스트 유사도 추천 
 def tfidf_matrix(keyword_title,review_data):
   tfidf = TfidfVectorizer(max_features=500, stop_words='english')
   tfidf_matrix = tfidf.fit_transform(review_data['keyword_result'])
