@@ -14,7 +14,7 @@ export const DropdownContainer = styled.button<DropdownProps>`
   justify-content: center;
   position: relative;
   padding: 12px 28px;
-  gap: 5px;
+  gap: 8px;
   background-color: ${blue[100]};
   border: none;
   border-radius: 20px;
@@ -39,8 +39,9 @@ export const DropdownBtnText = styled.span<DropdownProps>`
 `;
 
 export const DropdownBtnIcStyle = styled(UpdownIc)<DropdownProps>`
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease-in-out;
   transform: ${({ isClicked }) => (isClicked ? "rotate(180deg)" : "none")};
 `;
 
@@ -52,13 +53,31 @@ export const DropdownItemContainer = styled.div`
   background-color: ${blue[100]};
   margin: 10px auto;
   width: 112px;
-  border-radius: 14px;
+  border-radius: 6px;
   padding: 10px;
   max-height: 420px;
 
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: ${blue[100]};
+    border-radius: 14px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${grey[400]};
+    border-radius: 14px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: ${mainColor};
+  }
 `;
 
 export const DropdownItem = styled.ul`
