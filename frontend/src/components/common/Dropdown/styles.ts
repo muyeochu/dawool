@@ -6,11 +6,13 @@ interface DropdownProps {
   isClicked: boolean;
 }
 
+// 드랍다운 버튼
 export const DropdownContainer = styled.button<DropdownProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  position: relative;
   padding: 12px 28px;
   gap: 5px;
   background-color: ${blue[100]};
@@ -24,8 +26,7 @@ export const DropdownContainer = styled.button<DropdownProps>`
   }
 `;
 
-// 드랍다운 안의 텍스트 스타일 지정
-export const DropdownText = styled.span<DropdownProps>`
+export const DropdownBtnText = styled.span<DropdownProps>`
   font-family: "SUIT";
   font-style: normal;
   font-weight: 500;
@@ -37,8 +38,7 @@ export const DropdownText = styled.span<DropdownProps>`
   color: ${black};
 `;
 
-// 드랍다운 안의 이미지 스타일 지정
-export const DropdownIcStyle = styled(UpdownIc)<DropdownProps>`
+export const DropdownBtnIcStyle = styled(UpdownIc)<DropdownProps>`
   width: 20px;
   height: 20px;
   transform: ${({ isClicked }) => (isClicked ? "rotate(180deg)" : "none")};
@@ -46,17 +46,30 @@ export const DropdownIcStyle = styled(UpdownIc)<DropdownProps>`
 
 export const DropdownItemContainer = styled.div`
   position: absolute;
-  top: 90%;
   text-align: center;
+  z-index: 1;
   overflow: hidden;
+  background-color: ${blue[100]};
+  margin: 10px auto;
+  width: 112px;
+  border-radius: 14px;
+  padding: 10px;
+
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 export const DropdownItem = styled.ul`
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 19px;
   list-style: none;
-  background-color: ${blue[100]};
   width: auto;
   padding: 8px 0 8px 0;
-  border-radius: 4px;
+  cursor: pointer;
 
   @keyframes dropdown {
     0% {
@@ -68,13 +81,8 @@ export const DropdownItem = styled.ul`
   }
   animation: dropdown 0.5s ease;
 
-  li {
-    padding-top: 5px;
-    padding-bottom: 5px;
-
-    &:hover {
-      background-color: ${mainColor};
-      cursor: pointer;
-    }
+  &:hover {
+    font-weight: 700;
+    cursor: pointer;
   }
 `;

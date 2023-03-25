@@ -3,14 +3,14 @@ import { City, District } from "../types/regionTypes";
 
 // 광역시도
 const cities: City[] = [
-  { id: 1, name: "서울특별시" },
-  { id: 2, name: "인천광역시" },
-  { id: 3, name: "대전광역시" },
-  { id: 4, name: "대구광역시" },
-  { id: 5, name: "광주광역시" },
-  { id: 6, name: "부산광역시" },
-  { id: 7, name: "울산광역시" },
-  { id: 8, name: "세종특별자치시" },
+  { id: 1, name: "서울" },
+  { id: 2, name: "인천" },
+  { id: 3, name: "대전" },
+  { id: 4, name: "대구" },
+  { id: 5, name: "광주" },
+  { id: 6, name: "부산" },
+  { id: 7, name: "울산" },
+  { id: 8, name: "세종" },
   { id: 31, name: "경기도" },
   { id: 32, name: "강원도" },
   { id: 33, name: "충청북도" },

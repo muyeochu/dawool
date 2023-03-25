@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import React, { useState, useRef } from "react";
+import { useRecoilValue } from "recoil";
 import {
   DropdownContainer,
-  DropdownText,
-  DropdownIcStyle,
+  DropdownBtnText,
+  DropdownBtnIcStyle,
   DropdownItemContainer,
   DropdownItem,
 } from "./styles";
 import { dropdownState } from "../../../recoil/ButtonState";
-// import { cityState } from "../../../recoil/RegionState";
 import { TripListTitleType } from "../../../types/tripListTypes";
 
 // 드롭다운이 받아야 할 props 정의
@@ -20,6 +19,7 @@ interface DropdownProps {
 
 export default function Dropdown({ itemList, onItemSelected }: DropdownProps) {
   const [isClicked, setIsClicked] = useState(false);
+  const dropdownRef = useRef<HTMLButtonElement>(null); // dropdownRef 생성
   const dropdown = useRecoilValue(dropdownState);
   const [selectedItem, setSelectedItem] = useState<
     TripListTitleType | string | null
@@ -37,24 +37,44 @@ export default function Dropdown({ itemList, onItemSelected }: DropdownProps) {
     onItemSelected(item);
   }
 
+  // 바깥쪽 영역을 클릭할 때 호출
+  function handleOutsideClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (dropdownRef.current && !dropdownRef.current.contains(target)) {
+      setIsClicked(false);
+    }
+  }
+
+  React.useEffect(() => {
+    // 바깥쪽 영역 클릭 시 드롭다운 닫기
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
-    <DropdownContainer onClick={handleClick} isClicked={isClicked}>
+    <DropdownContainer
+      ref={dropdownRef}
+      onClick={handleClick}
+      isClicked={isClicked}
+    >
       {selectedItem ? (
-        <DropdownText isClicked={isClicked}>
+        <DropdownBtnText isClicked={isClicked}>
           {typeof selectedItem === "string"
             ? selectedItem
             : selectedItem.titleType}
-        </DropdownText>
+        </DropdownBtnText>
       ) : (
-        <DropdownText isClicked={isClicked}>
+        <DropdownBtnText isClicked={isClicked}>
           {itemList.length > 0
             ? typeof itemList[0] === "string"
               ? itemList[0]
               : itemList[0].titleType
             : ""}
-        </DropdownText>
+        </DropdownBtnText>
       )}
-      <DropdownIcStyle isClicked={isClicked} />
+      <DropdownBtnIcStyle isClicked={isClicked} />
 
       {isClicked && (
         <DropdownItemContainer>
