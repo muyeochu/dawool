@@ -3,6 +3,8 @@ import axios from "axios";
 import { customAxios } from "./customAxios";
 import { ListType } from "../types/tripListTypes";
 
+
+
 // 여행지 목록 가져오는 함수
 const getTripListData = async (
   contentTypeId: number,

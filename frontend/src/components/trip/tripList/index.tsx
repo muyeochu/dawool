@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Button from "../../common/Button";
 import {
@@ -10,9 +11,20 @@ import {
 import TripCardList from "./tripCardList";
 import { TripListTitleType } from "../../../types/tripListTypes";
 import Dropdown from "../../common/Dropdown";
+import { City } from "../../../types/regionTypes";
+import { cityState } from "../../../recoil/RegionState";
 
 function TripList({ titleType }: TripListTitleType) {
   const [isClicked, setIsClicked] = useState(false);
+  const [citySelected, setCitySelected] = useState("");
+  const [cityStateData] = useRecoilState(cityState);
+
+  const handleCitySelected = (city: string | TripListTitleType) => {
+    if (typeof city === "string") {
+      setCitySelected(city);
+      setIsClicked(false);
+    }
+  };
 
   const handleClick = () => {
     setIsClicked(!isClicked);
@@ -54,8 +66,11 @@ function TripList({ titleType }: TripListTitleType) {
             영유아
           </Button>
         </ButtonList>
-        <Dropdown data={[]} onClick={handleClick}>
-          <span>지역 선택</span>
+        <Dropdown
+          itemList={cityStateData.map((city: City) => city.name)}
+          onItemSelected={handleCitySelected}
+        >
+          <span>{citySelected || "지역 선택"}</span>
         </Dropdown>
       </ButtonGroup>
 

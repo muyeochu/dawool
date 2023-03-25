@@ -17,10 +17,10 @@ export const DropdownContainer = styled.button<DropdownProps>`
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  /* transition: background-color 0.3s ease, color 0.3s ease; */
 
   &:hover:enabled {
     background-color: ${blue[300]};
+    transition: background-color 0.3s ease;
   }
 `;
 
@@ -42,4 +42,39 @@ export const DropdownIcStyle = styled(UpdownIc)<DropdownProps>`
   width: 20px;
   height: 20px;
   transform: ${({ isClicked }) => (isClicked ? "rotate(180deg)" : "none")};
+`;
+
+export const DropdownItemContainer = styled.div`
+  position: absolute;
+  top: 90%;
+  text-align: center;
+  overflow: hidden;
+`;
+
+export const DropdownItem = styled.ul`
+  list-style: none;
+  background-color: ${blue[100]};
+  width: auto;
+  padding: 8px 0 8px 0;
+  border-radius: 4px;
+
+  @keyframes dropdown {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  animation: dropdown 0.5s ease;
+
+  li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    &:hover {
+      background-color: ${mainColor};
+      cursor: pointer;
+    }
+  }
 `;
