@@ -48,12 +48,13 @@ export const DropdownItemContainer = styled.div`
   position: absolute;
   text-align: center;
   z-index: 1;
-  overflow: hidden;
+  overflow: auto;
   background-color: ${blue[100]};
   margin: 10px auto;
   width: 112px;
   border-radius: 14px;
   padding: 10px;
+  max-height: 420px;
 
   top: 100%;
   left: 50%;
@@ -82,7 +83,7 @@ export const DropdownItem = styled.ul`
   animation: dropdown 0.5s ease;
 
   &:hover {
-    font-weight: 700;
+    font-weight: 800;
     cursor: pointer;
   }
 `;
