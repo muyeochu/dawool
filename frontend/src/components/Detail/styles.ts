@@ -174,3 +174,9 @@ export const BarrierBtnContainer = styled.div`
   flex-wrap: wrap;
   gap: 10px;
 `;
+
+export const MapContainer = styled.div`
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 500px;
+`;

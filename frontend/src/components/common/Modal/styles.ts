@@ -13,6 +13,7 @@ export const ModalDimmer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
 `;
 
 // 작은 모달
@@ -24,6 +25,13 @@ export const ModalContainer = styled.div`
   background-color: white;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  z-index: 9999;
+
+  &.barrier {
+    min-height: 150px;
+    height: auto;
+    justify-content: space-between;
+  }
 `;
 
 export const ModalTitle = styled.div`
@@ -40,20 +48,30 @@ export const ModalContents = styled.div`
   font-size: 15px;
   line-height: 20px;
   color: ${grey[500]};
+
+  &.barrier {
+    padding-right: 1.4rem;
+  }
 `;
 
 export const ModalFooter = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 32px;
-  margin-top: 20px;
+
   padding-right: 1.4rem;
+
+  &.barrier {
+    padding-bottom: 20px;
+  }
 `;
 
 export const ModalBtn = styled.div`
   font-weight: 500;
   font-size: 16px;
   line-height: 25px;
+  margin-top: 20px;
   :hover {
     opacity: 50%;
     transition: 0.5s;

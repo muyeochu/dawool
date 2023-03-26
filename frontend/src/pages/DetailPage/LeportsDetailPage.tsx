@@ -1,27 +1,29 @@
 import DetailComponent from "../../components/Detail";
+import { useLocation } from "react-router-dom";
+
+import { useRecoilValue } from "recoil";
+import { getDataSelector } from "../../recoil/DetailSelectors";
 
 import { MainGridItems, RowGridContainer, RowGridItems } from "./styles";
 
-const infoField: string[] = [
-  "수용 인원",
-  "유모차 대여",
-  "애완동물 동반",
-  "체험 가능 연령",
-  "문의 및 안내",
-  "개장 기간",
-  "주차 요금",
-  "주차 시설",
-  "예약 안내",
-  "쉬는 날",
-  "입장료",
-  "이용 시간",
-];
-
 const LeportsDetailPage = () => {
+  const location = useLocation();
+  const pathArray = location.pathname.split("/");
+
+  const contentId = pathArray[pathArray.length - 1];
+
+  const myData = useRecoilValue(
+    getDataSelector({ contentId: contentId, location: 28 })
+  );
+
+  console.log("myData 원본은?", myData);
+
   return (
     <MainGridItems>
       <RowGridContainer>
-        <RowGridItems>{/* <DetailComponent /> */}</RowGridItems>
+        <RowGridItems>
+          {myData && <DetailComponent myData={myData} location={28} />}
+        </RowGridItems>
       </RowGridContainer>
     </MainGridItems>
   );

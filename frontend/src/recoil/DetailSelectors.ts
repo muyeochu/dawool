@@ -18,7 +18,6 @@ export const getDataSelector = selectorFamily<accommodationTypes, ParamType>({
       try {
         const response = await getDetailApi(contentId, location);
         const data = await response.data;
-        console.log(data);
         return data;
       } catch (error) {
         console.error(error);
