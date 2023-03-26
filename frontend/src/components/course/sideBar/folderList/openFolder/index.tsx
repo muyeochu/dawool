@@ -4,22 +4,28 @@ import {ExitFolderContainer,ExitFolderButton,ArrowIc,DeleteIc,FolderContainer} f
 import { FolderYellowIc } from "../styles";
 import { useState, useRef } from "react";
 import useModal from "../../../../../components/utils/useModal";
-
+import { modalState } from "../../../../../recoil/ModalState";
 // import axios from "axios";
 
 
 export const FolderInside=()=>{
     const { openModal, closeModal } = useModal();
-    // const ref = useRef<HTMLDivElement>(null);
+    const [mdState, setModalState] = useRecoilState(modalState);
     const modalDataS = {
         type: "default",
         title: "코스 삭제",
-        content: "이 코스를 삭제하면 코스에 저장된 관광지도 함께",
+        content: "이 코스를 삭제하면 코스에 저장된 관광지도 함께 삭제됩니다.",
         callback: () => {
+        // const deleteNowFolder = async ()=>{
+        //   await axios
+        //   .delete(process.env.REACT_APP_API_BASE_URL+"/api/user/my-course/{courseId}")
+        // }
           alert("삭제되었습니다!");
           closeModal();
+          exitFolder();
+          
           // 삭제 후 목록을 다시 불러오는 함수 작성
-          openModal(modalDataS);
+        //   openModal(modalDataS);
         },
       };
     const [folderState, setFolderState] = useRecoilState(FolderState);
@@ -35,18 +41,19 @@ export const FolderInside=()=>{
         // alert("임시")
         openModal(modalDataS);
         //그 뒤에 진자 삭제하겠다고 누르면 아래 코드 실행
-        // const deleteNowFolder = async ()=>{
-        //   await axios
-        //   .delete(process.env.REACT_APP_API_BASE_URL+"/api/user/my-course/{courseId}")
-        // }
+
 
         exitFolder();
     }
     return(<>
     <ExitFolderContainer >
-    <ExitFolderButton onClick={exitFolder}><ArrowIc/>전체 코스 보기</ExitFolderButton>
+        <ExitFolderButton onClick={exitFolder}><ArrowIc/>전체 코스 보기</ExitFolderButton>
     </ExitFolderContainer>
-    <FolderContainer><FolderYellowIc/>{folderState.opendFolder}<DeleteIc onClick={deleteNowFolder}/></FolderContainer>
+    <FolderContainer><FolderYellowIc/>{folderState.opendFolder} 
+        {mdState.isOpen?<DeleteIc style={{zIndex:-1}}/>:
+        <DeleteIc onClick={()=>{openModal(modalDataS)}}/>
+    }
+    </FolderContainer>
     <></>
     {/* 
     //옆에는 수정, 삭제 버튼
