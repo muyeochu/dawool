@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import styled from "styled-components";
-import TripList from "../components/trip/tripList";
+import TripList, { TripListProps } from "../components/trip/tripList";
 import Loading from "../components/common/Loading";
 
 const MainGridItems = styled.div`
@@ -35,7 +35,7 @@ const AccommodationPage = () => {
         <TripListGridItems>
           <RowGridContainer>
             <RowGridItems>
-              <TripList titleType="accommodation" />
+              {/* <TripList titleType="accommodation" /> */}
             </RowGridItems>
           </RowGridContainer>
         </TripListGridItems>

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { useRecoilState } from "recoil";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import Button from "../../common/Button";
 import {
   TripListContainer,
@@ -9,26 +8,57 @@ import {
   ButtonList,
 } from "./styles";
 import TripCardList from "./tripCardList";
-import { TripListTitleType } from "../../../types/tripListTypes";
+import { TripListTitleType, ListType } from "../../../types/tripListTypes";
 import Dropdown from "../../common/Dropdown";
 import { City } from "../../../types/regionTypes";
-import { cityState } from "../../../recoil/RegionState";
+import { citiesState, citySelectedState } from "../../../recoil/RegionState";
+import { getListSelector } from "../../../recoil/TripListSelector";
 
-function TripList({ titleType }: TripListTitleType) {
-  const [isClicked, setIsClicked] = useState(false);
-  const [citySelected, setCitySelected] = useState("");
-  const [cityStateData] = useRecoilState(cityState);
+export interface TripListProps {
+  titleType: TripListTitleType["titleType"];
+}
 
-  const handleCitySelected = (city: string | TripListTitleType) => {
-    if (typeof city === "string") {
-      setCitySelected(city);
-      setIsClicked(false);
-    }
+function TripList({ titleType }: TripListProps) {
+  const [isClicked, setIsClicked] = useState<boolean>(false); // 버튼 클릭 여부
+  const [citySelected, setCitySelected] = useState<number>(1); // 선택된 도시
+  const [cityList, setCityList] = useRecoilState<City[]>(citiesState); // 지역 정보 관리
+  const selectedCity = useRecoilValue<number>(citySelectedState);
+
+  useEffect(() => {
+    setCitySelected(selectedCity);
+  }, [selectedCity]);
+
+  // 드롭다운에서 도시 선택할 때 호출
+  const selectCity = (city: string | TripListTitleType) => {
+    const selectedCity = Number(city as TripListTitleType);
+    const newCityList = cityList.map((city) => ({
+      ...city,
+      selected: city.id === selectedCity,
+    }));
+    setCityList(newCityList);
+
+    setCitySelected(selectedCity); // 선택된 도시 업데이트
+    setIsClicked(false);
+    // console.log(selectedCity)
+    // onCitySelected && onCitySelected(Number(selectedCity)); // 콜백 함수가 있는 경우, 새로운 도시 선택 시 호출하여 선택한 도시 전달
   };
 
+  // 버튼 클릭될 때마다 호출
   const handleClick = () => {
-    setIsClicked(!isClicked);
+    setIsClicked((prev) => !prev);
   };
+  
+  // 선택된 도시에 해당하는 TripCardList만 필터링
+  const filteredList = useRecoilValue(
+    getListSelector({
+      titleType,
+      area: selectedCity,
+      barrier: "10000",
+      page: 0,
+      size: 10,
+    })
+  );
+  console.log(citySelected);
 
   const typeText =
     titleType === "restaurant"
@@ -47,8 +77,12 @@ function TripList({ titleType }: TripListTitleType) {
 
   return (
     <TripListContainer>
-      <TripListTitle>서울 {typeText} 목록</TripListTitle>
+      <TripListTitle>
+        {/* 서울 {typeText} 목록 */}
+        {citySelected} {typeText} 목록
+      </TripListTitle>
       <ButtonGroup>
+        {/* 무장애 필터링 버튼 */}
         <ButtonList>
           <Button onClick={handleClick} icType={"bathchair"}>
             지체장애
@@ -66,15 +100,20 @@ function TripList({ titleType }: TripListTitleType) {
             영유아
           </Button>
         </ButtonList>
+
+        {/* 드롭다운 */}
         <Dropdown
-          itemList={cityStateData.map((city: City) => city.name)}
-          onItemSelected={handleCitySelected}
+          itemList={cityList.map((city: City) => city.name)}
+          onItemSelected={selectCity}
         >
-          <span>{citySelected || "지역 선택"}</span>
+          <span>{citySelected}</span>
         </Dropdown>
       </ButtonGroup>
+      {/* 관광지 목록 */}
 
-      <TripCardList titleType={titleType} />
+      {filteredList && (
+        <TripCardList titleType={titleType} tripList={filteredList} />
+      )}
     </TripListContainer>
   );
 }

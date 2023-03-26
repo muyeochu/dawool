@@ -7,7 +7,7 @@ import {
   AlertMessage,
   DropdownButton,
 } from "./styles";
-import { cityState, districtState } from "../../../../../recoil/RegionState";
+import { citiesState, districtState } from "../../../../../recoil/RegionState";
 import { City, District } from "../../../../../types/regionTypes";
 
 import { ReactComponent as DropdownkIc } from "../../../../../assets/icon/dropdownIc.svg";
@@ -23,7 +23,7 @@ const RegionDropdown = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // 광역시도, 시군구 상태값 가져오기
-  const cities = useRecoilValue(cityState);
+  const cities = useRecoilValue(citiesState);
   const districts = useRecoilValue(districtState);
 
   // 광역시도가 변경될 때 호출, 선택된 광역시도의 id를 찾아 setSelectedCity 함수를 호출하여 상태값을 업데이트

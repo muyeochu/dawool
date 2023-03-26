@@ -34,7 +34,9 @@ export default function Dropdown({ itemList, onItemSelected }: DropdownProps) {
   function handleItemClick(item: string | TripListTitleType) {
     setIsClicked(false);
     setSelectedItem(typeof item === "string" ? item : item.titleType); // 선택한 item을 selectedItem state에 할당
-    onItemSelected(item);
+    if(typeof item !== "string") {
+      onItemSelected(item); // 선택한 item 전달
+    }
   }
 
   // 바깥쪽 영역을 클릭할 때 호출
