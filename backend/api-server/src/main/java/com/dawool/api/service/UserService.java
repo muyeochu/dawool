@@ -1,18 +1,24 @@
 package com.dawool.api.service;
 
+import com.dawool.api.dto.user.MyCourseDetailReqDto;
+import com.dawool.api.dto.user.MyCourseResDto;
 import com.dawool.api.dto.user.ReissueTokenReqDto;
 import com.dawool.api.dto.user.ReissueTokenResDto;
 import com.dawool.api.dto.user.TokenResDto;
 import com.dawool.api.dto.SurveyReqDto;
+import com.dawool.api.entity.Course;
+import com.dawool.api.entity.Spot;
 import com.dawool.api.entity.Survey;
 import com.dawool.api.entity.User;
 import com.dawool.api.jwt.JwtTokenProvider;
+import com.dawool.api.repository.CourseRepository;
 import com.dawool.api.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,7 +30,9 @@ import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Mono;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 회원 Service
@@ -38,6 +46,7 @@ import java.util.Date;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final CourseRepository courseRepository;
     private final JwtTokenProvider jwtTokenProvider;
     @Value("${kakao.restapi.key}")
     private String kakaoAPIKey;
@@ -213,6 +222,54 @@ public class UserService {
         User user = userRepository.findById(userId).orElseThrow();
         user.setSurvey(new Survey().of(survey));
         userRepository.save(user);
+
+    }
+
+    public List<MyCourseResDto> getMyCourse() {
+        String userId = getLoginUser();
+
+        List<Course> courseList = courseRepository.findByUserid(userId);
+
+        List<MyCourseResDto> myCourseList = new ArrayList<>();
+
+        for (Course course : courseList) {
+            MyCourseResDto myCourseResDto = new MyCourseResDto().of(course);
+            myCourseList.add(myCourseResDto);
+        }
+
+        return myCourseList;
+    }
+
+
+    public void createCourse(String courseName) {
+        String userId = getLoginUser();
+        Course course = new Course();
+        JSONObject jsonObject = new JSONObject(courseName);
+
+        course.setUserid(userId);
+        course.setCoursename(jsonObject.getString("courseName"));
+        course.setSpots(new ArrayList<Spot>());
+        course.setMemo("");
+        courseRepository.save(course);
+    }
+
+    public HttpStatus addSpotToCourse(String courseId, MyCourseDetailReqDto myCourse) {
+        String userId = getLoginUser();
+        Course course = courseRepository.findById(courseId).orElseThrow();
+        if (!course.getUserid().equals(userId)) {
+            return HttpStatus.FORBIDDEN;
+        }
+
+        Spot spot = myCourse.of(myCourse);
+        course.getSpots().add(spot);
+
+        courseRepository.save(course);
+
+        return HttpStatus.OK;
+    }
+
+    public void modifyCourse() {
+        String userId = getLoginUser();
 
     }
 }
