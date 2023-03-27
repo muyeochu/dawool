@@ -52,7 +52,7 @@ interface accommodationFieldTypes3 {
   refundRegulation: "환불 규정";
 }
 
-export interface accommodationTypes {
+export interface DetailCommonTypes {
   myData: {
     info: {
       [key: string]: any;

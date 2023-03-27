@@ -101,7 +101,7 @@ const DetailComponent = ({
         </MainBtnInfoContainer>
       </MainInfoContainer>
 
-      {/* <BarrierTag barrierInfo={myData.info.barrier} /> */}
+      <BarrierTag barrierInfo={myData.info.barrier} />
       <Map mapInfo={mapInfo} />
     </>
   );
