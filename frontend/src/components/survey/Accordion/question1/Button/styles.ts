@@ -8,7 +8,7 @@ import {
 } from "../../../../../styles/Colors";
 
 interface StyledButtonProps {
-  isClicked: boolean;
+  isclicked: boolean;
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
@@ -17,7 +17,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
   justify-content: center;
   padding: 14px 34px;
-  background-color: ${({ isClicked }) => (isClicked ? mainColor : "grey[50]")};
+  background-color: ${({ isclicked }) => (isclicked ? mainColor : "grey[50]")};
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -25,7 +25,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
   &:hover:enabled {
     background-color: ${blue[300]};
-    color: ${({ isClicked }) => (isClicked ? grey[500] : white)};
+    color: ${({ isclicked }) => (isclicked ? grey[500] : white)};
   }
 
   &:disabled {
@@ -45,7 +45,7 @@ export const ButtonText = styled.span<StyledButtonProps>`
   align-items: center;
   text-align: center;
 
-  color: ${({ isClicked }) => (isClicked ? white : grey[500])};
+  color: ${({ isclicked }) => (isclicked ? white : grey[500])};
 `;
 
 // 버튼 안의 이미지 스타일 지정

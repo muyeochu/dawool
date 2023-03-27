@@ -50,9 +50,9 @@ export default function Button({ children, icType }: ButtonProps) {
       : "none";
 
   return (
-    <StyledButton onClick={handleClick} isClicked={isClicked}>
-      <ButtonIcon src={icSrc} isClicked={isClicked} />
-      <ButtonText isClicked={isClicked}>{children}</ButtonText>
+    <StyledButton onClick={handleClick} isclicked={isClicked.toString()}>
+      <ButtonIcon src={icSrc} isclicked={isClicked.toString()} />
+      <ButtonText isclicked={isClicked.toString()}>{children}</ButtonText>
     </StyledButton>
   );
 }
