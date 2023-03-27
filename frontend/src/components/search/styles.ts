@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { mainColor, white, black, blue, grey } from "../../styles/Colors";
+
+import { ReactComponent as SearchIc } from "../../assets/icon/searchSquareIc.svg";
 
 export const MainGridItems = styled.div`
   grid-column: 2 / span 1;
@@ -14,4 +17,26 @@ export const RowGridContainer = styled.div`
 
 export const RowGridItems = styled.div`
   grid-row: 2 / span 1;
+`;
+
+export const SerachIcStyle = styled(SearchIc)`
+  width: 65px;
+  height: 65px;
+`;
+
+export const TitleContainer = styled.div`
+  display: flex;
+
+  span {
+    font-weight: 700;
+    font-size: 45px;
+    line-height: 54px;
+    margin-top: 2px;
+
+    &.keyword {
+      color: ${mainColor};
+      margin-right: 10px;
+      margin-left: 5px;
+    }
+  }
 `;

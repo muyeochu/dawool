@@ -2,7 +2,7 @@ import { atom, selector, selectorFamily, SerializableParam } from "recoil";
 
 import { getDetailApi } from "./Api";
 
-import { DetailCommonTypes } from "../types/accommodationTypes";
+import { CommonDataTypes } from "../types/detailTypes";
 
 interface ParamTypes {
   contentId: any;
@@ -10,7 +10,7 @@ interface ParamTypes {
   [key: string]: SerializableParam;
 }
 
-export const getDataSelector = selectorFamily<DetailCommonTypes, ParamTypes>({
+export const getDataSelector = selectorFamily<CommonDataTypes, ParamTypes>({
   key: "getDataSelector",
   get:
     ({ contentId, location }) =>

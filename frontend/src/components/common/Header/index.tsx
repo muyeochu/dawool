@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { searchState } from "../../../recoil/SearchSelector";
+
+import { ParamTypes } from "../../../recoil/SearchSelector";
 
 // styles
 import {
@@ -37,6 +41,9 @@ const Header = () => {
   const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
   let currentUrl = window.location.pathname;
+
+  const [searchInput, setSearchInput] = useRecoilState(searchState);
+  const searchInput2 = useRecoilValue(searchState);
 
   const [search, setSearch] = useState("");
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -84,6 +91,16 @@ const Header = () => {
       setSearch("");
       return;
     }
+
+    console.log("원래state는?", searchInput2);
+    const newParam: any = {
+      title: search,
+      ...searchState,
+    };
+
+    console.log("새 param은?", newParam);
+    setSearchInput(newParam);
+    console.log("검색어는?", searchInput2);
     navigate("/search", { state: search });
   };
 
