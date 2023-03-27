@@ -6,5 +6,6 @@ app_name = 'recommend'
 urlpatterns = [
     url(r'^spot/(?P<spot_id>\d+)', views.spot_list),
     url('restaurant/', views.food_list),
+    url('stay/', views.stay_list),
 ]
 
