@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Suspense } from "react";
 import KakaoAuthHandle from "./components/auth/KakaoAuthHandle";
+import Loading from "./components/common/Loading";
 import {
   AccommodationPage,
   AccommodationDetailPage,
@@ -78,16 +79,13 @@ function App() {
               <Route
                 path="/accommodation"
                 element={
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={<Loading />}>
                     <AccommodationPage />
                   </Suspense>
                 }
               />
               <Route path="/login" element={<LoginPage />} />
-              <Route
-                path="/callback"
-                element={<KakaoAuthHandle />}
-              ></Route>
+              <Route path="/callback" element={<KakaoAuthHandle />}></Route>
               <Route path="/mycourse" element={<MyCoursePage />} />
               <Route path="/restaurant" element={<RestaurantPage />} />
               <Route path="/search" element={<SearchPage />} />

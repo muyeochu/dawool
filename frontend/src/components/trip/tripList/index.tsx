@@ -58,7 +58,7 @@ function TripList({ titleType }: TripListProps) {
       size: 10,
     })
   );
-  console.log(citySelected);
+  // console.log(citySelected);
 
   const typeText =
     titleType === "restaurant"

@@ -59,16 +59,16 @@ export default function Dropdown({ itemList, onItemSelected }: DropdownProps) {
     <DropdownContainer
       ref={dropdownRef}
       onClick={handleClick}
-      isClicked={isClicked}
+      isclicked={isClicked.toString()}
     >
       {selectedItem ? (
-        <DropdownBtnText isClicked={isClicked}>
+        <DropdownBtnText isclicked={isClicked.toString()}>
           {typeof selectedItem === "string"
             ? selectedItem
             : selectedItem.titleType}
         </DropdownBtnText>
       ) : (
-        <DropdownBtnText isClicked={isClicked}>
+        <DropdownBtnText isclicked={isClicked.toString()}>
           {itemList.length > 0
             ? typeof itemList[0] === "string"
               ? itemList[0]
@@ -76,7 +76,7 @@ export default function Dropdown({ itemList, onItemSelected }: DropdownProps) {
             : ""}
         </DropdownBtnText>
       )}
-      <DropdownBtnIcStyle isClicked={isClicked} />
+      <DropdownBtnIcStyle isclicked={isClicked.toString()} />
 
       {isClicked && (
         <DropdownItemContainer>

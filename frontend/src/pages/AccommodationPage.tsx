@@ -27,19 +27,17 @@ export const RowGridItems = styled.div`
 const AccommodationPage = () => {
   return (
     <>
-      <Suspense fallback={<Loading />}>
-        <MainGridItems>
-          <div>추천 부분</div>
-        </MainGridItems>
+      <MainGridItems>
+        <div>추천 부분</div>
+      </MainGridItems>
 
-        <TripListGridItems>
-          <RowGridContainer>
-            <RowGridItems>
-              {/* <TripList titleType="accommodation" /> */}
-            </RowGridItems>
-          </RowGridContainer>
-        </TripListGridItems>
-      </Suspense>
+      <TripListGridItems>
+        <RowGridContainer>
+          <RowGridItems>
+            <TripList titleType="accommodation" />
+          </RowGridItems>
+        </RowGridContainer>
+      </TripListGridItems>
     </>
   );
 };
