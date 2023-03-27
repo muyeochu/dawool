@@ -44,7 +44,43 @@ public class BarrierDto {
     private String infantsFamilyEtc;
 
     public BarrierDto of(Barrier barrier){
-        if(barrier == null) return null;
+        if(barrier == null) {
+            return BarrierDto.builder()
+                    // 무장애 정보
+                    .parking("0")
+                    .route("0")
+                    .publicTransport("0")
+                    .ticketOffice("0")
+                    .promotion("0")
+                    .wheelchair("0")
+                    .exit("0")
+                    .elevator("0")
+                    .restroom("0")
+                    .auditorium("0")
+                    .room("0")
+                    .handicapEtc("0")
+
+                    .braileBlock("0")
+                    .helpDog("0")
+                    .guideHuman("0")
+                    .audioGuide("0")
+                    .bigPrint("0")
+                    .brailePromotion("0")
+                    .guideSystem("0")
+                    .blindHandicapEtc("0")
+
+                    .signGuide("0")
+                    .videoGuide("0")
+                    .hearingRoom("0")
+                    .hearingHandicapEtc("0")
+
+                    .stroller("0")
+                    .lactationRoom("0")
+                    .babySpareChair("0")
+                    .infantsFamilyEtc("0")
+                    .babySpareChair("0")
+                    .build();
+        }
         return BarrierDto.builder()
                 // 무장애 정보
                 .parking(barrier.getParking())
