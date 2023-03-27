@@ -25,6 +25,7 @@ target_collection = db.recommend_tour
 
 collection = db.user # 컬렉션 
 
+
 # 12- 관광지, 14 -문화생활, 28-레포츠, 38-쇼핑
 @api_view(['GET'])
 def spot_list(request, spot_id):
@@ -38,18 +39,16 @@ def spot_list(request, spot_id):
             # JWT 디코딩
             user_id = decode_jwt(token)
 
-
             object_id = user_id['sub']
 
             user_result = collection.find({'_id': ObjectId(object_id)})       
             # 사용자 정보 
             user = list(user_result)[0]
 
-            # 갔던곳, 선호 관광지 배열 > 여러 개 
-            visitLocation = user['survey']['visitLocation']
-    
             # 사용자가 취향 설문을 했을 때 
-            if len(user['survey']) > 1:
+            try:
+                 # 갔던곳, 선호 관광지 배열 > 여러 개 
+                visitLocation = user['survey']['visitLocation']
                 # 선호 시간 > 1시간 50000
                 userTime = user['survey']['preferredTime']
 
@@ -62,23 +61,31 @@ def spot_list(request, spot_id):
                 result_df = neartime_find(preferredTime,departure, target_collection)
                 # 취향 설문 >  무장애 타입, 갔던 관광지, 인기관광지 여부 
                 result_data = survey_recommend(user, spot_id, result_df, visitLocation)
+
+                # 필요한 컬럼만 추출
+                selected_column = result_data[['contentid','contenttypeid', 'title','firstimage']]
+                selected_column = selected_column.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl'})
+                selected_column["liked"] = False
+                dict_data = selected_column.to_dict(orient='records')
             
             # 취향 설문 안했을때 인기순
-            else:
+            except:
                 spots = RecommendTour.objects.all()
                 se = RecommendTourSerializer(spots, many=True)
                 data = pd.DataFrame(se.data) 
-                result_data = popular_sorted(spot_id, data)
-
-            # 필요한 컬럼만 추출
-            selected_column = result_data[['contentid','contenttypeid', 'title','firstimage']]
-            selected_column = selected_column.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl'})
-            selected_column["liked"] = False
-            dict_data = selected_column.to_dict(orient='records')
-        
+                dict_data = popular_sorted(spot_id, data)
 
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
+        # 로그인 안했을때, 인기순
+        except IndexError:
+            spots = RecommendTour.objects.all()
+            se = RecommendTourSerializer(spots, many=True)
+            data = pd.DataFrame(se.data) 
+            dict_data = popular_sorted(12, data)
+        
+            return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
+
         except Exception as e:
             logging.error(str(e), exc_info=True)
     
@@ -91,60 +98,16 @@ def food_list(request):
     logging.info('식당 추천 시작')
     if(request.method == 'POST'):
         try:
-            food_id = 39
-            # 최근 검색 관광지 정보 찾기 
-            request_body = request.body.decode('utf-8')
-            request_dict = json.loads(request_body)
-
-            recently_contentid = request_dict['contentid']
-
-            find_result = target_collection.find({'contentid': recently_contentid})
-
-            find_result_list = list(find_result)[0]
-
-            mapx = find_result_list['location']['coordinates']['mapx']
-            mapy = find_result_list['location']['coordinates']['mapy']
-             # 출발지 배열 > 출발지 배열 
-            departure = [mapx, mapy]
-            
-            # JWT 토큰 추출
-            token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
-
-            # JWT 디코딩
-            user_id = decode_jwt(token)
-
-            object_id = user_id['sub']
-
-            user_result = collection.find({'_id': ObjectId(object_id)}) 
-
-            # 사용자 정보 
-            user = list(user_result)[0]
-
-            # 선호 시간 가장 가까이 30분 거리 
-            preferredTime = 25000
-    
-            # 30분 거리 
-            result_df = neartime_find(preferredTime, departure, target_collection)
-
-            # 사용자가 취향 설문을 했을 때 
-            if len(user['survey']) > 1:
-                
-                # 취향설문 갔던곳, 선호 관광지 배열 > 여러 개 
-                visitLocation = user['survey']['visitLocation']
-
-                # 취향 설문 >  무장애 타입, 갔던 관광지, 인기관광지 여부 
-                result_data = survey_recommend(user, food_id, result_df, visitLocation)
-            
-            # 취향 설문 안했을때 근처에서 인기순, 근처 거리에 관광지가 없을때 그냥 인기순 
-            else:
-                result_data = popular_sorted(food_id, result_df)
-
-            # 필요한 컬럼만 추출
-            selected_column = result_data[['contentid','contenttypeid', 'title','firstimage']]
-            selected_column = selected_column.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl'})
-            selected_column["liked"] = False
-            dict_data = selected_column.to_dict(orient='records')
+            dict_data = recommend_logic(request, 39)
+            return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
+        # 로그인 안했을때, 인기순
+        except ValueError:
+            spots = RecommendTour.objects.all()
+            se = RecommendTourSerializer(spots, many=True)
+            data = pd.DataFrame(se.data) 
+
+            dict_data = popular_sorted(39, data)
 
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
@@ -153,7 +116,90 @@ def food_list(request):
     
     return JsonResponse({'message': 'food_list error'}, status=status.HTTP_404_NOT_FOUND)
 
+# 숙박 추천 
+@api_view(['POST'])
+def stay_list(request):
+    logging.basicConfig(level=logging.INFO)
+    logging.info('숙박 추천 시작')
+    if(request.method == 'POST'):
+        try:
+            dict_data = recommend_logic(request, 32)
+            return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
+        
+        # 로그인 안했을때, 인기순
+        except ValueError:
+            spots = RecommendTour.objects.all()
+            se = RecommendTourSerializer(spots, many=True)
+            data = pd.DataFrame(se.data) 
+            dict_data = popular_sorted(32, data)
+        
+            return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
+        
+        except Exception as e:
+            logging.error(str(e), exc_info=True)
+    
+    return JsonResponse({'message': 'stay_list error'}, status=status.HTTP_404_NOT_FOUND)
 
+
+# 식당 & 숙박 추천 알고리즘 
+def recommend_logic(request, contenttypeid):
+            
+    # 최근 검색 관광지 정보 찾기 
+    request_body = request.body.decode('utf-8')
+    request_dict = json.loads(request_body)
+
+    recently_contentid = request_dict['contentid']
+
+    find_result = target_collection.find({'contentid': recently_contentid})
+
+    find_result_list = list(find_result)[0]
+
+    mapx = find_result_list['location']['coordinates']['mapx']
+    mapy = find_result_list['location']['coordinates']['mapy']
+        # 출발지 배열 > 출발지 배열 
+    departure = [mapx, mapy]
+    
+    # JWT 토큰 추출
+    token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
+
+    # JWT 디코딩
+    user_id = decode_jwt(token)
+
+    object_id = user_id['sub']
+
+    user_result = collection.find({'_id': ObjectId(object_id)}) 
+
+    # 사용자 정보 
+    user = list(user_result)[0]
+
+    # 선호 시간 가장 가까이 30분 거리 
+    preferredTime = 25000
+
+    # 30분 거리 
+    result_df = neartime_find(preferredTime, departure, target_collection)
+
+    # 사용자가 취향 설문을 했을 때 
+    try: 
+        # 취향설문 갔던곳, 선호 관광지 배열 > 여러 개 
+        visitLocation = user['survey']['visitLocation']
+
+        # 취향 설문 >  무장애 타입, 갔던 관광지, 인기관광지 여부 
+        result_data = survey_recommend(user, contenttypeid, result_df, visitLocation)
+
+
+         # 필요한 컬럼만 추출
+        selected_column = result_data[['contentid','contenttypeid', 'title','firstimage']]
+        selected_column = selected_column.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl'})
+        selected_column["liked"] = False
+        dict_data = selected_column.to_dict(orient='records')
+
+    
+    # 취향 설문 안했을때 근처에서 인기순, 근처 거리에 관광지가 없을때 그냥 인기순 
+    except:
+        dict_data = popular_sorted(contenttypeid, result_df)
+
+   
+    return dict_data
 
 
 # 사용자 취향 설문 없을때 인기 순으로 
@@ -163,11 +209,18 @@ def popular_sorted(contenttype_id, data):
     columns_name = ['contentid','contenttypeid','deaf','visual_impaired','mobility_weak', 'old', 'infant','searchcount']
     for name in columns_name:
         data[name] = data[name].apply(lambda x: int(float(x)))
-
     type_data = data[data['contenttypeid'] == int(contenttype_id)] 
     result_data = type_data.sort_values(by='searchcount', ascending=False).head(4)
 
-    return result_data
+    # 필요한 컬럼만 추출
+    selected_column = result_data[['contentid','contenttypeid', 'title','firstimage']]
+    selected_column = selected_column.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl'})
+    selected_column["liked"] = False
+    dict_data = selected_column.to_dict(orient='records')
+
+    logging.info("인기순 종료!!!====================")
+
+    return dict_data
 
 
 # 선호 시간(거리)로 데이터 찾기 
@@ -242,12 +295,10 @@ def survey_recommend(user, spot_id, result_df, visitLocation):
     # 추천 결과 
     result_data = pd.DataFrame()
     for i in recommend_tour:
-        target_data = type_data[type_data['title'] == i[0]]
+        target_data = type_data[type_data['contentid'] == i[0]]
         result_data = pd.concat([result_data,target_data])
 
     return result_data 
-
-
 
 
 # 토큰 디코딩 
@@ -265,13 +316,14 @@ def decode_jwt(token):
 
 
 # 텍스트 유사도 추천 알고리즘 
-def tfidf_matrix(keyword_title,review_data):
+def tfidf_matrix(contentid,review_data):
+  logging.info("텍스트 유사도!============")
   tfidf = TfidfVectorizer(max_features=500, stop_words='english')
   tfidf_matrix = tfidf.fit_transform(review_data['keyword_result'])
   cosine_matrix = cosine_similarity(tfidf_matrix, tfidf_matrix)
   #  title와 id를 매핑할 dictionary를 생성해줍니다. 
   title2idx = {}
-  for i, c in enumerate(review_data['title']): 
+  for i, c in enumerate(review_data['contentid']): 
       title2idx[i] = c
 
   # id와 title를 매핑할 dictionary를 생성해줍니다. 
@@ -280,11 +332,11 @@ def tfidf_matrix(keyword_title,review_data):
       idx2title[c] = i
 
 
-  idx = idx2title[keyword_title]
+  idx = idx2title[contentid]
   sim_scores = [(i, c) for i, c in enumerate(cosine_matrix[idx]) if i != idx] # 자기 자신을 제외한 관광지들의 유사도 및 인덱스를 추출 
   sim_scores = sorted(sim_scores, key = lambda x: x[1], reverse=True) # 유사도가 높은 순서대로 정렬 
   sim_scores = [(title2idx[i], score) for i, score in sim_scores[0:4]]
-  logging.info("텍스트 유사도!============")
+
   
   return sim_scores
 
@@ -326,12 +378,17 @@ def popular_concat(data, target_data):
 def popular_recommend(popular_data, target_data):
     recommend_result = []
     for i in range(len(target_data)):
-        title = target_data['title'].values[i]
-        recommend_tour = tfidf_matrix(title, popular_data)
+        contentid = target_data['contentid'].values[i]
+        recommend_tour = tfidf_matrix(contentid, popular_data)
         recommend_result.append(recommend_tour)
     
-    recommend_list = sum(recommend_result, [])
+    # 중복제거 
+    sum_data = sum(recommend_result, [])
+
+    recommend_list = [t for i, t in enumerate(sum_data) if t[0] not in [d[0] for d in sum_data[:i]]]
+
     # 유사도가 높은 순서대로 정렬 
+
     result_list = sorted(recommend_list, key = lambda x: x[1], reverse=True)[0:4]
     logging.info("유사도 높은 순서대로 추천!============")
 
