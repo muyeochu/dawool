@@ -1,43 +1,34 @@
 import React from "react";
-import { useRecoilValue, selector } from "recoil";
-import {
-  RestaurantListSelector,
-  AccommodationListSelector,
-  TourSpotListSelector,
-  CultureListSelector,
-  LeportsListSelector,
-  ShoppingListSelector,
-} from "../../../../recoil/TripListSelector";
+import { useRecoilValue } from "recoil";
+import { getListSelector } from "../../../../recoil/TripListSelector";
 import TripCardItem from "../tripCardItem";
 import { TripCardListContainer } from "./styles";
-import { TripListTitleType, ListType } from "../../../../types/tripListTypes";
+import { ListType, TripListTitleType } from "../../../../types/tripListTypes";
+import { citiesState } from "../../../../recoil/RegionState";
 
-const emptyListSelector = selector<ListType[]>({
-  key: "emptyListSelector",
-  get: () => [],
-});
+interface TripCardListProps {
+  titleType: TripListTitleType["titleType"];
+  tripList: ListType[];
+}
 
-function TripCardList({ titleType }: TripListTitleType) {
-
-  let etcTripList = useRecoilValue<ListType[]>(
-    titleType === "restaurant"
-      ? RestaurantListSelector
-      : titleType === "accommodation"
-      ? AccommodationListSelector
-      : titleType === "tourSpot"
-      ? TourSpotListSelector
-      : titleType === "culture"
-      ? CultureListSelector
-      : titleType === "leports"
-      ? LeportsListSelector
-      : titleType === "shopping"
-      ? ShoppingListSelector
-      : emptyListSelector
+function TripCardList({ titleType, tripList }: TripCardListProps) {
+  const cityList = useRecoilValue(citiesState);
+  const selectedCity = cityList?.find((city) => city.id) ?? { id: 1 };
+  const filteredList = useRecoilValue(
+    getListSelector({
+      titleType,
+      citySelected: selectedCity.id,
+      area: selectedCity.id,
+      barrier: "10000",
+      page: 0,
+      size: 10,
+    })
   );
+  // console.log(filteredList)
 
   return (
     <TripCardListContainer>
-      {etcTripList && etcTripList.map((item) => (
+      {filteredList && filteredList.map((item: ListType) => (
         <TripCardItem key={item.contentId} contents={item} />
       ))}
     </TripCardListContainer>

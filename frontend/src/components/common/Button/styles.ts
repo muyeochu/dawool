@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { white, black, mainColor, grey, blue } from "../../../styles/Colors";
 
 interface StyledButtonProps {
-  isClicked: boolean;
+  isclicked: string;
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
@@ -12,7 +12,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   justify-content: center;
   padding: 12px 28px;
   gap: 5px;
-  background-color: ${({ isClicked }) => (isClicked ? mainColor : white)};
+  background-color: ${({ isclicked }) => (isclicked === "true" ? mainColor : white)};
   color: "black";
   font-size: 18px;
   font-weight: 700;
@@ -24,7 +24,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   &:hover:enabled {
     background-color: ${blue[300]};
     border: 3px solid ${blue[300]};
-    color: ${({ isClicked }) => (isClicked ? black : white)};
+    color: ${({ isclicked }) => (isclicked === "true" ? black : white)};
   }
 
   &:disabled {
@@ -44,12 +44,12 @@ export const ButtonText = styled.span<StyledButtonProps>`
   align-items: center;
   text-align: center;
 
-  color: ${({ isClicked }) => (isClicked ? white : black)};
+  color: ${({ isclicked }) => (isclicked === "true" ? white : black)};
 `;
 
 // 버튼 안의 이미지 스타일 지정
 export const ButtonIcon = styled.img<StyledButtonProps>`
   width: 20px;
   height: 20px;
-  filter: ${({ isClicked }) => (isClicked ? "brightness(100%)" : "brightness(0%)")};
+  filter: ${({ isclicked }) => (isclicked === "true" ? "brightness(100%)" : "brightness(0%)")};
 `;
