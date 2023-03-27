@@ -1,5 +1,4 @@
 import { atom, selector, selectorFamily, SerializableParam } from "recoil";
-import { v1 } from "uuid";
 import axios from "axios";
 import { customAxios } from "./customAxios";
 import { ListType } from "../types/tripListTypes";
@@ -29,6 +28,7 @@ export const getListSelector = selectorFamily<ListType[], ListSelectorProps>({
   key: "getListSelector",
   get: ({ titleType, area, barrier, page, size }) => async ({ get }) => {
     const selectedCity = get(citySelectedState) as number;
+    // console.log(selectedCity)
     const contentTypeId = getContentTypeId(titleType);
     try {
       const response = await customAxios.get(
