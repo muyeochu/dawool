@@ -40,3 +40,11 @@ export const TitleContainer = styled.div`
     }
   }
 `;
+
+export const ButtonList = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+`;
+

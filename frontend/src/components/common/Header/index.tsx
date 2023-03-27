@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { searchState } from "../../../recoil/SearchSelector";
 
 import { ParamTypes } from "../../../recoil/SearchSelector";
@@ -43,7 +43,8 @@ const Header = () => {
   let currentUrl = window.location.pathname;
 
   const [searchInput, setSearchInput] = useRecoilState(searchState);
-  const searchInput2 = useRecoilValue(searchState);
+
+  const resetSearchInput = useResetRecoilState(searchState);
 
   const [search, setSearch] = useState("");
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -85,22 +86,26 @@ const Header = () => {
     e: React.MouseEvent | React.KeyboardEvent<HTMLInputElement>
   ) => {
     // 공백 검사
-    const blank_pattern = /^\s+|\s+$/g;
-    if (search.replace(blank_pattern, "") === "") {
+    const blankPattern = /^\s+|\s+$/g;
+    if (search.replace(blankPattern, "") === "") {
+      alert("공백은 입력할 수 없습니다!");
       console.log("아무것도 입력되지 않음!");
+      resetSearchInput();
       setSearch("");
       return;
     }
 
-    console.log("원래state는?", searchInput2);
-    const newParam: any = {
-      title: search,
-      ...searchState,
-    };
+    // 특수문자 검사
+    const specialPattern = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
+    if (specialPattern.test(search) === true) {
+      alert("특수문자는 입력할 수 없습니다!");
+      console.log("특수문자 입력됨!");
+      resetSearchInput();
+      setSearch("");
+      return;
+    }
 
-    console.log("새 param은?", newParam);
-    setSearchInput(newParam);
-    console.log("검색어는?", searchInput2);
+    setSearchInput({ ...searchInput, title: search });
     navigate("/search", { state: search });
   };
 

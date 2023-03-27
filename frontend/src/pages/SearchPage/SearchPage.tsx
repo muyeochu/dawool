@@ -2,16 +2,17 @@ import { useLocation } from "react-router-dom";
 import SearchList from "../../components/search/index";
 
 import { useRecoilValue } from "recoil";
-import {
-
-  getSearchSelector,
-} from "../../recoil/SearchSelector";
+import { searchState, getSearchSelector } from "../../recoil/SearchSelector";
 
 import { MainGridItems, RowGridContainer, RowGridItems } from "./styles";
+
 
 const SearchPage = () => {
   const location = useLocation();
   const word: string = location.state;
+  const searchInput = useRecoilValue(searchState);
+
+  console.log("검색어는?", searchInput);
 
   const searchData = useRecoilValue(
     getSearchSelector({

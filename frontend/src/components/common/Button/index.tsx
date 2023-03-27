@@ -12,6 +12,7 @@ import toddlerIc from "../../../assets/icon/toddlerIc.svg";
 
 // children -> 하나의 자식 노드만 전달
 interface ButtonProps {
+  ref?: any;
   onClick?: () => void;
   disabled?: boolean;
   children: React.ReactNode;
