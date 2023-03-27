@@ -2,15 +2,15 @@ import { atom, selector, selectorFamily, SerializableParam } from "recoil";
 
 import { getDetailApi } from "./Api";
 
-import { accommodationTypes } from "../types/accommodationTypes";
+import { DetailCommonTypes } from "../types/accommodationTypes";
 
-interface ParamType {
+interface ParamTypes {
   contentId: any;
   location: number;
   [key: string]: SerializableParam;
 }
 
-export const getDataSelector = selectorFamily<accommodationTypes, ParamType>({
+export const getDataSelector = selectorFamily<DetailCommonTypes, ParamTypes>({
   key: "getDataSelector",
   get:
     ({ contentId, location }) =>
@@ -18,7 +18,6 @@ export const getDataSelector = selectorFamily<accommodationTypes, ParamType>({
       try {
         const response = await getDetailApi(contentId, location);
         const data = await response.data;
-        console.log(data);
         return data;
       } catch (error) {
         console.error(error);
