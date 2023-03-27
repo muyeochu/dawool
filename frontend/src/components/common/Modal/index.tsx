@@ -49,10 +49,12 @@ const Modal = () => {
 
       {modalDataState.isOpen && modalDataState.type === "barrier" && (
         <ModalDimmer>
-          <ModalContainer>
+          <ModalContainer className="barrier">
             <ModalTitle>{modalDataState.title}</ModalTitle>
-            <ModalContents>{modalDataState.content}</ModalContents>
-            <ModalFooter>
+            <ModalContents className="barrier">
+              {modalDataState.content}
+            </ModalContents>
+            <ModalFooter className="barrier">
               <ModalBtn onClick={closeModal}>닫기</ModalBtn>
             </ModalFooter>
           </ModalContainer>

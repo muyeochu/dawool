@@ -5,13 +5,8 @@ import { useRecoilValue } from "recoil";
 import { getDataSelector } from "../../recoil/DetailSelectors";
 
 import { MainGridItems, RowGridContainer, RowGridItems } from "./styles";
-import { useParams } from "react-router-dom";
 
 const AccommodationDetailPage = () => {
-  // contentid
-  // const { contentId }: any = useParams();
-  // console.log("id는?", contentId);
-
   const location = useLocation();
   const pathArray = location.pathname.split("/");
 

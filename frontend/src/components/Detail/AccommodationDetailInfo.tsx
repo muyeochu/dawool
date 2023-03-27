@@ -5,14 +5,36 @@ const AccommodationDetailInfo = ({ myData }: any) => {
     <InfoBox>
       <ul>
         <li>
-          <b>입실 시간</b>
-          <InfoFontStyle>{myData.info.checkInTime}</InfoFontStyle>
+          <b>주소</b>
+          <InfoFontStyle>
+            {myData.info.addr1 === "0" ? "없음" : myData.info.addr1}
+          </InfoFontStyle>
+        </li>
+        <li>
+          <b>홈페이지</b>
+          <InfoFontStyle>
+            {myData.info.homepage === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.homepage }}
+              />
+            )}
+          </InfoFontStyle>
+        </li>
+        <li>
+          <b>입실시간</b>
+          <InfoFontStyle>
+            {myData.info.checkInTime === "0" ? "없음" : myData.info.checkInTime}
+          </InfoFontStyle>
         </li>
         <li>
           <b>
-            퇴실 시간
+            퇴실시간
             <InfoFontStyle>
-              {myData.info.checkOutTime ? myData.info.checkOutTime : "없음"}
+              {myData.info.checkOutTime === "0"
+                ? "없음"
+                : myData.info.checkOutTime}
             </InfoFontStyle>
           </b>
         </li>
@@ -35,7 +57,7 @@ const AccommodationDetailInfo = ({ myData }: any) => {
           </InfoFontStyle>
         </li>
         <li>
-          <b>주차 시설</b>
+          <b>주차시설</b>
           <InfoFontStyle>
             {myData.info.commonParking === "0"
               ? "없음"
@@ -49,15 +71,19 @@ const AccommodationDetailInfo = ({ myData }: any) => {
           </InfoFontStyle>
         </li>
         <li>
-          <b>예약 안내 홈페이지</b>
+          <b>예약안내 홈페이지</b>
           <InfoFontStyle>
-            {myData.info.reservationUrl === "0"
-              ? "없음"
-              : myData.info.reservationUrl}
+            {myData.info.reservationUrl === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.reservationUrl }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>부대 시설</b>
+          <b>부대시설</b>
           <InfoFontStyle>
             {myData.info.subFacility === "0" ? "없음" : myData.info.subFacility}
           </InfoFontStyle>
@@ -109,11 +135,11 @@ const AccommodationDetailInfo = ({ myData }: any) => {
           <InfoFontStyle>{myData.info.sauna ? "있음" : "없음"}</InfoFontStyle>
         </li>
         <li>
-          <b>스포츠 시설</b>
+          <b>스포츠시설</b>
           <InfoFontStyle>{myData.info.sports ? "있음" : "없음"}</InfoFontStyle>
         </li>
         <li>
-          <b>환불 규정</b>
+          <b>환불규정</b>
           <InfoFontStyle>
             {myData.info.refundRegulation === "0"
               ? "없음"
