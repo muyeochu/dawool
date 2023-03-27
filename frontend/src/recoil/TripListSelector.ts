@@ -28,7 +28,7 @@ export const getListSelector = selectorFamily<ListType[], ListSelectorProps>({
   key: "getListSelector",
   get: ({ titleType, area, barrier, page, size }) => async ({ get }) => {
     const selectedCity = get(citySelectedState) as number;
-    console.log(selectedCity)
+    // console.log(selectedCity)
     const contentTypeId = getContentTypeId(titleType);
     try {
       const response = await customAxios.get(

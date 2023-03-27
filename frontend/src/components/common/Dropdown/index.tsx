@@ -46,7 +46,6 @@ export default function Dropdown({ itemList, onSelected }: DropdownProps) {
       const city = cities.find((city) => city.name === item);
       if (city) {
         setCitySelected(+city.id);
-        console.log("!!!!!여기!", city.id);
         setDropdownValue((prev) => ({
           ...prev,
           selectedTripListTitle: item,
@@ -75,8 +74,6 @@ export default function Dropdown({ itemList, onSelected }: DropdownProps) {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
-
-  // console.log(citySelected);
 
   return (
     <DropdownContainer
