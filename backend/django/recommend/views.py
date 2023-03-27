@@ -121,9 +121,6 @@ def food_list(request):
             # 사용자 정보 
             user = list(user_result)[0]
 
-            # 갔던곳, 선호 관광지 배열 > 여러 개 
-            visitLocation = user['survey']['visitLocation']
-
             # 선호 시간 가장 가까이 30분 거리 
             preferredTime = 25000
     
@@ -132,6 +129,10 @@ def food_list(request):
 
             # 사용자가 취향 설문을 했을 때 
             if len(user['survey']) > 1:
+                
+                # 취향설문 갔던곳, 선호 관광지 배열 > 여러 개 
+                visitLocation = user['survey']['visitLocation']
+
                 # 취향 설문 >  무장애 타입, 갔던 관광지, 인기관광지 여부 
                 result_data = survey_recommend(user, food_id, result_df, visitLocation)
             
