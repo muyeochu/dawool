@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Suspense } from "react";
 import KakaoAuthHandle from "./components/auth/KakaoAuthHandle";
-import Loading from "./components/common/Loading";
 import {
   AccommodationPage,
   AccommodationDetailPage,
