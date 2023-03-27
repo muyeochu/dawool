@@ -27,6 +27,8 @@ import Header from "./components/common/Header";
 import ScrollToTop from "./components/utils/ScrollToTop";
 import Modal from "./components/common/Modal";
 
+import Loading from "./components/common/Loading";
+
 import {
   AppContainer,
   GridContainer,
@@ -48,46 +50,63 @@ function App() {
               <Route
                 path="/detail/accommodation/:id"
                 element={
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={<Loading />}>
                     <AccommodationDetailPage />
                   </Suspense>
                 }
               />
               <Route
                 path="/detail/culture/:id"
-                element={<CultureDetailPage />}
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <CultureDetailPage />
+                  </Suspense>
+                }
               />
               <Route
                 path="/detail/leports/:id"
-                element={<LeportsDetailPage />}
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <LeportsDetailPage />
+                  </Suspense>
+                }
               />
               <Route
                 path="/detail/restaurant/:id"
-                element={<RestaurantDetailPage />}
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <RestaurantDetailPage />
+                  </Suspense>
+                }
               />
               <Route
                 path="/detail/shopping/:id"
-                element={<ShoppingDetailPage />}
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ShoppingDetailPage />
+                  </Suspense>
+                }
               />
               <Route
                 path="/detail/tourspot/:id"
-                element={<TourSpotDetailPage />}
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <TourSpotDetailPage />
+                  </Suspense>
+                }
               />
 
               <Route path="/interest" element={<InterestPage />} />
               <Route
                 path="/accommodation"
                 element={
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={<Loading />}>
                     <AccommodationPage />
                   </Suspense>
                 }
               />
               <Route path="/login" element={<LoginPage />} />
-              <Route
-                path="/callback"
-                element={<KakaoAuthHandle />}
-              ></Route>
+              <Route path="/callback" element={<KakaoAuthHandle />}></Route>
               <Route path="/mycourse" element={<MyCoursePage />} />
               <Route path="/restaurant" element={<RestaurantPage />} />
               <Route path="/search" element={<SearchPage />} />
