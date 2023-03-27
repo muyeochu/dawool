@@ -89,7 +89,6 @@ def spot_list(request, spot_id):
 def food_list(request):
     logging.basicConfig(level=logging.INFO)
     logging.info('식당 추천 시작')
-    # 나중에는 get으로 전부 바꿔야함 
     if(request.method == 'POST'):
         try:
             food_id = 39
@@ -166,7 +165,7 @@ def popular_sorted(contenttype_id, data):
         data[name] = data[name].apply(lambda x: int(float(x)))
 
     type_data = data[data['contenttypeid'] == int(contenttype_id)] 
-    result_data = type_data.sort_values(by='Salary', ascending=False).head(4)
+    result_data = type_data.sort_values(by='searchcount', ascending=False).head(4)
 
     return result_data
 
