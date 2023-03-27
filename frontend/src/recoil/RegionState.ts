@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, useSetRecoilState } from "recoil";
 import { City, District } from "../types/regionTypes";
 
 // 광역시도
@@ -1196,20 +1196,22 @@ const districts: District[] = [
   },
 ];
 
-// export const cityState = atom<number>({
-//   key: "cityState",
-//   default: 1,
-// });
-
 export const citiesState = atom<City[]>({
   key: "citiesState",
   default: cities,
 });
 
+// 현재 선택된 도시의 ID 저장
 export const citySelectedState = atom<number>({
   key: "citySelectedState",
   default: 1,
 });
+
+// 선택된 도시의 ID 변경하는 함수 반환
+export const useSetCitySelectedState = () => {
+  const setCitySelected = useSetRecoilState(citySelectedState);
+  return (newCityId: number) => setCitySelected(newCityId);
+};
 
 export const districtState = atom({
   key: "districtState",
