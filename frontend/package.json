@@ -14,6 +14,7 @@
     "lottie-react": "^2.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-intersection-observer": "^9.4.3",
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.8.9",
@@ -50,6 +51,7 @@
   },
   "devDependencies": {
     "@types/react-scroll": "^1.8.6",
-    "@types/styled-components": "^5.1.26"
+    "@types/styled-components": "^5.1.26",
+    "@types/uuid": "^9.0.1"
   }
 }

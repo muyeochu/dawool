@@ -39,8 +39,8 @@ export default function Q1Button({ id, onClick, children, isClicked }: ButtonPro
   }
 
   return (
-    <StyledButton onClick={handleClick} isClicked={isClickedState}>
-      <ButtonText isClicked={isClickedState}>{children}</ButtonText>
+    <StyledButton onClick={handleClick} isclicked={isClickedState}>
+      <ButtonText isclicked={isClickedState}>{children}</ButtonText>
     </StyledButton>
   );
 }

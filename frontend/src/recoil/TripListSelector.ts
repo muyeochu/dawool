@@ -1,107 +1,66 @@
-import { atom, selector } from "recoil";
+import { atom, selector, selectorFamily, SerializableParam } from "recoil";
+import { v1 } from "uuid";
 import axios from "axios";
 import { customAxios } from "./customAxios";
 import { ListType } from "../types/tripListTypes";
+import { citySelectedState } from "./RegionState";
 
-const getTripListData = (
-  contentTypeId: number,
-  area: number,
-  barrier: string,
-  page: number,
-  size: number
-): Promise<ListType[]> =>
-  customAxios
-    .get(
-      `location/list/${contentTypeId}?area=${area}&barrier=${barrier}&page=${page}&size=${size}`
-    )
-    .then((response) => {
-      // console.log(response.data);
-      return response.data.contents;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+// titleType 타입 정의
+type TitleType =
+  | "restaurant"
+  | "accommodation"
+  | "tourSpot"
+  | "culture"
+  | "leports"
+  | "shopping";
 
-// 식당 목록
-export const RestaurantListSelector = selector<ListType[]>({
-  key: "RestaurantListSelector",
-  get: async () => {
+interface ListSelectorProps {
+  titleType: TitleType;
+  area: number;
+  citySelected?: number;
+  barrier: string;
+  page: number;
+  size: number;
+  [key: string]: SerializableParam;
+}
+
+// 여행지 목록 가져오는 selector
+export const getListSelector = selectorFamily<ListType[], ListSelectorProps>({
+  key: "getListSelector",
+  get: ({ titleType, area, barrier, page, size }) => async ({ get }) => {
+    const selectedCity = get(citySelectedState) as number;
+    const contentTypeId = getContentTypeId(titleType);
     try {
-      const restaurantList = await getTripListData(39, 1, "10000", 0, 10);
-
-      return restaurantList;
-    } catch (err) {
-      throw err;
+      const response = await customAxios.get(
+        `location/list/${contentTypeId}?area=${selectedCity}&barrier=${barrier}&page=${page}&size=${size}`
+      );
+      return response.data.contents.map((item: ListType) => ({
+        ...item,
+        category: titleType,
+      }));
+    } catch (error) {
+      console.error(error);
+      return [];
     }
   },
 });
 
-// 숙박 목록
-export const AccommodationListSelector = selector<ListType[]>({
-  key: "AccommodationListSelector",
-  get: async () => {
-    try {
-      const accommodationList = await getTripListData(32, 1, "10000", 0, 10);
-
-      return accommodationList;
-    } catch (err) {
-      throw err;
-    }
-  },
-});
-
-// 관광지 목록
-export const TourSpotListSelector = selector<ListType[]>({
-  key: "TourSpotListSelector",
-  get: async () => {
-    try {
-      const tourSpotList = await getTripListData(12, 1, "10000", 0, 10);
-
-      return tourSpotList;
-    } catch (err) {
-      throw err;
-    }
-  },
-});
-
-// 문화시설 목록
-export const CultureListSelector = selector<ListType[]>({
-  key: "CultureListSelector",
-  get: async () => {
-    try {
-      const cultureList = await getTripListData(14, 1, "10000", 0, 10);
-
-      return cultureList;
-    } catch (err) {
-      throw err;
-    }
-  },
-});
-
-// 레포츠 목록
-export const LeportsListSelector = selector<ListType[]>({
-  key: "LeportsListSelector",
-  get: async () => {
-    try {
-      const leportsList = await getTripListData(28, 1, "00000", 0, 10);
-
-      return leportsList;
-    } catch (err) {
-      throw err;
-    }
-  },
-});
-
-// 쇼핑 목록
-export const ShoppingListSelector = selector<ListType[]>({
-  key: "ShoppingListSelector",
-  get: async () => {
-    try {
-      const shoppingList = await getTripListData(38, 1, "00000", 0, 10);
-
-      return shoppingList;
-    } catch (err) {
-      throw err;
-    }
-  },
-});
+// titleType에 따른 contentTypeId 반환하는 함수
+const getContentTypeId = (titleType: string) => {
+  switch (titleType) {
+    case "restaurant":
+      return 39;
+    case "accommodation":
+      return 32;
+    case "tourSpot":
+      return 12;
+    case "culture":
+      return 14;
+    case "leports":
+      return 28;
+    case "shopping":
+      return 38;
+    default:
+      throw new Error(`Invalid titleType: ${titleType}`);
+  }
+};
