@@ -12,7 +12,7 @@ from django.conf import settings
 from bson import ObjectId
 from pymongo import MongoClient
 import base64
-
+import json
 
 
 DATABASE_URL = settings.DATABASES['default']['CLIENT']['host']
@@ -22,6 +22,9 @@ client = MongoClient(DATABASE_URL)
 db = client.S08P22D105 # 데이터베이스 
 
 target_collection = db.recommend_tour
+
+collection = db.user # 컬렉션 
+
 # 12- 관광지, 14 -문화생활, 28-레포츠, 38-쇼핑
 @api_view(['GET'])
 def spot_list(request, spot_id):
@@ -35,7 +38,6 @@ def spot_list(request, spot_id):
             # JWT 디코딩
             user_id = decode_jwt(token)
 
-            collection = db.user # 컬렉션 
 
             object_id = user_id['sub']
 
@@ -48,15 +50,25 @@ def spot_list(request, spot_id):
     
             # 사용자가 취향 설문을 했을 때 
             if len(user['survey']) > 1:
+                # 선호 시간 > 1시간 50000
+                userTime = user['survey']['preferredTime']
+
+                preferredTime = int(userTime) * 50000
+    
+                # 출발지 배열 > 출발지 배열 
+                departure = user['survey']['departure']
                 
                 # 취향 설문  >  선호 거리 
-                result_df = neartime_find(user, target_collection)
+                result_df = neartime_find(preferredTime,departure, target_collection)
                 # 취향 설문 >  무장애 타입, 갔던 관광지, 인기관광지 여부 
                 result_data = survey_recommend(user, spot_id, result_df, visitLocation)
             
             # 취향 설문 안했을때 인기순
             else:
-                result_data = popular_sorted(spot_id)
+                spots = RecommendTour.objects.all()
+                se = RecommendTourSerializer(spots, many=True)
+                data = pd.DataFrame(se.data) 
+                result_data = popular_sorted(spot_id, data)
 
             # 필요한 컬럼만 추출
             selected_column = result_data[['contentid','contenttypeid', 'title','firstimage']]
@@ -72,20 +84,29 @@ def spot_list(request, spot_id):
     
     return JsonResponse({'message': 'spot_list error'}, status=status.HTTP_404_NOT_FOUND)
 
-
-@api_view(['GET'])
-def food_list(request, food_id):
+# 식당 추천 
+@api_view(['POST'])
+def food_list(request):
     logging.basicConfig(level=logging.INFO)
     logging.info('식당 추천 시작')
     # 나중에는 get으로 전부 바꿔야함 
-    if(request.method == 'GET'):
+    if(request.method == 'POST'):
         try:
+            food_id = 39
+            # 최근 검색 관광지 정보 찾기 
+            request_body = request.body.decode('utf-8')
+            request_dict = json.loads(request_body)
 
-            # 최근 검색 관광지 
-            recently_contentid = request['contentid']
+            recently_contentid = request_dict['contentid']
 
             find_result = target_collection.find({'contentid': recently_contentid})
-            
+
+            find_result_list = list(find_result)[0]
+
+            mapx = find_result_list['location']['coordinates']['mapx']
+            mapy = find_result_list['location']['coordinates']['mapy']
+             # 출발지 배열 > 출발지 배열 
+            departure = [mapx, mapy]
             
             # JWT 토큰 추출
             token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
@@ -93,31 +114,30 @@ def food_list(request, food_id):
             # JWT 디코딩
             user_id = decode_jwt(token)
 
-            DATABASE_URL = settings.DATABASES['default']['CLIENT']['host']
-
-            client = MongoClient(DATABASE_URL)
-
-            db = client.S08P22D105 # 데이터베이스 
-            collection = db.user # 컬렉션 
-            target_collection = db.recommend_tour
-            
             object_id = user_id['sub']
 
-            user_result = collection.find({'_id': ObjectId(object_id)})       
+            user_result = collection.find({'_id': ObjectId(object_id)}) 
+
             # 사용자 정보 
             user = list(user_result)[0]
 
+            # 갔던곳, 선호 관광지 배열 > 여러 개 
+            visitLocation = user['survey']['visitLocation']
+
+            # 선호 시간 가장 가까이 30분 거리 
+            preferredTime = 25000
+    
+            # 30분 거리 
+            result_df = neartime_find(preferredTime, departure, target_collection)
+
             # 사용자가 취향 설문을 했을 때 
             if len(user['survey']) > 1:
-                
-                # 취향 설문  >  선호 거리 
-                result_df = neartime_find(user, target_collection)
                 # 취향 설문 >  무장애 타입, 갔던 관광지, 인기관광지 여부 
-                result_data = survey_recommend(user, food_id, result_df, recently_location)
+                result_data = survey_recommend(user, food_id, result_df, visitLocation)
             
-            # 취향 설문 안했을때 인기순
+            # 취향 설문 안했을때 근처에서 인기순, 근처 거리에 관광지가 없을때 그냥 인기순 
             else:
-                result_data = popular_sorted(food_id)
+                result_data = popular_sorted(food_id, result_df)
 
             # 필요한 컬럼만 추출
             selected_column = result_data[['contentid','contenttypeid', 'title','firstimage']]
@@ -131,17 +151,14 @@ def food_list(request, food_id):
         except Exception as e:
             logging.error(str(e), exc_info=True)
     
-    return JsonResponse({'message': 'spot_list error'}, status=status.HTTP_404_NOT_FOUND)
+    return JsonResponse({'message': 'food_list error'}, status=status.HTTP_404_NOT_FOUND)
 
 
 
 
 # 사용자 취향 설문 없을때 인기 순으로 
-def popular_sorted(contenttype_id):
+def popular_sorted(contenttype_id, data):
     logging.info("취향설문 없을때 인기 순!!====================")
-    spots = RecommendTour.objects.all()
-    se = RecommendTourSerializer(spots, many=True)
-    data = pd.DataFrame(se.data) 
 
     columns_name = ['contentid','contenttypeid','deaf','visual_impaired','mobility_weak', 'old', 'infant','searchcount']
     for name in columns_name:
@@ -154,18 +171,10 @@ def popular_sorted(contenttype_id):
 
 
 # 선호 시간(거리)로 데이터 찾기 
-def neartime_find(user, target_collection):
+def neartime_find(preferredTime, departure, target_collection):
     logging.info("선호 시간으로 데이터 찾기!!====================")
-    # 선호 시간 > 1시간 50000
-    userTime = user['survey']['preferredTime']
 
-    preferredTime = int(userTime) * 50000
-    
-    # 출발지 배열 > 출발지 배열 
-    departure = user['survey']['departure']
-
-
-        # 선호시간 거리 계산으로 목록 뽑기 
+    # 선호시간 거리 계산으로 목록 뽑기 
     query = {
         "location": {
             "$near": {
