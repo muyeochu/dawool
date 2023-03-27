@@ -11,6 +11,7 @@ import com.dawool.api.service.CultureFacilityService;
 import com.dawool.api.service.EntertainmentService;
 import com.dawool.api.service.LeisureSportsService;
 import com.dawool.api.service.LodgingService;
+import com.dawool.api.service.PlaceService;
 import com.dawool.api.service.RestaurantService;
 import com.dawool.api.service.ShoppingService;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,7 @@ public class PlaceController {
     private final LodgingService lodgingService;
     private final ShoppingService shoppingService;
     private final RestaurantService restaurantService;
+    private final PlaceService placeService;
 
     /**
      * 타입별 장소 목록
@@ -90,8 +92,6 @@ public class PlaceController {
                 placeList =
                         restaurantService.getRestaurantList(areaCode, barrier, page, size);
                 break;
-
-
         }
 
         Map<String, List<PlaceDto>> response = new HashMap<>();
@@ -141,5 +141,17 @@ public class PlaceController {
                 return ResponseEntity.ok(restaurantResponse);
         }
         return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * 북마크 저장 및 해제
+     *
+     * @param contentId
+     * @return
+     */
+    @GetMapping("/bookmark/{contentId}")
+    public ResponseEntity<?> heartPlace(@PathVariable("contentId") int contentId){
+        placeService.heartPlace(contentId);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }
