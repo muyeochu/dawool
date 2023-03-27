@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainColor, white, grey, black, blue } from "../../../styles/Colors";
+import { black } from "../../../styles/Colors";
 
 export const TripListContainer = styled.div``;
 

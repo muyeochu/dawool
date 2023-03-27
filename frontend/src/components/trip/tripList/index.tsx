@@ -8,8 +8,8 @@ import {
   ButtonList,
 } from "./styles";
 import TripCardList from "./tripCardList";
-import { TripListTitleType, ListType } from "../../../types/tripListTypes";
-import Dropdown, { DropdownProps } from "../../common/Dropdown";
+import { TripListTitleType } from "../../../types/tripListTypes";
+import Dropdown from "../../common/Dropdown";
 import { City } from "../../../types/regionTypes";
 import { citiesState, citySelectedState } from "../../../recoil/RegionState";
 import { getListSelector } from "../../../recoil/TripListSelector";
@@ -79,7 +79,7 @@ function TripList({ titleType }: TripListProps) {
   };
 
   return (
-    <TripListContainer>
+    <TripListContainer id="trip-list-container">
       <TripListTitle>
         {cityName} {typeText} 목록
       </TripListTitle>
