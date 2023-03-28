@@ -14,6 +14,7 @@ import { AxiosInstance } from "axios";
 import { userState } from "../../../../recoil/UserState";
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useNavigate } from "react-router-dom";
 //폴더 생성 실험용 데이터
 // const data=[
 //     {id:1, name:"111"},
@@ -23,6 +24,7 @@ import ReactDOM from 'react-dom';
 // ]
 
 export const Folders=()=>{
+    const navigate = useNavigate();
     // const baseURL = "http://j8d105.p.ssafy.io:8888";
     const baseURL = process.env.BASE_URL;
     const [folderState, setFolderState] = useRecoilState(FolderState);
@@ -72,15 +74,30 @@ async function myFunction() {
     } 
 }
 
+function intoFolder(event:any,index:number){
+    const folderContainer = event.target.parentNode;
+    const folderName = folderContainer.textContent.trim();
+    console.log(folderName)
+    setFolderState({
+        isOpen:true,
+        opendFolder:folderName,//클릭한 태그의 innerText
+        courseId:index//클릭한 태그의 숫자로 된 classname?
+    //     //Id는 백에서 받아와서 넣기??
+    //     // openFolder: props 입력받아서 그 props의 폴더 이름 넣기
+    //     //밑에서 치면 da.name이런식으로 넣기.
+    });
+}
 
 function createTag(forderList: any) {
-    // console.log(forderList["myCourse"]);
     const div = document.getElementById("folder");
     const div2 = document.createElement("div"); 
     div2.className="FolderContainer";
     console.log(div2);
-    for (const forder of forderList["myCourse"]) {
-        const element = ()=><FolderContainer><FolderYellowIc/>{forder.courseName}</FolderContainer>
+    for(let i=0;i<forderList["myCourse"].length;i++){
+        const forder = forderList["myCourse"][i];
+    // }
+    // for (const forder of forderList["myCourse"]) {
+        const element = ()=><FolderContainer onClick={(event)=>intoFolder(event,i)}><FolderYellowIc/>{forder.courseName}</FolderContainer>
         const fdContainer = document.createElement("div");
         ReactDOM.render(element(),fdContainer);
         div2.appendChild(fdContainer); 
@@ -122,11 +139,11 @@ myFunction().then(forderList=>{
     //     }
     // insertFolder();
     // }
-    function changeFolder(e:any){
-        e.preventDefault(); 
-        setInput(e.target.value);
-        // data.push(input);
-    }
+    // function changeFolder(e:any){
+    //     e.preventDefault(); 
+    //     // setInput(e.target.value);
+    //     // data.push(input);
+    // }
     function test(e:any){
         e.preventDefault(); 
         // data.push(...[{id:data.length+1, name:input}])
@@ -135,19 +152,15 @@ myFunction().then(forderList=>{
         // if(forderinput){
         //     forderinput.value="";
         // }
+        let forderinput = document.getElementById("inputName") as HTMLInputElement|null;
+        if(forderinput){
+            forderinput.value = "";
+        }
+        console.log(e.target.value);
         setInput(e.target.value); //이거하면 화면에 폴더리스트 갱신됨 히히
     }
 
-    // function intoFolder(){
-    //     setFolderState({
-    //         isOpen:true,
-    //         opendFolder:"임시",
-    //         courseId:data[0].id
-    //         //Id는 백에서 받아와서 넣기??
-    //         // openFolder: props 입력받아서 그 props의 폴더 이름 넣기
-    //         //밑에서 치면 da.name이런식으로 넣기.
-    //     });
-    // }
+   
     return(
         <>
         <FolderHeaderContainer>
@@ -159,7 +172,8 @@ myFunction().then(forderList=>{
             {/* <input placeholder="새 코스명을 입력해주세요." ></input> */}
             {/* <FolderHeaderFont>새 코스명을 입력해주세요.</FolderHeaderFont> */}
             {/* 엔터 누를 때마다 백한테 보내기. 해당 코드는 https://www.youtube.com/watch?v=gZddSM-byRE&list=PLkaAEQyMpRg-k-PZDKvqw7EChwJQXxhkI&index=3 참고하기 */}
-            <InputForderName id="inputName" type="text" required={true} value={input} onChange={changeFolder} ></InputForderName>
+            <InputForderName id="inputName" type="text" required={true} value={input}></InputForderName>
+            {/* onChange={changeFolder} */}
             </label>
             </form>
         </FolderHeaderContainer>
