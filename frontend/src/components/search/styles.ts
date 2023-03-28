@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainColor, white, black, blue, grey } from "../../styles/Colors";
+import { mainColor, grey } from "../../styles/Colors";
 
 import { ReactComponent as SearchIc } from "../../assets/icon/searchSquareIc.svg";
 
@@ -57,4 +57,20 @@ export const TripCardListContainer = styled.div`
   flex-flow: row wrap;
   gap: 25px;
   margin-top: -20px;
+`;
+
+export const NonDataContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin-top: 80px;
+
+  p {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 54px;
+    color: ${grey[500]};
+  }
 `;

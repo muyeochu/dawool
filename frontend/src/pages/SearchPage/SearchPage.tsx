@@ -28,15 +28,13 @@ const SearchPage = () => {
     })
   );
 
+  console.log("데이터좀..", searchData);
+
   return (
     <MainGridItems>
       <RowGridContainer>
         <RowGridItems>
-          {searchData ? (
-            <SearchList word={word} data={searchData} />
-          ) : (
-            <h1>아무것도 없습니다.</h1>
-          )}
+          <SearchList word={word} data={searchData} />
         </RowGridItems>
       </RowGridContainer>
     </MainGridItems>

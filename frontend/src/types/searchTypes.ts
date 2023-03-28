@@ -1,5 +1,5 @@
 export interface SearchDataTypes {
-  searchData: {
+
     contents: {
       [key: string]: any;
       sportsId: string;
@@ -14,5 +14,5 @@ export interface SearchDataTypes {
       infant: number;
     
     };
-  };
+  
 }
