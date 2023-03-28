@@ -8,19 +8,23 @@ const {persistAtom} = recoilPersist(); // localStorage에 저장됨
 // });
 interface UserType{
     accessToken:String,
+    accessTokenExpiresIn:number,
+    grantType:String,
     nickName:String,
     refreshToken:String,
-    isSurvey:boolean
+    isSurvey:boolean,
 }
-export const User:UserType={
+export const User=():UserType=>({
     accessToken:"",
+    accessTokenExpiresIn:0,
+    grantType:"",
     nickName:"",
     refreshToken:"",
     isSurvey:false
-}
+})
 export const userState = atom({
     key:"userState",
-    default:null,
+    default: User(),
     effects_UNSTABLE:[persistAtom],
 })
 

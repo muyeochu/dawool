@@ -88,7 +88,11 @@ function App() {
                 path="/callback"
                 element={<KakaoAuthHandle />}
               ></Route>
-              <Route path="/mycourse" element={<MyCoursePage />} />
+              <Route path="/mycourse" element={
+                  <Suspense fallback={<div>Loading...</div>}>
+                  <MyCoursePage />
+              </Suspense>
+              } />
               <Route path="/restaurant" element={<RestaurantPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/survey" element={<SurveyPage />} />

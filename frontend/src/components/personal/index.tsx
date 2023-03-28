@@ -62,7 +62,7 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
   };
 
   const checkLogin=()=>{
-    if(user===null){
+    if(user.accessToken===""){
       alert("로그인이 필요한 서비스입니다.");
       navigate("/login");
       return true;
@@ -84,7 +84,7 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
               <LogoIcStyle />
               <UserContainer>
                 <PersonIcStyle />
-                {user===null?
+                {user.accessToken===""?
                 <UserFontStyle onClick={goLogin} style={{cursor:"pointer"}}>로그인해주세요</UserFontStyle>
                 :<UserFontStyle >{user["nickName"]}님</UserFontStyle>}
               </UserContainer>
@@ -116,7 +116,7 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
                 >
                   <InterestIcStyle /> <MenuFont>관심 여행지 관리</MenuFont>
                 </IconMenuContainer>
-                {user!==null &&
+                {user.accessToken!=="" &&
                 <LogoutContainer
                   onClick={() => {
                     handleLogout();
