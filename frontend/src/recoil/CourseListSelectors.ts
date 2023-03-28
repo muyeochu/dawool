@@ -7,7 +7,7 @@ import { selector } from "recoil";
 export const getCourseListData = (
     Id:number
 ):Promise<ListType[]> =>
-customAxios.get(`user/my-course/${Id}`)
+customAxios.get(`course/${Id}`)
 .then((res)=>{
     console.log(res);
     return res.data;
