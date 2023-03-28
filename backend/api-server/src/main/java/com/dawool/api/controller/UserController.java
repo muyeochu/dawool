@@ -1,8 +1,9 @@
 package com.dawool.api.controller;
 
 
-import com.dawool.api.dto.user.MyCourseDetailReqDto;
-import com.dawool.api.dto.user.MyCourseResDto;
+import com.dawool.api.dto.user.MyCourseDetailDto;
+import com.dawool.api.dto.user.MyCourseDto;
+import com.dawool.api.dto.user.MyCourseListDto;
 import com.dawool.api.dto.user.ReissueTokenReqDto;
 import com.dawool.api.dto.user.ReissueTokenResDto;
 import com.dawool.api.dto.user.TokenResDto;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 회원 controller
@@ -81,8 +84,10 @@ public class UserController {
      */
     @GetMapping("/my-course")
     public ResponseEntity<?> getMyCourse() {
-        List<MyCourseResDto> mycourseList = userService.getMyCourse();
-        return ResponseEntity.ok(mycourseList);
+        List<MyCourseListDto> myCourseList = userService.getMyCourse();
+        Map<String, List<MyCourseListDto>> myCourse = new HashMap<>();
+        myCourse.put("myCourse",myCourseList);
+        return ResponseEntity.ok(myCourse);
     }
 
     /**
@@ -94,25 +99,72 @@ public class UserController {
     @PostMapping("/my-course")
     public ResponseEntity<?> createCourse(@RequestBody String courseName) {
         userService.createCourse(courseName);
-        return ResponseEntity.ok(HttpStatus.OK);
+        List<MyCourseListDto> myCourseList = userService.getMyCourse();
+        Map<String, List<MyCourseListDto>> myCourse = new HashMap<>();
+        myCourse.put("myCourse",myCourseList);
+        return ResponseEntity.ok(myCourse);
     }
 
+    /**
+     * 내 코스 상세조회
+     * 
+     * @param courseId
+     * @return
+     */
+    @GetMapping("/my-course/{courseId}")
+    public ResponseEntity<?> detailCourse(@PathVariable String courseId) {
+        MyCourseDto myCourse = userService.detailCourse(courseId);
+        return ResponseEntity.ok(myCourse);
+    }
 
+    /**
+     * 내 코스에 여행지 추가
+     *
+     * @param courseId
+     * @param myCourse
+     * @return
+     */
     @PostMapping("/my-course/{courseId}")
-    public ResponseEntity<?> addSpotToCourse(@PathVariable String courseId, @RequestBody MyCourseDetailReqDto myCourse) {
+    public ResponseEntity<?> addSpotToCourse(@PathVariable String courseId, @RequestBody MyCourseDetailDto myCourse) {
         HttpStatus httpStatus = userService.addSpotToCourse(courseId, myCourse);
         return ResponseEntity.status(httpStatus).body(httpStatus.getReasonPhrase());
     }
+    // 차후 수정 내용
+//    /**
+//     * 내 코스 수정
+//     *
+//     * @param courseId
+//     * @param memo
+//     * @return
+//     */
+//    @PutMapping("/my-course/{courseId}")
+//    public ResponseEntity<?> modifyCourseMemo(@PathVariable String courseId, @RequestBody String memo) {
+//        HttpStatus httpStatus = userService.modifyCourse(courseId, memo);
+//        return ResponseEntity.status(httpStatus).body();
+//    }
 
-    @PutMapping("/my-course/{courseId}")
-    public ResponseEntity<?> modifyCourse(@PathVariable String courseId, @RequestBody String a) {
-
-        return null;
-    }
-
+    /**
+     * 내 코스 삭제
+     *
+     * @param courseId
+     * @return
+     */
     @DeleteMapping("/my-course/{courseId}")
     public ResponseEntity<?> deleteCourse(@PathVariable String courseId) {
+        HttpStatus httpStatus = userService.deleteCourse(courseId);
+        return ResponseEntity.status(httpStatus).body(httpStatus.getReasonPhrase());
+    }
 
-        return null;
+    /**
+     * 내 코스 여행지 삭제
+     *
+     * @param courseId
+     * @param spotId
+     * @return
+     */
+    @DeleteMapping("/my-course/{courseId}/{spotId}")
+    public ResponseEntity<?> deleteSpot(@PathVariable String courseId, @PathVariable int spotId) {
+        HttpStatus httpStatus = userService.deleteSpot(courseId, spotId);
+        return ResponseEntity.status(httpStatus).body(httpStatus.getReasonPhrase());
     }
 }
