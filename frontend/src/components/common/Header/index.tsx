@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { searchState } from "../../../recoil/SearchSelector";
+
+import { ParamTypes } from "../../../recoil/SearchSelector";
 
 // styles
 import {
@@ -37,6 +41,10 @@ const Header = () => {
   const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
   let currentUrl = window.location.pathname;
+
+  const [searchInput, setSearchInput] = useRecoilState(searchState);
+
+  const resetSearchInput = useResetRecoilState(searchState);
 
   const [search, setSearch] = useState("");
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -78,13 +86,27 @@ const Header = () => {
     e: React.MouseEvent | React.KeyboardEvent<HTMLInputElement>
   ) => {
     // 공백 검사
-    const blank_pattern = /^\s+|\s+$/g;
-    if (search.replace(blank_pattern, "") === "") {
+    const blankPattern = /^\s+|\s+$/g;
+    if (search.replace(blankPattern, "") === "") {
+      alert("공백은 입력할 수 없습니다!");
       console.log("아무것도 입력되지 않음!");
+      resetSearchInput();
       setSearch("");
       return;
     }
+
+    // 특수문자 검사
+    const specialPattern = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
+    if (specialPattern.test(search) === true) {
+      alert("특수문자는 입력할 수 없습니다!");
+      console.log("특수문자 입력됨!");
+      resetSearchInput();
+      setSearch("");
+      return;
+    }
+    setSearchInput({ ...searchInput, title: search, barrier: "00000" });
     navigate("/search", { state: search });
+    window.location.reload();
   };
 
   const onCheckEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {

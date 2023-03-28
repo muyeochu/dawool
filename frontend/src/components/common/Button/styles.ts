@@ -8,11 +8,14 @@ interface StyledButtonProps {
 export const StyledButton = styled.button<StyledButtonProps>`
   display: flex;
   flex-direction: row;
+  height: 50px;
+  min-width: 158px;
   align-items: center;
   justify-content: center;
   padding: 12px 28px;
   gap: 5px;
-  background-color: ${({ isclicked }) => (isclicked === "true" ? mainColor : white)};
+  background-color: ${({ isclicked }) =>
+    isclicked === "true" ? mainColor : white};
   color: "black";
   font-size: 18px;
   font-weight: 700;
@@ -51,5 +54,6 @@ export const ButtonText = styled.span<StyledButtonProps>`
 export const ButtonIcon = styled.img<StyledButtonProps>`
   width: 20px;
   height: 20px;
-  filter: ${({ isclicked }) => (isclicked === "true" ? "brightness(100%)" : "brightness(0%)")};
+  filter: ${({ isclicked }) =>
+    isclicked === "true" ? "brightness(100%)" : "brightness(0%)"};
 `;
