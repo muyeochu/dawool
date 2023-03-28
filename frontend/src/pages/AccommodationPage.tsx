@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import TripRec from "../components/trip/tripRec";
 import TripList from "../components/trip/tripList";
-import Loading from "../components/common/Loading";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
@@ -26,8 +25,12 @@ export const RowGridItems = styled.div`
 const AccommodationPage = () => {
   return (
     <>
-      <MainGridItems>{/* 추천 숙박 */}</MainGridItems>
+      {/* 추천 숙박 */}
+      <MainGridItems>
+        <TripRec titleType="accommodation" />
+      </MainGridItems>
 
+      {/* 숙박 목록 list */}
       <TripListGridItems>
         <RowGridContainer>
           <RowGridItems>

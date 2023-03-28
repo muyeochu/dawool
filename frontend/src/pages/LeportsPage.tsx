@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import TripList from "../components/trip/tripList";
-import Loading from "../components/common/Loading";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
@@ -27,10 +26,12 @@ export const RowGridItems = styled.div`
 const LeportsPage = () => {
   return (
     <>
+      {/* 추천 레포츠 */}
       <MainGridItems>
         <div>추천 부분</div>
       </MainGridItems>
 
+      {/* 레포츠 목록 list */}
       <TripListGridItems>
         <RowGridContainer>
           <RowGridItems>

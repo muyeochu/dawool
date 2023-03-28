@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import TripRec from "../components/trip/tripRec";
 import TripList from "../components/trip/tripList";
-import Loading from "../components/common/Loading";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;

@@ -45,7 +45,7 @@ export default function Dropdown({ itemList, onSelected }: DropdownProps) {
     if (typeof item === "string") {
       const city = cities.find((city) => city.name === item);
       if (city) {
-        setCitySelected(+city.id);
+        setCitySelected(city.id);
         setDropdownValue((prev) => ({
           ...prev,
           selectedTripListTitle: item,
