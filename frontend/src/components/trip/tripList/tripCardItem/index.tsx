@@ -67,26 +67,16 @@ function TripCardItem({ contents, type }: TripCardItemProps) {
           <CardImage src={contents.imageUrl} alt={"대표 이미지"} />
         )}
         <BarrierIconContainer>
-          {contents.mobilityWeak ? (
-            <BathchairIcStyle/>
-          ) : null}
-          {contents.visuallyImpaired ? (
-            <EyeIcStyle/>
-          ) : null}
-          {contents.deaf ? (
-            <EarIcStyle/>
-          ) : null}
-          {contents.old ? (
-            <OldmanIcStyle/>
-          ) : null}
-          {contents.infant ? (
-            <ToddlerIcStyle/>
-          ) : null}
+          {contents.mobilityWeak ? <BathchairIcStyle /> : null}
+          {contents.visuallyImpaired ? <EyeIcStyle /> : null}
+          {contents.deaf ? <EarIcStyle /> : null}
+          {contents.old ? <OldmanIcStyle /> : null}
+          {contents.infant ? <ToddlerIcStyle /> : null}
         </BarrierIconContainer>
       </ImageContainer>
       <CardBottomContainer>
         <CardText onClick={handleClick}>{contents.title}</CardText>
-        {type ==="list" && <LikedIcStyle />}
+        {type === "list" && <LikedIcStyle />}
       </CardBottomContainer>
     </CardContainer>
   );
