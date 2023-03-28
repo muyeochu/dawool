@@ -1,9 +1,9 @@
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { mainColor, white, grey, blue, black } from "../../../styles/Colors";
-import RecBackgroundImg from "../../../assets/images/recBackgroundImg.png"
+import RecBackgroundImg from "../../../assets/images/recBackgroundImg.png";
 import { ReactComponent as DownArrowIc } from "../../../assets/icon/downarrowIc.svg";
 
-const bounce = keyframes`
+export const bounce = keyframes`
   0% {
     transform: translateY(0);
   }
@@ -28,7 +28,6 @@ export const TripRecContainer = styled.div`
 `;
 
 export const TripRecTitleContainer = styled.div`
-  
   text-align: left;
   font-family: "SUIT";
   font-style: normal;

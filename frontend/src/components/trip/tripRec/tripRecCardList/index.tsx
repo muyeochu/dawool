@@ -2,13 +2,16 @@ import React from "react";
 import { TripRecCardListContainer } from "./styles";
 import TripRecCardItem from "../tripRecCardItem";
 
-function TripRecCardList() {
+// interface TripRecCardListProps {
+//   RecList: ListType[];
+// }
+// const TripRecCardList() => {
+const TripRecCardList = () => {
+  
   return (
     <TripRecCardListContainer>
-      <TripRecCardItem />
-      <TripRecCardItem />
-      <TripRecCardItem />
-      <TripRecCardItem />
+      {/* {RecList.map((item: ListType) => )}
+      <TripRecCardItem /> */}
     </TripRecCardListContainer>
   );
 }

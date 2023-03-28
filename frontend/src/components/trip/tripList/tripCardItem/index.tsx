@@ -24,7 +24,7 @@ function TripCardItem({ contents }: TripCardItemProps) {
   const handleClick = () => {
     // 로그인한 경우 -> 최근 본 관광지 contentId를 local에 저장
     if (user.accessToken !== "") {
-      localStorage.setItem("recentPlace", contents.contentId.toString());
+      localStorage.setItem("recentContentId", contents.contentId.toString());
     }
 
     switch (contents.contentTypeId) {
