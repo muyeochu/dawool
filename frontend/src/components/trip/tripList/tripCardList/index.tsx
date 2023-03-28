@@ -14,6 +14,7 @@ interface TripCardListProps {
 function TripCardList({ titleType, tripList }: TripCardListProps) {
   const cityList = useRecoilValue(citiesState);
   const selectedCity = cityList?.find((city) => city.id) ?? { id: 1 };
+  
   const filteredList = useRecoilValue(
     getListSelector({
       titleType,

@@ -7,11 +7,12 @@ import {
   RecDonwArrowIcContainer,
   RecDonwArrowIcStyle,
 } from "./styles";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { TripListTitleType } from "../../../types/tripListTypes";
-import TripRecCardList from "./tripRecCardList";
+// import TripRecCardList from "./tripRecCardList";
 import { Link } from "react-scroll";
 import { userState } from "../../../recoil/UserState";
+import { getRecListSelector } from "../../../recoil/RecListSelector";
 
 export interface TripRecProps {
   titleType: TripListTitleType["titleType"];
@@ -20,6 +21,17 @@ export interface TripRecProps {
 function TripRec({ titleType }: TripRecProps) {
   // 유저 정보 가져오기
   const [user, setUser] = useRecoilState(userState);
+
+  // 추천 data 가져오기
+  const recentContentId = parseInt(
+    localStorage.getItem("recentContentId") || "0"
+  );
+  const RecList = useRecoilValue(
+    getRecListSelector({ recentContentId: recentContentId })
+  );
+
+  console.log("추천목록", RecList);
+
   const typeText =
     titleType === "restaurant"
       ? "식당"
@@ -45,7 +57,7 @@ function TripRec({ titleType }: TripRecProps) {
       </TripRecTitleContainer>
 
       {/* cards */}
-      <TripRecCardList />
+      {/* {RecList && <TripRecCardList RecList={RecList}/>} */}
       {/* bottom button */}
       <RecDonwArrowIcContainer>
         <Link to="trip-list-container" smooth={true} duration={500}>
