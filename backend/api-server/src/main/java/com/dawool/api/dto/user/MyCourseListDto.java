@@ -7,20 +7,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
+/**
+ * 내 코스 정보
+ *
+ * @author 이준
+ */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MyCourseResDto {
+public class MyCourseListDto {
 
     private String courseId;
     private String courseName;
 
-    public MyCourseResDto of(Course course) {
-        return MyCourseResDto.builder()
+    /**
+     * Entity -> Dto
+     *
+     * @param course
+     * @return
+     */
+    public MyCourseListDto of(Course course) {
+        return MyCourseListDto.builder()
                 .courseId(course.getId())
                 .courseName(course.getCoursename())
                 .build();
