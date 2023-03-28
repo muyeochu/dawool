@@ -69,6 +69,7 @@ public class LeisureSportsDto extends CommonInfoDto{
                 .spotId(leisureSports.getId())
                 // 공통정보
                 .contentId(leisureSports.getContentid())
+                .contentTypeId(leisureSports.getContenttypeid())
                 .addr1(leisureSports.getAddr1())
                 .title(leisureSports.getTitle())
                 .category(Category.valueOf(leisureSports.getCat3()).getCategory())

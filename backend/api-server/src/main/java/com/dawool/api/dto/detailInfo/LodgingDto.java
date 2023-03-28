@@ -102,6 +102,7 @@ public class LodgingDto extends CommonInfoDto{
                 .spotId(lodging.getId())
                 // 공통정보
                 .contentId(lodging.getContentid())
+                .contentTypeId(lodging.getContenttypeid())
                 .addr1(lodging.getAddr1())
                 .title(lodging.getTitle())
                 .category(Category.valueOf(lodging.getCat3()).getCategory())

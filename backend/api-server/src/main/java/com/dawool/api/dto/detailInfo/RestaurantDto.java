@@ -70,6 +70,7 @@ public class RestaurantDto extends CommonInfoDto{
                 .spotId(restaurant.getId())
                 // 공통정보
                 .contentId(restaurant.getContentid())
+                .contentTypeId(restaurant.getContenttypeid())
                 .addr1(restaurant.getAddr1())
                 .title(restaurant.getTitle())
                 .category(Category.valueOf(restaurant.getCat3()).getCategory())

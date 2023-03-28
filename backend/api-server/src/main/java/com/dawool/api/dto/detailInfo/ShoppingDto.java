@@ -67,6 +67,7 @@ public class ShoppingDto extends CommonInfoDto{
                 .spotId(shopping.getId())
                 // 공통정보
                 .contentId(shopping.getContentid())
+                .contentTypeId(shopping.getContenttypeid())
                 .addr1(shopping.getAddr1())
                 .title(shopping.getTitle())
                 .category(Category.valueOf(shopping.getCat3()).getCategory())

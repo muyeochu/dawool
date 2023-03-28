@@ -76,6 +76,7 @@ public class EntertainmentDto extends CommonInfoDto{
                 .spotId(entertainment.getId())
                 // 공통정보
                 .contentId(entertainment.getContentid())
+                .contentTypeId(entertainment.getContenttypeid())
                 .addr1(entertainment.getAddr1())
                 .title(entertainment.getTitle())
                 .category(Category.valueOf(entertainment.getCat3()).getCategory())

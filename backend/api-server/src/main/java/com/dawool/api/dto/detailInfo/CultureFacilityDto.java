@@ -52,6 +52,7 @@ public class CultureFacilityDto extends CommonInfoDto{
                 .spotId(cultureFacility.getId())
                 // 공통정보
                 .contentId(cultureFacility.getContentid())
+                .contentTypeId(cultureFacility.getContenttypeid())
                 .addr1(cultureFacility.getAddr1())
                 .title(cultureFacility.getTitle())
                 .category(Category.valueOf(cultureFacility.getCat3()).getCategory())
