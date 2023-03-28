@@ -37,9 +37,9 @@ public class CommonInfo {
     private String addr1;
     private String addr2;
     // 경도
-    private float mapx;
+    private double mapx;
     // 위도
-    private float mapy;
+    private double mapy;
     // 지도 레벨
     private float mlevel;
     // 청각장애

@@ -44,7 +44,7 @@ public class ShoppingDto extends CommonInfoDto{
 
     @Builder
     public ShoppingDto(String spotId, int contentId, int contentTypeId, String title, String category, String homepage, String firstImage,
-                       int areaCode, String addr1, float mapX, float mapY, float mLevel,
+                       int areaCode, String addr1, double mapX, double mapY, float mLevel,
                        int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
                        int isBabyCarriage, String isCreditCard, int isPet, String fairDay, String infoCenter, String openTime,
                        String commonParking, String restDate, String restroom, String saleItem, String shopGuide) {
