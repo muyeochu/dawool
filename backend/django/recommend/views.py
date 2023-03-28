@@ -102,7 +102,7 @@ def food_list(request):
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
-        except ValueError:
+        except ValueError and IndexError:
             spots = RecommendTour.objects.all()
             se = RecommendTourSerializer(spots, many=True)
             data = pd.DataFrame(se.data) 
@@ -127,7 +127,7 @@ def stay_list(request):
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
-        except ValueError:
+        except ValueError and IndexError:
             spots = RecommendTour.objects.all()
             se = RecommendTourSerializer(spots, many=True)
             data = pd.DataFrame(se.data) 
