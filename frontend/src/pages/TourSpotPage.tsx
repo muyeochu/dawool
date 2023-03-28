@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import TripList from "../components/trip/tripList";
+import TripRec from "../components/trip/tripRec";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
-  background-color: grey;
-  height: 92vh;
 `;
 
 const TripListGridItems = styled.div`
@@ -28,7 +27,7 @@ const TourSpotPage = () => {
     <>
       {/* 추천 관광지 */}
       <MainGridItems>
-        <div>추천 부분</div>
+      <TripRec titleType="tourSpot" />
       </MainGridItems>
 
       {/* 관광지 목록 list */}

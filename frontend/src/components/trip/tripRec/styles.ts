@@ -28,6 +28,7 @@ export const TripRecContainer = styled.div`
 `;
 
 export const TripRecTitleContainer = styled.div`
+  
   text-align: left;
   font-family: "SUIT";
   font-style: normal;
