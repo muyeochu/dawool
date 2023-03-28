@@ -15,7 +15,6 @@ export const ImageContainer = styled.div`
   height: 285px;
   border-radius: 10px;
   filter: drop-shadow(0px 5.40717px 5.40717px rgba(0, 0, 0, 0.4));
-  border-radius: 10px;
   position: relative;
   overflow: hidden;
   display: flex;

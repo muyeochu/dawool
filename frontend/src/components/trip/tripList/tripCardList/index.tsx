@@ -24,7 +24,6 @@ function TripCardList({ titleType, tripList }: TripCardListProps) {
       size: 10,
     })
   );
-  // console.log(filteredList)
 
   return (
     <TripCardListContainer>
