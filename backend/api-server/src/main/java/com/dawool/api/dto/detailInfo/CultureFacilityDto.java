@@ -32,7 +32,7 @@ public class CultureFacilityDto extends CommonInfoDto{
 
     @Builder
     public CultureFacilityDto(String spotId, int contentId, int contentTypeId, String title, String category, String homepage, String firstImage,
-                              int areaCode, String addr1, float mapX, float mapY, float mLevel, int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
+                              int areaCode, String addr1, double mapX, double mapY, float mLevel, int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
                               float isBabyCarriage, float isPet, String discountInfo, String infoCenter, String commonParking, String parkingFee, String restDate, String useFee, String useTime, String spendTime) {
         super(spotId, contentId, contentTypeId, title, category, homepage, firstImage, areaCode, addr1, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, barrier);
         this.isBabyCarriage = isBabyCarriage;

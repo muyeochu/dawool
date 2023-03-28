@@ -37,9 +37,9 @@ public class CommonInfoDto {
     // 도로명 주소
     private String addr1;
     // 경도
-    private float mapX;
+    private double mapX;
     // 위도
-    private float mapY;
+    private double mapY;
     // 지도 레벨
     private float mLevel;
     // 청각장애
