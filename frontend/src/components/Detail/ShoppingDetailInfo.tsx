@@ -1,17 +1,21 @@
-import { InfoBox, InfoFontStyle } from "./styles";
+import { InfoBox, InfoMainFontStyle, InfoFontStyle } from "./styles";
 
 const ShoppingDetailInfo = ({ myData }: any) => {
   return (
     <InfoBox>
       <ul>
         <li>
-          <b>주소</b>
+          <InfoMainFontStyle>주소</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.addr1 === "0" ? "없음" : myData.info.addr1}
+            {myData.info.addr1 === "0" ? (
+              "없음"
+            ) : (
+              <span dangerouslySetInnerHTML={{ __html: myData.info.addr1 }} />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>홈페이지</b>
+          <InfoMainFontStyle>홈페이지</InfoMainFontStyle>
           <InfoFontStyle>
             {myData.info.homepage === "0" ? (
               "없음"
@@ -23,63 +27,107 @@ const ShoppingDetailInfo = ({ myData }: any) => {
           </InfoFontStyle>
         </li>
         <li>
-          <b>유모차 대여</b>
+          <InfoMainFontStyle>유모차 대여</InfoMainFontStyle>
           <InfoFontStyle>
             {myData.info.isBabyCarriage ? "가능" : "불가능"}
           </InfoFontStyle>
         </li>
         <li>
-          <b>애완동물 동반</b>
+          <InfoMainFontStyle>애완동물 동반</InfoMainFontStyle>
           <InfoFontStyle>{myData.info.isPet ? "가능" : "불가능"}</InfoFontStyle>
         </li>
         <li>
-          <b>장서는날</b>
+          <InfoMainFontStyle>장서는날</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.fairDay === "0" ? "없음" : myData.info.fairDay}
+            {myData.info.fairDay === "0" ? (
+              "없음"
+            ) : (
+              <span dangerouslySetInnerHTML={{ __html: myData.info.fairDay }} />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>문의 및 안내</b>
+          <InfoMainFontStyle>문의 및 안내</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.infoCenter === "0" ? "없음" : myData.info.infoCenter}
+            {myData.info.infoCenter === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.infoCenter }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>영업시간</b>
+          <InfoMainFontStyle>영업시간</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.openTime === "0" ? "없음" : myData.info.openTime}
+            {myData.info.openTime === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.openTime }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>주차시설</b>
+          <InfoMainFontStyle>주차시설</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.commonParking === "0"
-              ? "없음"
-              : myData.info.commonParking}
+            {myData.info.commonParking === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.commonParking }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>쉬는날</b>
+          <InfoMainFontStyle>쉬는날</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.restDate === "0" ? "없음" : myData.info.restDate}
+            {myData.info.restDate === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.restDate }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>화장실</b>
+          <InfoMainFontStyle>화장실</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.restroom === "0" ? "없음" : myData.info.restroom}
+            {myData.info.restroom === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.restroom }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>판매품목</b>
+          <InfoMainFontStyle>판매품목</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.saleItem === "0" ? "문의 필요" : myData.info.saleItem}
+            {myData.info.saleItem === "0" ? (
+              "문의 필요"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.saleItem }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>매장안내</b>
+          <InfoMainFontStyle>매장안내</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.shopGuide === "0" ? "없음" : myData.info.shopGuide}
+            {myData.info.shopGuide === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.shopGuide }}
+              />
+            )}
           </InfoFontStyle>
         </li>
       </ul>

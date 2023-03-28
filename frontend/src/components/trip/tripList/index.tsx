@@ -84,7 +84,7 @@ function TripList({ titleType }: TripListProps) {
       <ButtonGroup>
         {/* 무장애 필터링 버튼 */}
         <ButtonList>
-          <Button onClick={handleClick} icType={"bathchair"}>
+          {/* <Button onClick={handleClick} icType={"bathchair"}>
             지체장애
           </Button>
           <Button onClick={handleClick} icType={"eye"}>
@@ -98,7 +98,7 @@ function TripList({ titleType }: TripListProps) {
           </Button>
           <Button onClick={handleClick} icType={"toddler"}>
             영유아
-          </Button>
+          </Button> */}
         </ButtonList>
 
         {/* 드롭다운 */}
