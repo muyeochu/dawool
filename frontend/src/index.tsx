@@ -6,10 +6,12 @@ import App from "./App";
 import Footer from "./components/common/Footer/index";
 import "./index.css";
 
+const footerRemove = new URL(window.location.href).href.includes('/login');
+
 ReactDOM.render(
   <RecoilRoot>
     <App />
-    <Footer />
+    {footerRemove?<></>:<Footer/>}
   </RecoilRoot>,
   document.getElementById("root")
 );
