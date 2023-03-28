@@ -20,7 +20,7 @@ environ.Env.read_env(
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 # jwt security
-JWT_SECRET_KEY =env('JWT_SECERET_KEY')
+JWT_SECRET_KEY = env('JWT_SECERET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +31,12 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'recommend',
+
+
+    'corsheaders',
+
+    'rest_framework',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,20 +44,28 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djongo',
-    'rest_framework',
-    'corsheaders',
+
 ]
 
+
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-   
+
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    env('DEPLOYED_URL'),
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
 ]
 
 ROOT_URLCONF = 'dawool.urls'
@@ -74,40 +88,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dawool.wsgi.application'
 
-# CORS 관련 추가
-CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:3000'
-                         ,'http://localhost:3000',
-                         env('DEPLOYED_URL')]
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ALLOW_METHODS = (
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-)
-
-CORS_ALLOW_HEADERS = (
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-)
 # 몽고db 설치시 설정
 
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME':'S08P22D105',
+        'NAME': 'S08P22D105',
         'CLIENT': {
             'host': env('DATABASE_URL'),
             'authSource': 'admin',
