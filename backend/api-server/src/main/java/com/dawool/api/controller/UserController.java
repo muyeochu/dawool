@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 회원 controller
+ * 회원 관련 Controller
  *
  * @author 이준
  * @author 김정은
@@ -74,97 +74,5 @@ public class UserController {
     public ResponseEntity<?> survey(@RequestBody SurveyReqDto survey){
         userService.survey(survey);
         return ResponseEntity.ok(HttpStatus.OK);
-    }
-
-
-    /**
-     * 내 코스 조회
-     * 
-     * @return
-     */
-    @GetMapping("/my-course")
-    public ResponseEntity<?> getMyCourse() {
-        List<MyCourseListDto> myCourseList = userService.getMyCourse();
-        Map<String, List<MyCourseListDto>> myCourse = new HashMap<>();
-        myCourse.put("myCourse",myCourseList);
-        return ResponseEntity.ok(myCourse);
-    }
-
-    /**
-     * 내 코스 폴더 추가
-     * 
-     * @param courseName
-     * @return
-     */
-    @PostMapping("/my-course")
-    public ResponseEntity<?> createCourse(@RequestBody String courseName) {
-        userService.createCourse(courseName);
-        List<MyCourseListDto> myCourseList = userService.getMyCourse();
-        Map<String, List<MyCourseListDto>> myCourse = new HashMap<>();
-        myCourse.put("myCourse",myCourseList);
-        return ResponseEntity.ok(myCourse);
-    }
-
-    /**
-     * 내 코스 상세조회
-     * 
-     * @param courseId
-     * @return
-     */
-    @GetMapping("/my-course/{courseId}")
-    public ResponseEntity<?> detailCourse(@PathVariable String courseId) {
-        MyCourseDto myCourse = userService.detailCourse(courseId);
-        return ResponseEntity.ok(myCourse);
-    }
-
-    /**
-     * 내 코스에 여행지 추가
-     *
-     * @param courseId
-     * @param myCourse
-     * @return
-     */
-    @PostMapping("/my-course/{courseId}")
-    public ResponseEntity<?> addSpotToCourse(@PathVariable String courseId, @RequestBody MyCourseDetailDto myCourse) {
-        HttpStatus httpStatus = userService.addSpotToCourse(courseId, myCourse);
-        return ResponseEntity.status(httpStatus).body(httpStatus.getReasonPhrase());
-    }
-    // 차후 수정 내용
-//    /**
-//     * 내 코스 수정
-//     *
-//     * @param courseId
-//     * @param memo
-//     * @return
-//     */
-//    @PutMapping("/my-course/{courseId}")
-//    public ResponseEntity<?> modifyCourseMemo(@PathVariable String courseId, @RequestBody String memo) {
-//        HttpStatus httpStatus = userService.modifyCourse(courseId, memo);
-//        return ResponseEntity.status(httpStatus).body();
-//    }
-
-    /**
-     * 내 코스 삭제
-     *
-     * @param courseId
-     * @return
-     */
-    @DeleteMapping("/my-course/{courseId}")
-    public ResponseEntity<?> deleteCourse(@PathVariable String courseId) {
-        HttpStatus httpStatus = userService.deleteCourse(courseId);
-        return ResponseEntity.status(httpStatus).body(httpStatus.getReasonPhrase());
-    }
-
-    /**
-     * 내 코스 여행지 삭제
-     *
-     * @param courseId
-     * @param spotId
-     * @return
-     */
-    @DeleteMapping("/my-course/{courseId}/{spotId}")
-    public ResponseEntity<?> deleteSpot(@PathVariable String courseId, @PathVariable int spotId) {
-        HttpStatus httpStatus = userService.deleteSpot(courseId, spotId);
-        return ResponseEntity.status(httpStatus).body(httpStatus.getReasonPhrase());
     }
 }
