@@ -1,12 +1,11 @@
-import React, { Suspense } from "react";
+import React from "react";
 import styled from "styled-components";
-import TripList, { TripListProps } from "../components/trip/tripList";
+import TripRec from "../components/trip/tripRec";
+import TripList from "../components/trip/tripList";
 import Loading from "../components/common/Loading";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
-  background-color: grey;
-  height: 92vh;
 `;
 
 const TripListGridItems = styled.div`
@@ -27,9 +26,7 @@ export const RowGridItems = styled.div`
 const AccommodationPage = () => {
   return (
     <>
-      <MainGridItems>
-        <div>추천 부분</div>
-      </MainGridItems>
+      <MainGridItems>{/* 추천 숙박 */}</MainGridItems>
 
       <TripListGridItems>
         <RowGridContainer>

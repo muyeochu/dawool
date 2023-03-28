@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import styled from "styled-components";
 import TripList from "../components/trip/tripList";
 import Loading from "../components/common/Loading";
@@ -25,22 +25,19 @@ export const RowGridItems = styled.div`
 `;
 
 const TourSpotPage = () => {
-  
   return (
     <>
-      <Suspense fallback={<Loading />}>
-        <MainGridItems>
-          <div>추천 부분</div>
-        </MainGridItems>
+      <MainGridItems>
+        <div>추천 부분</div>
+      </MainGridItems>
 
-        <TripListGridItems>
-          <RowGridContainer>
-            <RowGridItems>
-              <TripList titleType="tourSpot" />
-            </RowGridItems>
-          </RowGridContainer>
-        </TripListGridItems>
-      </Suspense>
+      <TripListGridItems>
+        <RowGridContainer>
+          <RowGridItems>
+            <TripList titleType="tourSpot" />
+          </RowGridItems>
+        </RowGridContainer>
+      </TripListGridItems>
     </>
   );
 };
