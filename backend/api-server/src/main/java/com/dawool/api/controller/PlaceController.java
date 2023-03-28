@@ -1,5 +1,6 @@
 package com.dawool.api.controller;
 
+import com.dawool.api.dto.HeartReqDto;
 import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.CultureFacilityDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
@@ -21,6 +22,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -146,12 +149,26 @@ public class PlaceController {
     /**
      * 북마크 저장 및 해제
      *
-     * @param contentId
      * @return
      */
-    @GetMapping("/bookmark/{contentId}")
-    public ResponseEntity<?> heartPlace(@PathVariable("contentId") int contentId){
-        placeService.heartPlace(contentId);
+    @PostMapping("/bookmark")
+    public ResponseEntity<?> heartPlace(@RequestBody HeartReqDto heart){
+        placeService.heartPlace(heart);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    /**
+     * 북마크 목록
+     *
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/bookmark")
+    public ResponseEntity<?> getHeartList(int page, int size){
+        List<PlaceDto> list = placeService.getHeartList(page, size);
+        Map<String, List<PlaceDto>> response = new HashMap<>();
+        response.put("contents", list);
+        return ResponseEntity.ok(response);
     }
 }

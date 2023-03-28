@@ -1,5 +1,7 @@
 package com.dawool.api.service;
 
+import com.dawool.api.dto.HeartReqDto;
+import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.SearchDto;
 import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.CultureFacility;
@@ -7,13 +9,21 @@ import com.dawool.api.entity.Entertainment;
 import com.dawool.api.entity.Heart;
 import com.dawool.api.entity.LeisureSports;
 import com.dawool.api.entity.Lodging;
+import com.dawool.api.entity.Place;
 import com.dawool.api.entity.Restaurant;
 import com.dawool.api.entity.Shopping;
 import com.dawool.api.repository.CommonTemplate;
+import com.dawool.api.repository.CultureFacilityRepository;
+import com.dawool.api.repository.EntertainmentRepository;
 import com.dawool.api.repository.HeartRepository;
+import com.dawool.api.repository.LeisureSportsRepository;
+import com.dawool.api.repository.LodgingRepository;
+import com.dawool.api.repository.RestaurantRepository;
+import com.dawool.api.repository.ShoppingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -124,24 +134,72 @@ public class PlaceService {
     }
 
     /**
+     * 북마크 저장 및 해제
      *
-     * @param contentId
+     * @param heart
      */
-    public void heartPlace(int contentId){
+    public void heartPlace(HeartReqDto heart){
         String objectId = UserService.getLoginUser();
 
         // 이미 북마크한 여행지인 경우 북마크 취소
-        if(heartRepository.existsByContentidAndUserid(contentId, objectId)){
+        if(heartRepository.existsBySpotidAndUserid(heart.getSpotId(), objectId)){
             // delete
-            Heart heart = heartRepository.findByContentidAndUserid(contentId, objectId);
-            heartRepository.delete(heart);
+            Heart object = heartRepository.findBySpotidAndUserid(heart.getSpotId(), objectId);
+            heartRepository.delete(object);
         } else {    // 북마크
             // save
-            Heart heart = Heart.builder()
-                    .userid(objectId)
-                    .contentid(contentId)
+            Place place = Place.builder()
+                    .contentid(heart.getContentId())
+                    .contenttypeid(heart.getContentTypeId())
+                    .title(heart.getTitle())
+                    .firstimage(heart.getImageUrl())
+                    .category(heart.getCategory())
+                    .mobilityweak(heart.getMobilityWeak())
+                    .visual_impaired(heart.getVisuallyImpaired())
+                    .deaf(heart.getDeaf())
+                    .old(heart.getOld())
+                    .infant(heart.getInfant())
                     .build();
-            heartRepository.save(heart);
+
+            Heart object = Heart.builder()
+                    .userid(objectId)
+                    .spotid(heart.getSpotId())
+                    .place(place)
+                    .build();
+            heartRepository.save(object);
         }
+    }
+
+    /**
+     * 사용자 별 북마크 목록
+     *
+     * @param page
+     * @param size
+     * @return
+     */
+    public List<PlaceDto> getHeartList(int page, int size){
+        String objectId = UserService.getLoginUser();
+
+        List<Heart> heartList = (List<Heart>) resultList(heartRepository.findByUserid(objectId), page, size);
+        List<PlaceDto> list = new ArrayList<>();
+        for(Heart heart: heartList){
+            Place place = heart.getPlace();
+            PlaceDto dto = PlaceDto.builder()
+                    .spotId(heart.getSpotid())
+                    .contentId(place.getContentid())
+                    .contentTypeId(place.getContenttypeid())
+                    .title(place.getTitle())
+                    .imageUrl(place.getFirstimage())
+                    .category(place.getCategory())
+                    .mobilityWeak(place.getMobilityweak())
+                    .visuallyImpaired(place.getVisual_impaired())
+                    .deaf(place.getDeaf())
+                    .old(place.getOld())
+                    .infant(place.getInfant())
+                    .isLiked(true)
+                    .build();
+            list.add(dto);
+        }
+        return list;
     }
 }
