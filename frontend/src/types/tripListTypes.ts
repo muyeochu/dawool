@@ -1,5 +1,6 @@
 import React from "react";
 
+// 각 관광지 타입 정보
 export interface TripListTitleType {
   contentTypeId: number;
   titleType:

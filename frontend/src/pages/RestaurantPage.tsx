@@ -1,12 +1,11 @@
 import React, { Suspense } from "react";
 import styled from "styled-components";
+import TripRec from "../components/trip/tripRec";
 import TripList from "../components/trip/tripList";
 import Loading from "../components/common/Loading";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
-  background-color: grey;
-  height: 92vh;
 `;
 
 const TripListGridItems = styled.div`
@@ -30,7 +29,7 @@ const RestaurantPage = () => {
       <Suspense fallback={<Loading />}>
         {/* 추천 식당 */}
         <MainGridItems>
-          <div>추천 부분</div>
+          <TripRec titleType="restaurant"/>
         </MainGridItems>
 
         {/* 식당 목록 list */}
