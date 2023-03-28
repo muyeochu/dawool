@@ -8,6 +8,12 @@ import {
   CardBottomContainer,
   CardText,
   LikedIcStyle,
+  BarrierIconContainer,
+  BathchairIcStyle,
+  EyeIcStyle,
+  EarIcStyle,
+  OldmanIcStyle,
+  ToddlerIcStyle,
 } from "./styles";
 import { ListType } from "../../../../types/tripListTypes";
 import exampleImg from "../../../../assets/images/exampleImg.png";
@@ -60,6 +66,23 @@ function TripCardItem({ contents, type }: TripCardItemProps) {
         ) : (
           <CardImage src={contents.imageUrl} alt={"대표 이미지"} />
         )}
+        <BarrierIconContainer>
+          {contents.mobilityWeak ? (
+            <BathchairIcStyle/>
+          ) : null}
+          {contents.visuallyImpaired ? (
+            <EyeIcStyle/>
+          ) : null}
+          {contents.deaf ? (
+            <EarIcStyle/>
+          ) : null}
+          {contents.old ? (
+            <OldmanIcStyle/>
+          ) : null}
+          {contents.infant ? (
+            <ToddlerIcStyle/>
+          ) : null}
+        </BarrierIconContainer>
       </ImageContainer>
       <CardBottomContainer>
         <CardText onClick={handleClick}>{contents.title}</CardText>

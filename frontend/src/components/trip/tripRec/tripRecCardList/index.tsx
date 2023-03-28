@@ -7,13 +7,16 @@ import TripRecCardItem from "../tripRecCardItem";
 // }
 // const TripRecCardList() => {
 const TripRecCardList = () => {
-  
   return (
     <TripRecCardListContainer>
       {/* {RecList.map((item: ListType) => )}
       <TripRecCardItem /> */}
+      <TripRecCardItem />
+      <TripRecCardItem />
+      <TripRecCardItem />
+      <TripRecCardItem />
     </TripRecCardListContainer>
   );
-}
+};
 
 export default TripRecCardList;
