@@ -5,14 +5,3 @@ export const sortByState = atom({
   key: 'sortByState',
   default: 'none',
 })
-
-// export const tripListState = selector<EtcListType[]>({
-//   key: 'tripListState',
-//   get: ({get}) => {
-//     const sortBy = get(sortByState);
-//     const tripLists = get(TripFilteredList);
-//     if (tripLists) {
-//       return tripLists[sortBy];
-//     }
-//   }
-// })

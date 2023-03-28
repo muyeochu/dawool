@@ -1,5 +1,7 @@
 import React from "react";
-
+import { useRecoilState } from "recoil";
+import { recentViewdContentState } from "../../../../recoil/UserState";
+import { userState } from "../../../../recoil/UserState";
 import {
   CardContainer,
   ImageContainer,
@@ -18,8 +20,12 @@ interface TripCardItemProps {
 
 function TripCardItem({ contents }: TripCardItemProps) {
   const navigate = useNavigate();
+  const [recentlyViewedContentId, setrecentlyViewedContentId] = useRecoilState(recentViewdContentState)
+  const [user, setUser] = useRecoilState(userState);
 
   const handleClick = () => {
+    setrecentlyViewedContentId(contents.contentId)
+    
     switch (contents.contentTypeId) {
       case 39:
         navigate(`/detail/restaurant/${contents.contentId}`);
