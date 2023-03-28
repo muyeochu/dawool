@@ -1,7 +1,6 @@
-import React, { Suspense } from "react";
+import React from "react";
 import styled from "styled-components";
 import TripList from "../components/trip/tripList";
-import Loading from "../components/common/Loading";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
@@ -27,19 +26,19 @@ export const RowGridItems = styled.div`
 const CulturePage = () => {
   return (
     <>
-      <Suspense fallback={<Loading />}>
-        <MainGridItems>
-          <div>추천 부분</div>
-        </MainGridItems>
+    {/* 추천 문화시설 */}
+      <MainGridItems>
+        <div>추천 부분</div>
+      </MainGridItems>
 
-        <TripListGridItems>
-          <RowGridContainer>
-            <RowGridItems>
-              <TripList titleType="culture" />
-            </RowGridItems>
-          </RowGridContainer>
-        </TripListGridItems>
-      </Suspense>
+      {/* 문화시설 목록 list */}
+      <TripListGridItems>
+        <RowGridContainer>
+          <RowGridItems>
+            <TripList titleType="culture" />
+          </RowGridItems>
+        </RowGridContainer>
+      </TripListGridItems>
     </>
   );
 };

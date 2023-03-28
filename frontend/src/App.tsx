@@ -106,10 +106,7 @@ function App() {
                 }
               />
               <Route path="/login" element={<LoginPage />} />
-              <Route
-                path="/callback"
-                element={<KakaoAuthHandle />}
-              ></Route>
+              <Route path="/callback" element={<KakaoAuthHandle />}></Route>
               <Route path="/mycourse" element={
                   <Suspense fallback={<div>Loading...</div>}>
                   <MyCoursePage />
@@ -118,10 +115,38 @@ function App() {
               <Route path="/restaurant" element={<RestaurantPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/survey" element={<SurveyPage />} />
-              <Route path="/tourspot" element={<TourSpotPage />} />
-              <Route path="/culture" element={<CulturePage />} />
-              <Route path="/leports" element={<LeportsPage />} />
-              <Route path="/shopping" element={<ShoppingPage />} />
+              <Route
+                path="/tourspot"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <TourSpotPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/culture"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <CulturePage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/leports"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <LeportsPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/shopping"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ShoppingPage />
+                  </Suspense>
+                }
+              />
 
               {/* 테스트 페이지 */}
               <Route path="/modaltest" element={<ModalTest />} />
