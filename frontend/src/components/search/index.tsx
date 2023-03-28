@@ -1,37 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 import { useRecoilState, useRecoilValue } from "recoil";
 import { searchState, getSearchSelector } from "../../recoil/SearchSelector";
 
-import { TitleContainer, SerachIcStyle, ButtonList } from "./styles";
+import { TitleContainer, SerachIcStyle, ButtonList, TripCardListContainer } from "./styles";
 import Button from "../common/Button";
 
-interface WordTypes {
+import TripCardItem from "../trip/tripList/tripCardItem";
+import { ListType } from "../../types/tripListTypes";
+
+interface PropTypes {
   word: string;
+  data: any;
 }
 
-const SearchList = ({ word }: WordTypes) => {
-  const [isClicked, setIsClicked] = useState<boolean>(false); // 버튼 클릭 여부
-  const [searchValue, setSearchValue] = useRecoilState(searchState);
+const SearchList = ( {word, data}: PropTypes) => {
+  const checkSearchValue= useRecoilValue(searchState);
 
-  const refs = {
-    0: React.useRef<HTMLButtonElement>(null),
-    1: React.useRef<HTMLButtonElement>(null),
-    2: React.useRef<HTMLButtonElement>(null),
-    3: React.useRef<HTMLButtonElement>(null),
-    4: React.useRef<HTMLButtonElement>(null),
-  };
+  console.log("SearchList의 데이터", data)
 
-  let selectedBtn = searchValue.barrier.split("");
-  console.log("선택된 버튼은?", selectedBtn);
-  const handleClick = () => {
-    setIsClicked((prev) => !prev);
+  const buttons = [
+    { id: 0, label: "지체장애인", icType: "bathchair", btType: 0 },
+    { id: 1, label: "시각장애인", icType: "eye" , btType: 0 },
+    { id: 2, label: "청각장애인", icType: "ear" , btType: 0 },
+    { id: 3, label: "노인", icType: "oldman" , btType: 0 },
+    { id: 4, label: "영유아", icType: "toddler" , btType: 0 },
+  ];
 
-    let selectedBtn = searchValue.barrier;
-    console.log("선택된 버튼은?", selectedBtn);
-
-    setSearchValue({ ...searchValue, barrier: selectedBtn });
-  };
+  console.log("search값은?", checkSearchValue);
 
   return (
     <>
@@ -41,22 +37,19 @@ const SearchList = ({ word }: WordTypes) => {
         <span>검색결과</span>
       </TitleContainer>
       <ButtonList>
-        <Button onClick={handleClick} icType={"bathchair"} ref={refs[0]}>
-          지체장애
-        </Button>
-        <Button onClick={handleClick} icType={"eye"} ref={refs[1]}>
-          시각장애
-        </Button>
-        <Button onClick={handleClick} icType={"ear"} ref={refs[2]}>
-          청각장애
-        </Button>
-        <Button onClick={handleClick} icType={"oldman"} ref={refs[3]}>
-          노인
-        </Button>
-        <Button onClick={handleClick} icType={"toddler"} ref={refs[4]}>
-          영유아
-        </Button>
+      {buttons.map(({ id, label, icType, btType }) => (
+  <Button key={id}  id={id} icType={icType} btType={btType}>
+    {label}
+  </Button>
+))}
       </ButtonList>
+<TripCardListContainer>
+     {data.contents.map((item: ListType) => (
+      <TripCardItem type="search" key={item.contentId} contents={item}/>
+     ))}
+</TripCardListContainer>
+
+
     </>
   );
 };

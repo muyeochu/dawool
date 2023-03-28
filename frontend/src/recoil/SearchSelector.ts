@@ -5,7 +5,7 @@ import { getSearchApi } from "./Api";
 import { SearchDataTypes } from "../types/searchTypes";
 
 export interface ParamTypes {
-  title: string ;
+  title: string;
   type: number;
   barrier: string;
   page: number;
@@ -28,7 +28,7 @@ export const getSearchSelector = selectorFamily<SearchDataTypes, ParamTypes>({
   key: "getSearchSelector",
   get:
     ({ title, type, barrier, page, size }) =>
-    async ({ get }) => {
+    async () => {
       try {
         const response = await getSearchApi(title, type, barrier, page, size);
         const data = await response.data;

@@ -104,9 +104,9 @@ const Header = () => {
       setSearch("");
       return;
     }
-
-    setSearchInput({ ...searchInput, title: search });
+    setSearchInput({ ...searchInput, title: search, barrier: "00000" });
     navigate("/search", { state: search });
+    window.location.reload();
   };
 
   const onCheckEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
