@@ -25,5 +25,6 @@ public class Heart {
     @Id
     private String id;
     private String userid;
-    private int contentid;
+    private String spotid;
+    private Place place;
 }
