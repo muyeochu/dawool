@@ -1,5 +1,6 @@
 import styled, {keyframes} from "styled-components";
 import { mainColor, white, grey, blue, black } from "../../../styles/Colors";
+import RecBackgroundImg from "../../../assets/images/recBackgroundImg.png"
 import { ReactComponent as DownArrowIc } from "../../../assets/icon/downarrowIc.svg";
 
 const bounce = keyframes`
@@ -17,11 +18,12 @@ const bounce = keyframes`
 export const TripRecContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   position: relative;
   height: 92vh;
-  background-image: url("../../../assets/images/recBackgroundImg.png");
+  width: 100vw;
+  background-image: url(${RecBackgroundImg});
   background-size: cover;
 `;
 

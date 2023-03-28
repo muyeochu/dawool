@@ -7,14 +7,19 @@ import {
   RecDonwArrowIcContainer,
   RecDonwArrowIcStyle,
 } from "./styles";
+import { useRecoilState } from "recoil";
 import { TripListTitleType } from "../../../types/tripListTypes";
+import TripRecCardList from "./tripRecCardList";
 import { Link } from "react-scroll";
+import { userState } from "../../../recoil/UserState";
 
 export interface TripRecProps {
   titleType: TripListTitleType["titleType"];
 }
 
 function TripRec({ titleType }: TripRecProps) {
+  // 유저 정보 가져오기
+  const [user, setUser] = useRecoilState(userState);
   const typeText =
     titleType === "restaurant"
       ? "식당"
@@ -34,11 +39,13 @@ function TripRec({ titleType }: TripRecProps) {
     <TripRecContainer>
       {/* title */}
       <TripRecTitleContainer>
+        {/* {user===null} */}
         <TripRecTitle1>예린님!</TripRecTitle1>
         <TripRecTitle2>이런 {typeText}은 어떠세요?</TripRecTitle2>
       </TripRecTitleContainer>
 
       {/* cards */}
+      <TripRecCardList />
       {/* bottom button */}
       <RecDonwArrowIcContainer>
         <Link to="trip-list-container" smooth={true} duration={500}>

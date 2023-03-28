@@ -1,8 +1,7 @@
-import React, { Suspense } from "react";
+import React from "react";
 import styled from "styled-components";
 import TripRec from "../components/trip/tripRec";
 import TripList from "../components/trip/tripList";
-import Loading from "../components/common/Loading";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
@@ -26,7 +25,6 @@ export const RowGridItems = styled.div`
 const RestaurantPage = () => {
   return (
     <>
-      <Suspense fallback={<Loading />}>
         {/* 추천 식당 */}
         <MainGridItems>
           <TripRec titleType="restaurant"/>
@@ -40,7 +38,6 @@ const RestaurantPage = () => {
             </RowGridItems>
           </RowGridContainer>
         </TripListGridItems>
-      </Suspense>
     </>
   );
 };
