@@ -2,7 +2,7 @@ import { MenuFont } from "../../../personal/styles";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, selector } from "recoil";
 import {FolderState} from "../../../../recoil/CourseFolderState"
-import {FolderContainer,InputForderName,FolderGreyIc,FolderYellowIc,FolderHeaderContainer} from "./styles"
+import {FolderContainer,InputForderName,FolderGreyIc,FolderYellowIc,FolderHeaderContainer, FolderContainerWrapper} from "./styles"
 import axios from "axios";
 // import { FolderListSelector } from "../../../../recoil/CourseFolderState";
 import { ListType } from "../../../../types/courseFolderTypes";
@@ -12,6 +12,8 @@ import { customAxios2 } from "../../../../recoil/customAxios";
 import { Suspense } from 'react';
 import { AxiosInstance } from "axios";
 import { userState } from "../../../../recoil/UserState";
+import React from 'react';
+import ReactDOM from 'react-dom';
 //폴더 생성 실험용 데이터
 // const data=[
 //     {id:1, name:"111"},
@@ -41,27 +43,58 @@ export const Folders=()=>{
 
 
     const getCourseFolderData = ():Promise<ListType[]>=>
-    customAxios2.get(`user/my-course`)
+    customAxios2.get(`course`)
     .then((res)=>{
     console.log(res);
     return res.data;
     }).catch((err)=>{
         console.log(err);
     })
+//     const UniqueFolderListSelector = selector<ListType[]>({
+//         key:"UniqueFolderListSelector",
+//         get:async ()=>{
+//             try{
+//                 const folderList = await getCourseFolderData();
 
-    const FolderListSelector = selector<ListType[]>({
-        key:"FolderListSelector",
-        get:async ()=>{
-            try{
-                const folderList = await getCourseFolderData();
-                return folderList;
-            }catch(err){
-                throw err;
-            }
-        }
-    })
-let folderLists = useRecoilValue<ListType[]>(FolderListSelector);
+//                 return folderList;
+//             }catch(err){
+//                 throw err;
+//             }
+//         }
+//     })
+// let folderLists = console.log(useRecoilValue<ListType[]>(UniqueFolderListSelector));
+async function myFunction() {
+    try {
+        let forderList = await getCourseFolderData();
+        return forderList;
+    } catch (err) {
+        throw err;
+    } 
+}
 
+
+function createTag(forderList: any) {
+    // console.log(forderList["myCourse"]);
+    const div = document.getElementById("folder");
+    const div2 = document.createElement("div"); 
+    div2.className="FolderContainer";
+    console.log(div2);
+    for (const forder of forderList["myCourse"]) {
+        const element = ()=><FolderContainer><FolderYellowIc/>{forder.courseName}</FolderContainer>
+        const fdContainer = document.createElement("div");
+        ReactDOM.render(element(),fdContainer);
+        div2.appendChild(fdContainer); 
+    }
+    div ?.appendChild(div2);
+    console.log(div)
+    return div;
+  }
+
+myFunction().then(forderList=>{
+    createTag(forderList);
+})
+
+// console.log(UniqueFolderListSelector.key);
     // const handleInput=(e:any)=>{
     //     if(e.code==='Enter'){
     //         setNewFolder(e.target.value);
@@ -133,27 +166,8 @@ let folderLists = useRecoilValue<ListType[]>(FolderListSelector);
 
 {/* 백이랑 통신 후 아래 주석 코드 사용해서 폴더 출력하기 
 selector 로 리스트 받아오기*/}
-<div>
-        {folderLists?
-            folderLists.map((folder)=>
-            // {
-            //     return(
-            //         <div ><FolderYellowIc/>{folder.courseName}</div>
-            //     )
-            // }
-            <>
-            {console.log(folder)}
-            </>
-            )
-        :
-        // (data.map((da)=>{
-        //     return(
-        //         <div><FolderYellowIc />{da.name}</div>
-        //     )
-        // })
-        // )
-        <div>dmdmdkddl</div>
-        }
+<div id="folder">
+
         </div>
     {/* {data.map((da)=>{
         return(
