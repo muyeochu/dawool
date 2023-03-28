@@ -2,6 +2,8 @@ package com.dawool.api;
 
 import com.dawool.api.entity.Shopping;
 import com.dawool.api.repository.CommonTemplate;
+import com.dawool.api.repository.CourseRepository;
+import com.dawool.api.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,23 +19,13 @@ class ApiServerApplicationTests {
 	private CommonTemplate commonTemplate;
 	@Autowired
 	private MongoTemplate mongoTemplate;
+	@Autowired
+	private CourseRepository courseRepository;
+	@Autowired
+	private UserService userService;
 	@Test
 	void contextLoads() {
-		List<Shopping> list = null;
 
-		String str = "10001";
-		String[] arr = str.split("");
-		System.out.println(Arrays.toString(arr));
-		list = mongoTemplate.find(commonTemplate.findByAreacodeAndBarrierFree(1, arr), Shopping.class,"shopping");
-		System.out.println(list.size());
-		if(!list.isEmpty()) {
-			for (Shopping l : list) {
-				System.out.println("### Filter : " + l.getTitle());
-			}
-		}
-		else {
-			System.out.println("###EMPTY###");
-		}
 	}
 
 }

@@ -1,6 +1,9 @@
 package com.dawool.api.controller;
 
 
+import com.dawool.api.dto.user.MyCourseDetailDto;
+import com.dawool.api.dto.user.MyCourseDto;
+import com.dawool.api.dto.user.MyCourseListDto;
 import com.dawool.api.dto.user.ReissueTokenReqDto;
 import com.dawool.api.dto.user.ReissueTokenResDto;
 import com.dawool.api.dto.user.TokenResDto;
@@ -9,15 +12,22 @@ import com.dawool.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
- * 회원 controller
+ * 회원 관련 Controller
  *
  * @author 이준
  * @author 김정은

@@ -63,7 +63,7 @@ public class LodgingDto extends CommonInfoDto{
 
     @Builder
     public LodgingDto(String spotId, int contentId, int contentTypeId, String title, String category, String homepage, String firstImage,
-                      int areaCode, String addr1, float mapX, float mapY, float mLevel, int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
+                      int areaCode, String addr1, double mapX, double mapY, float mLevel, int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
                       String checkInTime, String checkOutTime, String isCooking, String foodPlace, float hanok, String infoCenter, String commonParking, String pickup, String reservationUrl,
                       String subFacility, float barbecue, float fitness, float beverage, float bicycle, float campfire, float karaoke, float publicBath, float publicPc, float sauna, float sports, String refundRegulation) {
         super(spotId, contentId, contentTypeId, title, category, homepage, firstImage, areaCode, addr1, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, barrier);
