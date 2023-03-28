@@ -1,6 +1,6 @@
-import { customAxios } from "./customAxios";
+import { customAxios, customAxiosRec } from "./customAxios";
 
-// 상세페이지 요청
+// GET
 export const getDetailApi = async (contentId: number, location: number) =>
   await customAxios.get(`location/${location}/${contentId}`, {
     withCredentials: true,
@@ -9,7 +9,6 @@ export const getDetailApi = async (contentId: number, location: number) =>
     },
   });
 
-// 검색결과 요청
 export const getSearchApi = async (
   title: string,
   type: number,
@@ -27,4 +26,16 @@ export const getSearchApi = async (
     }
   );
 
-
+// POST
+export const getRecEtcApi = async (recentContentId: number) =>
+  await customAxiosRec.post(
+    `recommend/restaurant/`,
+    { recentContentId: recentContentId },
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
