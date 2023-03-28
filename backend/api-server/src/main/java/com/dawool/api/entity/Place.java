@@ -19,7 +19,7 @@ public class Place {
     private String title;
     private String firstimage;
     private String category;
-    private int mobilityweak;
+    private int mobility_weak;
     private int visual_impaired;
     private int deaf;
     private int old;
