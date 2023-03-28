@@ -41,7 +41,7 @@ public class JwtTokenProvider {
     private static final long ACCESS_EXPIRE_TIME = 1 * 60 * 60 * 1000L; //
 
     // Refresh Token 시간
-    private static final long REFRESH_EXPIRE_TIME = 30 * 24 * 60 * 1000L;
+    private static final long REFRESH_EXPIRE_TIME = 30 * 24 * 60 * 60 * 1000L;
 
     /**
      * 생성자
