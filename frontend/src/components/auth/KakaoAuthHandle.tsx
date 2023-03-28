@@ -22,6 +22,7 @@ const KakaoAuthHandle = ()=>{
       .then((res)=>{
         console.log(res);
         localStorage.setItem("token",res.data.accessToken);
+        localStorage.setItem("recentPlace", '0');
         console.log(userState);//잘들어옴
         setUserState({
           accessToken : res.data.accessToken,

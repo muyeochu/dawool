@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { recentViewdContentState } from "../../../../recoil/UserState";
 import { userState } from "../../../../recoil/UserState";
 import {
   CardContainer,
@@ -20,12 +19,14 @@ interface TripCardItemProps {
 
 function TripCardItem({ contents }: TripCardItemProps) {
   const navigate = useNavigate();
-  const [recentlyViewedContentId, setrecentlyViewedContentId] = useRecoilState(recentViewdContentState)
   const [user, setUser] = useRecoilState(userState);
 
   const handleClick = () => {
-    setrecentlyViewedContentId(contents.contentId)
-    
+    // 로그인한 경우 -> 최근 본 관광지 contentId를 local에 저장
+    if (user.accessToken !== "") {
+      localStorage.setItem("recentPlace", contents.contentId.toString());
+    }
+
     switch (contents.contentTypeId) {
       case 39:
         navigate(`/detail/restaurant/${contents.contentId}`);
