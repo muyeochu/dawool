@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * 코스 관련 Repository
+ *
+ */
 @Repository
 public interface CourseRepository extends MongoRepository<Course, String> {
 
