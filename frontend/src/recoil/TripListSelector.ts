@@ -34,6 +34,7 @@ export const getListSelector = selectorFamily<ListType[], ListSelectorProps>({
       const response = await customAxios.get(
         `location/list/${contentTypeId}?area=${selectedCity}&barrier=${barrier}&page=${page}&size=${size}`
       );
+      // console.log(response.data.contents)
       return response.data.contents.map((item: ListType) => ({
         ...item,
         category: titleType,
