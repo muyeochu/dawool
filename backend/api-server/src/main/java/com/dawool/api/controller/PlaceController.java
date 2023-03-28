@@ -1,5 +1,6 @@
 package com.dawool.api.controller;
 
+import com.dawool.api.dto.HeartReqDto;
 import com.dawool.api.dto.PlaceDto;
 import com.dawool.api.dto.detailInfo.CultureFacilityDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
@@ -11,6 +12,7 @@ import com.dawool.api.service.CultureFacilityService;
 import com.dawool.api.service.EntertainmentService;
 import com.dawool.api.service.LeisureSportsService;
 import com.dawool.api.service.LodgingService;
+import com.dawool.api.service.PlaceService;
 import com.dawool.api.service.RestaurantService;
 import com.dawool.api.service.ShoppingService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -46,6 +50,7 @@ public class PlaceController {
     private final LodgingService lodgingService;
     private final ShoppingService shoppingService;
     private final RestaurantService restaurantService;
+    private final PlaceService placeService;
 
     /**
      * 타입별 장소 목록
@@ -90,8 +95,6 @@ public class PlaceController {
                 placeList =
                         restaurantService.getRestaurantList(areaCode, barrier, page, size);
                 break;
-
-
         }
 
         Map<String, List<PlaceDto>> response = new HashMap<>();
@@ -141,5 +144,31 @@ public class PlaceController {
                 return ResponseEntity.ok(restaurantResponse);
         }
         return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * 북마크 저장 및 해제
+     *
+     * @return
+     */
+    @PostMapping("/bookmark")
+    public ResponseEntity<?> heartPlace(@RequestBody HeartReqDto heart){
+        placeService.heartPlace(heart);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    /**
+     * 북마크 목록
+     *
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/bookmark")
+    public ResponseEntity<?> getHeartList(int page, int size){
+        List<PlaceDto> list = placeService.getHeartList(page, size);
+        Map<String, List<PlaceDto>> response = new HashMap<>();
+        response.put("contents", list);
+        return ResponseEntity.ok(response);
     }
 }

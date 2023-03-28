@@ -1,6 +1,6 @@
 package com.dawool.api.controller;
 
-import com.dawool.api.service.SearchService;
+import com.dawool.api.service.PlaceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ import java.util.Map;
 @RequestMapping("/api/search")
 public class SearchController {
 
-    private final SearchService searchService;
+    private final PlaceService searchService;
 
     /**
      * 키워드 검색
