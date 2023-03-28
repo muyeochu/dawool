@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * 내 코스 관련 Service
  *
+ * @author 이준
  */
 @Service
 @RequiredArgsConstructor
