@@ -73,7 +73,7 @@ export const ToddlerIcStyle = styled(toddlerIc)``;
 export const CardBottomContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   margin-top: 19px;
   gap: 5px;
