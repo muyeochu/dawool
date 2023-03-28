@@ -121,6 +121,7 @@ export const InfoBox = styled.div`
     font-weight: 600;
     font-size: 16px;
     line-height: 30px;
+    white-space: nowrap;
   }
 
   ::-webkit-scrollbar {
@@ -145,9 +146,17 @@ export const InfoBox = styled.div`
   }
 `;
 
+export const InfoMainFontStyle = styled.b`
+  display: inline-block;
+  padding-right: 20px;
+  letter-spacing: 0.2px;
+  width: 150px;
+`;
+
 export const InfoFontStyle = styled.span`
+  display: inline-block;
+  vertical-align: top;
   color: ${grey[600]};
-  margin-left: 20px;
 `;
 
 export const BarrierContainer = styled.div`

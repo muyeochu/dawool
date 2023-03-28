@@ -16,9 +16,10 @@ import { useNavigate } from "react-router";
 
 interface TripCardItemProps {
   contents: ListType;
+  type: string;
 }
 
-function TripCardItem({ contents }: TripCardItemProps) {
+function TripCardItem({ contents, type }: TripCardItemProps) {
   const navigate = useNavigate();
   const [recentlyViewedContentId, setrecentlyViewedContentId] = useRecoilState(recentViewdContentState)
   const [user, setUser] = useRecoilState(userState);
@@ -61,7 +62,7 @@ function TripCardItem({ contents }: TripCardItemProps) {
       </ImageContainer>
       <CardBottomContainer>
         <CardText onClick={handleClick}>{contents.title}</CardText>
-        <LikedIcStyle />
+        {type ==="list" && <LikedIcStyle />}
       </CardBottomContainer>
     </CardContainer>
   );

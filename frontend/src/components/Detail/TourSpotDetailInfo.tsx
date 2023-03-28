@@ -1,17 +1,21 @@
-import { InfoBox, InfoFontStyle } from "./styles";
+import { InfoBox, InfoMainFontStyle, InfoFontStyle } from "./styles";
 
 const TourSpotDetailInfo = ({ myData }: any) => {
   return (
     <InfoBox>
       <ul>
         <li>
-          <b>주소</b>
+          <InfoMainFontStyle>주소</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.addr1 === "0" ? "없음" : myData.info.addr1}
+            {myData.info.addr1 === "0" ? (
+              "없음"
+            ) : (
+              <span dangerouslySetInnerHTML={{ __html: myData.info.addr1 }} />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>홈페이지</b>
+          <InfoMainFontStyle>홈페이지</InfoMainFontStyle>
           <InfoFontStyle>
             {myData.info.homepage === "0" ? (
               "없음"
@@ -23,77 +27,113 @@ const TourSpotDetailInfo = ({ myData }: any) => {
           </InfoFontStyle>
         </li>
         <li>
-          <b>유모차 대여</b>
+          <InfoMainFontStyle>유모차 대여</InfoMainFontStyle>
           <InfoFontStyle>
             {myData.info.isBabyCarriage ? "가능" : "불가능"}
           </InfoFontStyle>
         </li>
         <li>
-          <b>애완동물 동반</b>
+          <InfoMainFontStyle>애완동물 동반</InfoMainFontStyle>
           <InfoFontStyle>{myData.info.isPet ? "가능" : "불가능"}</InfoFontStyle>
         </li>
         <li>
-          <b>체험안내</b>
+          <InfoMainFontStyle>체험안내</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.expGuide === "0" ? "없음" : myData.info.expGuide}
+            {myData.info.expGuide === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.expGuide }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>체험가능 연령</b>
+          <InfoMainFontStyle>체험가능 연령</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.expAgeRange === "0" ? "없음" : myData.info.expAgeRange}
+            {myData.info.expAgeRange === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.expAgeRange }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>세계문화유산 유무</b>
+          <InfoMainFontStyle>세계문화유산 유무</InfoMainFontStyle>
           <InfoFontStyle>
             {myData.info.heritage1 ? "있음" : "없음"}
           </InfoFontStyle>
         </li>
         <li>
-          <b>세계자연유산 유무</b>
+          <InfoMainFontStyle>세계자연유산 유무</InfoMainFontStyle>
           <InfoFontStyle>
             {myData.info.heritage2 ? "있음" : "없음"}
           </InfoFontStyle>
         </li>
         <li>
-          <b>세계기록유산 유무</b>
+          <InfoMainFontStyle>세계기록유산 유무</InfoMainFontStyle>
           <InfoFontStyle>
             {myData.info.heritage3 ? "있음" : "없음"}
           </InfoFontStyle>
         </li>
         <li>
-          <b>전화번호</b>
+          <InfoMainFontStyle>전화번호</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.infoCenter === "0" ? "없음" : myData.info.infoCenter}
+            {myData.info.infoCenter === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.infoCenter }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>주차시설</b>
+          <InfoMainFontStyle>주차시설</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.commonParking === "0"
-              ? "없음"
-              : myData.info.commonParking}
+            {myData.info.commonParking === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.commonParking }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>쉬는날</b>
+          <InfoMainFontStyle>쉬는날</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.restDate === "0" ? "없음" : myData.info.restDate}
+            {myData.info.restDate === "0" ? (
+              "없음"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.restDate }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>이용시기</b>
+          <InfoMainFontStyle>이용시기</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.useSeason === "0"
-              ? "문의 필요"
-              : myData.info.useSeason}
+            {myData.info.useSeason === "0" ? (
+              "문의 필요"
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: myData.info.useSeason }}
+              />
+            )}
           </InfoFontStyle>
         </li>
         <li>
-          <b>이용시간</b>
+          <InfoMainFontStyle>이용시간</InfoMainFontStyle>
           <InfoFontStyle>
-            {myData.info.useTime === "0" ? "문의 필요" : myData.info.useTime}
+            {myData.info.useTime === "0" ? (
+              "문의 필요"
+            ) : (
+              <span dangerouslySetInnerHTML={{ __html: myData.info.useTime }} />
+            )}
           </InfoFontStyle>
         </li>
       </ul>

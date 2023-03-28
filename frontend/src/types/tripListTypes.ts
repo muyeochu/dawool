@@ -39,5 +39,5 @@ export interface ListType {
   mobilityWeak: number;
   old: number;
   infant: number;
-  liked: boolean;
+  liked?: boolean;
 }

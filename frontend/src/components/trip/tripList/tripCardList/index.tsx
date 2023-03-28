@@ -28,7 +28,7 @@ function TripCardList({ titleType, tripList }: TripCardListProps) {
   return (
     <TripCardListContainer>
       {filteredList && filteredList.map((item: ListType) => (
-        <TripCardItem key={item.contentId} contents={item} />
+        <TripCardItem type="list" key={item.contentId} contents={item} />
       ))}
     </TripCardListContainer>
   );
