@@ -1,5 +1,6 @@
 import {ReactComponent as FolderGrey} from "../../../../assets/icon/folderGrey.svg";
 import {ReactComponent as FolderYellow} from "../../../../assets/icon/folderYellow.svg";
+import {ReactComponent as Memo} from "../../../../assets/icon/memoIc.svg";
 import styled from "styled-components";
 import { MenuFont } from "../../../personal/styles";
 import { grey, black } from "../../../../styles/Colors";
@@ -46,4 +47,9 @@ export const FolderContainer = styled.div`
     &:hover{
         color:${black}
     }
+`
+export const MemoIc = styled(Memo)`
+    margin-left: 5%;
+    margin-right: 5%;
+    display: inline-block;
 `

@@ -2,7 +2,10 @@ import styled from "styled-components"
 import {ReactComponent as Arrow} from "../../../../../assets/icon/arrowIc.svg"
 // import {ReactComponent as Dot} from "../../../../../assets/icon/menuDotIc.svg"
 import {ReactComponent as DeleteFolder} from "../../../../../assets/icon/deleteIc.svg"
+import {ReactComponent as UpdateMemo} from "../../../../../assets/icon/updateIc.svg"
 import { grey } from "../../../../../styles/Colors";
+import {ReactComponent as Memo} from "../../../../../assets/icon/memoIc.svg";
+import { CourseList } from "./courseList";
 
 export const ExitFolderContainer = styled.div`
 flex-direction: row;
@@ -59,3 +62,30 @@ export const DeleteIc = styled(DeleteFolder)`
 // export const DotContent = styled(DropDownContent)`
 //     border: 1px solid ${grey[300]};
 // `
+
+
+
+export const MemoContainer = styled.div`
+display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    `
+
+
+
+export const UpdateIc = styled(UpdateMemo)`
+     position: absolute;
+  text-align: center;
+  overflow: hidden;
+  margin-left:20%;
+  cursor: pointer;
+`
+export const CourseListContainer = styled(CourseList)`
+display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+`
