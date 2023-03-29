@@ -13,18 +13,19 @@ interface TripRecCardItemProps {
 const TripRecCardItem = ({ item }: TripRecCardItemProps) => {
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(userState);
+  console.log("item!", item.contentid)
 
   const handleClick = () => {
     if (user.accessToken !== "" && item.contentTypeId in [12, 14, 28, 32, 38]) {
-      localStorage.setItem("recentContentId", item.contentId.toString());
+      localStorage.setItem("recentContentId", item.contentid.toString());
     }
 
     switch (item.contentTypeId) {
       case 39:
-        navigate(`/detail/restaurant/${item.contentId}`);
+        navigate(`/detail/restaurant/${item.contentid}`);
         break;
       case 32:
-        navigate(`/detail/accommodation/${item.contentId}`);
+        navigate(`/detail/accommodation/${item.contentid}`);
         break;
     }
   };
@@ -32,10 +33,10 @@ const TripRecCardItem = ({ item }: TripRecCardItemProps) => {
   return (
     <RecCardContainer>
       <RecImageContainer onClick={handleClick}>
-        {item.imageUrl === "0" ? (
+        {item.firstimage === "0" ? (
           <RecCardImage src={exampleImg} alt={"대표 이미지"} />
         ) : (
-          <RecCardImage src={item.imageUrl} alt={"대표 이미지"} />
+          <RecCardImage src={item.firstimage} alt={"대표 이미지"} />
         )}
       </RecImageContainer>
     </RecCardContainer>

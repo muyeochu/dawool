@@ -27,16 +27,8 @@ export const getSearchApi = async (
   );
 
 // 즐길거리 추천
-// export const getRecEntertainmentApi = async (contentTypeId: number) =>
-//   await customAxiosRec.get(`recommend/spot/${contentTypeId}/`, {
-//     withCredentials: true,
-//     headers: {
-//       "Content-Type": "application/json;charset=UTF-8",
-//       Authorization: `Bearer ${localStorage.getItem("token")}`,
-//     },
-//   });
-export const getEntertainmentApi = async () =>
-  await customAxiosRec.get(`recommend/spot/12/`, {
+export const getRecEntertainmentApi = async (contentTypeId: number) =>
+  await customAxiosRec.get(`recommend/spot/${contentTypeId}/`, {
     withCredentials: true,
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
@@ -44,16 +36,9 @@ export const getEntertainmentApi = async () =>
     },
   });
 
+
 // POST //
 // 식당 & 숙박 추천
-// export const getRecEtcApi = async (titleType: string, recentContent: number) =>
-//   await customAxiosRec.post(`recommend/${titleType}/`, recentContent, {
-//     withCredentials: true,
-//     headers: {
-//       "Content-Type": "application/json;charset=UTF-8",
-//       Authorization: `Bearer ${localStorage.getItem("token")}`,
-//     },
-//   });
 export const getRecEtcApi = async (titleType: string, recentContentId: number) =>
   await customAxiosRec.post(
     `recommend/${titleType}/`,
