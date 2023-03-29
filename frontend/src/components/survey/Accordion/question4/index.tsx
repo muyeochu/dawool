@@ -5,6 +5,7 @@ import RadioButtonGroup from "../../../common/RadioButton/RadioButtonGroup";
 import { fourthState } from "../../../../recoil/SurveyState";
 
 const FourthQuestion = () => {
+  // radio button의 선택지
   const responses = [
     {
       label: "예",
@@ -18,15 +19,13 @@ const FourthQuestion = () => {
     },
   ];
 
+  // 현재 선택된 radio button value
   const [selectedValue, setSelectedValue] = useRecoilState(fourthState);
-
+  // 선택한 값을 selectedValue로 설정
   function radioGroupHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setSelectedValue(event.target.value);
   }
-
-  useEffect(() => {
-    // console.log(selectedValue);
-  }, [selectedValue]);
+  // console.log(selectedValue)
 
   return (
     <RadioButtonContainer>

@@ -1,9 +1,6 @@
 import { atom, selector } from "recoil";
-import { recoilPersist } from 'recoil-persist';
 
-const { persistAtom } = recoilPersist();
-
-// 네 번째 설문만 완료! 다른 설문은 다시 확인하기!
+// 3, 4 완료! 다른 설문은 다시 확인하기!
 
 // 첫 번째 취향설문
 export const firstState = atom<number[]>({
@@ -18,9 +15,9 @@ export const secondState = atom<string>({
 })
 
 // 세 번째 취향설문
-export const thirdState = atom<number>({
+export const thirdState = atom<string>({
   key: 'thirdState',
-  default: 1,
+  default: "",
 });
 
 // 네 번째 취향설문

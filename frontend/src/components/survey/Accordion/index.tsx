@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
-import { accordionState } from "./state";
 import {
   AccordionItemContainer,
   HeaderContainer,
@@ -19,11 +18,11 @@ interface AccordionProps {
 }
 
 const Accordion: React.FC<AccordionProps> = ({ title, children }) => {
+  // Accordion이 열려있는지, 닫혀있는지 여부
   const [isOpen, setIsOpen] = useState(false);
-
+  //  Accordion의 Header를 클릭 -> isOpen 값 반전
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
-    // console.log(isOpen)
   };
 
   return (

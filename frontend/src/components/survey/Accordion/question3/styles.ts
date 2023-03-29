@@ -8,5 +8,5 @@ export const SliderContainer = styled.div`
   align-items: center;
   background-color: ${white};
   margin-top: 16px;
-  padding:20px 60px 16px 60px;
+  padding:20px 70px 16px 70px;
 `;
