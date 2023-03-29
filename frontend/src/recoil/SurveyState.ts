@@ -1,7 +1,4 @@
 import { atom, selector } from "recoil";
-import { recoilPersist } from 'recoil-persist';
-
-const { persistAtom } = recoilPersist();
 
 // 네 번째 설문만 완료! 다른 설문은 다시 확인하기!
 
