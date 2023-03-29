@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { mainColor, grey } from "../../styles/Colors";
 
 import { ReactComponent as SearchIc } from "../../assets/icon/searchSquareIc.svg";
+import { ReactComponent as NonSearchImg } from "../../assets/images/nonSearchImg.svg";
 
 export const MainGridItems = styled.div`
   grid-column: 2 / span 1;
@@ -61,16 +62,23 @@ export const TripCardListContainer = styled.div`
 
 export const NonDataContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-  margin-top: 80px;
+  margin-top: 30px;
 
   p {
     font-weight: 600;
-    font-size: 24px;
+    font-size: 32px;
     line-height: 54px;
     color: ${grey[500]};
+    margin-bottom: 40px;
   }
+`;
+
+export const NonSearchImgStyle = styled(NonSearchImg)`
+  width: 250px;
+  height: 250px;
 `;

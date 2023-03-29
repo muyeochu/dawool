@@ -14,7 +14,7 @@ import toddlerIc from "../../../assets/icon/toddlerIc.svg";
 // children -> 하나의 자식 노드만 전달
 interface ButtonProps {
   id: number;
-  btType: number; // search버튼인지 목록 버튼인지?
+  btType: number; // 0: search버튼, 1: 목록버튼
   // onClick?: () => void;
   // onClick?: (id: number) => void;
   disabled?: boolean;
@@ -29,7 +29,6 @@ export default function Button({ id, children, icType, btType }: ButtonProps) {
 
   // 'useRecoilState' hook -> Recoil의 'buttonState' 값을 가져와 버튼 상태에 대한 정보 유지
   const [button, setButton] = useRecoilState(buttonState);
-
 
   // 'useEffect' hook -> 'clicked' 값이 변경될 때마다 Recoil의 `buttonState` update
   // 'clicked'값이 'true'이면 Recoil 상태값 'buttonState'의 'clicked' 프로퍼티 'true'로 설정
@@ -48,7 +47,10 @@ export default function Button({ id, children, icType, btType }: ButtonProps) {
       const barrier = barrierArray.join("");
       setSearchValue({ ...searchValue, barrier: barrier });
     }
-   
+
+    // list 버튼인 경우
+    if (btType === 1) {
+    }
   }
 
   let icSrc =
