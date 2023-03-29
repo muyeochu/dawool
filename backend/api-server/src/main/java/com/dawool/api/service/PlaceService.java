@@ -138,7 +138,7 @@ public class PlaceService {
      *
      * @param heart
      */
-    public void heartPlace(HeartReqDto heart){
+    public boolean heartPlace(HeartReqDto heart){
         String objectId = UserService.getLoginUser();
 
         // 이미 북마크한 여행지인 경우 북마크 취소
@@ -146,6 +146,7 @@ public class PlaceService {
             // delete
             Heart object = heartRepository.findBySpotidAndUserid(heart.getSpotId(), objectId);
             heartRepository.delete(object);
+            return false;
         } else {    // 북마크
             // save
             Place place = Place.builder()
@@ -167,6 +168,7 @@ public class PlaceService {
                     .place(place)
                     .build();
             heartRepository.save(object);
+            return true;
         }
     }
 

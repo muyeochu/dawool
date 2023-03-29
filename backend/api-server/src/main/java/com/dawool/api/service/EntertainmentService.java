@@ -8,6 +8,7 @@ import com.dawool.api.entity.Entertainment;
 import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.CommonTemplate;
 import com.dawool.api.repository.EntertainmentRepository;
+import com.dawool.api.repository.HeartRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -31,6 +32,7 @@ public class EntertainmentService {
 
     private final EntertainmentRepository entertainmentRepository;
     private final BarrierRepository barrierRepository;
+    private final HeartRepository heartRepository;
     private final CommonTemplate commonTemplate;
     private final MongoTemplate mongoTemplate;
 
@@ -43,7 +45,7 @@ public class EntertainmentService {
      * @param size
      * @return
      */
-    public List<PlaceDto> getEntertainmentList(int areaCode, String barrierCode, int page, int size) {
+    public List<PlaceDto> getEntertainmentList(String userId, int areaCode, String barrierCode, int page, int size) {
 
         String[] barrier = barrierCode.split("");
 
@@ -51,7 +53,11 @@ public class EntertainmentService {
 
         List<PlaceDto> entertainmentList = new ArrayList<>();
         for (CommonInfo entertainment : list) {
-            PlaceDto place = new PlaceDto().of(entertainment);
+            boolean liked = false;
+            if(!userId.equals("anonymousUser")){
+                liked = heartRepository.existsBySpotidAndUserid(entertainment.getId(), userId);
+            }
+            PlaceDto place = new PlaceDto().of(entertainment, liked);
             entertainmentList.add(place);
         }
         return entertainmentList;
@@ -86,10 +92,14 @@ public class EntertainmentService {
      * @param contentId
      * @return
      */
-    public EntertainmentDto getEntertainmentInfo(int contentId){
+    public EntertainmentDto getEntertainmentInfo(String userId, int contentId){
         Entertainment entertainment = entertainmentRepository.findByContentid(String.valueOf(contentId));
         Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
 
-        return new EntertainmentDto().of(entertainment, barrier);
+        boolean liked = false;
+        if(!userId.equals("anonymousUser")){
+            liked = heartRepository.existsBySpotidAndUserid(entertainment.getId(), userId);
+        }
+        return new EntertainmentDto().of(entertainment, barrier, liked);
     }
 }

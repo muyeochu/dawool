@@ -47,7 +47,7 @@ public class PlaceDto {
      * @param info
      * @return
      */
-    public PlaceDto of(CommonInfo info){
+    public PlaceDto of(CommonInfo info, boolean liked){
         return PlaceDto.builder()
                 .spotId(info.getId())
                 .contentId(info.getContentid())
@@ -60,7 +60,7 @@ public class PlaceDto {
                 .deaf(info.getDeaf())
                 .old(info.getOld())
                 .infant(info.getInfant())
-                .isLiked(false)
+                .isLiked(liked)
                 .build();
     }
 

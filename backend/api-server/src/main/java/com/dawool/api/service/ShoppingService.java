@@ -7,6 +7,7 @@ import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.Shopping;
 import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.CommonTemplate;
+import com.dawool.api.repository.HeartRepository;
 import com.dawool.api.repository.ShoppingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,7 @@ public class ShoppingService {
 
     private final ShoppingRepository shoppingRepository;
     private final BarrierRepository barrierRepository;
+    private final HeartRepository heartRepository;
     private final CommonTemplate commonTemplate;
     private final MongoTemplate mongoTemplate;
 
@@ -42,7 +44,7 @@ public class ShoppingService {
      * @param size
      * @return
      */
-    public List<PlaceDto> getShoppingList(int areaCode, String barrierCode, int page, int size) {
+    public List<PlaceDto> getShoppingList(String userId, int areaCode, String barrierCode, int page, int size) {
 
         String[] barrier = barrierCode.split("");
 
@@ -50,7 +52,11 @@ public class ShoppingService {
 
         List<PlaceDto> shoppingList = new ArrayList<>();
         for (CommonInfo shopping : list) {
-            PlaceDto place = new PlaceDto().of(shopping);
+            boolean liked = false;
+            if(!userId.equals("anonymousUser")){
+                liked = heartRepository.existsBySpotidAndUserid(shopping.getId(), userId);
+            }
+            PlaceDto place = new PlaceDto().of(shopping, liked);
             shoppingList.add(place);
         }
         return shoppingList;
@@ -85,10 +91,14 @@ public class ShoppingService {
      * @param contentId
      * @return
      */
-    public ShoppingDto getShoppingInfo(int contentId){
+    public ShoppingDto getShoppingInfo(String userId, int contentId){
         Shopping shopping = shoppingRepository.findByContentid(String.valueOf(contentId));
         Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
 
-        return new ShoppingDto().of(shopping, barrier);
+        boolean liked = false;
+        if(!userId.equals("anonymousUser")){
+            liked = heartRepository.existsBySpotidAndUserid(shopping.getId(), userId);
+        }
+        return new ShoppingDto().of(shopping, barrier, liked);
     }
 }
