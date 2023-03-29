@@ -33,7 +33,7 @@ const SurveyPage = () => {
         </Accordion>
 
         <Accordion title="선호하는 이동거리가 있나요?">
-          <ThirdQuestion />
+          <ThirdQuestion isOpen={true} />
         </Accordion>
 
         <Accordion title="인기있는 관광지에 방문하는 것을 선호하나요?">
