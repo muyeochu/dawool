@@ -18,7 +18,6 @@ import {
   getRecEtcSelector,
 } from "../../../recoil/RecListSelector";
 import { recommendListType } from "../../../types/recListTypes";
-import { titleTypeMap } from "../../../types/tripListTypes";
 
 export interface TripRecProps {
   titleType: TripListTitleType["titleType"];
@@ -71,30 +70,15 @@ function TripRec({ titleType }: TripRecProps) {
       : "";
 
   // 식당 & 숙박 selector 호출
-  
-  const abc =
-    contentTypeId in [12, 14, 28, 32, 38, 39]
+  const selectorPick =
+    contentTypeId && [12, 14, 28, 32, 38, 39].includes(contentTypeId)
       ? getRecEntertainmentSelector({ titleType, contentTypeId: contentTypeId })
       : getRecEtcSelector({
-          titleType: recTitle,
-          recentContentId: recentContentId,
-        });
-
-  const RecList = useRecoilValue(abc)
-  console.log("여기!", RecList);
-
-
-  // const RecList = useRecoilValue(
-  //   getRecEtcSelector({
-  //     titleType: recTitle,
-  //     recentContentId: recentContentId,
-  //   })
-  // );
-
-  // 즐길거리
-  // const RecList = useRecoilValue(getRecEntertainmentListSelector({contentTypeId:12}))
-
-  console.log("추천목록", RecList);
+        titleType: recTitle,
+        recentContentId: recentContentId,
+      });
+  const RecList = useRecoilValue(selectorPick)
+  console.log("추천목록!", RecList);
 
   return (
     <TripRecContainer>
@@ -125,7 +109,6 @@ function TripRec({ titleType }: TripRecProps) {
         </TripRecCardListContainer>
       )}
 
-      {/* {RecList && <TripRecCardList RecList={RecList} />} */}
       {/* bottom button */}
       <RecDonwArrowIcContainer>
         <Link to="trip-list-container" smooth={true} duration={500}>
