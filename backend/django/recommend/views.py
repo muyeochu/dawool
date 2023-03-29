@@ -13,6 +13,7 @@ from bson import ObjectId
 from pymongo import MongoClient
 import base64
 import json
+import time
 
 
 DATABASE_URL = settings.DATABASES['default']['CLIENT']['host']
@@ -31,17 +32,18 @@ collection = db.user # 컬렉션
 def spot_list(request, spot_id):
     logging.basicConfig(level=logging.INFO)
     logging.info('관광지 추천 시작')
+    start = time.time()  # 시작 시간 저장
     # 나중에는 get으로 전부 바꿔야함 
     if(request.method == 'GET'):
         try:
             # JWT 토큰 추출
             token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
-            print(token)
             if token == "null":   
                 spots = RecommendTour.objects.all()
                 se = RecommendTourSerializer(spots, many=True)
                 data = pd.DataFrame(se.data) 
                 dict_data = popular_sorted(12, data)
+                print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
                 return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
 
             # JWT 디코딩
@@ -83,6 +85,7 @@ def spot_list(request, spot_id):
                 data = pd.DataFrame(se.data) 
                 dict_data = popular_sorted(spot_id, data)
 
+                print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
@@ -91,6 +94,7 @@ def spot_list(request, spot_id):
             se = RecommendTourSerializer(spots, many=True)
             data = pd.DataFrame(se.data) 
             dict_data = popular_sorted(12, data)
+            print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
 
         except Exception as e:
@@ -103,9 +107,11 @@ def spot_list(request, spot_id):
 def food_list(request):
     logging.basicConfig(level=logging.INFO)
     logging.info('식당 추천 시작')
+    start = time.time()  # 시작 시간 저장
     if(request.method == 'POST'):
         try:
             dict_data = recommend_logic(request, 39)
+            print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
@@ -115,7 +121,7 @@ def food_list(request):
             data = pd.DataFrame(se.data) 
 
             dict_data = popular_sorted(39, data)
-
+            print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         except Exception as e:
@@ -128,18 +134,22 @@ def food_list(request):
 def stay_list(request):
     logging.basicConfig(level=logging.INFO)
     logging.info('숙박 추천 시작')
+    start = time.time()  # 시작 시간 저장
     if(request.method == 'POST'):
         try:
             dict_data = recommend_logic(request, 32)
+            print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
         except ValueError and IndexError:
             spots = RecommendTour.objects.all()
             se = RecommendTourSerializer(spots, many=True)
+            print("데이터 불러오기 time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             data = pd.DataFrame(se.data) 
+            print("정렬 전 time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             dict_data = popular_sorted(32, data)
-        
+            print("정렬 후 time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         except Exception as e:
