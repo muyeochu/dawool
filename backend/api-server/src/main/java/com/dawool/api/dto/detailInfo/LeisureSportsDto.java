@@ -46,7 +46,7 @@ public class LeisureSportsDto extends CommonInfoDto{
 
     @Builder
     public LeisureSportsDto(String spotId, int contentId, int contentTypeId, String title, String category, String homepage, String firstImage,
-                            int areaCode, String addr1, float mapX, float mapY, float mLevel, int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
+                            int areaCode, String addr1, double mapX, double mapY, float mLevel, int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
                             String accomCount, float isBabyCarriage, float isPet, String expAgeRange, String infoCenter, String openPeriod,
                             String parkingFee, String commonParking, String reservation, String restDate, String useFee, String useTime) {
         super(spotId, contentId, contentTypeId, title, category, homepage, firstImage, areaCode, addr1, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, barrier);
@@ -64,7 +64,7 @@ public class LeisureSportsDto extends CommonInfoDto{
         this.useTime = useTime;
     }
 
-    public LeisureSportsDto of(LeisureSports leisureSports, Barrier barrier){
+    public LeisureSportsDto of(LeisureSports leisureSports, Barrier barrier, boolean liked){
         return LeisureSportsDto.builder()
                 .spotId(leisureSports.getId())
                 // 공통정보
@@ -78,7 +78,7 @@ public class LeisureSportsDto extends CommonInfoDto{
                 .mobilityWeak(leisureSports.getMobility_weak())
                 .old(leisureSports.getOld())
                 .infant(leisureSports.getInfant())
-                .isLiked(false)
+                .isLiked(liked)
                 .firstImage(leisureSports.getFirstimage())
                 .homepage(leisureSports.getHomepage())
                 .mapX(leisureSports.getMapx())

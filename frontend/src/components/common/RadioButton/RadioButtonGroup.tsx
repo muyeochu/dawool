@@ -6,19 +6,18 @@ const RadioButtonGroup = ({ options, onChange }: IInputGroup) => {
 
   // options 배열 순회하며 각각의 옵션에 대한 RadioButton 컴포넌트 렌더링
   function renderOptions() {
-    return options.map(({ label, name, disabled }: IOption, index) => {
+    return options.map(({ label, name, value, disabled }: IOption, index) => {
       const shortenedOptionLabel = label.replace(/\s+/g, "");
       const optionId = `radio-option-${shortenedOptionLabel}`;
 
       return (
         <RadioButton
-          value={label}
+          value={value}
           label={label}
           key={optionId}
           id={optionId}
           name={name}
           disabled={disabled}
-          defaultChecked={index === 0}
           onChange={onChange}
         />
       );

@@ -1,6 +1,6 @@
-import { customAxios } from "./customAxios";
+import { customAxios, customAxios2, customAxiosRec } from "./customAxios";
 
-// 상세페이지 요청
+// GET //
 export const getDetailApi = async (contentId: number, location: number) =>
   await customAxios.get(`location/${location}/${contentId}`, {
     withCredentials: true,
@@ -37,4 +37,74 @@ export const getSearchApi = async ({
     }
   );
 
+// 즐길거리 추천
+// export const getRecEntertainmentApi = async (contentTypeId: number) =>
+//   await customAxiosRec.get(`recommend/spot/${contentTypeId}/`, {
+//     withCredentials: true,
+//     headers: {
+//       "Content-Type": "application/json;charset=UTF-8",
+//       Authorization: `Bearer ${localStorage.getItem("token")}`,
+//     },
+//   });
+export const getEntertainmentApi = async () =>
+  await customAxiosRec.get(`recommend/spot/12/`, {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
+// POST //
+// 식당 & 숙박 추천
+// export const getRecEtcApi = async (titleType: string, recentContent: number) =>
+//   await customAxiosRec.post(`recommend/${titleType}/`, recentContent, {
+//     withCredentials: true,
+//     headers: {
+//       "Content-Type": "application/json;charset=UTF-8",
+//       Authorization: `Bearer ${localStorage.getItem("token")}`,
+//     },
+//   });
+export const getRecEtcApi = async (titleType: string, recentContentId: number) =>
+  await customAxiosRec.post(
+    `recommend/${titleType}/`,
+    { contentid: recentContentId },
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
+// 북마크 저장 및 해제
+export const bookmarkApi = async (info: any) =>
+  await customAxios2.post(
+    `location/bookmark`,
+    {
+      spotId: info.spotId,
+      contentId: info.contentId,
+      contentTypeId: info.contentTypeId,
+      title: info.title,
+      imageUrl: info.firstImage,
+      category: info.category,
+      deaf: info.deaf,
+      visuallyImpaired: info.visuallyImpaired,
+      mobilityWeak: info.mobilityWeak,
+      old: info.old,
+      infant: info.infant,
+    },
+    {
+      withCredentials: true,
+    }
+  );
+
+// 북마크 목록 불러오기
+export const getBookmarkListApi = async (page: number, size: number) =>
+  await customAxios.get(`location/bookmark?page=${page}&size=${size}`, {
+    withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });

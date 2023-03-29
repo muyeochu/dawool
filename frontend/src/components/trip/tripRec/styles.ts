@@ -1,9 +1,9 @@
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { mainColor, white, grey, blue, black } from "../../../styles/Colors";
-import RecBackgroundImg from "../../../assets/images/recBackgroundImg.png"
+import RecBackgroundImg from "../../../assets/images/recBackgroundImg.png";
 import { ReactComponent as DownArrowIc } from "../../../assets/icon/downarrowIc.svg";
 
-const bounce = keyframes`
+export const bounce = keyframes`
   0% {
     transform: translateY(0);
   }
@@ -23,19 +23,20 @@ export const TripRecContainer = styled.div`
   position: relative;
   height: 92vh;
   width: 100vw;
+  padding: 150px 184px;
   background-image: url(${RecBackgroundImg});
   background-size: cover;
 `;
 
 export const TripRecTitleContainer = styled.div`
-  
   text-align: left;
   font-family: "SUIT";
   font-style: normal;
   font-weight: 600;
-  font-size: 45px;
-  line-height: 56px;
+  font-size: 35px;
+  line-height: 45px;
   color: ${black};
+  margin-bottom: 55px;
 `;
 
 export const TripRecTitle1 = styled.div`
@@ -46,6 +47,14 @@ export const TripRecTitle1 = styled.div`
 export const TripRecTitle2 = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const TripRecCardListContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 `;
 
 export const RecDonwArrowIcContainer = styled.div`

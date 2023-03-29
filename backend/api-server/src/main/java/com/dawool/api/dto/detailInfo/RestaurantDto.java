@@ -41,7 +41,7 @@ public class RestaurantDto extends CommonInfoDto{
 
     @Builder
     public RestaurantDto(String spotId, int contentId, int contentTypeId, String title, String category, String homepage, String firstImage,
-                         int areaCode, String addr1, float mapX, float mapY, float mLevel,
+                         int areaCode, String addr1, double mapX, double mapY, float mLevel,
                          int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
                          int isCreditCard, String firstMenu, String infoCenter, float kidsFacility, String openTime, String packing,
                          String commonParking, String reservation, String restDate, String treatMenu) {
@@ -65,7 +65,7 @@ public class RestaurantDto extends CommonInfoDto{
      * @param barrier
      * @return
      */
-    public RestaurantDto of(Restaurant restaurant, Barrier barrier){
+    public RestaurantDto of(Restaurant restaurant, Barrier barrier, boolean liked){
         return RestaurantDto.builder()
                 .spotId(restaurant.getId())
                 // 공통정보
@@ -79,7 +79,7 @@ public class RestaurantDto extends CommonInfoDto{
                 .mobilityWeak(restaurant.getMobility_weak())
                 .old(restaurant.getOld())
                 .infant(restaurant.getInfant())
-                .isLiked(false)
+                .isLiked(liked)
                 .firstImage(restaurant.getFirstimage())
                 .homepage(restaurant.getHomepage())
                 .mapX(restaurant.getMapx())

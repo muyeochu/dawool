@@ -46,7 +46,7 @@ public class EntertainmentDto extends CommonInfoDto{
 
     @Builder
     public EntertainmentDto(String spotId, int contentId, int contentTypeId, String title, String category, String homepage, String firstImage,
-                            int areaCode, String addr1, float mapX, float mapY, float mLevel, int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
+                            int areaCode, String addr1, double mapX, double mapY, float mLevel, int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
                             int isBabyCarriage, int isPet, String expAgeRange, String expGuide, float heritage1, float heritage2, float heritage3,
                             String infoCenter, String commonParking, String restDate, String useSeason, String useTime) {
         super(spotId, contentId, contentTypeId, title, category, homepage, firstImage, areaCode, addr1, mapX, mapY, mLevel, deaf, visuallyImpaired, mobilityWeak, old, infant, isLiked, hit, barrier);
@@ -71,7 +71,7 @@ public class EntertainmentDto extends CommonInfoDto{
      * @param barrier
      * @return
      */
-    public EntertainmentDto of(Entertainment entertainment, Barrier barrier){
+    public EntertainmentDto of(Entertainment entertainment, Barrier barrier, boolean liked){
         return EntertainmentDto.builder()
                 .spotId(entertainment.getId())
                 // 공통정보
@@ -85,7 +85,7 @@ public class EntertainmentDto extends CommonInfoDto{
                 .mobilityWeak(entertainment.getMobility_weak())
                 .old(entertainment.getOld())
                 .infant(entertainment.getInfant())
-                .isLiked(false)
+                .isLiked(liked)
                 .firstImage(entertainment.getFirstimage())
                 .homepage(entertainment.getHomepage())
                 .mapX(entertainment.getMapx())

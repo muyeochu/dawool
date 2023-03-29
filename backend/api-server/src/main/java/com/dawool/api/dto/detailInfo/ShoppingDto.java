@@ -44,7 +44,7 @@ public class ShoppingDto extends CommonInfoDto{
 
     @Builder
     public ShoppingDto(String spotId, int contentId, int contentTypeId, String title, String category, String homepage, String firstImage,
-                       int areaCode, String addr1, float mapX, float mapY, float mLevel,
+                       int areaCode, String addr1, double mapX, double mapY, float mLevel,
                        int deaf, int visuallyImpaired, int mobilityWeak, int old, int infant, boolean isLiked, int hit, BarrierDto barrier,
                        int isBabyCarriage, String isCreditCard, int isPet, String fairDay, String infoCenter, String openTime,
                        String commonParking, String restDate, String restroom, String saleItem, String shopGuide) {
@@ -62,7 +62,7 @@ public class ShoppingDto extends CommonInfoDto{
         this.shopGuide = shopGuide;
     }
 
-    public ShoppingDto of(Shopping shopping, Barrier barrier){
+    public ShoppingDto of(Shopping shopping, Barrier barrier, boolean liked){
         return ShoppingDto.builder()
                 .spotId(shopping.getId())
                 // 공통정보
@@ -76,7 +76,7 @@ public class ShoppingDto extends CommonInfoDto{
                 .mobilityWeak(shopping.getMobility_weak())
                 .old(shopping.getOld())
                 .infant(shopping.getInfant())
-                .isLiked(false)
+                .isLiked(liked)
                 .firstImage(shopping.getFirstimage())
                 .homepage(shopping.getHomepage())
                 .mapX(shopping.getMapx())

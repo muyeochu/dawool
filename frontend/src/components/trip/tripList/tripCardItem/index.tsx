@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { recentViewdContentState } from "../../../../recoil/UserState";
 import { userState } from "../../../../recoil/UserState";
 import {
   CardContainer,
@@ -9,6 +8,12 @@ import {
   CardBottomContainer,
   CardText,
   LikedIcStyle,
+  BarrierIconContainer,
+  BathchairIcStyle,
+  EyeIcStyle,
+  EarIcStyle,
+  OldmanIcStyle,
+  ToddlerIcStyle,
 } from "./styles";
 import { ListType } from "../../../../types/tripListTypes";
 import exampleImg from "../../../../assets/images/exampleImg.png";
@@ -21,12 +26,17 @@ interface TripCardItemProps {
 
 function TripCardItem({ contents, type }: TripCardItemProps) {
   const navigate = useNavigate();
-  const [recentlyViewedContentId, setrecentlyViewedContentId] = useRecoilState(recentViewdContentState)
   const [user, setUser] = useRecoilState(userState);
 
   const handleClick = () => {
-    setrecentlyViewedContentId(contents.contentId)
-    
+    // 로그인 유저 & 즐길거리인 경우 -> 최근 본 관광지 contentId를 local에 저장
+    if (
+      user.accessToken !== "" &&
+      contents.contentTypeId in [12, 14, 28, 32, 38]
+    ) {
+      localStorage.setItem("recentContentId", contents.contentId.toString());
+    }
+
     switch (contents.contentTypeId) {
       case 39:
         navigate(`/detail/restaurant/${contents.contentId}`);
@@ -59,10 +69,17 @@ function TripCardItem({ contents, type }: TripCardItemProps) {
         ) : (
           <CardImage src={contents.imageUrl} alt={"대표 이미지"} />
         )}
+        <BarrierIconContainer>
+          {contents.mobilityWeak ? <BathchairIcStyle /> : null}
+          {contents.visuallyImpaired ? <EyeIcStyle /> : null}
+          {contents.deaf ? <EarIcStyle /> : null}
+          {contents.old ? <OldmanIcStyle /> : null}
+          {contents.infant ? <ToddlerIcStyle /> : null}
+        </BarrierIconContainer>
       </ImageContainer>
       <CardBottomContainer>
         <CardText onClick={handleClick}>{contents.title}</CardText>
-        {type ==="list" && <LikedIcStyle />}
+        {type === "list" && <LikedIcStyle />}
       </CardBottomContainer>
     </CardContainer>
   );

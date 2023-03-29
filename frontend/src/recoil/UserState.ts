@@ -32,7 +32,7 @@ export const userState = atom({
 //로그아웃 - 로컬스토리지 지워지게 됨 퍼지?
 
 // 최근 본 여행지의 contentId 저장
-export const recentViewdContentState = atom<number>({
-    key: 'recentViewdContentState',
-    default: 0
-})
+// export const recentViewdContentState = atom<number>({
+//     key: 'recentViewdContentState',
+//     default: 0
+// })
