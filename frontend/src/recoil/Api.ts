@@ -28,7 +28,7 @@ export const getSearchApi = async (
 
 // 즐길거리 추천
 export const getRecEntertainmentApi = async (contentTypeId: number) =>
-  await customAxiosRec.get(`recommend/spot/${contentTypeId}`,
+  await customAxiosRec.get(`recommend/spot/${contentTypeId}/`,
   {
     withCredentials: true,
       headers: {
@@ -51,3 +51,4 @@ export const getRecEtcApi = async (recentContentId: number) =>
       },
     }
   );
+

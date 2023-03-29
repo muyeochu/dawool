@@ -23,18 +23,21 @@ export interface TripRecProps {
 
 function TripRec({ titleType }: TripRecProps) {
   // 유저 정보 가져오기
-  // const [user, setUser] = useRecoilState(userState);
+  const [user, setUser] = useRecoilState(userState);
 
   // 추천 data 가져오기
   const recentContentId = parseInt(
     localStorage.getItem("recentContentId") || "0"
   );
+  // 식당&숙박
   // const RecList = useRecoilValue(
-  //   getRecListSelector({ recentContentId: recentContentId })
+  //   getRecListSelector({ recentContentId: 0 })
+  //   // getRecListSelector({ recentContentId: recentContentId })
   // );
-  // const RecList = useRecoilValue(getRecEntertainmentListSelector({contentTypeId:12}))
+  // 즐길거리
+  const RecList = useRecoilValue(getRecEntertainmentListSelector({contentTypeId:12}))
 
-  // console.log("추천목록", RecList);
+  console.log("추천목록", RecList);
 
   const typeText =
     titleType === "restaurant"
