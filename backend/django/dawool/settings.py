@@ -25,7 +25,7 @@ JWT_SECRET_KEY =env('JWT_SECERET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.100.71']
+ALLOWED_HOSTS = []
 
 # Application definition
 
