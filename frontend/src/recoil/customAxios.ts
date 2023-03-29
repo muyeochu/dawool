@@ -25,3 +25,4 @@ export const customAxiosRec: AxiosInstance = axios.create({
     "Content-Type": "application/json;charset=UTF-8",
   },
 });
+
