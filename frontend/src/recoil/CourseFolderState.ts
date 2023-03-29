@@ -3,7 +3,7 @@ import {atom} from "recoil";
 interface FolderType{
     isOpen : boolean;
     opendFolder:string;
-    courseId:Number;
+    courseId:string;
 }
 
 export const FolderState = atom<FolderType>({
@@ -11,7 +11,7 @@ export const FolderState = atom<FolderType>({
     default:{
         isOpen:false,
         opendFolder:"",
-        courseId:1
+        courseId:""
     }
 })
 

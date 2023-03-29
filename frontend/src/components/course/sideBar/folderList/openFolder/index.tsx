@@ -22,7 +22,7 @@ export const FolderInside=()=>{
         callback: () => {
         // const deleteNowFolder = async ()=>{
         //   await axios
-        //   .delete(process.env.REACT_APP_API_BASE_URL+"/api/user/my-course/{courseId}")
+        //   .delete(process.env.REACT_APP_API_BASE_URL+"/api/course/{courseId}")
         // }
           alert("삭제되었습니다!");
           closeModal();
@@ -34,7 +34,7 @@ export const FolderInside=()=>{
         setFolderState({
             isOpen:false,
             opendFolder:"",
-            courseId:1 //나중에contentid로 넣기
+            courseId:"" //나중에contentid로 넣기
         });
     }
 

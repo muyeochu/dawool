@@ -26,7 +26,7 @@ export const FolderGreyIc = styled(FolderGrey)`
 //     color:${grey[300]}
 // `
 
-export const InputForderName = styled.input.attrs({
+export const InputFolderName = styled.input.attrs({
     placeholder:"새 코스명을 입력해주세요.",
     
 })`
@@ -41,13 +41,16 @@ export const FolderContainer = styled.div`
     padding: 10px;
     gap: 10px;
     color: ${grey[300]};
-
     border-bottom:1px solid ${grey[300]};
     cursor: pointer; //생성된 폴더 목록 클릭 가능하게 표시.(마우스 커서 변환)
     &:hover{
         color:${black}
     }
 `
+export const FolderContainerWrapper = styled.div`
+${FolderContainer}
+`
+
 export const MemoIc = styled(Memo)`
     margin-left: 5%;
     margin-right: 5%;
