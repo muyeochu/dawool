@@ -20,7 +20,8 @@ export interface TripListProps {
 
 function TripList({ titleType }: TripListProps) {
   const [isClicked, setIsClicked] = useState<boolean>(false); // 무장애 필터링 버튼 중 하나가 클릭되었는지 여부 나타내는 상태값
-  const [citySelected, setCitySelected] = useRecoilState<number>(citySelectedState); // 선택된 도시의 ID 값 나타내는 상태값
+  const [citySelected, setCitySelected] =
+    useRecoilState<number>(citySelectedState); // 선택된 도시의 ID 값 나타내는 상태값
   const [cityList, setCityList] = useRecoilState<City[]>(citiesState); // 지역 정보를 관리하는 citiesState recoil atom의 상태값
 
   // 드롭다운에서 선택된 도시에 맞는 여행 목록 가져옴
@@ -104,7 +105,10 @@ function TripList({ titleType }: TripListProps) {
         </ButtonList>
 
         {/* 드롭다운 */}
-        <Dropdown itemList={cityList.map((city: City) => city.name)} onSelected={onCitySelected}>
+        <Dropdown
+          itemList={cityList.map((city: City) => city.name)}
+          onSelected={onCitySelected}
+        >
           <span>{cityName}</span>
         </Dropdown>
       </ButtonGroup>

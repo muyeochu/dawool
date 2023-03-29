@@ -9,10 +9,13 @@ import {
 } from "./styles";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { TripListTitleType } from "../../../types/tripListTypes";
-// import TripRecCardList from "./tripRecCardList";
+import TripRecCardList from "./tripRecCardList";
 import { Link } from "react-scroll";
 import { userState } from "../../../recoil/UserState";
-import { getRecListSelector } from "../../../recoil/RecListSelector";
+import {
+  getRecEntertainmentListSelector,
+  getRecListSelector,
+} from "../../../recoil/RecListSelector";
 
 export interface TripRecProps {
   titleType: TripListTitleType["titleType"];
@@ -26,9 +29,13 @@ function TripRec({ titleType }: TripRecProps) {
   const recentContentId = parseInt(
     localStorage.getItem("recentContentId") || "0"
   );
-  const RecList = useRecoilValue(
-    getRecListSelector({ recentContentId: recentContentId })
-  );
+  // 식당&숙박
+  // const RecList = useRecoilValue(
+  //   getRecListSelector({ recentContentId: 0 })
+  //   // getRecListSelector({ recentContentId: recentContentId })
+  // );
+  // 즐길거리
+  const RecList = useRecoilValue(getRecEntertainmentListSelector({contentTypeId:12}))
 
   console.log("추천목록", RecList);
 
@@ -51,12 +58,14 @@ function TripRec({ titleType }: TripRecProps) {
     <TripRecContainer>
       {/* title */}
       <TripRecTitleContainer>
+        <TripRecTitle2>BEST {typeText} 👍</TripRecTitle2>
         {/* {user===null} */}
-        <TripRecTitle1>예린님!</TripRecTitle1>
-        <TripRecTitle2>이런 {typeText}은 어떠세요?</TripRecTitle2>
+        {/* <TripRecTitle1>예린님!</TripRecTitle1>
+        <TripRecTitle2>이런 {typeText}은 어떠세요?</TripRecTitle2> */}
       </TripRecTitleContainer>
 
       {/* cards */}
+      <TripRecCardList/>
       {/* {RecList && <TripRecCardList RecList={RecList}/>} */}
       {/* bottom button */}
       <RecDonwArrowIcContainer>
