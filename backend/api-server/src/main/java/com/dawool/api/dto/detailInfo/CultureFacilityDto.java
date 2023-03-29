@@ -47,7 +47,7 @@ public class CultureFacilityDto extends CommonInfoDto{
         this.spendTime = spendTime;
     }
 
-    public CultureFacilityDto of(CultureFacility cultureFacility, Barrier barrier){
+    public CultureFacilityDto of(CultureFacility cultureFacility, Barrier barrier, boolean liked){
         return CultureFacilityDto.builder()
                 .spotId(cultureFacility.getId())
                 // 공통정보
@@ -60,7 +60,7 @@ public class CultureFacilityDto extends CommonInfoDto{
                 .mobilityWeak(cultureFacility.getMobility_weak())
                 .old(cultureFacility.getOld())
                 .infant(cultureFacility.getInfant())
-                .isLiked(false)
+                .isLiked(liked)
                 .firstImage(cultureFacility.getFirstimage())
                 .homepage(cultureFacility.getHomepage())
                 .mapX(cultureFacility.getMapx())

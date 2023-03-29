@@ -7,6 +7,7 @@ import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.Lodging;
 import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.CommonTemplate;
+import com.dawool.api.repository.HeartRepository;
 import com.dawool.api.repository.LodgingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,7 @@ public class LodgingService {
 
     private final LodgingRepository lodgingRepository;
     private final BarrierRepository barrierRepository;
+    private final HeartRepository heartRepository;
     private final CommonTemplate commonTemplate;
     private final MongoTemplate mongoTemplate;
 
@@ -42,7 +44,7 @@ public class LodgingService {
      * @param size
      * @return
      */
-    public List<PlaceDto> getLodgingList(int areaCode, String barrierCode, int page, int size) {
+    public List<PlaceDto> getLodgingList(String userId, int areaCode, String barrierCode, int page, int size) {
 
         String[] barrier = barrierCode.split("");
 
@@ -50,7 +52,11 @@ public class LodgingService {
 
         List<PlaceDto> lodgingList = new ArrayList<>();
         for (CommonInfo lodging : list) {
-            PlaceDto place = new PlaceDto().of(lodging);
+            boolean liked = false;
+            if(!userId.equals("anonymousUser")){
+                liked = heartRepository.existsBySpotidAndUserid(lodging.getId(), userId);
+            }
+            PlaceDto place = new PlaceDto().of(lodging, liked);
             lodgingList.add(place);
         }
         return lodgingList;
@@ -85,10 +91,14 @@ public class LodgingService {
      * @param contentId
      * @return
      */
-    public LodgingDto getLodgingInfo(int contentId){
+    public LodgingDto getLodgingInfo(String userId, int contentId){
         Lodging lodging = lodgingRepository.findByContentid(String.valueOf(contentId));
         Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
 
-        return new LodgingDto().of(lodging, barrier);
+        boolean liked = false;
+        if(!userId.equals("anonymousUser")){
+            liked = heartRepository.existsBySpotidAndUserid(lodging.getId(), userId);
+        }
+        return new LodgingDto().of(lodging, barrier, liked);
     }
 }

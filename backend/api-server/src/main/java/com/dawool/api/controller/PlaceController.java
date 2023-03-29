@@ -15,6 +15,7 @@ import com.dawool.api.service.LodgingService;
 import com.dawool.api.service.PlaceService;
 import com.dawool.api.service.RestaurantService;
 import com.dawool.api.service.ShoppingService;
+import com.dawool.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -69,31 +70,32 @@ public class PlaceController {
             @RequestParam("barrier") String barrier,
             int page, int size){
 
+        String userId = UserService.getLoginUser();
         List<PlaceDto> placeList = new ArrayList<>();
         switch (type){
             case 12:
                 placeList =
-                    entertainmentService.getEntertainmentList(areaCode, barrier, page, size);
+                    entertainmentService.getEntertainmentList(userId, areaCode, barrier, page, size);
                 break;
             case 14:
                 placeList =
-                        cultureFacilityService.getCultureFacilityList(areaCode, barrier, page, size);
+                        cultureFacilityService.getCultureFacilityList(userId, areaCode, barrier, page, size);
                 break;
             case 28:
                 placeList =
-                        leisureSportsService.getLeisureSportsList(areaCode, barrier, page, size);
+                        leisureSportsService.getLeisureSportsList(userId, areaCode, barrier, page, size);
                 break;
             case 32:
                 placeList =
-                        lodgingService.getLodgingList(areaCode, barrier, page, size);
+                        lodgingService.getLodgingList(userId, areaCode, barrier, page, size);
                 break;
             case 38:
                 placeList =
-                        shoppingService.getShoppingList(areaCode, barrier, page, size);
+                        shoppingService.getShoppingList(userId, areaCode, barrier, page, size);
                 break;
             case 39:
                 placeList =
-                        restaurantService.getRestaurantList(areaCode, barrier, page, size);
+                        restaurantService.getRestaurantList(userId, areaCode, barrier, page, size);
                 break;
         }
 
@@ -111,34 +113,36 @@ public class PlaceController {
      */
     @GetMapping("/{type}/{contentId}")
     public ResponseEntity<?> getPlaceInfo(@PathVariable("type") int type, @PathVariable("contentId") int contentId){
+
+        String userId = UserService.getLoginUser();
         switch (type){
             case 12:
-                EntertainmentDto entertainment = entertainmentService.getEntertainmentInfo(contentId);
+                EntertainmentDto entertainment = entertainmentService.getEntertainmentInfo(userId, contentId);
                 Map<String, EntertainmentDto> entertainmentResponse = new HashMap<>();
                 entertainmentResponse.put("info", entertainment);
                 return ResponseEntity.ok(entertainmentResponse);
             case 14:
-                CultureFacilityDto cultureFacility = cultureFacilityService.getCultureFacilityInfo(contentId);
+                CultureFacilityDto cultureFacility = cultureFacilityService.getCultureFacilityInfo(userId, contentId);
                 Map<String, CultureFacilityDto> cultureFacilityResponse = new HashMap<>();
                 cultureFacilityResponse.put("info", cultureFacility);
                 return ResponseEntity.ok(cultureFacilityResponse);
             case 28:
-                LeisureSportsDto leisureSports = leisureSportsService.getLeisureSportsInfo(contentId);
+                LeisureSportsDto leisureSports = leisureSportsService.getLeisureSportsInfo(userId, contentId);
                 Map<String, LeisureSportsDto> leisureSportsResponse = new HashMap<>();
                 leisureSportsResponse.put("info", leisureSports);
                 return ResponseEntity.ok(leisureSportsResponse);
             case 32:
-                LodgingDto lodging = lodgingService.getLodgingInfo(contentId);
+                LodgingDto lodging = lodgingService.getLodgingInfo(userId, contentId);
                 Map<String, LodgingDto> lodgingResponse = new HashMap<>();
                 lodgingResponse.put("info", lodging);
                 return ResponseEntity.ok(lodgingResponse);
             case 38:
-                ShoppingDto shopping = shoppingService.getShoppingInfo(contentId);
+                ShoppingDto shopping = shoppingService.getShoppingInfo(userId, contentId);
                 Map<String, ShoppingDto> shoppingResponse = new HashMap<>();
                 shoppingResponse.put("info", shopping);
                 return ResponseEntity.ok(shoppingResponse);
             case 39:
-                RestaurantDto restaurant = restaurantService.getRestaurantInfo(contentId);
+                RestaurantDto restaurant = restaurantService.getRestaurantInfo(userId, contentId);
                 Map<String, RestaurantDto> restaurantResponse = new HashMap<>();
                 restaurantResponse.put("info", restaurant);
                 return ResponseEntity.ok(restaurantResponse);

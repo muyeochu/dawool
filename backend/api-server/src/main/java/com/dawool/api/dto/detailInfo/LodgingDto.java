@@ -97,7 +97,7 @@ public class LodgingDto extends CommonInfoDto{
      * @param barrier
      * @return
      */
-    public LodgingDto of(Lodging lodging, Barrier barrier) {
+    public LodgingDto of(Lodging lodging, Barrier barrier, boolean liked) {
         return LodgingDto.builder()
                 .spotId(lodging.getId())
                 // 공통정보
@@ -110,7 +110,7 @@ public class LodgingDto extends CommonInfoDto{
                 .mobilityWeak(lodging.getMobility_weak())
                 .old(lodging.getOld())
                 .infant(lodging.getInfant())
-                .isLiked(false)
+                .isLiked(liked)
                 .firstImage(lodging.getFirstimage())
                 .homepage(lodging.getHomepage())
                 .mapX(lodging.getMapx())

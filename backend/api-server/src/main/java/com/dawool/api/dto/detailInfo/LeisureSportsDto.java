@@ -64,7 +64,7 @@ public class LeisureSportsDto extends CommonInfoDto{
         this.useTime = useTime;
     }
 
-    public LeisureSportsDto of(LeisureSports leisureSports, Barrier barrier){
+    public LeisureSportsDto of(LeisureSports leisureSports, Barrier barrier, boolean liked){
         return LeisureSportsDto.builder()
                 .spotId(leisureSports.getId())
                 // 공통정보
@@ -77,7 +77,7 @@ public class LeisureSportsDto extends CommonInfoDto{
                 .mobilityWeak(leisureSports.getMobility_weak())
                 .old(leisureSports.getOld())
                 .infant(leisureSports.getInfant())
-                .isLiked(false)
+                .isLiked(liked)
                 .firstImage(leisureSports.getFirstimage())
                 .homepage(leisureSports.getHomepage())
                 .mapX(leisureSports.getMapx())

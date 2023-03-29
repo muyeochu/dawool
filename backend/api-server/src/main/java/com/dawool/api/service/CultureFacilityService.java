@@ -8,6 +8,7 @@ import com.dawool.api.entity.CultureFacility;
 import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.CommonTemplate;
 import com.dawool.api.repository.CultureFacilityRepository;
+import com.dawool.api.repository.HeartRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -30,6 +31,7 @@ public class CultureFacilityService {
 
     private final CultureFacilityRepository cultureFacilityRepository;
     private final BarrierRepository barrierRepository;
+    private final HeartRepository heartRepository;
     private final CommonTemplate commonTemplate;
     private final MongoTemplate mongoTemplate;
 
@@ -42,7 +44,7 @@ public class CultureFacilityService {
      * @param size
      * @return
      */
-    public List<PlaceDto> getCultureFacilityList(int areaCode, String barrierCode, int page, int size) {
+    public List<PlaceDto> getCultureFacilityList(String userId, int areaCode, String barrierCode, int page, int size) {
 
         String[] barrier = barrierCode.split("");
 
@@ -50,7 +52,11 @@ public class CultureFacilityService {
 
         List<PlaceDto> cultureFacilityList = new ArrayList<>();
         for (CommonInfo cultureFacility : list) {
-            PlaceDto place = new PlaceDto().of(cultureFacility);
+            boolean liked = false;
+            if(!userId.equals("anonymousUser")){
+                liked = heartRepository.existsBySpotidAndUserid(cultureFacility.getId(), userId);
+            }
+            PlaceDto place = new PlaceDto().of(cultureFacility, liked);
             cultureFacilityList.add(place);
         }
         return cultureFacilityList;
@@ -85,10 +91,14 @@ public class CultureFacilityService {
      * @param contentId
      * @return
      */
-    public CultureFacilityDto getCultureFacilityInfo(int contentId){
+    public CultureFacilityDto getCultureFacilityInfo(String userId, int contentId){
         CultureFacility cultureFacility = cultureFacilityRepository.findByContentid(String.valueOf(contentId));
         Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
 
-        return new CultureFacilityDto().of(cultureFacility, barrier);
+        boolean liked = false;
+        if(!userId.equals("anonymousUser")){
+            liked = heartRepository.existsBySpotidAndUserid(cultureFacility.getId(), userId);
+        }
+        return new CultureFacilityDto().of(cultureFacility, barrier, liked);
     }
 }

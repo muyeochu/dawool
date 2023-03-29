@@ -65,7 +65,7 @@ public class RestaurantDto extends CommonInfoDto{
      * @param barrier
      * @return
      */
-    public RestaurantDto of(Restaurant restaurant, Barrier barrier){
+    public RestaurantDto of(Restaurant restaurant, Barrier barrier, boolean liked){
         return RestaurantDto.builder()
                 .spotId(restaurant.getId())
                 // 공통정보
@@ -78,7 +78,7 @@ public class RestaurantDto extends CommonInfoDto{
                 .mobilityWeak(restaurant.getMobility_weak())
                 .old(restaurant.getOld())
                 .infant(restaurant.getInfant())
-                .isLiked(false)
+                .isLiked(liked)
                 .firstImage(restaurant.getFirstimage())
                 .homepage(restaurant.getHomepage())
                 .mapX(restaurant.getMapx())

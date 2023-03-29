@@ -7,6 +7,7 @@ import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.Restaurant;
 import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.CommonTemplate;
+import com.dawool.api.repository.HeartRepository;
 import com.dawool.api.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,7 @@ public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
     private final BarrierRepository barrierRepository;
+    private final HeartRepository heartRepository;
     private final CommonTemplate commonTemplate;
     private final MongoTemplate mongoTemplate;
 
@@ -42,7 +44,7 @@ public class RestaurantService {
      * @param size
      * @return
      */
-    public List<PlaceDto> getRestaurantList(int areaCode, String barrierCode, int page, int size) {
+    public List<PlaceDto> getRestaurantList(String userId, int areaCode, String barrierCode, int page, int size) {
 
         String[] barrier = barrierCode.split("");
 
@@ -50,7 +52,11 @@ public class RestaurantService {
 
         List<PlaceDto> restaurantList = new ArrayList<>();
         for (CommonInfo restaurant : list) {
-            PlaceDto place = new PlaceDto().of(restaurant);
+            boolean liked = false;
+            if(!userId.equals("anonymousUser")){
+                liked = heartRepository.existsBySpotidAndUserid(restaurant.getId(), userId);
+            }
+            PlaceDto place = new PlaceDto().of(restaurant, liked);
             restaurantList.add(place);
         }
         return restaurantList;
@@ -80,15 +86,19 @@ public class RestaurantService {
     }
 
     /**
-     * 숙박 상세정보 조회
+     * 식당 상세정보 조회
      *
      * @param contentId
      * @return
      */
-    public RestaurantDto getRestaurantInfo(int contentId){
+    public RestaurantDto getRestaurantInfo(String userId, int contentId){
         Restaurant restaurant = restaurantRepository.findByContentid(String.valueOf(contentId));
         Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
 
-        return new RestaurantDto().of(restaurant, barrier);
+        boolean liked = false;
+        if(!userId.equals("anonymousUser")){
+            liked = heartRepository.existsBySpotidAndUserid(restaurant.getId(), userId);
+        }
+        return new RestaurantDto().of(restaurant, barrier, liked);
     }
 }

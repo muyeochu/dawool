@@ -71,7 +71,7 @@ public class EntertainmentDto extends CommonInfoDto{
      * @param barrier
      * @return
      */
-    public EntertainmentDto of(Entertainment entertainment, Barrier barrier){
+    public EntertainmentDto of(Entertainment entertainment, Barrier barrier, boolean liked){
         return EntertainmentDto.builder()
                 .spotId(entertainment.getId())
                 // 공통정보
@@ -84,7 +84,7 @@ public class EntertainmentDto extends CommonInfoDto{
                 .mobilityWeak(entertainment.getMobility_weak())
                 .old(entertainment.getOld())
                 .infant(entertainment.getInfant())
-                .isLiked(false)
+                .isLiked(liked)
                 .firstImage(entertainment.getFirstimage())
                 .homepage(entertainment.getHomepage())
                 .mapX(entertainment.getMapx())
