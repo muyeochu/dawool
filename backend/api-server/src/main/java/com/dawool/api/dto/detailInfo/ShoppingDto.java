@@ -62,7 +62,7 @@ public class ShoppingDto extends CommonInfoDto{
         this.shopGuide = shopGuide;
     }
 
-    public ShoppingDto of(Shopping shopping, Barrier barrier){
+    public ShoppingDto of(Shopping shopping, Barrier barrier, boolean liked){
         return ShoppingDto.builder()
                 .spotId(shopping.getId())
                 // 공통정보
@@ -76,7 +76,7 @@ public class ShoppingDto extends CommonInfoDto{
                 .mobilityWeak(shopping.getMobility_weak())
                 .old(shopping.getOld())
                 .infant(shopping.getInfant())
-                .isLiked(false)
+                .isLiked(liked)
                 .firstImage(shopping.getFirstimage())
                 .homepage(shopping.getHomepage())
                 .mapX(shopping.getMapx())
