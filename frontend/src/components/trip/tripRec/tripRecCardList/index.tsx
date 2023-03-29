@@ -1,22 +1,22 @@
 import React from "react";
-import { TripRecCardListContainer } from "./styles";
+// import { TripRecCardListContainer } from "./styles";
 import TripRecCardItem from "../tripRecCardItem";
+import { recommendListType } from "../../../../types/recListTypes";
 
-// interface TripRecCardListProps {
-//   RecList: ListType[];
-// }
-// const TripRecCardList() => {
-const TripRecCardList = () => {
-  return (
-    <TripRecCardListContainer>
-      {/* {RecList.map((item: ListType) => )}
-      <TripRecCardItem /> */}
-      <TripRecCardItem />
-      <TripRecCardItem />
-      <TripRecCardItem />
-      <TripRecCardItem />
-    </TripRecCardListContainer>
-  );
+interface TripRecCardListProps {
+  RecList: { contents: recommendListType[] };
+}
+
+const TripRecCardList = ({ RecList }: TripRecCardListProps) => {
+  const { contents } = RecList;
+
+  // return (
+    // <TripRecCardListContainer>
+    //   {contents.map((item: recommendListType) => (
+    //     <TripRecCardItem key={item.contentId} item={item} />
+    //   ))}
+    // </TripRecCardListContainer>
+  // )
 };
 
 export default TripRecCardList;

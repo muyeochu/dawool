@@ -33,10 +33,10 @@ export const TripRecTitleContainer = styled.div`
   font-family: "SUIT";
   font-style: normal;
   font-weight: 600;
-  font-size: 40px;
-  line-height: 56px;
+  font-size: 35px;
+  line-height: 45px;
   color: ${black};
-  margin-bottom: 70px;
+  margin-bottom: 55px;
 `;
 
 export const TripRecTitle1 = styled.div`
@@ -47,6 +47,14 @@ export const TripRecTitle1 = styled.div`
 export const TripRecTitle2 = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const TripRecCardListContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 `;
 
 export const RecDonwArrowIcContainer = styled.div`
