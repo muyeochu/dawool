@@ -9,7 +9,6 @@ import {
   RestaurantDetailPage,
   ShoppingDetailPage,
   TourSpotDetailPage,
-  InterestPage,
   IntroPage,
   LoginPage,
   MyCoursePage,
@@ -20,6 +19,7 @@ import {
   CulturePage,
   LeportsPage,
   ShoppingPage,
+  BookmarkPage,
   ModalTest,
   ButtonTest,
 } from "./pages/index";
@@ -96,7 +96,14 @@ function App() {
                 }
               />
 
-              <Route path="/interest" element={<InterestPage />} />
+              <Route
+                path="/interest"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <BookmarkPage />
+                  </Suspense>
+                }
+              />
               <Route
                 path="/accommodation"
                 element={
@@ -124,7 +131,6 @@ function App() {
                   </Suspense>
                 }
               />
-
 
               <Route
                 path="/search"
