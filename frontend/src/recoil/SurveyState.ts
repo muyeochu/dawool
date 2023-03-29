@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-// 네 번째 설문만 완료! 다른 설문은 다시 확인하기!
+// 3, 4 완료! 다른 설문은 다시 확인하기!
 
 // 첫 번째 취향설문
 export const firstState = atom<number[]>({
