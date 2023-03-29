@@ -27,7 +27,7 @@ const RestaurantPage = () => {
     <>
         {/* 추천 식당 */}
         <MainGridItems>
-          {/* <TripRec titleType="restaurant"/> */}
+          <TripRec titleType="restaurant"/>
         </MainGridItems>
 
         {/* 식당 목록 list */}
