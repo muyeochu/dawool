@@ -9,14 +9,24 @@ export const getDetailApi = async (contentId: number, location: number) =>
     },
   });
 
-// 검색결과 요청
-export const getSearchApi = async (
-  title: string,
+export interface searchQueryTypes  {
+  title: string
   type: number,
   barrier: string,
   page: number,
   size: number
-) =>
+}
+
+
+
+// 검색결과 요청
+export const getSearchApi = async ({
+  title,
+  type,
+  barrier,
+  page,
+  size
+}: searchQueryTypes) =>
   await customAxios.get(
     `search?title=${title}&type=${type}&barrier=${barrier}&page=${page}&size=${size}`,
     {

@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState,  } from "react";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-import { searchState, getSearchSelector } from "../../recoil/SearchSelector";
+import { searchState } from "../../recoil/SearchSelector";
 
 import {
   TitleContainer,
@@ -23,7 +23,6 @@ interface PropTypes {
 const SearchList = ({ word, data }: PropTypes) => {
   const checkSearchValue = useRecoilValue(searchState);
 
-  console.log("SearchList의 데이터", data);
 
   const buttons = [
     { id: 0, label: "지체장애인", icType: "bathchair", btType: 0 },
@@ -33,7 +32,7 @@ const SearchList = ({ word, data }: PropTypes) => {
     { id: 4, label: "영유아", icType: "toddler", btType: 0 },
   ];
 
-  console.log("search값은?", checkSearchValue);
+  
 
   return (
     <>
@@ -42,7 +41,7 @@ const SearchList = ({ word, data }: PropTypes) => {
         <span className="keyword">{word}</span>
         <span>검색결과</span>
       </TitleContainer>
-      {data.contents.length >= 1 ? (
+      {data.length >= 1 ? (
         <>
           <ButtonList>
             {buttons.map(({ id, label, icType, btType }) => (
@@ -52,7 +51,7 @@ const SearchList = ({ word, data }: PropTypes) => {
             ))}
           </ButtonList>
           <TripCardListContainer>
-            {data.contents.map((item: ListType) => (
+            {data.map((item: ListType) => (
               <TripCardItem
                 type="search"
                 key={item.contentId}

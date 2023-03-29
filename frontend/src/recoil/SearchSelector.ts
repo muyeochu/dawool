@@ -1,4 +1,4 @@
-import { atom, selectorFamily, SerializableParam } from "recoil";
+import { atom, selector, selectorFamily, SerializableParam } from "recoil";
 
 import { getSearchApi } from "./Api";
 
@@ -20,22 +20,35 @@ export const searchState = atom<ParamTypes>({
     type: 0,
     barrier: "00000",
     page: 0,
-    size: 20,
+    size: 10,
   },
 });
 
-export const getSearchSelector = selectorFamily<SearchDataTypes, ParamTypes>({
-  key: "getSearchSelector",
-  get:
-    ({ title, type, barrier, page, size }) =>
-    async () => {
-      try {
-        const response = await getSearchApi(title, type, barrier, page, size);
-        const data = await response.data;
-        return data;
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
-    },
+export const searchDatas = atom<SearchDataTypes[]>({
+  key: "searchDatas",
+  default: [],
 });
+
+// export const getSearchSelector = selectorFamily<SearchDataTypes, ParamTypes>({
+//   key: "getSearchSelector",
+//   get:
+//     ({ title, type, barrier, page, size }) =>
+//     async ({ get }) => {
+//       const searchData = get(searchState);
+//       // console.log("search구독중", searchData);
+//       try {
+//         const response = await getSearchApi({
+//           title,
+//           type,
+//           barrier,
+//           page,
+//           size,
+//         });
+//         const data = await response.data;
+//         return data;
+//       } catch (error) {
+//         console.error(error);
+//         throw error;
+//       }
+//     },
+// });
