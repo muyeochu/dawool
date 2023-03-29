@@ -1,5 +1,5 @@
 import React from "react";
-import { RecCardContainer, RecImageContainer, RecCardImage } from "./styles";
+import { RecCardContainer, RecImageContainer, RecCardImage, RecCardTitleContainer } from "./styles";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../../recoil/UserState";
 import exampleImg from "../../../../assets/images/exampleImg.png";
@@ -15,16 +15,28 @@ const TripRecCardItem = ({ item }: TripRecCardItemProps) => {
   const [user, setUser] = useRecoilState(userState);
 
   const handleClick = () => {
-    if (user.accessToken !== "" && item.contentTypeId in [12, 14, 28, 32, 38]) {
-      localStorage.setItem("recentContentId", item.contentId.toString());
+    if (user.accessToken !== "" && item.contenttypeid in [12, 14, 28, 32, 38]) {
+      localStorage.setItem("recentContentId", item.contentid.toString());
     }
 
-    switch (item.contentTypeId) {
+    switch (item.contenttypeid) {
+      case 12:
+        navigate(`/detail/tourspot/${item.contentid}`);
+        break;
+      case 14:
+        navigate(`/detail/culture/${item.contentid}`);
+        break;
+      case 28:
+        navigate(`/detail/leports/${item.contentid}`);
+        break;
+      case 38:
+        navigate(`/detail/shopping/${item.contentid}`);
+        break;
       case 39:
-        navigate(`/detail/restaurant/${item.contentId}`);
+        navigate(`/detail/restaurant/${item.contentid}`);
         break;
       case 32:
-        navigate(`/detail/accommodation/${item.contentId}`);
+        navigate(`/detail/accommodation/${item.contentid}`);
         break;
     }
   };
@@ -32,11 +44,12 @@ const TripRecCardItem = ({ item }: TripRecCardItemProps) => {
   return (
     <RecCardContainer>
       <RecImageContainer onClick={handleClick}>
-        {item.imageUrl === "0" ? (
+        {item.firstimage === "0" ? (
           <RecCardImage src={exampleImg} alt={"대표 이미지"} />
         ) : (
-          <RecCardImage src={item.imageUrl} alt={"대표 이미지"} />
+          <RecCardImage src={item.firstimage} alt={"대표 이미지"} />
         )}
+        <RecCardTitleContainer>{item.title}</RecCardTitleContainer>
       </RecImageContainer>
     </RecCardContainer>
   );

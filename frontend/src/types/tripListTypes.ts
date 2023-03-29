@@ -11,20 +11,16 @@ export interface TripListTitleType {
     | "leports"
     | "shopping";
   typeText: string;
-  
 }
 
-const titleTypeMap: Record<number, TripListTitleType> = {
-  39: { contentTypeId: 39, titleType: "restaurant", typeText: "식당" },
-  32: { contentTypeId: 32, titleType: "accommodation", typeText: "숙박" },
-  12: { contentTypeId: 12, titleType: "tourSpot", typeText: "관광지" },
-  14: { contentTypeId: 14, titleType: "culture", typeText: "문화시설" },
-  28: { contentTypeId: 28, titleType: "leports", typeText: "레포츠" },
-  38: { contentTypeId: 38, titleType: "shopping", typeText: "쇼핑" },
-};
-
-export const getListTitleType = (contentTypeId: number): TripListTitleType =>
-  titleTypeMap[contentTypeId];
+export const titleTypeMap: Record<number, TripListTitleType> = [
+  { contentTypeId: 39, titleType: "restaurant", typeText: "식당" },
+  { contentTypeId: 32, titleType: "accommodation", typeText: "숙박" },
+  { contentTypeId: 12, titleType: "tourSpot", typeText: "관광지" },
+  { contentTypeId: 14, titleType: "culture", typeText: "문화시설" },
+  { contentTypeId: 28, titleType: "leports", typeText: "레포츠" },
+  { contentTypeId: 38, titleType: "shopping", typeText: "쇼핑" },
+]
 
 // 목록 데이터 타입
 export interface ListType {
