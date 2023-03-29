@@ -21,7 +21,6 @@ export const customAxios2: AxiosInstance = axios.create({
 export const customAxiosRec: AxiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_REC_URL + "/api/",
   headers: {
-    Authorization: "Bearer " + localStorage.getItem("token"),
     "Content-Type": "application/json;charset=UTF-8",
   },
 });

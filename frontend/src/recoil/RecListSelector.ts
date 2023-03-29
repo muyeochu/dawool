@@ -1,32 +1,29 @@
 import { selectorFamily, SerializableParam } from "recoil";
-import { getRecEntertainmentApi, getRecEtcApi } from "./Api";
-import { recommendListType } from "../types/recListTypes";
+import { getRecEtcApi } from "./Api";
+import { RecListType, recommendListType } from "../types/recListTypes";
 
-interface ParamTypes {
-  // titleType: string;
+interface getRecListSelectorProps {
+  titleType: string;
   recentContentId: number;
   [key: string]: SerializableParam;
 }
 
-interface getRecEntertainmentListSelectorProps {
-  contentTypeId: number;
-  [key: string]: SerializableParam;
-}
-
-// 즐길거리 추천 목록 가져오는 selector
-export const getRecEntertainmentListSelector = selectorFamily<
-  recommendListType,
-  getRecEntertainmentListSelectorProps
+// // 식당&숙박 추천 목록 가져오는 selector
+export const getRecListSelector = selectorFamily<
+  RecListType,
+  getRecListSelectorProps
 >({
-  key: "getRecEntertainmentListSelector",
+  key: "getRecListSelector",
   get:
-    ({ contentTypeId }) =>
+    ({ titleType, recentContentId }) =>
     async () => {
       try {
-        const response = await getRecEntertainmentApi(contentTypeId);
-        console.log(response.data);
-        const data = await response.data;
-        return data;
+        const response = await getRecEtcApi(titleType, recentContentId);
+        // console.log(response.data.contents);
+        return response.data.contents.map((item: recommendListType) => ({
+          ...item,
+          category: titleType,
+        }));
       } catch (error) {
         console.error(error);
         throw error;
@@ -34,23 +31,28 @@ export const getRecEntertainmentListSelector = selectorFamily<
     },
 });
 
-// 식당&숙박 추천 목록 가져오는 selector
-export const getRecListSelector = selectorFamily<recommendListType, ParamTypes>(
-  {
-    key: "getRecListSelector",
-    get: ({ recentContentId }) =>
-    // get: ({ titleType, recentContentId }) =>
-      async ({ get }) => {
-        try {
-          const response = await getRecEtcApi(recentContentId);
-          // const response = await getRecEtcApi(titleType, recentContentId);
-          console.log(response.data);
-          const data = await response.data;
-          return data;
-        } catch (error) {
-          console.error(error);
-          throw error;
-        }
-      },
-  }
-);
+// interface getRecEntertainmentListSelectorProps {
+//   contentTypeId: number;
+//   [key: string]: SerializableParam;
+// }
+
+// // 즐길거리 추천 목록 가져오는 selector
+// export const getRecEntertainmentListSelector = selectorFamily<
+//   recommendListType,
+//   getRecEntertainmentListSelectorProps
+// >({
+//   key: "getRecEntertainmentListSelector",
+//   get:
+//     () =>
+//     async () => {
+//       try {
+//         const response = await getRecEntertainmentApi();
+//         console.log(response.data);
+//         const data = await response.data;
+//         return data;
+//       } catch (error) {
+//         console.error(error);
+//         throw error;
+//       }
+//     },
+// });

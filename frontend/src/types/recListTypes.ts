@@ -5,3 +5,5 @@ export interface recommendListType {
   imageUrl: string;
   liked: boolean;
 }
+
+export type RecListType = recommendListType[];
