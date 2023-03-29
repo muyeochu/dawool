@@ -3,6 +3,7 @@ import { getRecEntertainmentApi, getRecEtcApi } from "./Api";
 import { recommendListType } from "../types/recListTypes";
 
 interface ParamTypes {
+  // titleType: string;
   recentContentId: number;
   [key: string]: SerializableParam;
 }
@@ -37,11 +38,12 @@ export const getRecEntertainmentListSelector = selectorFamily<
 export const getRecListSelector = selectorFamily<recommendListType, ParamTypes>(
   {
     key: "getRecListSelector",
-    get:
-      ({ recentContentId }) =>
+    get: ({ recentContentId }) =>
+    // get: ({ titleType, recentContentId }) =>
       async ({ get }) => {
         try {
           const response = await getRecEtcApi(recentContentId);
+          // const response = await getRecEtcApi(titleType, recentContentId);
           console.log(response.data);
           const data = await response.data;
           return data;
