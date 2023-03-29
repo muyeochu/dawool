@@ -6,6 +6,8 @@ import {ReactComponent as UpdateMemo} from "../../../../../assets/icon/updateIc.
 import {ReactComponent as Accomodation} from "../../../../../assets/icon/accomodationIc.svg"
 import {ReactComponent as Entertainment} from "../../../../../assets/icon/entertainmentIc.svg"
 import {ReactComponent as Restaurant} from "../../../../../assets/icon/restaurantIc.svg"
+import {ReactComponent as X} from "../../../../../assets/icon/xIc.svg"
+import {ReactComponent as Circle} from "../../../../../assets/icon/circleIc.svg"
 import { grey } from "../../../../../styles/Colors";
 import {ReactComponent as Memo} from "../../../../../assets/icon/memoIc.svg";
 import { CourseList } from "./courseList";
@@ -98,9 +100,25 @@ export const RestaurantIc = styled(Restaurant)`
     margin-right: 5%;
     display: inline-block;
 `
-
+export const CircleIc = styled(Circle)`
+    margin-left: 5%;
+    margin-right: 5%;
+    display: inline-block;
+`
+export const TextInIc = styled.text`
+margin-left: 5%;
+    margin-right: 5%;
+    display: inline-block;
+`
+export const XIc = styled(X)`
+position: absolute;
+  text-align: center;
+  overflow: hidden;
+  margin-left:21.5%;
+  cursor: pointer;
+`
 export const CourseListContainer = styled(CourseList)`
-display: flex;
+    display: flex;
     flex-direction: row;
     align-items: center;
     padding: 10px;
