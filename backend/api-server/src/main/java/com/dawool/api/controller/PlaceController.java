@@ -153,8 +153,10 @@ public class PlaceController {
      */
     @PostMapping("/bookmark")
     public ResponseEntity<?> heartPlace(@RequestBody HeartReqDto heart){
-        placeService.heartPlace(heart);
-        return ResponseEntity.ok(HttpStatus.OK);
+        boolean liked = placeService.heartPlace(heart);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("liked", liked);
+        return ResponseEntity.ok(response);
     }
 
     /**
