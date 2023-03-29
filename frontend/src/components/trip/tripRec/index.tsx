@@ -74,11 +74,11 @@ function TripRec({ titleType }: TripRecProps) {
     contentTypeId && [12, 14, 28, 32, 38, 39].includes(contentTypeId)
       ? getRecEntertainmentSelector({ titleType, contentTypeId: contentTypeId })
       : getRecEtcSelector({
-        titleType: recTitle,
-        recentContentId: recentContentId,
-      });
-  const RecList = useRecoilValue(selectorPick)
-  console.log("추천목록!", RecList);
+          titleType: recTitle,
+          recentContentId: recentContentId,
+        });
+  const RecList = useRecoilValue(selectorPick);
+  // console.log("추천목록!", RecList);
 
   return (
     <TripRecContainer>
