@@ -18,7 +18,7 @@ export const FolderInside=()=>{
     const [folderState, setFolderState] = useRecoilState(FolderState);
     
     const deleteCourseFolderData = ()=>
-    customAxios2.delete(`course/${folderState.courseId}`)
+    customAxios2.delete(`user/my-course/${folderState.courseId}`)
     .then(()=>{
         console.log("삭제됨");
     }).catch((err)=>{
@@ -53,7 +53,7 @@ export const FolderInside=()=>{
         setFolderState({
             isOpen:false,
             opendFolder:"",
-            courseId:"" //나중에contentid로 넣기
+            courseId:""
         });
     }
 

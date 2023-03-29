@@ -45,7 +45,7 @@ export const Folders=()=>{
 
 
     const getCourseFolderData = ():Promise<ListType[]>=>
-    customAxios2.get(`course`)
+    customAxios2.get(`user/my-course`)
     .then((res)=>{
     console.log(res);
     return res.data;
@@ -84,7 +84,7 @@ function intoFolder(event:any,index:number){
     setFolderState({
         isOpen:true,
         opendFolder:folderName,//클릭한 태그의 innerText
-        courseId:folderId//클릭한 태그의 숫자로 된 classname?
+        courseId:folderId,
     //     //Id는 백에서 받아와서 넣기??
     //     // openFolder: props 입력받아서 그 props의 폴더 이름 넣기
     //     //밑에서 치면 da.name이런식으로 넣기.
@@ -126,7 +126,7 @@ myFunction().then(folderList=>{
 
 
     // const getCourseFolderData = ():Promise<ListType[]>=>
-    // customAxios2.get(`course`)
+    // customAxios2.get(`user/my-course`)
     // .then((res)=>{
     // console.log(res);
     // return res.data;
@@ -139,7 +139,7 @@ myFunction().then(folderList=>{
         let folderinput = document.getElementById("inputName") as HTMLInputElement|null;
         const postCourseFolderData = async(name:string):Promise<CreateListType>=>{
             try{
-                const response = await customAxios2.post<CreateListType>(`course`,{courseName:name});
+                const response = await customAxios2.post<CreateListType>(`user/my-course`,{courseName:name});
                 console.log(response);
                 return response.data;
             }catch(err){
@@ -160,7 +160,7 @@ myFunction().then(folderList=>{
         if(folderinput){
             folderinput.value = "";
         }
-            // customAxios2.post(`course`,{name})
+            // customAxios2.post(`user/my-course`,{name})
             // .then((res)=>{
             //     console.log(res);
             // }).catch((err)=>{
