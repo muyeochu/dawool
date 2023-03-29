@@ -1,9 +1,9 @@
 export interface recommendListType {
-  contentId: number;
-  contentTypeId: number;
+  category: string;
+  contentid: number;
+  contenttypeid: number;
+  firstimage: string;
   title: string;
-  imageUrl: string;
-  liked: boolean;
 }
 
 export type RecListType = recommendListType[];

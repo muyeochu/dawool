@@ -34,7 +34,6 @@ export const ImageContainer = styled.div`
   &:hover {
     transform: scale(1.05);
   }
-
 `;
 
 export const CardImage = styled.img`
