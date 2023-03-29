@@ -2,10 +2,10 @@ import { MenuFont } from "../../../personal/styles";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, selector } from "recoil";
 import {FolderState} from "../../../../recoil/CourseFolderState"
-import {FolderContainer,InputForderName,FolderGreyIc,FolderYellowIc,FolderHeaderContainer, FolderContainerWrapper} from "./styles"
+import {FolderContainer,InputFolderName,FolderGreyIc,FolderYellowIc,FolderHeaderContainer, FolderContainerWrapper} from "./styles"
 import axios from "axios";
 // import { FolderListSelector } from "../../../../recoil/CourseFolderState";
-import { ListType } from "../../../../types/courseFolderTypes";
+import { ListType , CreateListType} from "../../../../types/courseFolderTypes";
 // const FolderItem = ({name:string})=>{<FolderYellowIc>{name}<FolderYellowIc/>}
 //서버한테서 이미 생성 된 폴더들 받아오기
 import { customAxios2 } from "../../../../recoil/customAxios";
@@ -67,8 +67,8 @@ export const Folders=()=>{
 // let folderLists = console.log(useRecoilValue<ListType[]>(UniqueFolderListSelector));
 async function myFunction() {
     try {
-        let forderList = await getCourseFolderData();
-        return forderList;
+        let folderList = await getCourseFolderData();
+        return folderList;
     } catch (err) {
         throw err;
     } 
@@ -76,29 +76,33 @@ async function myFunction() {
 
 function intoFolder(event:any,index:number){
     const folderContainer = event.target.parentNode;
+    // console.log(event.target.id)
     const folderName = folderContainer.textContent.trim();
-    console.log(folderName)
+    const folderId = event.target.id.trim();
+    // const folderId = folderContainer.Id.trim();
+    // console.log(folderId)
     setFolderState({
         isOpen:true,
         opendFolder:folderName,//클릭한 태그의 innerText
-        courseId:index//클릭한 태그의 숫자로 된 classname?
+        courseId:folderId//클릭한 태그의 숫자로 된 classname?
     //     //Id는 백에서 받아와서 넣기??
     //     // openFolder: props 입력받아서 그 props의 폴더 이름 넣기
     //     //밑에서 치면 da.name이런식으로 넣기.
     });
 }
 
-function createTag(forderList: any) {
+function createTag(folderList: any) {
     const div = document.getElementById("folder");
     const div2 = document.createElement("div"); 
     div2.className="FolderContainer";
     console.log(div2);
-    for(let i=0;i<forderList["myCourse"].length;i++){
-        const forder = forderList["myCourse"][i];
+    for(let i=0;i<folderList["myCourse"].length;i++){
+        const folder = folderList["myCourse"][i];
     // }
-    // for (const forder of forderList["myCourse"]) {
-        const element = ()=><FolderContainer onClick={(event)=>intoFolder(event,i)}><FolderYellowIc/>{forder.courseName}</FolderContainer>
+    // for (const folder of folderList["myCourse"]) {
+        const element = ()=><FolderContainer id = {folder.courseId} onClick={(event)=>intoFolder(event,i)}><FolderYellowIc/>{folder.courseName}</FolderContainer>
         const fdContainer = document.createElement("div");
+        
         ReactDOM.render(element(),fdContainer);
         div2.appendChild(fdContainer); 
     }
@@ -107,8 +111,8 @@ function createTag(forderList: any) {
     return div;
   }
 
-myFunction().then(forderList=>{
-    createTag(forderList);
+myFunction().then(folderList=>{
+    createTag(folderList);
 })
 
 // console.log(UniqueFolderListSelector.key);
@@ -120,25 +124,65 @@ myFunction().then(forderList=>{
     //     }
     // } 엔터 인식하는 함수. 쓸지 안쓸지 아직 고민
 
+
+    // const getCourseFolderData = ():Promise<ListType[]>=>
+    // customAxios2.get(`course`)
+    // .then((res)=>{
+    // console.log(res);
+    // return res.data;
+    // }).catch((err)=>{
+    //     console.log(err);
+    // })
     //백이랑 통신해서 만든 폴더 백에 보내기 위한 코드
-    // function insertFolder(e:any){
-    //     e.preventDefault();
-    //     const insertFolder = async()=>{
-    //         await axios
-    //         .post(baseURL+"/api/user/my-course",{
-    //             folderName:input
-    //         })
-    //         .then((res)=>{
-    //             console.log(res.data);
-    //             setInput("");
-    //             getFolders();
-    //         })
-    //         .catch((err)=>{
-    //             console.log(err);
-    //         })
-    //     }
+    function insertFolder(e:any){
+        e.preventDefault();
+        let folderinput = document.getElementById("inputName") as HTMLInputElement|null;
+        const postCourseFolderData = async(name:string):Promise<CreateListType>=>{
+            try{
+                const response = await customAxios2.post<CreateListType>(`course`,{courseName:name});
+                console.log(response);
+                return response.data;
+            }catch(err){
+                console.log(err);
+                throw new Error('error');
+            }
+        }
+        myFunction().then(folderList=>{
+            createTag(folderList);
+        })
+        let inputText = folderinput?.value;
+        if(inputText){
+            postCourseFolderData(inputText).then(()=>{   
+                window.location.reload();
+            });
+
+        }
+        if(folderinput){
+            folderinput.value = "";
+        }
+            // customAxios2.post(`course`,{name})
+            // .then((res)=>{
+            //     console.log(res);
+            // }).catch((err)=>{
+            //     console.log(err);
+            // })
+        // const insertFolder = async()=>{
+        //     await axios
+        //     .post(baseURL+"/api/course",{
+        //         folderName:input
+        //     })
+        //     .then((res)=>{
+        //         console.log(res.data);
+        //         setInput(e.target.value);
+        //         // myFunction();
+        //         // getFolders();
+        //     })
+        //     .catch((err)=>{
+        //         console.log(err);
+        //     })
+        // }
     // insertFolder();
-    // }
+    }
     // function changeFolder(e:any){
     //     e.preventDefault(); 
     //     // setInput(e.target.value);
@@ -148,13 +192,13 @@ myFunction().then(forderList=>{
         e.preventDefault(); 
         // data.push(...[{id:data.length+1, name:input}])
         // console.log(data)
-        // let forderinput = document.getElementById("inputName") as HTMLInputElement|null;
-        // if(forderinput){
-        //     forderinput.value="";
+        // let folderinput = document.getElementById("inputName") as HTMLInputElement|null;
+        // if(folderinput){
+        //     folderinput.value="";
         // }
-        let forderinput = document.getElementById("inputName") as HTMLInputElement|null;
-        if(forderinput){
-            forderinput.value = "";
+        let folderinput = document.getElementById("inputName") as HTMLInputElement|null;
+        if(folderinput){
+            folderinput.value = "";
         }
         console.log(e.target.value);
         setInput(e.target.value); //이거하면 화면에 폴더리스트 갱신됨 히히
@@ -164,7 +208,7 @@ myFunction().then(forderList=>{
     return(
         <>
         <FolderHeaderContainer>
-            <form onSubmit={test} >
+            <form onSubmit={insertFolder} >
             {/* 백엔드와 통신 시 아래 코드 사용 */}
             {/* onSubmit={insertFolder} */} 
                 <label>
@@ -172,7 +216,7 @@ myFunction().then(forderList=>{
             {/* <input placeholder="새 코스명을 입력해주세요." ></input> */}
             {/* <FolderHeaderFont>새 코스명을 입력해주세요.</FolderHeaderFont> */}
             {/* 엔터 누를 때마다 백한테 보내기. 해당 코드는 https://www.youtube.com/watch?v=gZddSM-byRE&list=PLkaAEQyMpRg-k-PZDKvqw7EChwJQXxhkI&index=3 참고하기 */}
-            <InputForderName id="inputName" type="text" required={true} value={input}></InputForderName>
+            <InputFolderName id="inputName" type="text" required={true} defaultValue={input}></InputFolderName>
             {/* onChange={changeFolder} */}
             </label>
             </form>
