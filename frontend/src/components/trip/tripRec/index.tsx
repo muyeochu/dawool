@@ -29,13 +29,16 @@ function TripRec({ titleType }: TripRecProps) {
   const recentContentId = parseInt(
     localStorage.getItem("recentContentId") || "0"
   );
-  // 식당&숙박
-  // const RecList = useRecoilValue(
-  //   getRecListSelector({ recentContentId: 0 })
-  //   // getRecListSelector({ recentContentId: recentContentId })
-  // );
+
+  // 식당 & 숙박
+  const RecList = useRecoilValue(
+    // getRecListSelector({ titleType, recentContentId: recentContentId })
+    getRecListSelector({ recentContentId: recentContentId })
+  );
+  console.log(titleType)
+
   // 즐길거리
-  const RecList = useRecoilValue(getRecEntertainmentListSelector({contentTypeId:12}))
+  // const RecList = useRecoilValue(getRecEntertainmentListSelector({contentTypeId:12}))
 
   console.log("추천목록", RecList);
 

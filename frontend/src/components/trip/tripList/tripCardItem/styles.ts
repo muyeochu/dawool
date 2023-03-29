@@ -52,9 +52,9 @@ export const BarrierIconContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   position: absolute;
-  top: 20%;
+  top: 10%;
   left: 50%;
   transform: translate( -50%, -50% );
   opacity: 0;

@@ -27,7 +27,7 @@ const AccommodationPage = () => {
     <>
       {/* 추천 숙박 */}
       <MainGridItems>
-        <TripRec titleType="accommodation" />
+        {/* <TripRec titleType="accommodation" /> */}
       </MainGridItems>
 
       {/* 숙박 목록 list */}
