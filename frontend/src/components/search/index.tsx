@@ -1,14 +1,10 @@
-import React, { useState,  } from "react";
-
-import { useRecoilState, useRecoilValue } from "recoil";
-import { searchState } from "../../recoil/SearchSelector";
-
 import {
   TitleContainer,
   SerachIcStyle,
   ButtonList,
   TripCardListContainer,
   NonDataContainer,
+  NonSearchImgStyle,
 } from "./styles";
 import Button from "../common/Button";
 
@@ -21,9 +17,6 @@ interface PropTypes {
 }
 
 const SearchList = ({ word, data }: PropTypes) => {
-  const checkSearchValue = useRecoilValue(searchState);
-
-
   const buttons = [
     { id: 0, label: "지체장애인", icType: "bathchair", btType: 0 },
     { id: 1, label: "시각장애인", icType: "eye", btType: 0 },
@@ -32,7 +25,9 @@ const SearchList = ({ word, data }: PropTypes) => {
     { id: 4, label: "영유아", icType: "toddler", btType: 0 },
   ];
 
-  
+  if (data === "[]") {
+    console.log("비엇지롱");
+  }
 
   return (
     <>
@@ -64,6 +59,7 @@ const SearchList = ({ word, data }: PropTypes) => {
         <>
           <NonDataContainer>
             <p>검색 결과가 없습니다.</p>
+            <NonSearchImgStyle />
           </NonDataContainer>
         </>
       )}

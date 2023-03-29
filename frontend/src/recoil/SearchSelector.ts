@@ -3,6 +3,7 @@ import { atom, selector, selectorFamily, SerializableParam } from "recoil";
 import { getSearchApi } from "./Api";
 
 import { SearchDataTypes } from "../types/searchTypes";
+import { inflateSync } from "zlib";
 
 export interface ParamTypes {
   title: string;
