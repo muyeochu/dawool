@@ -16,11 +16,11 @@ const TripRecCardItem = ({ item }: TripRecCardItemProps) => {
   console.log("item!", item.contentid)
 
   const handleClick = () => {
-    if (user.accessToken !== "" && item.contentTypeId in [12, 14, 28, 32, 38]) {
+    if (user.accessToken !== "" && item.contenttypeid in [12, 14, 28, 32, 38]) {
       localStorage.setItem("recentContentId", item.contentid.toString());
     }
 
-    switch (item.contentTypeId) {
+    switch (item.contenttypeid) {
       case 39:
         navigate(`/detail/restaurant/${item.contentid}`);
         break;

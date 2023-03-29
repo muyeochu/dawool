@@ -1,7 +1,7 @@
 export interface recommendListType {
   category: string;
   contentid: number;
-  contentTypeId: number;
+  contenttypeid: number;
   firstimage: string;
   title: string;
 }
