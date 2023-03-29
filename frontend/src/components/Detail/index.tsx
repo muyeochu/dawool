@@ -1,7 +1,9 @@
+import { useState } from "react";
 import {
   VolumeIcStyle,
   FolderIcStyle,
   HeartIcStyle,
+  LikedIcStyle,
   TitleContainer,
   TitleIcContainer,
   IcExpContainer,
@@ -21,6 +23,7 @@ import RestaurantDetailInfo from "./RestaurantDetailInfo";
 import BarrierTag from "./BarrierTag";
 import Map from "./Map";
 import DetailBtn from "../common/DetailBtn";
+import { bookmark } from "../../recoil/BookmarkSelector";
 
 import logo from "../../assets/icon/logoIc.svg";
 
@@ -37,6 +40,8 @@ const DetailComponent = ({
     mapY: myData.info.mapY,
   };
 
+  const [heart, setHeart] = useState<boolean>(myData.info.liked);
+
   return (
     <>
       <TitleContainer title={myData.info.title}>
@@ -49,8 +54,13 @@ const DetailComponent = ({
             <FolderIcStyle />
             <p>코스 추가</p>
           </IcExpContainer>
-          <IcExpContainer>
-            <HeartIcStyle />
+          <IcExpContainer
+            onClick={async () => {
+              const liked = await bookmark(myData.info);
+              setHeart(liked);
+            }}
+          >
+            {heart ? <HeartIcStyle /> : <LikedIcStyle />}
             <p>관심</p>
           </IcExpContainer>
         </TitleIcContainer>

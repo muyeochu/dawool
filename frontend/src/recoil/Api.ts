@@ -1,4 +1,4 @@
-import { customAxios, customAxiosRec } from "./customAxios";
+import { customAxios, customAxios2, customAxiosRec } from "./customAxios";
 
 // GET //
 export const getDetailApi = async (contentId: number, location: number) =>
@@ -67,4 +67,33 @@ export const getRecEtcApi = async (titleType: string, recentContentId: number) =
     }
   );
 
+// 북마크 저장 및 해제
+export const bookmarkApi = async (info: any) =>
+  await customAxios2.post(
+    `location/bookmark`,
+    {
+      spotId: info.spotId,
+      contentId: info.contentId,
+      contentTypeId: info.contentTypeId,
+      title: info.title,
+      imageUrl: info.firstImage,
+      category: info.category,
+      deaf: info.deaf,
+      visuallyImpaired: info.visuallyImpaired,
+      mobilityWeak: info.mobilityWeak,
+      old: info.old,
+      infant: info.infant,
+    },
+    {
+      withCredentials: true,
+    }
+  );
 
+// 북마크 목록 불러오기
+export const getBookmarkListApi = async (page: number, size: number) =>
+  await customAxios.get(`location/bookmark?page=${page}&size=${size}`, {
+    withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });

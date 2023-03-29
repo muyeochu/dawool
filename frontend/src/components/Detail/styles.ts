@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { ReactComponent as VolumeIc } from "../../assets/icon/volumeIc.svg";
 import { ReactComponent as FolderIc } from "../../assets/icon/folderIc.svg";
 import { ReactComponent as HeartIc } from "../../assets/icon/heartIc.svg";
+import { ReactComponent as likedIc } from "../../assets/icon/likedIc.svg";
 
 import { mainColor, black, white, blue, grey } from "../../styles/Colors";
 
@@ -19,6 +20,14 @@ export const FolderIcStyle = styled(FolderIc)`
 `;
 
 export const HeartIcStyle = styled(HeartIc)`
+  width: 37px;
+  height: 32px;
+  cursor: pointer;
+`;
+
+export const LikedIcStyle = styled(likedIc)`
+  /* 크기 바뀌는 문제 해결하기! */
+  display: block;
   width: 37px;
   height: 32px;
   cursor: pointer;

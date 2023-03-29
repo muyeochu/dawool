@@ -7,6 +7,7 @@ import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.LeisureSports;
 import com.dawool.api.repository.BarrierRepository;
 import com.dawool.api.repository.CommonTemplate;
+import com.dawool.api.repository.HeartRepository;
 import com.dawool.api.repository.LeisureSportsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,7 @@ public class LeisureSportsService {
 
     private final LeisureSportsRepository leisureSportsRepository;
     private final BarrierRepository barrierRepository;
+    private final HeartRepository heartRepository;
     private final CommonTemplate commonTemplate;
     private final MongoTemplate mongoTemplate;
 
@@ -42,7 +44,7 @@ public class LeisureSportsService {
      * @param size
      * @return
      */
-    public List<PlaceDto> getLeisureSportsList(int areaCode, String barrierCode, int page, int size) {
+    public List<PlaceDto> getLeisureSportsList(String userId,int areaCode, String barrierCode, int page, int size) {
 
         String[] barrier = barrierCode.split("");
 
@@ -50,7 +52,11 @@ public class LeisureSportsService {
 
         List<PlaceDto> leisureSportsList = new ArrayList<>();
         for (CommonInfo leisureSports : list) {
-            PlaceDto place = new PlaceDto().of(leisureSports);
+            boolean liked = false;
+            if(!userId.equals("anonymousUser")){
+                liked = heartRepository.existsBySpotidAndUserid(leisureSports.getId(), userId);
+            }
+            PlaceDto place = new PlaceDto().of(leisureSports, liked);
             leisureSportsList.add(place);
         }
         return leisureSportsList;
@@ -85,10 +91,14 @@ public class LeisureSportsService {
      * @param contentId
      * @return
      */
-    public LeisureSportsDto getLeisureSportsInfo(int contentId){
+    public LeisureSportsDto getLeisureSportsInfo(String userId, int contentId){
         LeisureSports leisureSports = leisureSportsRepository.findByContentid(String.valueOf(contentId));
         Barrier barrier = barrierRepository.findByContentid(String.valueOf(contentId));
 
-        return new LeisureSportsDto().of(leisureSports, barrier);
+        boolean liked = false;
+        if(!userId.equals("anonymousUser")){
+            liked = heartRepository.existsBySpotidAndUserid(leisureSports.getId(), userId);
+        }
+        return new LeisureSportsDto().of(leisureSports, barrier, liked);
     }
 }
