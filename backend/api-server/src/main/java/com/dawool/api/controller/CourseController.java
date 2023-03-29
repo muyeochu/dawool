@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/course")
+@RequestMapping("/api/user/my-course")
 public class CourseController {
 
     private final CourseService courseService;
