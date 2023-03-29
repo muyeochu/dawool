@@ -15,7 +15,7 @@ const TripRecCardItem = ({ item }: TripRecCardItemProps) => {
   const [user, setUser] = useRecoilState(userState);
 
   const handleClick = () => {
-    if (user.accessToken !== "") {
+    if (user.accessToken !== "" && item.contentTypeId in [12, 14, 28, 32, 38]) {
       localStorage.setItem("recentContentId", item.contentId.toString());
     }
 

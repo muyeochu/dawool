@@ -10,7 +10,6 @@ import {
 } from "./styles";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { TripListTitleType } from "../../../types/tripListTypes";
-import TripRecCardList from "./tripRecCardList";
 import TripRecCardItem from "./tripRecCardItem";
 import { Link } from "react-scroll";
 import { userState } from "../../../recoil/UserState";
@@ -24,7 +23,7 @@ export interface TripRecProps {
 function TripRec({ titleType }: TripRecProps) {
   // 유저 정보 가져오기
   const [user, setUser] = useRecoilState(userState);
-  console.log(user)
+  // console.log(user)
 
   // 추천 data 가져오기
   const recentContentId = parseInt(
@@ -38,7 +37,7 @@ function TripRec({ titleType }: TripRecProps) {
       ? "restaurant"
       : titleType === "accommodation"
       ? "stay"
-      : "기타";
+      : "";
   // 식당 & 숙박
   const RecList = useRecoilValue(
     getRecListSelector({
@@ -74,11 +73,11 @@ function TripRec({ titleType }: TripRecProps) {
         {user.accessToken === "" ? (
           <>
             <TripRecTitle2>BEST {typeText} 👍</TripRecTitle2>
-            <TripRecTitle2>로그인하시면 취향에 맞는 {typeText}를 추천해드려요!</TripRecTitle2>
+            <TripRecTitle2>로그인하시면 취향에 맞는 {typeText}을 추천해드려요!</TripRecTitle2>
           </>
         ) : (
           <>
-            <TripRecTitle1>{user.nickname}님!</TripRecTitle1>
+            <TripRecTitle1>{user.nickName}님!</TripRecTitle1>
             <TripRecTitle2>이런 {typeText}은 어떠세요?</TripRecTitle2>
           </>
         )}

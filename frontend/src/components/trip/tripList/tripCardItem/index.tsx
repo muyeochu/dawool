@@ -29,8 +29,11 @@ function TripCardItem({ contents, type }: TripCardItemProps) {
   const [user, setUser] = useRecoilState(userState);
 
   const handleClick = () => {
-    // 로그인한 경우 -> 최근 본 관광지 contentId를 local에 저장
-    if (user.accessToken !== "") {
+    // 로그인 유저 & 즐길거리인 경우 -> 최근 본 관광지 contentId를 local에 저장
+    if (
+      user.accessToken !== "" &&
+      contents.contentTypeId in [12, 14, 28, 32, 38]
+    ) {
       localStorage.setItem("recentContentId", contents.contentId.toString());
     }
 
