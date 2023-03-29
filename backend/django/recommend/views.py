@@ -36,6 +36,14 @@ def spot_list(request, spot_id):
         try:
             # JWT 토큰 추출
             token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
+            print(token)
+            if token == "null":   
+                spots = RecommendTour.objects.all()
+                se = RecommendTourSerializer(spots, many=True)
+                data = pd.DataFrame(se.data) 
+                dict_data = popular_sorted(12, data)
+                return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
+
             # JWT 디코딩
             user_id = decode_jwt(token)
 
@@ -83,7 +91,6 @@ def spot_list(request, spot_id):
             se = RecommendTourSerializer(spots, many=True)
             data = pd.DataFrame(se.data) 
             dict_data = popular_sorted(12, data)
-        
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
 
         except Exception as e:
