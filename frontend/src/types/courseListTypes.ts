@@ -1,7 +1,13 @@
 export interface ListType{
-    contentId:number;
-    name:string;
-    type:string;
-    lat:string;
-    lng:string;
+    courseName: String,
+    course: [
+        {
+          contentId: Number
+          contentTypeId: Number,
+          title: String,
+          mapX: String,
+          mapY: String,
+         },
+    ], 
+    memo: String
 }

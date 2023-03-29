@@ -7,6 +7,7 @@ import useModal from "../../../../../components/utils/useModal";
 import { modalState } from "../../../../../recoil/ModalState";
 import { mockComponent } from "react-dom/test-utils";
 import { CourseList } from "./courseList";
+import { customAxios2 } from "../../../../../recoil/customAxios";
 // import axios from "axios";
 
 
@@ -14,6 +15,24 @@ export const FolderInside=()=>{
     const { openModal, closeModal } = useModal();
     const [mdState, setModalState] = useRecoilState(modalState);
     const [memo, setMemo] = useState('');
+    const [folderState, setFolderState] = useRecoilState(FolderState);
+    
+    const deleteCourseFolderData = ()=>
+    customAxios2.delete(`user/my-course/${folderState.courseId}`)
+    .then(()=>{
+        console.log("삭제됨");
+    }).catch((err)=>{
+        console.log(err);
+    })
+    async function myFunction(){
+        try{
+            await deleteCourseFolderData();
+        }catch(err){
+            throw err;
+        }
+    }
+//createTag함수이런거 적기
+    
 
     const modalDataS = {
         type: "default",
@@ -22,19 +41,19 @@ export const FolderInside=()=>{
         callback: () => {
         // const deleteNowFolder = async ()=>{
         //   await axios
-        //   .delete(process.env.REACT_APP_API_BASE_URL+"/api/user/my-course/{courseId}")
+        //   .delete(process.env.REACT_APP_API_BASE_URL+"/api/course/{courseId}")
         // }
-          alert("삭제되었습니다!");
-          closeModal();
-          exitFolder();
+        myFunction().then()
+        alert("삭제되었습니다!");
+        closeModal();
+        exitFolder();
         },
       };
-    const [folderState, setFolderState] = useRecoilState(FolderState);
     function exitFolder(){
         setFolderState({
             isOpen:false,
             opendFolder:"",
-            courseId:1 //나중에contentid로 넣기
+            courseId:""
         });
     }
 
