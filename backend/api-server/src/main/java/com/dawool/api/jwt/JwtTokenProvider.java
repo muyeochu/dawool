@@ -9,6 +9,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -166,19 +167,31 @@ public class JwtTokenProvider {
      */
     public Claims validateToken(String token) {
         try {
+            System.out.println("THIS COMPLETE");
             return this.getClaimsByToken(token); // token의 Body가 하기 exception들로 인해 유효하지 않으면 각각에 해당하는 로그 콘솔에 찍음
-        } catch (SecurityException e) {
-            log.info("Invalid JWT signature.");
-        } catch (MalformedJwtException e) {
-            log.info("Invalid JWT token.");
-            // 처음 로그인(/auth/kakao, /auth/google) 시, AccessToken(AppToken) 없이 접근해도 token validate을 체크하기 때문에 exception 터트리지 않고 catch합니다.
-        } catch (ExpiredJwtException e) {
-            log.info("Expired JWT token.");
-        } catch (UnsupportedJwtException e) {
-            log.info("Unsupported JWT token.");
-        } catch (IllegalArgumentException e) {
-            log.info("JWT token compact of handler are invalid.");
+        } catch(Exception e) {
+            log.warn(e.getMessage());
         }
+//        catch(SignatureException e) {
+//            System.out.println("THIS 0");
+//            log.info("Invalid signature.");
+//        } catch (SecurityException e) {
+//            System.out.println("THIS 1");
+//            log.info("Invalid JWT signature.");
+//        } catch (MalformedJwtException e) {
+//            System.out.println("THIS 2");
+//            log.info("Invalid JWT token.");
+//            // 처음 로그인(/auth/kakao, /auth/google) 시, AccessToken(AppToken) 없이 접근해도 token validate을 체크하기 때문에 exception 터트리지 않고 catch합니다.
+//        } catch (ExpiredJwtException e) {
+//            System.out.println("THIS 3");
+//            log.info("Expired JWT token.");
+//        } catch (UnsupportedJwtException e) {
+//            System.out.println("THIS 4");
+//            log.info("Unsupported JWT token.");
+//        } catch (IllegalArgumentException e) {
+//            System.out.println("THIS 5");
+//            log.info("JWT token compact of handler are invalid.");
+//        }
         return null;
     }
 
