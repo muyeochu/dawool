@@ -3,8 +3,8 @@ from djongo import models
 
 class RecommendTour(models.Model):
     _id=models.ObjectIdField()
-    contentid=models.TextField()
-    contenttypeid=models.TextField()
+    contentid=models.IntegerField()
+    contenttypeid=models.IntegerField()
     title=models.TextField()
     areacode=models.TextField()
     sigungucode=models.TextField()
@@ -15,17 +15,21 @@ class RecommendTour(models.Model):
     zipcode=models.TextField()
     mapx=models.TextField()
     mapy=models.TextField()
-    deaf=models.TextField()
-    old= models.TextField()
+    deaf=models.IntegerField()
+    old= models.IntegerField()
     firstimage = models.TextField()
-    visual_impaired=models.TextField()
-    mobility_weak = models.TextField()
-    infant=models.TextField()
+    visual_impaired=models.IntegerField()
+    mobility_weak = models.IntegerField()
+    infant=models.IntegerField()
     keyword_result=models.TextField()
-    searchcount=models.TextField()
+    searchcount=models.IntegerField()
+    location = models.JSONField()
 
 
     class Meta:
         db_table = "recommend_tour"
+
+
+
 
 
