@@ -1,6 +1,13 @@
 import styled from "styled-components";
-import { mainColor, grey, blue, white, black } from "../../../../styles/Colors";
+import { white, black } from "../../../../styles/Colors";
+
+// icon
 import { ReactComponent as likedIc } from "../../../../assets/icon/likedIc.svg";
+import { ReactComponent as bathchairIc } from "../../../../assets/icon/bathchairIc.svg";
+import { ReactComponent as eyeIc } from "../../../../assets/icon/eyeIc.svg";
+import { ReactComponent as earIc } from "../../../../assets/icon/earIc.svg";
+import { ReactComponent as oldmanIc } from "../../../../assets/icon/oldmanIc.svg";
+import { ReactComponent as toddlerIc } from "../../../../assets/icon/toddlerIc.svg";
 
 export const CardContainer = styled.div`
   width: 196px;
@@ -11,6 +18,8 @@ export const CardContainer = styled.div`
 `;
 
 export const ImageContainer = styled.div`
+  transition: transform 0.2s ease-in-out;
+
   width: 196px;
   height: 285px;
   border-radius: 10px;
@@ -21,19 +30,52 @@ export const ImageContainer = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
 `;
 
 export const CardImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+
+  ${ImageContainer}:hover & {
+    -webkit-filter: blur(3px);
+    filter: blur(3px) brightness(60%);
+  }
 `;
+
+export const BarrierIconContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate( -50%, -50% );
+  opacity: 0;
+  ${ImageContainer}:hover & {
+    opacity: 1;
+    transition: transform 0.2s ease-in-out;
+  }
+`;
+
+export const BathchairIcStyle = styled(bathchairIc)``;
+export const EyeIcStyle = styled(eyeIc)``;
+export const EarIcStyle = styled(earIc)``;
+export const OldmanIcStyle = styled(oldmanIc)``;
+export const ToddlerIcStyle = styled(toddlerIc)``;
 
 export const CardBottomContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  margin-top: 19px;
   gap: 5px;
   margin-top: 11px;
 `;

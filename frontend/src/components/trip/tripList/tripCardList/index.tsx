@@ -14,7 +14,7 @@ interface TripCardListProps {
 function TripCardList({ titleType, tripList }: TripCardListProps) {
   const cityList = useRecoilValue(citiesState);
   const selectedCity = cityList?.find((city) => city.id) ?? { id: 1 };
-  
+
   const filteredList = useRecoilValue(
     getListSelector({
       titleType,
@@ -28,9 +28,10 @@ function TripCardList({ titleType, tripList }: TripCardListProps) {
 
   return (
     <TripCardListContainer>
-      {filteredList && filteredList.map((item: ListType) => (
-        <TripCardItem type="list" key={item.contentId} contents={item} />
-      ))}
+      {filteredList &&
+        filteredList.map((item: ListType) => (
+          <TripCardItem type="list" key={item.contentId} contents={item} />
+        ))}
     </TripCardListContainer>
   );
 }

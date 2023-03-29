@@ -3,11 +3,11 @@ import "rsuite/dist/rsuite.min.css";
 import { Slider } from "rsuite";
 import { SliderContainer } from "./styles";
 import { useRecoilState } from "recoil";
-import { secondState } from "../../../../recoil/SurveyState";
+import { thirdState } from "../../../../recoil/SurveyState";
 
 const ThirdQuestion = () => {
-  // secondState와 연결된 mark 상태 변수 만들기
-  const [mark, setMark] = useRecoilState(secondState);
+  // thirdState와 연결된 mark 상태 변수 만들기
+  const [mark, setMark] = useRecoilState(thirdState);
   console.log(mark)
 
   const renderMark = (mark: number) => {

@@ -23,6 +23,7 @@ export const TripRecContainer = styled.div`
   position: relative;
   height: 92vh;
   width: 100vw;
+  padding: 150px 184px;
   background-image: url(${RecBackgroundImg});
   background-size: cover;
 `;
@@ -32,9 +33,10 @@ export const TripRecTitleContainer = styled.div`
   font-family: "SUIT";
   font-style: normal;
   font-weight: 600;
-  font-size: 45px;
+  font-size: 40px;
   line-height: 56px;
   color: ${black};
+  margin-bottom: 70px;
 `;
 
 export const TripRecTitle1 = styled.div`
