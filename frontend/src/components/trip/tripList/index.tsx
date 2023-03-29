@@ -79,6 +79,14 @@ function TripList({ titleType }: TripListProps) {
     setIsClicked((prev) => !prev);
   };
 
+  const buttons = [
+    { id: 0, label: "지체장애인", icType: "bathchair", btType: 1 },
+    { id: 1, label: "시각장애인", icType: "eye", btType: 1 },
+    { id: 2, label: "청각장애인", icType: "ear", btType: 1 },
+    { id: 3, label: "노인", icType: "oldman", btType: 1 },
+    { id: 4, label: "영유아", icType: "toddler", btType: 1 },
+  ];
+
   return (
     <TripListContainer id="trip-list-container">
       <TripListTitle>
@@ -87,21 +95,11 @@ function TripList({ titleType }: TripListProps) {
       <ButtonGroup>
         {/* 무장애 필터링 버튼 */}
         <ButtonList>
-          {/* <Button onClick={handleClick} icType={"bathchair"}>
-            지체장애
-          </Button>
-          <Button onClick={handleClick} icType={"eye"}>
-            시각장애
-          </Button>
-          <Button onClick={handleClick} icType={"ear"}>
-            청각장애
-          </Button>
-          <Button onClick={handleClick} icType={"oldman"}>
-            노인
-          </Button>
-          <Button onClick={handleClick} icType={"toddler"}>
-            영유아
-          </Button> */}
+          {buttons.map(({ id, label, icType, btType }) => (
+            <Button key={id} id={id} icType={icType} btType={btType}>
+              {label}
+            </Button>
+          ))}
         </ButtonList>
 
         {/* 드롭다운 */}

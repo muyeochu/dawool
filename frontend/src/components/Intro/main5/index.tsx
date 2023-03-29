@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../../recoil/UserState";
 
 import {
   MainFifthContainer,
@@ -12,16 +14,18 @@ import {
 
 const MainFifth = () => {
   const navigate = useNavigate();
+  const isLogin = useRecoilValue(userState);
 
   const justLookAround = () => {
     navigate("/tourspot");
   };
 
   const wantRec = () => {
-    // 로그인 된 상태라면
-    // navigate("/tourspot")
-    // 로그인 하지 않은 상태라면
-    navigate("/login");
+    if (isLogin.accessToken.length >= 1) {
+      navigate("/tourspot");
+    } else {
+      navigate("/login");
+    }
   };
 
   return (

@@ -1,40 +1,105 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
+import Loading from "../../components/common/Loading";
 import { useLocation } from "react-router-dom";
 import SearchList from "../../components/search/index";
 
-import { useRecoilValue, useResetRecoilState, useRecoilState } from "recoil";
-import { searchState, getSearchSelector } from "../../recoil/SearchSelector";
+import {
+  useRecoilValue,
+  useResetRecoilState,
+  useRecoilState,
+  selectorFamily,
+  SerializableParam,
+} from "recoil";
+import { getSearchApi } from "../../recoil/Api";
+import { SearchDataTypes } from "../../types/searchTypes";
+// import { searchState, getSearchSelector } from "../../recoil/SearchSelector";
+import { searchState } from "../../recoil/SearchSelector";
 
-import { MainGridItems, RowGridContainer, RowGridItems } from "./styles";
+import {
+  MainGridItems,
+  RowGridContainer,
+  RowGridItems,
+  EndBlock,
+} from "./styles";
 
 const SearchPage = () => {
   const location = useLocation();
   const word: string = location.state;
-  // const searchInput = useRecoilValue(searchState); // recoil 확인용(삭제)
+  const pageEnd: any = useRef();
+
   const [searchStateValue, setSearchStateValue] = useRecoilState(searchState);
+  const [searchData, setSearchData] = useState([]);
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   // 새로고침 할때마다 searchState 값 초기화 필요
   useEffect(() => {
     setSearchStateValue({ ...searchStateValue, title: word, barrier: "00000" });
-  }, [searchStateValue.title]);
+  }, []);
 
-  const searchData = useRecoilValue(
-    getSearchSelector({
+  const getSearchDatas = async (page: number) => {
+    const searchQuery = {
       title: word,
       type: 0,
       barrier: searchStateValue.barrier,
-      page: 0,
+      page: page,
       size: 10,
-    })
-  );
+    };
+    const res = await getSearchApi(searchQuery);
+    const data = await res.data.contents;
 
-  console.log("데이터좀..", searchData);
+    // 페이지가 이동시에만 무한스크롤 구현(버튼 무한스크롤x)
+    if (page > prevPage) {
+      setSearchData((prev) => [...prev, ...data] as any);
+      setPrevPage(page);
+    } else {
+      // 버튼을 클릭할때 페이지 및 데이터 초기화
+      if (prevBarrier !== searchStateValue.barrier) {
+        setPage(0);
+        setPrevPage(0);
+        setSearchData(data);
+        setPrevBarrier(searchStateValue.barrier);
+      }
+      setSearchData(data);
+    }
+    setLoading(true);
+  };
+
+  const [prevPage, setPrevPage] = useState(0);
+  const [prevBarrier, setPrevBarrier] = useState("00000");
+
+  useEffect(() => {
+    getSearchDatas(page);
+  }, [page, searchStateValue]);
+
+  const loadMore = () => {
+    setPage((prev) => prev + 1);
+  };
+
+  useEffect(() => {
+    if (loading) {
+      //로딩되었을 때만 실행
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            loadMore();
+          }
+        },
+        { threshold: 1 }
+      );
+      //옵져버 탐색 시작
+      observer.observe(pageEnd.current);
+    }
+  }, [loading]);
 
   return (
     <MainGridItems>
       <RowGridContainer>
         <RowGridItems>
+        <Suspense fallback={<Loading />}> 
           <SearchList word={word} data={searchData} />
+          <EndBlock ref={pageEnd}></EndBlock>
+          </Suspense>
         </RowGridItems>
       </RowGridContainer>
     </MainGridItems>
