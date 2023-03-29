@@ -7,7 +7,6 @@ import RestaurantDetailPage from "./DetailPage/RestaurantDetailPage";
 import ShoppingDetailPage from "./DetailPage/ShoppingDetailPage";
 import TourSpotDetailPage from "./DetailPage/TourSpotDetailPage";
 
-import InterestPage from "./InterestPage";
 import IntroPage from "./IntroPage";
 import LoginPage from "./LoginPage";
 import MyCoursePage from "./MyCoursePage";
@@ -18,6 +17,7 @@ import TourSpotPage from "./TourSpotPage";
 import CulturePage from "./CulturePage";
 import LeportsPage from "./LeportsPage";
 import ShoppingPage from "./ShoppingPage";
+import BookmarkPage from "./BookmarkPage"
 
 import ModalTest from "./TestPage/ModalTest";
 import ButtonTest from "./TestPage/ButtonTest";
@@ -30,7 +30,6 @@ export {
   RestaurantDetailPage,
   ShoppingDetailPage,
   TourSpotDetailPage,
-  InterestPage,
   IntroPage,
   LoginPage,
   MyCoursePage,
@@ -41,6 +40,7 @@ export {
   CulturePage,
   LeportsPage,
   ShoppingPage,
+  BookmarkPage,
   ModalTest,
   ButtonTest,
 };
