@@ -14,7 +14,7 @@ from pymongo import MongoClient
 import base64
 import json
 import time
-
+from collections import OrderedDict
 
 DATABASE_URL = settings.DATABASES['default']['CLIENT']['host']
 
@@ -161,8 +161,9 @@ def recommend_logic(request, contenttypeid):
     # print("데이터 불러오기 time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
     contentid_data = se.data
     dict_content = contentid_data[0]['location']
-    # mapx = contentid_data['location']['coordinates']['mapx']
+    print(dict_content)
     mapx = eval(dict_content)['coordinates']['mapx']
+    print(mapx)
     mapy = eval(dict_content)['coordinates']['mapy']
     # 출발지 배열 > 출발지 배열 
     departure = [mapx, mapy]
