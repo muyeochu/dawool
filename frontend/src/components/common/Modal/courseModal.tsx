@@ -15,6 +15,7 @@ import {
   ModalCourseTitle,
   ModalCourseContainer
 } from "./styles";
+import { grey } from "../../../styles/Colors";
 
 import { FolderContainer,FolderYellowIc  } from "../../course/sideBar/folderList/styles";
 import { insertCourseType } from "../../../types/courseListTypes";
@@ -56,6 +57,15 @@ function setCourseIdIntoTar(e:any){
   window.title= goToGrandChild.getAttribute("title");
   window.mapX= goToGrandChild.getAttribute("mapX");
   window.mapY= goToGrandChild.getAttribute("mapY");
+  console.log(window.targetCourse)
+  const parent = e.target.parentNode.parentNode;
+
+  for (var i = 0; i < parent.childNodes.length; i++) {
+    parent.childNodes[i].style.backgroundColor='white';
+  }
+  e.target.parentNode.style.backgroundColor=`${grey[100]}`;
+
+      
 }
 
 function createTag(folderList: any) {
