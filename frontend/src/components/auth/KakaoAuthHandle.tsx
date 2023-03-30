@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import {useSetRecoilState,useRecoilState } from "recoil";
 import {userState,User} from "../../recoil/UserState"
+import Loading from "../common/Loading";
 
 const KakaoAuthHandle = ()=>{
   // const setUser = useSetRecoilState(userState);
@@ -42,7 +43,7 @@ const KakaoAuthHandle = ()=>{
   console.log(user);
   return (
     <>
-    <Container></Container>
+    <Loading/>
     </>
   )
 }
