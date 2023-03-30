@@ -66,7 +66,7 @@ export const DropdownItemContainer = styled.div`
   }
 
   &::-webkit-scrollbar-track {
-    background-color: ${blue[100]};
+    background-color: ${grey[100]};
     border-radius: 14px;
   }
 
@@ -76,7 +76,7 @@ export const DropdownItemContainer = styled.div`
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: ${mainColor};
+    background-color: ${grey[100]};
   }
 `;
 

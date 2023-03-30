@@ -11,3 +11,11 @@ export interface ListType{
     ], 
     memo: String
 }
+
+export interface insertCourseType{
+    contentId: Number
+    contentTypeId: Number,
+    title: String,
+    mapX: String,
+    mapY: String,
+}
