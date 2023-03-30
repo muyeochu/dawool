@@ -42,6 +42,36 @@ export const ModalTitle = styled.div`
   line-height: 20px;
 `;
 
+export const ModalCourseTitle = styled.div`
+  padding: 1.2rem 1.4rem 1.2rem 1.4rem;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 20px;
+`;
+
+export const ModalCourseContainer = styled.div`
+  width: 500px;
+  height: 320px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: ${grey[100]};
+    border-radius: 14px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${grey[300]};
+    border-radius: 14px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: ${grey[200]};
+  }
+`
+
 export const ModalContents = styled.div`
   padding-left: 1.4rem;
   font-weight: 600;
