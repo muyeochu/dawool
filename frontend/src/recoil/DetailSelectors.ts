@@ -18,6 +18,8 @@ export const getDataSelector = selectorFamily<CommonDataTypes, ParamTypes>({
       try {
         const response = await getDetailApi(contentId, location);
         const data = await response.data;
+        console.log("상세데이터는?", data)
+        console.log("상세데이터 통신됨")
         return data;
       } catch (error) {
         console.error(error);
