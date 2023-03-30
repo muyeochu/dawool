@@ -9,15 +9,13 @@ export const getDetailApi = async (contentId: number, location: number) =>
     },
   });
 
-export interface searchQueryTypes  {
-  title: string
-  type: number,
-  barrier: string,
-  page: number,
-  size: number
+export interface searchQueryTypes {
+  title: string;
+  type: number;
+  barrier: string;
+  page: number;
+  size: number;
 }
-
-
 
 // 검색결과 요청
 export const getSearchApi = async ({
@@ -25,7 +23,7 @@ export const getSearchApi = async ({
   type,
   barrier,
   page,
-  size
+  size,
 }: searchQueryTypes) =>
   await customAxios.get(
     `search?title=${title}&type=${type}&barrier=${barrier}&page=${page}&size=${size}`,
@@ -47,10 +45,12 @@ export const getRecEntertainmentApi = async (contentTypeId: number) =>
     },
   });
 
-
 // POST //
 // 식당 & 숙박 추천
-export const getRecEtcApi = async (titleType: string, recentContentId: number) =>
+export const getRecEtcApi = async (
+  titleType: string,
+  recentContentId: number
+) =>
   await customAxiosRec.post(
     `recommend/${titleType}/`,
     { contentid: recentContentId },
