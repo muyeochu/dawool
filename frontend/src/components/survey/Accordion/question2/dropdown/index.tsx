@@ -27,9 +27,7 @@ const RegionDropdown = () => {
   >(undefined); // 선택된 시군구 저장
   const [second, setSecond] = useRecoilState<string>(secondState); // SurveyState의 secondState 가져오기
 
-  console.log("광역시도 id=", selectedCity);
-  console.log("시군구 id=", selectedDistrict);
-  console.log("저장되는 값=", second);
+  // console.log("저장되는 값=", second);
 
   // 광역시도 드롭다운 클릭할 때 호출
   function handleCityClick() {
