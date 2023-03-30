@@ -85,7 +85,7 @@ function TripRec({ titleType }: TripRecProps) {
     <TripRecContainer>
       {/* title */}
       <TripRecTitleContainer>
-        {token !== null ? (
+        {token === null ? (
           <>
             <TripRecTitle2>BEST {typeText} 👍</TripRecTitle2>
             <TripRecTitle2>

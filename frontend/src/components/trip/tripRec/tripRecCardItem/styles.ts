@@ -55,3 +55,24 @@ export const RecCardTitleContainer = styled.div`
     transition: transform 0.2s ease-in-out;
   }
 `;
+
+export const RecCardAreaContainer = styled.div`
+  font-family: "SUIT";
+  font-style: normal;
+  width: 200px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+  display: flex;
+  color: ${white};
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+
+  ${RecImageContainer}:hover & {
+    opacity: 1;
+    transition: transform 0.2s ease-in-out;
+  }
+`;

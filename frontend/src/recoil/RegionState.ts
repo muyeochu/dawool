@@ -1,4 +1,4 @@
-import { atom, useSetRecoilState } from "recoil";
+import { atom } from "recoil";
 import { City, District } from "../types/regionTypes";
 
 // 광역시도
