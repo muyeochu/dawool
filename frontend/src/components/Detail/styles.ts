@@ -27,7 +27,6 @@ export const HeartIcStyle = styled(HeartIc)`
 
 export const LikedIcStyle = styled(likedIc)`
   /* 크기 바뀌는 문제 해결하기! */
-  display: block;
   width: 37px;
   height: 32px;
   cursor: pointer;

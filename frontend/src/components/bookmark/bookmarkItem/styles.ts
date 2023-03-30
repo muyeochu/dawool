@@ -53,11 +53,15 @@ export const CardText = styled.div`
   cursor: pointer;
 `;
 
+export const IcContainer = styled.div`
+  width: 37px;
+  height: 32px;
+  cursor: pointer;
+`;
+
 export const LikedIcStyle = styled(likedIc)`
-  /* 크기 바뀌는 문제 해결하기! */
-  display: block;
-  width: 23px;
-  height: 23px;
+ width: 37px;
+  height: 32px;
   cursor: pointer;
 `;
 
