@@ -1,8 +1,9 @@
 export interface recommendListType {
+  areaCode: number;
   category: string;
-  contentid: number;
-  contenttypeid: number;
-  firstimage: string;
+  contentId: number;
+  contentTypeId: number;
+  imageUrl: string;
   title: string;
 }
 

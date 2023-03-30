@@ -24,11 +24,12 @@ export interface TripRecProps {
 }
 
 function TripRec({ titleType }: TripRecProps) {
+  const token = localStorage.getItem("token");
   const [user, setUser] = useRecoilState(userState); // 유저 정보
   const recentContentId = parseInt(
     localStorage.getItem("recentContentId") || "0"
   );
-  console.log("최근 본 콘텐츠id=", recentContentId);
+  // console.log("최근 본 콘텐츠id=", recentContentId);
 
   const typeText =
     titleType === "restaurant"
@@ -69,9 +70,9 @@ function TripRec({ titleType }: TripRecProps) {
       ? "stay"
       : "";
 
-  // 식당 & 숙박 selector 호출
+  // 즐길거리 or (식당&숙박) selector 호출
   const selectorPick =
-    contentTypeId && [12, 14, 28, 32, 38, 39].includes(contentTypeId)
+    [12, 14, 28, 38].includes(contentTypeId)
       ? getRecEntertainmentSelector({ titleType, contentTypeId: contentTypeId })
       : getRecEtcSelector({
           titleType: recTitle,
@@ -84,7 +85,7 @@ function TripRec({ titleType }: TripRecProps) {
     <TripRecContainer>
       {/* title */}
       <TripRecTitleContainer>
-        {user.accessToken === "" ? (
+        {token !== null ? (
           <>
             <TripRecTitle2>BEST {typeText} 👍</TripRecTitle2>
             <TripRecTitle2>
@@ -104,7 +105,7 @@ function TripRec({ titleType }: TripRecProps) {
       {RecList && (
         <TripRecCardListContainer>
           {RecList.map((item: recommendListType) => (
-            <TripRecCardItem key={item.contentid} item={item} />
+            <TripRecCardItem key={item.contentId} item={item} />
           ))}
         </TripRecCardListContainer>
       )}
