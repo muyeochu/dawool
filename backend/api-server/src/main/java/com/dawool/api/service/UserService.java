@@ -1,14 +1,9 @@
 package com.dawool.api.service;
 
-import com.dawool.api.dto.user.MyCourseDetailDto;
-import com.dawool.api.dto.user.MyCourseDto;
-import com.dawool.api.dto.user.MyCourseListDto;
 import com.dawool.api.dto.user.ReissueTokenReqDto;
 import com.dawool.api.dto.user.ReissueTokenResDto;
 import com.dawool.api.dto.user.TokenResDto;
 import com.dawool.api.dto.SurveyReqDto;
-import com.dawool.api.entity.Course;
-import com.dawool.api.entity.Spot;
 import com.dawool.api.entity.Survey;
 import com.dawool.api.entity.User;
 import com.dawool.api.jwt.JwtTokenProvider;
@@ -19,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
