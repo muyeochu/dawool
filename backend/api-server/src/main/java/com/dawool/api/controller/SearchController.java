@@ -48,7 +48,8 @@ public class SearchController {
         List<?> searchList = new ArrayList<>();
         Map<String, Object> response = new HashMap<>();
         if(title.length() == 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Empty Title");
+            response.put("contents", "Empty Title");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
         searchList = searchService.getSearchList(title, type, barrier, page, size);
         if (searchList.size() > 0) {
