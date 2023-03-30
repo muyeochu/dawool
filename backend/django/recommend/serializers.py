@@ -12,6 +12,6 @@ class RecommendSerializer(serializers.ModelSerializer):
 class PopularTourSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecommendTour
-        fields = [ 'title','contentid','contenttypeid','firstimage']
+        fields = [ 'title','contentid','contenttypeid','firstimage','areacode']
 
 
