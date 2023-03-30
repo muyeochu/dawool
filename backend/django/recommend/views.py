@@ -40,7 +40,6 @@ def spot_list(request, spot_id):
             token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
             if token == "null":   
                 dict_data = popular_sorted(int(spot_id))
-                print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
                 return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
 
             # JWT 디코딩
@@ -66,10 +65,8 @@ def spot_list(request, spot_id):
                 
                 # 취향 설문  >  선호 거리 
                 result_df = neartime_find(preferredTime,departure, target_collection)
-                print(result_df)
                 # 취향 설문 >  무장애 타입, 갔던 관광지, 인기관광지 여부 
                 result_data = survey_recommend(user, int(spot_id), result_df, visitLocation)
-                print(result_data)
                 result_data = result_data[result_data['contenttypeid']==int(spot_id)]
 
                 # 필요한 컬럼만 추출
@@ -81,14 +78,12 @@ def spot_list(request, spot_id):
             except:
                 dict_data = popular_sorted(int(spot_id))
 
-                print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
         except ValueError and IndexError:
             
             dict_data = popular_sorted(int(spot_id))
-            print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
 
         except Exception as e:
@@ -105,7 +100,6 @@ def food_list(request):
     if(request.method == 'POST'):
         try:
             dict_data = recommend_logic(request, 39)
-            print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
@@ -113,7 +107,6 @@ def food_list(request):
             # 식당 인기순 
             contenttype_id = 39
             dict_data = popular_sorted(contenttype_id)
-            print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         except Exception as e:
@@ -161,9 +154,7 @@ def recommend_logic(request, contenttypeid):
     # print("데이터 불러오기 time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
     contentid_data = se.data
     dict_content = contentid_data[0]['location']
-    print(dict_content)
     mapx = eval(dict_content)['coordinates']['mapx']
-    print(mapx)
     mapy = eval(dict_content)['coordinates']['mapy']
     # 출발지 배열 > 출발지 배열 
     departure = [mapx, mapy]
@@ -366,7 +357,6 @@ def popular_filter(count, Barrier_data, target_data):
         full_data = popular_concat(no_popular_data, target_data)
         result_list = popular_recommend(full_data, target_data)
 
-    print(result_list)
     return result_list
 
 
