@@ -25,7 +25,7 @@ import BarrierTag from "./BarrierTag";
 import Map from "./Map";
 import DetailBtn from "../common/DetailBtn";
 import { bookmark } from "../../recoil/BookmarkSelector";
-
+import useModal from "../utils/useModal";
 import logo from "../../assets/icon/logoIc.svg";
 
 const DetailComponent = ({
@@ -41,10 +41,31 @@ const DetailComponent = ({
     mapY: myData.info.mapY,
   };
 
+  
   const navigate = useNavigate();
   const [heart, setHeart] = useState<boolean>(myData.info.liked);
   const token = localStorage.getItem("token") || "0";
+  const { openModal, closeModal } = useModal();
 
+  function createTage(){
+    const div = document.getElementById("ExpContainer");
+    div?.setAttribute("contentId",myData.info.contentId);
+    div?.setAttribute("TypeId",myData.info.TypeId);
+    div?.setAttribute("title",myData.info.title);
+    div?.setAttribute("mapX",myData.info.mapX);
+    div?.setAttribute("mapY",myData.info.mapY)
+  }
+  createTage();
+
+
+  
+  const modalDataL = {
+    type: "course",
+    content: <></>,
+    callback: () => {
+      closeModal();
+    },
+  };
   return (
     <>
       <TitleContainer title={myData.info.title}>
@@ -53,10 +74,12 @@ const DetailComponent = ({
           <VolumeIcStyle />
         </TitleIcContainer>
         <TitleIcContainer>
-          <IcExpContainer>
+          <div id="ExpContainer">
+          <IcExpContainer onClick={()=>{openModal(modalDataL)}}> 
             <FolderIcStyle />
             <p>코스 추가</p>
           </IcExpContainer>
+          </div>
           <IcExpContainer
             onClick={async () => {
               if (token !== "0") {

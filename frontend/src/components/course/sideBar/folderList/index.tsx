@@ -23,6 +23,14 @@ import { useNavigate } from "react-router-dom";
 //     }
 // ]
 
+export const getCourseFolderData = ():Promise<ListType[]>=>
+    customAxios2.get(`user/my-course`)
+    .then((res)=>{
+    console.log(res);
+    return res.data;
+    }).catch((err)=>{
+        console.log(err);
+    })
 export const Folders=()=>{
     const navigate = useNavigate();
     // const baseURL = "http://j8d105.p.ssafy.io:8888";
@@ -44,14 +52,7 @@ export const Folders=()=>{
     },[]);
 
 
-    const getCourseFolderData = ():Promise<ListType[]>=>
-    customAxios2.get(`user/my-course`)
-    .then((res)=>{
-    console.log(res);
-    return res.data;
-    }).catch((err)=>{
-        console.log(err);
-    })
+    
 //     const UniqueFolderListSelector = selector<ListType[]>({
 //         key:"UniqueFolderListSelector",
 //         get:async ()=>{
@@ -98,12 +99,10 @@ function createTag(folderList: any) {
     console.log(div2);
     for(let i=0;i<folderList["myCourse"].length;i++){
         const folder = folderList["myCourse"][i];
-    // }
-    // for (const folder of folderList["myCourse"]) {
         const element = ()=><FolderContainer id = {folder.courseId} onClick={(event)=>intoFolder(event,i)}><FolderYellowIc/>{folder.courseName}</FolderContainer>
         const fdContainer = document.createElement("div");
-        
         ReactDOM.render(element(),fdContainer);
+        // fdContainer.setAttribute("courseId",folder.courseId)
         div2.appendChild(fdContainer); 
     }
     div ?.appendChild(div2);

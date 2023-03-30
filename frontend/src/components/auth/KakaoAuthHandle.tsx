@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import {useSetRecoilState,useRecoilState } from "recoil";
 import {userState,User} from "../../recoil/UserState"
+import Loading from "../common/Loading";
 
 const KakaoAuthHandle = ()=>{
   // const setUser = useSetRecoilState(userState);
@@ -33,7 +34,7 @@ const KakaoAuthHandle = ()=>{
         isSurvey: res.data.isSurvey
         })
         // 
-        navigate("/tourspot");
+        navigate("/");
         //리코일에 데이터 담고 바로 메인페이지로 보내기
       })
     }
@@ -42,7 +43,7 @@ const KakaoAuthHandle = ()=>{
   console.log(user);
   return (
     <>
-    <Container></Container>
+    <Loading/>
     </>
   )
 }
