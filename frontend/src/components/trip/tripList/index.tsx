@@ -6,13 +6,15 @@ import {
   TripListTitle,
   ButtonGroup,
   ButtonList,
+  TripCardListContainer,
 } from "./styles";
-import TripCardList from "./tripCardList";
+import TripCardItem from "./tripCardItem";
 import { TripListTitleType } from "../../../types/tripListTypes";
 import Dropdown from "../../common/Dropdown";
 import { City } from "../../../types/regionTypes";
 import { citiesState, citySelectedState } from "../../../recoil/RegionState";
 import { getListSelector } from "../../../recoil/TripListSelector";
+import { ListType } from "../../../types/tripListTypes";
 
 export interface TripListProps {
   titleType: TripListTitleType["titleType"];
@@ -23,6 +25,8 @@ function TripList({ titleType }: TripListProps) {
   const [citySelected, setCitySelected] =
     useRecoilState<number>(citySelectedState); // 선택된 도시의 ID 값 나타내는 상태값
   const [cityList, setCityList] = useRecoilState<City[]>(citiesState); // 지역 정보를 관리하는 citiesState recoil atom의 상태값
+  // const cityList = useRecoilValue(citiesState);
+  const selectedCity = cityList?.find((city) => city.id) ?? { id: 1 };
 
   // 드롭다운에서 선택된 도시에 맞는 여행 목록 가져옴
   const filteredList = useRecoilValue(
@@ -112,8 +116,15 @@ function TripList({ titleType }: TripListProps) {
       </ButtonGroup>
       {/* 관광지 목록 */}
 
-      {filteredList && (
+      {/* {filteredList && (
         <TripCardList titleType={titleType} tripList={filteredList} />
+      )} */}
+      {filteredList && (
+        <TripCardListContainer>
+          {filteredList.map((item: ListType) => (
+            <TripCardItem type="list" key={item.contentId} contents={item} />
+          ))}
+        </TripCardListContainer>
       )}
     </TripListContainer>
   );
