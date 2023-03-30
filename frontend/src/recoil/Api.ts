@@ -48,8 +48,18 @@ export const getRecEntertainmentApi = async (contentTypeId: number) =>
   });
 
 // POST //
+// 취향설문 (selector 아직 안 만듦..)
+export const postSurveyApi = async () =>
+  await customAxios2.post(`user/survey`, {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
 // 식당 & 숙박 추천
-export const getRecEtcApi = async (
+export const postRecEtcApi = async (
   titleType: string,
   recentContentId: number
 ) =>
