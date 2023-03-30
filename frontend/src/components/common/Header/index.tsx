@@ -3,8 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { searchState } from "../../../recoil/SearchSelector";
 
-import { ParamTypes } from "../../../recoil/SearchSelector";
-
 // styles
 import {
   HeaderFont,

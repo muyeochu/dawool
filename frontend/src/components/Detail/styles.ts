@@ -1,11 +1,11 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { ReactComponent as VolumeIc } from "../../assets/icon/volumeIc.svg";
 import { ReactComponent as FolderIc } from "../../assets/icon/folderIc.svg";
 import { ReactComponent as HeartIc } from "../../assets/icon/heartIc.svg";
 import { ReactComponent as likedIc } from "../../assets/icon/likedIc.svg";
 
-import { mainColor, black, white, blue, grey } from "../../styles/Colors";
+import { grey } from "../../styles/Colors";
 
 export const VolumeIcStyle = styled(VolumeIc)`
   width: 48px;
@@ -43,7 +43,12 @@ export const TitleContainer = styled.div<{ title: string }>`
   justify-content: space-between;
 
   p {
-    font-size: ${(props) => (props.title.length >= 10 ? "32px" : "46px")};
+    font-size: ${(props) =>
+      props.title.length >= 33
+        ? "26px"
+        : props.title.length >= 15
+        ? "32px"
+        : "42px"};
     font-weight: 700;
     line-height: 62px;
   }
