@@ -4,15 +4,9 @@ import { useLocation } from "react-router-dom";
 import SearchList from "../../components/search/index";
 
 import {
-  useRecoilValue,
-  useResetRecoilState,
   useRecoilState,
-  selectorFamily,
-  SerializableParam,
 } from "recoil";
 import { getSearchApi } from "../../recoil/Api";
-import { SearchDataTypes } from "../../types/searchTypes";
-// import { searchState, getSearchSelector } from "../../recoil/SearchSelector";
 import { searchState } from "../../recoil/SearchSelector";
 
 import {
@@ -27,8 +21,8 @@ const SearchPage = () => {
   const word: string = location.state;
   const pageEnd: any = useRef();
 
-  const [searchStateValue, setSearchStateValue] = useRecoilState(searchState);
-  const [searchData, setSearchData] = useState([]);
+  const [searchStateValue, setSearchStateValue] = useRecoilState(searchState); // 무장애 태그 상태
+  const [searchData, setSearchData] = useState([]); // 받아온 데이터를 저장
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -65,8 +59,8 @@ const SearchPage = () => {
     setLoading(true);
   };
 
-  const [prevPage, setPrevPage] = useState(0);
-  const [prevBarrier, setPrevBarrier] = useState("00000");
+  const [prevPage, setPrevPage] = useState(0); // 이전 페이지 상태를 저장
+  const [prevBarrier, setPrevBarrier] = useState("00000"); // 이전 버튼 상태를 저장
 
   useEffect(() => {
     getSearchDatas(page);
