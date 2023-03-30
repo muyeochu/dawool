@@ -1,7 +1,15 @@
 import styled from "styled-components";
-import { black } from "../../styles/Colors"
+import { black } from "../../styles/Colors";
 
-export const TripListContainer = styled.div``;
+export const TripCardListContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  align-items: center;
+  flex-flow: row wrap;
+  gap: 43px;
+  margin-top: -20px;
+`;
 
 export const TripListTitle = styled.h1`
   font-family: "SUIT";
