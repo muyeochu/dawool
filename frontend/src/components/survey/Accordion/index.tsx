@@ -42,3 +42,4 @@ const Accordion: React.FC<AccordionProps> = ({ title, children }) => {
 };
 
 export default Accordion;
+

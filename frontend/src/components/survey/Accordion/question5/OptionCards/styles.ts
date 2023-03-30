@@ -42,14 +42,12 @@ export const CardImage = styled.img`
 `;
 
 export const CardText = styled.div`
+  width: 170px;
   font-family: "SUIT";
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
-  line-height: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  line-height: 24px;
   text-align: center;
   position: absolute;
   top: 50%;

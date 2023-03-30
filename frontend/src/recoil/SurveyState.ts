@@ -27,7 +27,7 @@ export const fourthState = atom<string>({
 })
 
 // 다섯 번째 취향설문
-export const fifthState = atom<string>({
+export const fifthState = atom<number[]>({
   key: 'fifthState',
-  default: ""
+  default: []
 })
