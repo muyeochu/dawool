@@ -4,9 +4,10 @@ import { NavLink } from "react-router-dom";
 import { ReactComponent as LogoIc } from "../../../assets/icon/logoIc.svg";
 import { ReactComponent as SearchIc } from "../../../assets/icon/searchIc.svg";
 import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
-import { ReactComponent as DropDownIc } from "../../../assets/icon/ddIc.svg";
+// import { ReactComponent as DropDownIc } from "../../../assets/icon/ddIc.svg";
+import { ReactComponent as DropDownIc } from "../../../assets/icon/downarrowIc.svg";
 
-import { mainColor, blue, grey, white, black } from "../../../styles/Colors";
+import { mainColor, blue, grey, white } from "../../../styles/Colors";
 
 export const HeaderFont = styled.div`
   font-weight: 500;
@@ -146,7 +147,7 @@ export const NavStyle = styled(NavLink)`
 
 export const DropDownIcContainer = styled.div<{ ismenuopen: string }>`
   position: relative;
-  margin-right: 15px;
+  /* margin-right: 15px; */
 
   fill: ${(props) => (props.ismenuopen === "false" ? "black" : mainColor)};
   color: ${(props) => (props.ismenuopen === "false" ? "black" : mainColor)};
@@ -175,7 +176,7 @@ export const DropDownIcStyle = styled(DropDownIc)<{ ismenuopen: string }>`
 export const DropDownContainer = styled.div`
   position: absolute;
   top: 90%;
-  right: 400px;
+  right: 395px;
   text-align: center;
   overflow: hidden;
 `;

@@ -188,7 +188,7 @@ const Header = () => {
                 ismenuopen={isMenuOpen.toString()}
               >
                 즐길거리
-                <DropDownIcStyle ismenuopen={isMenuOpen.toString()} />
+                {/* <DropDownIcStyle ismenuopen={isMenuOpen.toString()} /> */}
               </DropDownIcContainer>
 
               {isMenuOpen === true && (

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { black } from "../../../styles/Colors";
+import { black, mainColor } from "../../../styles/Colors";
 
 export const TripListContainer = styled.div``;
 
@@ -13,6 +13,11 @@ export const TripListTitle = styled.h1`
   align-items: center;
 
   color: ${black};
+
+  span{
+    color: ${mainColor};
+    margin-right: 12px;
+  }
 `;
 
 export const ButtonGroup = styled.div`
