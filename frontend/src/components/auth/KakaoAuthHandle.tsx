@@ -33,7 +33,7 @@ const KakaoAuthHandle = ()=>{
         isSurvey: res.data.isSurvey
         })
         // 
-        navigate("/tourspot");
+        navigate("/");
         //리코일에 데이터 담고 바로 메인페이지로 보내기
       })
     }
