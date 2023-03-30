@@ -9,15 +9,13 @@ export const getDetailApi = async (contentId: number, location: number) =>
     },
   });
 
-export interface searchQueryTypes  {
-  title: string
-  type: number,
-  barrier: string,
-  page: number,
-  size: number
+export interface searchQueryTypes {
+  title: string;
+  type: number;
+  barrier: string;
+  page: number;
+  size: number;
 }
-
-
 
 // 검색결과 요청
 export const getSearchApi = async ({
@@ -25,7 +23,7 @@ export const getSearchApi = async ({
   type,
   barrier,
   page,
-  size
+  size,
 }: searchQueryTypes) =>
   await customAxios.get(
     `search?title=${title}&type=${type}&barrier=${barrier}&page=${page}&size=${size}`,
@@ -44,13 +42,17 @@ export const getRecEntertainmentApi = async (contentTypeId: number) =>
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // Authorization:
+      //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NDBlYTY5MTg5YTY1MTVhZWNkNDRkZjgiLCJBdXRoZW50aWNhdGlvbiI6IlVTRVIiLCJpYXQiOjE2Nzk1NTUxNzIsImV4cCI6MTY4MjE0NzE3Mn0.WZR8zznJipY1KFy_mzOx5FboMOrCQoKJpo8x9fZqgGw",
     },
   });
 
-
 // POST //
 // 식당 & 숙박 추천
-export const getRecEtcApi = async (titleType: string, recentContentId: number) =>
+export const getRecEtcApi = async (
+  titleType: string,
+  recentContentId: number
+) =>
   await customAxiosRec.post(
     `recommend/${titleType}/`,
     { contentid: recentContentId },
@@ -59,6 +61,8 @@ export const getRecEtcApi = async (titleType: string, recentContentId: number) =
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
+        // Authorization:
+        //   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NDBlYTY5MTg5YTY1MTVhZWNkNDRkZjgiLCJBdXRoZW50aWNhdGlvbiI6IlVTRVIiLCJpYXQiOjE2Nzk1NTUxNzIsImV4cCI6MTY4MjE0NzE3Mn0.WZR8zznJipY1KFy_mzOx5FboMOrCQoKJpo8x9fZqgGw",
       },
     }
   );
