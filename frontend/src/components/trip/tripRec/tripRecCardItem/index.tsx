@@ -1,5 +1,10 @@
 import React from "react";
-import { RecCardContainer, RecImageContainer, RecCardImage, RecCardTitleContainer } from "./styles";
+import {
+  RecCardContainer,
+  RecImageContainer,
+  RecCardImage,
+  RecCardTitleContainer,
+} from "./styles";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../../recoil/UserState";
 import exampleImg from "../../../../assets/images/exampleImg.png";
@@ -12,10 +17,10 @@ interface TripRecCardItemProps {
 
 const TripRecCardItem = ({ item }: TripRecCardItemProps) => {
   const navigate = useNavigate();
-  const [user, setUser] = useRecoilState(userState);
+  const token = localStorage.getItem("token");
 
   const handleClick = () => {
-    if (user.accessToken !== "" && item.contenttypeid in [12, 14, 28, 32, 38]) {
+    if (token !== null && [12, 14, 28, 32, 38].includes(item.contenttypeid)) {
       localStorage.setItem("recentContentId", item.contentid.toString());
     }
 
