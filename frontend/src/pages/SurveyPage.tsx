@@ -1,8 +1,10 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
 import { SurveyTitle } from "../components/survey/SurveyTitle/styles";
 import { AccordionListContainer } from "../components/survey/Accordion/styles";
 import styled from "styled-components";
 import Accordion from "../components/survey/Accordion/index";
+import { firstState, secondState, thirdState, fourthState, fifthState } from "../recoil/SurveyState";
 
 // question 1~5
 import FirstQuestion from "../components/survey/Accordion/question1";
@@ -19,6 +21,15 @@ const MainGridItems = styled.div`
 `;
 
 const SurveyPage = () => {
+  const first = useRecoilValue(firstState);
+  const second = useRecoilValue(secondState);
+  const third = useRecoilValue(thirdState);
+  const fourth = useRecoilValue(fourthState);
+  const fifth = useRecoilValue(fifthState);
+  const checkedIcCount = [first, second, third, fourth, fifth].filter(
+    (state) => state !== "" && state.length !== 0
+  ).length;
+
   return (
     <MainGridItems>
       <SurveyTitle>취향설문</SurveyTitle>
@@ -44,7 +55,7 @@ const SurveyPage = () => {
           <FifthQuestion />
         </Accordion>
 
-        <SaveBtn />
+        <SaveBtn checkedIcCount={checkedIcCount} />
       </AccordionListContainer>
     </MainGridItems>
   );

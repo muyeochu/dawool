@@ -60,7 +60,7 @@ const cards = [
 
 const OptionCards = () => {
   const [fifthSurvey, setFifthSurvey] = useRecoilState(fifthState);
-  console.log("다섯번째", fifthSurvey)
+  // console.log("다섯번째", fifthSurvey)
 
   const handleCardClick = (id: number) => {
     // fifthState 상태 업데이트
