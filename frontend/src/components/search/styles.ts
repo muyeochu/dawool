@@ -27,6 +27,7 @@ export const SerachIcStyle = styled(SearchIc)`
 
 export const TitleContainer = styled.div`
   display: flex;
+  margin-left: -8px;
 
   span {
     font-weight: 700;
@@ -53,10 +54,10 @@ export const ButtonList = styled.div`
 export const TripCardListContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   flex-flow: row wrap;
-  gap: 25px;
+  gap: 43px;
   margin-top: -20px;
 `;
 
