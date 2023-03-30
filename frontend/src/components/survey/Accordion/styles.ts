@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { white, blue, grey } from "../../../styles/Colors";
+import { blue, grey } from "../../../styles/Colors";
 
 import { ReactComponent as UpdownIc } from "../../../assets/icon/updownIc.svg";
 

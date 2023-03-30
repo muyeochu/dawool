@@ -1,11 +1,5 @@
 import styled from "styled-components";
-import {
-  white,
-  black,
-  mainColor,
-  grey,
-  blue,
-} from "../../../../../styles/Colors";
+import { white, blue } from "../../../../../styles/Colors";
 
 export const CardListContainer = styled.div`
   margin-top: 40px;

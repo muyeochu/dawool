@@ -1,103 +1,112 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   Container,
-  Dropdown,
   DropdownContainer,
-  AlertMessage,
-  DropdownButton,
+  DropdownBtnText,
+  DropdownBtnIcStyle,
+  DropdownItemContainer,
+  DropdownItem,
+  CityDropdownContainer,
+  DistrictDropdownContainer,
 } from "./styles";
 import { citiesState, districtState } from "../../../../../recoil/RegionState";
 import { City, District } from "../../../../../types/regionTypes";
+import { secondState } from "../../../../../recoil/SurveyState";
 
-import { ReactComponent as DropdownkIc } from "../../../../../assets/icon/dropdownIc.svg";
-
-// 현재 선택된 광역시도와 시군구 저장
 const RegionDropdown = () => {
-  const [selectedCity, setSelectedCity] = useState<City | undefined>();
+  // 현재 선택된 광역시도와 시군구 저장
+  const [isCityClicked, setIsCityClicked] = useState(false);
+  const [isDistrictClicked, setIsDistrictClicked] = useState(false);
+  const dropdownRef = useRef<HTMLButtonElement>(null); // dropdownRef 생성
+  const cities = useRecoilValue<City[]>(citiesState);
+  const districts = useRecoilValue<District[]>(districtState);
+  const [selectedCity, setSelectedCity] = useState<City | undefined>(undefined); // 선택된 광역시 저장
   const [selectedDistrict, setSelectedDistrict] = useState<
     District | undefined
-  >();
+  >(undefined); // 선택된 시군구 저장
+  const [second, setSecond] = useRecoilState<string>(secondState); // SurveyState의 secondState 가져오기
 
-  // 드롭다운 옵션 목록 열림 여부 상태값
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  console.log("광역시도 id=", selectedCity);
+  console.log("시군구 id=", selectedDistrict);
+  console.log("저장되는 값=", second);
 
-  // 광역시도, 시군구 상태값 가져오기
-  const cities = useRecoilValue(citiesState);
-  const districts = useRecoilValue(districtState);
+  // 광역시도 드롭다운 클릭할 때 호출
+  function handleCityClick() {
+    setIsDistrictClicked(false);
+    setIsCityClicked(!isCityClicked);
+  }
 
-  // 광역시도가 변경될 때 호출, 선택된 광역시도의 id를 찾아 setSelectedCity 함수를 호출하여 상태값을 업데이트
-  const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedCityId = parseInt(event.target.value);
-    const city = cities.find((city) => city.id === selectedCityId);
+  // 시군구 드롭다운을 클릭할 때 호출
+  function handleDistrictClick() {
+    setIsCityClicked(false);
+    setIsDistrictClicked(!isDistrictClicked);
+  }
+
+  // 광역시 선택 시 호출
+  function handleCitySelect(city: City) {
     setSelectedCity(city);
-    setSelectedDistrict(undefined); // 시군구 선택값 초기화
-  };
+    setSelectedDistrict(undefined);
+    setIsCityClicked(false);
+  }
 
-  // 시군구가 변경될 때 호출, 선택된 시군구의 id를 찾아 setSelectedDistrict 함수를 호출하여 상태값을 업데이트
-  const handleDistrictChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const selectedDistrictId = parseInt(event.target.value);
-    const district = districts.find(
-      (district) => district.id === selectedDistrictId
-    );
+  // 시군구 선택 시 호출
+  function handleDistrictSelect(district: District) {
     setSelectedDistrict(district);
-  };
-
-  // 선택된 광역시도에 해당하는 시군구들만 필터링
-  const filteredDistricts = districts.filter(
-    (district) => selectedCity && district.cityId === selectedCity.id
-  );
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
+    setSecond(`${selectedCity?.id}${district.id}`);
+    setIsDistrictClicked(false);
+  }
 
   return (
     <Container>
-      <DropdownContainer>
-        <Dropdown value={selectedCity?.id} onChange={handleCityChange}>
-          <option value="">광역시도</option>
-          {cities.map((city) => (
-            <option key={city.id} value={city.id}>
-              {city.name}
-            </option>
-          ))}
-        </Dropdown>
-        {selectedCity && (
-          <Dropdown
-            value={selectedDistrict?.id}
-            onChange={handleDistrictChange}
-          >
-            <option value="">시군구</option>
-            {filteredDistricts.map((district) => (
-              <option key={district.id} value={district.id}>
-                {district.name}
-              </option>
+      {/* 광역시도 */}
+      <CityDropdownContainer
+        onClick={handleCityClick}
+        isclicked={isCityClicked.toString()}
+      >
+        <DropdownBtnText isclicked={isCityClicked.toString()}>
+          {selectedCity?.name ?? "광역시도 선택"}
+          <DropdownBtnIcStyle isclicked={isCityClicked.toString()} />
+        </DropdownBtnText>
+        {isCityClicked && (
+          <DropdownItemContainer>
+            {cities.map((city) => (
+              <DropdownItem key={city.id} onClick={() => handleCitySelect(city)}>
+                {city.name}
+              </DropdownItem>
             ))}
-          </Dropdown>
+          </DropdownItemContainer>
         )}
-      </DropdownContainer>
-      {!selectedDistrict && <AlertMessage>시군구를 선택해주세요.</AlertMessage>}
+      </CityDropdownContainer>
+
+      {/* 시군구 */}
+      {selectedCity && (
+        <DistrictDropdownContainer
+          onClick={handleDistrictClick}
+          isclicked={isDistrictClicked.toString()}
+        >
+          <DropdownBtnText isclicked={isDistrictClicked.toString()}>
+            {selectedDistrict?.name ?? "시군구 선택"}
+            <DropdownBtnIcStyle isclicked={isDistrictClicked.toString()} />
+          </DropdownBtnText>
+          {selectedCity && isDistrictClicked && (
+            <DropdownItemContainer>
+              {districts
+                .filter((district) => district.cityId === selectedCity.id)
+                .map((district) => (
+                  <DropdownItem
+                    key={district.id}
+                    onClick={() => handleDistrictSelect(district)}
+                  >
+                    {district.name}
+                  </DropdownItem>
+                ))}
+            </DropdownItemContainer>
+          )}
+        </DistrictDropdownContainer>
+      )}
     </Container>
   );
 };
 
 export default RegionDropdown;
-
-// <div>
-//   <DropdownContanier>
-//   <DropdownText>
-//     광역시도
-//   </DropdownText>
-//     <DropdownkIc />
-// </DropdownContanier>
-
-// <DropdownContanier>
-//   <DropdownText>
-//     시군구
-//   </DropdownText>
-//     <DropdownkIc />
-// </DropdownContanier>
-// </div>

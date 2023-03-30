@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import Q1Button from "./Button";
 import { ButtonListContainer } from "./styles";
 import { useRecoilState } from "recoil";

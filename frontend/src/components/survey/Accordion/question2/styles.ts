@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { white } from "../../../../styles/Colors";
 
 // 설문 문항 전체 감싸는 container
 export const HangjungdongContanier = styled.div`
-  border-radius: 3px;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  background-color: ${white};
-  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 3px;
+  background-color: orange;
+  height: 400px;
+  min-height: 100%;
 
   margin-top: 16px;
   padding:16px 60px 16px 60px;

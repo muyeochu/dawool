@@ -1207,13 +1207,7 @@ export const citySelectedState = atom<number>({
   default: 1,
 });
 
-// 선택된 도시의 ID 변경하는 함수 반환(없어도 잘 돌아감)
-// export const useSetCitySelectedState = () => {
-//   const setCitySelected = useSetRecoilState(citySelectedState);
-//   return (newCityId: number) => setCitySelected(newCityId);
-// };
-
-export const districtState = atom({
+export const districtState = atom<District[]>({
   key: "districtState",
   default: districts,
 });

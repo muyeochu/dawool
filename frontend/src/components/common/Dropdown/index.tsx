@@ -21,7 +21,6 @@ export interface DropdownProps {
 export default function Dropdown({ itemList, onSelected }: DropdownProps) {
   const [isClicked, setIsClicked] = useState(false);
   const dropdownRef = useRef<HTMLButtonElement>(null); // dropdownRef 생성
-  const dropdown = useRecoilValue(dropdownState);
   const cities = useRecoilValue(citiesState);
   // 선택한 item 저장, 업데이트
   const [selectedItem, setSelectedItem] = useState<
