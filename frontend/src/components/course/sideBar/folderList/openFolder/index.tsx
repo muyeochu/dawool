@@ -71,16 +71,6 @@ export const FolderInside=()=>{
         }
     </FolderContainer>
     <CourseListContainer/>
-    <MemoContainer>
-        <MemoIc/> 메모
-        <UpdateIc />
-        
-        {/* 메모칸 */}
-
-    </MemoContainer>
-    {/* 
-    //밑에는 파일들
-    //메모 */}
     </>
     )
 };
