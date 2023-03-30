@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { userState } from "../../../../recoil/UserState";
 import {
   CardContainer,
   ImageContainer,
@@ -26,13 +25,12 @@ interface TripCardItemProps {
 
 function TripCardItem({ contents, type }: TripCardItemProps) {
   const navigate = useNavigate();
-  const [user, setUser] = useRecoilState(userState);
+  const token = localStorage.getItem("token");
 
   const handleClick = () => {
     // 로그인 유저 & 즐길거리인 경우 -> 최근 본 관광지 contentId를 local에 저장
     if (
-      user.accessToken !== "" &&
-      contents.contentTypeId in [12, 14, 28, 32, 38]
+      token !== null && [12, 14, 28, 32, 38].includes(contents.contentTypeId)
     ) {
       localStorage.setItem("recentContentId", contents.contentId.toString());
     }
