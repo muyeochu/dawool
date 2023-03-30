@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   VolumeIcStyle,
   FolderIcStyle,
@@ -40,7 +41,9 @@ const DetailComponent = ({
     mapY: myData.info.mapY,
   };
 
+  const navigate = useNavigate();
   const [heart, setHeart] = useState<boolean>(myData.info.liked);
+  const token = localStorage.getItem("token") || "0";
 
   return (
     <>
@@ -56,8 +59,13 @@ const DetailComponent = ({
           </IcExpContainer>
           <IcExpContainer
             onClick={async () => {
-              const liked = await bookmark(myData.info);
-              setHeart(liked);
+              if (token !== "0") {
+                const liked = await bookmark(myData.info);
+                setHeart(liked);
+              } else {
+                alert("로그인이 필요합니다.");
+                navigate("/login");
+              }
             }}
           >
             {heart ? <HeartIcStyle /> : <LikedIcStyle />}
