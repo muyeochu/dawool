@@ -15,6 +15,8 @@ import base64
 import json
 import time
 from collections import OrderedDict
+from sklearn.metrics.pairwise import euclidean_distances
+import numpy as np
 
 DATABASE_URL = settings.DATABASES['default']['CLIENT']['host']
 
@@ -100,6 +102,8 @@ def food_list(request):
     if(request.method == 'POST'):
         try:
             dict_data = recommend_logic(request, 39)
+            print(get_heart())
+
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
@@ -123,6 +127,8 @@ def stay_list(request):
     if(request.method == 'POST'):
         try:
             dict_data = recommend_logic(request, 32)
+
+      
     
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
@@ -406,3 +412,37 @@ def Barrier_filter(is_mobility,is_visual, is_deaf, is_old, is_infant, near_conte
 
 
 
+def get_heart():
+    heart_collection = db.heart # 컬렉션 
+    heart_data = heart_collection.find({})
+    heart_list = list(heart_data)
+    heart_df = pd.DataFrame(heart_list)
+    heart_df = heart_df[['userid', 'spotid']]
+    print(heart_df)
+
+    heart_df['value'] = 1
+    pivot_df = heart_df.pivot_table(index='userid', columns='spotid', values='value', fill_value=-1)
+    pivot_df = pivot_df.drop('anonymousUser')
+
+    distance = euclidean_distances(pivot_df.iloc[:, :-1])
+    similarity = 1 / (distance + 1e-5)
+
+    print('Euclidean_similarity: \n', similarity)
+
+    li = []
+    for i in range(len(similarity)):
+        df_index = pivot_df.index.tolist()
+        print(similarity[i])
+        arr = np.array(similarity[i])
+
+        arr[i] = -np.inf
+
+        user_name = df_index[i]
+
+        max_index = np.argmax(arr)
+        li.append((df_index[i],df_index[max_index]))
+
+    print(li)
+
+
+    return pivot_df
