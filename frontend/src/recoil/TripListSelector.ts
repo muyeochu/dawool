@@ -1,53 +1,19 @@
-import { atom, selector, selectorFamily, SerializableParam } from "recoil";
-import axios from "axios";
-import { customAxios } from "./customAxios";
-import { ListType } from "../types/tripListTypes";
-import { citySelectedState } from "./RegionState";
+import { atom } from "recoil";
 
-// titleType 타입 정의
-type TitleType =
-  | "restaurant"
-  | "accommodation"
-  | "tourSpot"
-  | "culture"
-  | "leports"
-  | "shopping";
-
-interface ListSelectorProps {
-  titleType: TitleType;
-  area: number;
-  citySelected?: number;
+interface ListBarrierTypes {
   barrier: string;
-  page: number;
-  size: number;
-  [key: string]: SerializableParam;
 }
 
-// 여행지 목록 가져오는 selector
-export const getListSelector = selectorFamily<ListType[], ListSelectorProps>({
-  key: "getListSelector",
-  get: ({ titleType, area, barrier, page, size }) => async ({ get }) => {
-    const selectedCity = get(citySelectedState) as number;
-    // console.log(selectedCity)
-    const contentTypeId = getContentTypeId(titleType);
-    try {
-      const response = await customAxios.get(
-        `location/list/${contentTypeId}?area=${selectedCity}&barrier=${barrier}&page=${page}&size=${size}`
-      );
-      // console.log(response.data.contents)
-      return response.data.contents.map((item: ListType) => ({
-        ...item,
-        category: titleType,
-      }));
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  },
-});
+// 목록 무장애 태그 상태관리
+export const listBarrierState = atom<ListBarrierTypes>({
+  key: "listBarrierState",
+  default: {
+    barrier: "00000"
+  }
+})
 
 // titleType에 따른 contentTypeId 반환하는 함수
-const getContentTypeId = (titleType: string) => {
+export const getContentTypeId = (titleType: string) => {
   switch (titleType) {
     case "restaurant":
       return 39;

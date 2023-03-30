@@ -1,5 +1,23 @@
 import { customAxios, customAxios2, customAxiosRec } from "./customAxios";
 
+// 타입
+export interface searchQueryTypes {
+  title: string;
+  type: number;
+  barrier: string;
+  page: number;
+  size: number;
+}
+
+export interface listQueryTypes {
+  contentTypeId: number;
+  area: number;
+  citySelected?: number;
+  barrier: string;
+  page: number;
+  size: number;
+}
+
 // GET //
 export const getDetailApi = async (contentId: number, location: number) =>
   await customAxios2.get(`location/${location}/${contentId}`, {
@@ -9,13 +27,23 @@ export const getDetailApi = async (contentId: number, location: number) =>
     },
   });
 
-export interface searchQueryTypes {
-  title: string;
-  type: number;
-  barrier: string;
-  page: number;
-  size: number;
-}
+// 목록 리스트 요청
+export const getListApi = async ({
+  contentTypeId,
+  area,
+  barrier,
+  page,
+  size,
+}: listQueryTypes) =>
+  await customAxios2.get(
+    `location/list/${contentTypeId}?area=${area}&barrier=${barrier}&page=${page}&size=${size}`,
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    }
+  );
 
 // 검색결과 요청
 export const getSearchApi = async ({
@@ -42,8 +70,6 @@ export const getRecEntertainmentApi = async (contentTypeId: number) =>
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      // Authorization:
-      //     "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NDBlYTY5MTg5YTY1MTVhZWNkNDRkZjgiLCJBdXRoZW50aWNhdGlvbiI6IlVTRVIiLCJpYXQiOjE2Nzk1NTUxNzIsImV4cCI6MTY4MjE0NzE3Mn0.WZR8zznJipY1KFy_mzOx5FboMOrCQoKJpo8x9fZqgGw",
     },
   });
 

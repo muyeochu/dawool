@@ -11,7 +11,7 @@ import IntroPage from "./IntroPage";
 import LoginPage from "./LoginPage";
 import MyCoursePage from "./MyCoursePage";
 import RestaurantPage from "./RestaurantPage";
-import SearchPage from "./SearchPage/SearchPage";
+import SearchPage from "./SearchPage";
 import SurveyPage from "./SurveyPage";
 import TourSpotPage from "./TourSpotPage";
 import CulturePage from "./CulturePage";
