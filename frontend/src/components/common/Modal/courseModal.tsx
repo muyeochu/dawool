@@ -47,11 +47,15 @@ const CourseModal = () => {
 
 function setCourseIdIntoTar(e:any){
   window.targetCourse = e.target.id.trim(); 
-  window.contentId= e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].getAttribute("contentId");
-  window.contentTypeId= e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].getAttribute("contentTypeId");
-  window.title= e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].getAttribute("title");
-  window.mapX= e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].getAttribute("mapX");
-  window.mapY= e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].getAttribute("mapY");
+  const goToParent =e.target.parentNode.parentNode.parentNode;
+  const goToGrandParent = goToParent.parentNode.parentNode.parentNode.parentNode;
+  const goToChild = goToGrandParent.childNodes[1].childNodes[0].childNodes[0];
+  const goToGrandChild = goToChild.childNodes[0].childNodes[1].childNodes[0];
+  window.contentId= goToGrandChild.getAttribute("contentId");
+  window.contentTypeId= goToGrandChild.getAttribute("contentTypeId");
+  window.title= goToGrandChild.getAttribute("title");
+  window.mapX= goToGrandChild.getAttribute("mapX");
+  window.mapY= goToGrandChild.getAttribute("mapY");
 }
 
 function createTag(folderList: any) {
