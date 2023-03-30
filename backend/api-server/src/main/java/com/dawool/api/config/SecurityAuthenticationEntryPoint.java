@@ -1,5 +1,6 @@
 package com.dawool.api.config;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 public class SecurityAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        response.sendRedirect("http://j8d105.p.ssafy.io:3000");
+        System.out.println("에에에에에엥에에에에엥에에에에에엥   에에에에에에엥에에엥 에러발생! 에러발생! 에러발생! 에에에에에엥에에에엥에에엥");
+        response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
     }
 }
