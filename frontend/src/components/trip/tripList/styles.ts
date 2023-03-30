@@ -33,10 +33,12 @@ export const ButtonList = styled.div`
 export const TripCardListContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   flex-flow: row wrap;
-  gap: 25px;
+  gap: 43px;
 `;
 
-
+export const EndBlock = styled.div`
+  visibility: hidden;
+`

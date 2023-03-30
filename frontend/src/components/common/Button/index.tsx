@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { StyledButton, ButtonText, ButtonIcon } from "./styles";
 import { buttonState } from "../../../recoil/ButtonState";
 import { searchState } from "../../../recoil/SearchSelector";
+import { listBarrierState } from "../../../recoil/TripListSelector";
 
 // icon
 import bathchairIc from "../../../assets/icon/bathchairIc.svg";
@@ -15,8 +16,6 @@ import toddlerIc from "../../../assets/icon/toddlerIc.svg";
 interface ButtonProps {
   id: number;
   btType: number; // 0: search버튼, 1: 목록버튼
-  // onClick?: () => void;
-  // onClick?: (id: number) => void;
   disabled?: boolean;
   children: React.ReactNode;
   icType?: string;
@@ -25,7 +24,9 @@ interface ButtonProps {
 export default function Button({ id, children, icType, btType }: ButtonProps) {
   // 'useState' hook -> 클릭여부 상태값 관리 (기본값 'false')
   const [isClicked, setIsClicked] = useState(false);
+  // 무장애 버튼 상태관리
   const [searchValue, setSearchValue] = useRecoilState(searchState);
+  const [listValue, setListValue] = useRecoilState(listBarrierState);
 
   // 'useRecoilState' hook -> Recoil의 'buttonState' 값을 가져와 버튼 상태에 대한 정보 유지
   const [button, setButton] = useRecoilState(buttonState);
@@ -50,6 +51,10 @@ export default function Button({ id, children, icType, btType }: ButtonProps) {
 
     // list 버튼인 경우
     if (btType === 1) {
+      const barrierArray = listValue.barrier.split("");
+      barrierArray[id] = barrierArray[id] === "0" ? "1" : "0"; // 현재 버튼의 상태를 토글링
+      const barrier = barrierArray.join("");
+      setListValue({ ...listValue, barrier: barrier });
     }
   }
 
