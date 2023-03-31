@@ -9,7 +9,7 @@ interface BookmarkProps {
 export const BookmarkList = ({ contents }: BookmarkProps) => {
   return (
     <>
-      <TripListTitle>관심 여행지 관리</TripListTitle>
+      <TripListTitle>관심 여행지</TripListTitle>
       <TripCardListContainer>
         {contents.map((item: BookmarkItemType) => (
           <BookmarkCardItem contents={item} />

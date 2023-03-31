@@ -16,10 +16,9 @@ import {
   SearchBarContainer,
   SearchBarInput,
   SearchIcContainer,
-  MicIcContainer,
+  MicIcStyle,
   NavStyle,
   DropDownIcContainer,
-  DropDownIcStyle,
   DropDownContainer,
   DropDownContent,
   PersonIcContainer,
@@ -34,6 +33,10 @@ import { ReactComponent as PersonIc2 } from "../../../assets/icon/person2Ic.svg"
 
 // sidebar
 import SideBar from "../../personal";
+
+// modal
+import useModal from "../../utils/useModal";
+import Mic from "../../search/Mic";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -130,6 +133,17 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  // 음성인식 모달창 열기
+  const { openModal, closeModal } = useModal();
+
+  const ModalData = {
+    type: "mic",
+    content: <Mic/>,
+    callback: () => {
+      closeModal();
+    },
+  };
+
   // 즐길거리 각 페이지로 이동
   const goTourSpot = () => {
     navigate("/tourspot");
@@ -178,9 +192,7 @@ const Header = () => {
                   <SearchIc />
                 </SearchIcContainer>
               </SearchBarContainer>
-              <MicIcContainer headercolor={headerColor}>
-                <MicIc />
-              </MicIcContainer>
+              <MicIcStyle headercolor={headerColor} onClick={()=> {openModal(ModalData)}}/>
             </LogoToMic>
             <ListToMy>
               <DropDownIcContainer
@@ -188,7 +200,7 @@ const Header = () => {
                 ismenuopen={isMenuOpen.toString()}
               >
                 즐길거리
-                <DropDownIcStyle ismenuopen={isMenuOpen.toString()} />
+                {/* <DropDownIcStyle ismenuopen={isMenuOpen.toString()} /> */}
               </DropDownIcContainer>
 
               {isMenuOpen === true && (

@@ -21,6 +21,7 @@ import BookmarkPage from "./BookmarkPage"
 
 import ModalTest from "./TestPage/ModalTest";
 import ButtonTest from "./TestPage/ButtonTest";
+import MicTest from "./TestPage/MicTest";
 
 export {
   AccommodationPage,
@@ -43,4 +44,5 @@ export {
   BookmarkPage,
   ModalTest,
   ButtonTest,
+  MicTest,
 };

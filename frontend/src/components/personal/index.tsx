@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import {userState} from "../../recoil/UserState"
-import {useRecoilState } from "recoil";
+import { userState } from "../../recoil/UserState";
+import { useRecoilState } from "recoil";
 
 import {
   MyPageDimmer,
@@ -38,20 +38,17 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
 
   // 취향 설문 수정으로 이동
   const goSurvey = () => {
-    if(!checkLogin())
-    navigate("/survey");
+    if (!checkLogin()) navigate("/survey");
   };
 
   // 내 코스 관리로 이동
   const goMyCours = () => {
-    if(!checkLogin())
-    navigate("/mycourse");
+    if (!checkLogin()) navigate("/mycourse");
   };
 
   // 관심 여행지 관리로 이동
   const goInterest = () => {
-    if(!checkLogin())
-    navigate("/interest");
+    if (!checkLogin()) navigate("/interest");
   };
 
   // 로그아웃
@@ -61,18 +58,18 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
     navigate("/");
   };
 
-  const checkLogin=()=>{
-    if(user.accessToken===""){
+  const checkLogin = () => {
+    if (user.accessToken === "") {
       alert("로그인이 필요한 서비스입니다.");
       navigate("/login");
       return true;
-    }else return false;
-  }
-  const goLogin=()=>{
+    } else return false;
+  };
+  const goLogin = () => {
     navigate("/login");
     closeSideBar();
     const bfLogin = document.getElementById("beforeLogin");
-  }
+  };
 
   return (
     <>
@@ -84,13 +81,22 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
               <LogoIcStyle />
               <UserContainer>
                 <PersonIcStyle />
-                {user.accessToken===""?
-                <UserFontStyle onClick={goLogin} style={{cursor:"pointer"}}>로그인해주세요</UserFontStyle>
-                :<UserFontStyle >{user["nickName"]}님</UserFontStyle>}
+                {user.accessToken === "" ? (
+                  <UserFontStyle
+                    onClick={goLogin}
+                    style={{ cursor: "pointer" }}
+                  >
+                    로그인해주세요
+                  </UserFontStyle>
+                ) : (
+                  <UserFontStyle>
+                    {user["nickName"]} <span>님</span>
+                  </UserFontStyle>
+                )}
               </UserContainer>
 
               <LineStyle />
-      
+
               <MenuContainer>
                 <IconMenuContainer
                   onClick={() => {
@@ -116,18 +122,18 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
                 >
                   <InterestIcStyle /> <MenuFont>관심 여행지 관리</MenuFont>
                 </IconMenuContainer>
-                {user.accessToken!=="" &&
-                <LogoutContainer
-                  onClick={() => {
-                    handleLogout();
-                    closeSideBar();
-                  }}
-                >
-                  <IconMenuContainer>
-                    <LogoutIcStyle /> <MenuFont>로그아웃</MenuFont>
-                  </IconMenuContainer>
-                </LogoutContainer>
-                }
+                {user.accessToken !== "" && (
+                  <LogoutContainer
+                    onClick={() => {
+                      handleLogout();
+                      closeSideBar();
+                    }}
+                  >
+                    <IconMenuContainer>
+                      <LogoutIcStyle /> <MenuFont>로그아웃</MenuFont>
+                    </IconMenuContainer>
+                  </LogoutContainer>
+                )}
               </MenuContainer>
             </SidebarContainer>
           </SidebarStyle>
