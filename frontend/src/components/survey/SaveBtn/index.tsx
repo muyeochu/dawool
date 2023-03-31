@@ -9,7 +9,7 @@ import {
   fourthState,
   fifthState,
 } from "../../../recoil/SurveyState";
-import { postSurveySelector } from "../../../recoil/SurveySelector";
+import { postSurveyApi } from "../../../recoil/Api";
 
 interface SaveBtnProps {
   checkedIcCount: number;
@@ -17,7 +17,7 @@ interface SaveBtnProps {
 
 const SaveBtn = ({ checkedIcCount }: SaveBtnProps) => {
   const isActive = checkedIcCount === 5;
-  const fianlStateValue = useRecoilValue(finalFirstState);
+  const finalStateValue = useRecoilValue(finalFirstState);
   const setFinalFirstValue = useSetRecoilState(finalFirstState);
   const firstStateValue = useRecoilValue(firstState);
   const secondStateValue = useRecoilValue(secondState);
@@ -26,31 +26,34 @@ const SaveBtn = ({ checkedIcCount }: SaveBtnProps) => {
   const fifthStateValue = useRecoilValue(fifthState);
 
   // firstState 값을 string으로 변환하여 finalFirstState에 업데이트
-  const handleSave = () => {
-    const finalValue = firstStateValue.join("");
-    setFinalFirstValue(finalValue);
+  // const handleSave = () => {
+  //   const finalValue = firstStateValue.join("");
+  //   setFinalFirstValue(finalValue);
+  // };
+
+  const postSurveyData = async () => {
+    const surveyQuery = {
+      barrier: firstStateValue.join(""),
+      departure: secondStateValue,
+      preferredTime: thirdStateValue,
+      densePopulation: fourthStateValue,
+      visitLocation: fifthStateValue,
+    };
+    const res = await postSurveyApi(surveyQuery);
+    const data = await res;
   };
 
-  const handleClick = async () => {
+  const handleClick = () => {
     if (isActive) {
-      handleSave();
-      try {
-        await postSurveySelector({
-          finalFirstState: fianlStateValue,
-          secondState: secondStateValue,
-          thirdState: thirdStateValue,
-          fourthState: fourthStateValue,
-          fifthState: fifthStateValue,
-        });
-        alert("설문이 완료되었습니다.");
-      } catch (error) {
-        console.error(error);
-        alert("설문 제출에 실패했습니다. 다시 시도해주세요.");
-      }
+      postSurveyData();
+      // postSurveySelector(params);
+      alert("설문이 완료되었습니다.");
     } else {
       alert("설문을 완료해주세요!");
     }
   };
+
+  console.log(finalStateValue)
 
   return (
     <StyledButton isActive={isActive} onClick={handleClick}>
