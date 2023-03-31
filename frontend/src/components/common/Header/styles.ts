@@ -119,9 +119,14 @@ export const SearchIcContainer = styled(SearchIc)<{ headercolor: string }>`
   }
 `;
 
-export const MicIcContainer = styled(MicIc)<{ headercolor: string }>`
+export const MicIcStyle = styled(MicIc)<{ headercolor: string }>`
   fill: ${(props) =>
     props.headercolor === "transparent" ? "#000000" : mainColor};
+
+  &:hover {
+    fill: ${blue[500]};
+    cursor: pointer;
+  }
 `;
 
 export const NavStyle = styled(NavLink)`

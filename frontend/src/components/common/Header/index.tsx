@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { searchState } from "../../../recoil/SearchSelector";
+import useModal from "../../utils/useModal";
 
 // styles
 import {
@@ -16,10 +17,9 @@ import {
   SearchBarContainer,
   SearchBarInput,
   SearchIcContainer,
-  MicIcContainer,
+  MicIcStyle,
   NavStyle,
   DropDownIcContainer,
-  DropDownIcStyle,
   DropDownContainer,
   DropDownContent,
   PersonIcContainer,
@@ -130,6 +130,17 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  // 음성인식 모달창 열기
+  const { openModal, closeModal } = useModal();
+
+  const ModalData = {
+    type: "mic",
+    content: "아아악",
+    callback: () => {
+      closeModal();
+    },
+  };
+
   // 즐길거리 각 페이지로 이동
   const goTourSpot = () => {
     navigate("/tourspot");
@@ -178,9 +189,7 @@ const Header = () => {
                   <SearchIc />
                 </SearchIcContainer>
               </SearchBarContainer>
-              <MicIcContainer headercolor={headerColor}>
-                <MicIc />
-              </MicIcContainer>
+              <MicIcStyle headercolor={headerColor} onClick={()=> {openModal(ModalData)}}/>
             </LogoToMic>
             <ListToMy>
               <DropDownIcContainer

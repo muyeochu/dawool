@@ -90,6 +90,36 @@ const Modal = () => {
           </ModalLargeContainer>
         </ModalDimmer>
       )}
+
+      {modalDataState.isOpen && modalDataState.type === "mic" && (
+        <ModalDimmer>
+          <ModalLargeContainer>
+            <CloseBtnStyle onClick={closeModal} />
+            <ModalLargeContents>{modalDataState.content}</ModalLargeContents>
+            <MainFontStyle>
+              말하세요
+            </MainFontStyle>
+            <BtnStyle>
+              <BtnFontStyle
+                onClick={() => {
+                  goSurvey();
+                  closeModal();
+                }}
+              >
+                추천받기
+              </BtnFontStyle>
+            </BtnStyle>
+            <SideFontStyle
+              onClick={() => {
+                goRestaurant();
+                closeModal();
+              }}
+            >
+              둘러볼래요
+            </SideFontStyle>
+          </ModalLargeContainer>
+        </ModalDimmer>
+      )}
     </>
   );
 };

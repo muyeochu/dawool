@@ -25,9 +25,9 @@ const SearchList = ({ word, data }: PropTypes) => {
     { id: 4, label: "영유아", icType: "toddler", btType: 0 },
   ];
 
-  if (data === "[]") {
-    console.log("비엇지롱");
-  }
+  // 통신 후 데이터가 없는지 판별함
+  // noData = "no" 는 초기값인 빈 배열인 상태도 포함되어있다.
+  const noData = data === "No Content" ? "yes" : "no";
 
   return (
     <>
@@ -36,7 +36,8 @@ const SearchList = ({ word, data }: PropTypes) => {
         <span className="keyword">{word}</span>
         <span>검색결과</span>
       </TitleContainer>
-      {data.length >= 1 ? (
+
+      {noData === "no" && data.length >= 1 && (
         <>
           <ButtonList>
             {buttons.map(({ id, label, icType, btType }) => (
@@ -55,14 +56,14 @@ const SearchList = ({ word, data }: PropTypes) => {
             ))}
           </TripCardListContainer>
         </>
-      ) : (
-        <>
-          <NonDataContainer>
-            <p>검색 결과가 없습니다.</p>
-            <NonSearchImgStyle />
-          </NonDataContainer>
-        </>
       )}
+      {noData === "yes" &&  <>
+        <NonDataContainer>
+          <p>검색 결과가 없습니다.</p>
+          <NonSearchImgStyle />
+        </NonDataContainer>
+      </>}
+     
     </>
   );
 };

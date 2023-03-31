@@ -95,6 +95,8 @@ export const ModalLargeContainer = styled.div`
   background-color: white;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+
+  z-index: 9999;
 `;
 
 export const CloseBtnStyle = styled(CloseIc)`

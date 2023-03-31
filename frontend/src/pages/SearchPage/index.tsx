@@ -3,9 +3,7 @@ import Loading from "../../components/common/Loading";
 import { useLocation } from "react-router-dom";
 import SearchList from "../../components/search/index";
 
-import {
-  useRecoilState,
-} from "recoil";
+import { useRecoilState } from "recoil";
 import { getSearchApi } from "../../recoil/Api";
 import { searchState } from "../../recoil/SearchSelector";
 
@@ -42,20 +40,25 @@ const SearchPage = () => {
     const res = await getSearchApi(searchQuery);
     const data = await res.data.contents;
 
-    // 페이지가 이동시에만 무한스크롤 구현(버튼 무한스크롤x)
-    if (page > prevPage) {
-      setSearchData((prev) => [...prev, ...data] as any);
-      setPrevPage(page);
-    } else {
-      // 버튼을 클릭할때 페이지 및 데이터 초기화
-      if (prevBarrier !== searchStateValue.barrier) {
-        setPage(0);
-        setPrevPage(0);
-        setSearchData(data);
-        setPrevBarrier(searchStateValue.barrier);
-      }
+    if (data === "No Content") {
       setSearchData(data);
+    } else {
+      // 페이지가 이동시에만 무한스크롤 구현(버튼 무한스크롤x)
+      if (page > prevPage) {
+        setSearchData((prev) => [...prev, ...data] as any);
+        setPrevPage(page);
+      } else {
+        // 버튼을 클릭할때 페이지 및 데이터 초기화
+        if (prevBarrier !== searchStateValue.barrier) {
+          setPage(0);
+          setPrevPage(0);
+          setSearchData(data);
+          setPrevBarrier(searchStateValue.barrier);
+        }
+        setSearchData(data);
+      }
     }
+
     setLoading(true);
   };
 
@@ -86,17 +89,20 @@ const SearchPage = () => {
     }
   }, [loading]);
 
+
   return (
-    <MainGridItems>
-      <RowGridContainer>
-        <RowGridItems>
-        <Suspense fallback={<Loading />}> 
-          <SearchList word={word} data={searchData} />
-          <EndBlock ref={pageEnd}></EndBlock>
-          </Suspense>
-        </RowGridItems>
-      </RowGridContainer>
-    </MainGridItems>
+    <>
+      <MainGridItems>
+        <RowGridContainer>
+          <RowGridItems>
+            <Suspense fallback={<Loading />}>
+              <SearchList word={word} data={searchData} />
+            </Suspense>
+          </RowGridItems>
+        </RowGridContainer>
+      </MainGridItems>
+      <EndBlock ref={pageEnd}></EndBlock>
+    </>
   );
 };
 
