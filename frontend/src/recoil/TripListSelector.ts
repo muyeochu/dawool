@@ -1,6 +1,5 @@
-import { atom, selector, selectorFamily, SerializableParam } from "recoil";
-import axios from "axios";
-import { customAxios } from "./customAxios";
+import { selectorFamily, SerializableParam } from "recoil";
+import { customAxios2 } from "./customAxios";
 import { ListType } from "../types/tripListTypes";
 import { citySelectedState } from "./RegionState";
 
@@ -31,7 +30,7 @@ export const getListSelector = selectorFamily<ListType[], ListSelectorProps>({
     // console.log(selectedCity)
     const contentTypeId = getContentTypeId(titleType);
     try {
-      const response = await customAxios.get(
+      const response = await customAxios2.get(
         `location/list/${contentTypeId}?area=${selectedCity}&barrier=${barrier}&page=${page}&size=${size}`
       );
       // console.log(response.data.contents)

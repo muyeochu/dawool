@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { white, blue, grey } from "../../../styles/Colors";
+import { blue, grey } from "../../../styles/Colors";
 
 import { ReactComponent as UpdownIc } from "../../../assets/icon/updownIc.svg";
 
@@ -80,14 +80,4 @@ export const UpdownIcStyle = styled(UpdownIc)<ContainerProps>`
 export const BodyContainer = styled.div`
   width: auto;
   height: auto;
-
-  /* @keyframes accordion {
-    0% {
-      transform: translateY(-100%);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-  animation: accordion 0.8s ease; */
 `;

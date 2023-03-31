@@ -1,70 +1,76 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useRecoilState } from "recoil";
+import { fifthState } from "../../../../../recoil/SurveyState";
 import {
   CardListContainer,
   CardContainer,
   CardImage,
   CardText,
 } from "./styles";
-import { blue } from "../../../../../styles/Colors";
 
-// 임시 이미지
-import enterImg from "../../../../../assets/images/surveyImg.png";
-
-// 임시 데이터
+// card 이미지
 const cards = [
   {
-    id: 1,
-    image: enterImg,
+    id: 126078,
+    image: "http://tong.visitkorea.or.kr/cms2/website/11/2669611.jpg",
     text: "광안리해수욕장",
   },
   {
-    id: 2,
-    image: enterImg,
-    text: "대구 근대골목(근대로의 여행)",
+    id: 126508,
+    image: "http://tong.visitkorea.or.kr/cms2/website/22/2029222.jpg",
+    text: "경복궁",
   },
   {
-    id: 3,
-    image: enterImg,
-    text: "국립현대미술관(서울관)",
+    id: 129703,
+    image:
+      "https://a.cdn-hotels.com/gdcs/production110/d812/7a64317f-72f2-4c1e-9ca2-b735b72e2f27.jpg?impolicy=fcrop&w=800&h=533&q=medium",
+    text: "국립중앙박물관",
   },
   {
-    id: 4,
-    image: enterImg,
-    text: "근현대사기념관",
-  },
-  {
-    id: 5,
-    image: enterImg,
+    id: 2782788,
+    image:
+      "https://deptmapp.shinsegae.com/resources/site/img/store/cns/detail/img_daejun_etc_1_2.jpg",
     text: "대전 엑스포 아쿠아리움",
   },
   {
-    id: 6,
-    image: enterImg,
-    text: "여의도 둘레길(여의도 자전거도로)",
+    id: 762653,
+    image:
+      "https://gocamping.or.kr/upload/camp/2616/thumb/thumb_720_97630gihorciocn2d41R0gyX.jpg",
+    text: "자라섬오토캠핑장",
   },
   {
-    id: 7,
-    image: enterImg,
+    id: 1945438,
+    image:
+      "https://www.samcheok.go.kr/CmsMultiFile/view.do?multifileId=TT00000020&idx=209",
     text: "삼척 해양레일바이크",
   },
   {
-    id: 8,
-    image: enterImg,
-    text: "자라섬오토캠핑장",
+    id: 2708109,
+    image:
+      "https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/guest/image/FogoI_H9Gea1rJJxdN24-b8e9C8.jpg",
+    text: "더현대 서울",
+  },
+  {
+    id: 132183,
+    image:
+      "https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/7S1n/image/2eiWb25TVZ-Ddj3nMdB0OQ5koc8.jpg",
+    text: "광장시장",
   },
 ];
 
 const OptionCards = () => {
-  const [selectedCards, setSelectedCards] = useState<number[]>([]);
+  const [fifthSurvey, setFifthSurvey] = useRecoilState(fifthState);
+  // console.log("다섯번째", fifthSurvey)
 
   const handleCardClick = (id: number) => {
-    setSelectedCards((prevSelectedCards) => {
-      if (prevSelectedCards.includes(id)) {
-        return prevSelectedCards.filter(
+    // fifthState 상태 업데이트
+    setFifthSurvey((prevFifthSurvey) => {
+      if (prevFifthSurvey.includes(id)) {
+        return prevFifthSurvey.filter(
           (selectedCardId) => selectedCardId !== id
         );
       } else {
-        return [...prevSelectedCards, id];
+        return [...prevFifthSurvey, id];
       }
     });
   };
@@ -72,8 +78,11 @@ const OptionCards = () => {
   return (
     <CardListContainer>
       {cards.map((card) => (
-        <CardContainer key={card.id} onClick={() => handleCardClick(card.id)}
-        isSelected={selectedCards.includes(card.id)}>
+        <CardContainer
+          key={card.id}
+          onClick={() => handleCardClick(card.id)}
+          isSelected={fifthSurvey.includes(card.id)}
+        >
           <CardImage src={card.image} />
           <CardText>{card.text}</CardText>
         </CardContainer>
