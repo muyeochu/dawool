@@ -84,14 +84,14 @@ const Mic = () => {
           <p>검색하기</p>
         </BtnStyle> */}
 
-        <BtnStyle
+        {!listening && transcript.length === 0 && <BtnStyle
           onClick={() => {
             resetTranscript();
             setIsReset(true);
           }}
         >
           <p>다시 말하기</p>
-        </BtnStyle>
+        </BtnStyle>}
       </MicContainer>
     </>
   );
