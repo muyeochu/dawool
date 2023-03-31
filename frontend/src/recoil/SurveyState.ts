@@ -1,12 +1,16 @@
-import { atom, selector } from "recoil";
-
-// 3, 4 완료! 다른 설문은 다시 확인하기!
+import { atom } from "recoil";
 
 // 첫 번째 취향설문
-export const firstState = atom<number[]>({
+export const firstState = atom<string[]>({
   key: 'firstState',
   default: [],
 });
+
+// 첫 번째 취향설문 string으로 변환
+export const finalFirstState = atom<string>({
+  key: 'finalFirstState',
+  default: ""
+})
 
 // 두 번째 취향설문
 export const secondState = atom<string>({
@@ -27,7 +31,7 @@ export const fourthState = atom<string>({
 })
 
 // 다섯 번째 취향설문
-export const fifthState = atom<string>({
+export const fifthState = atom<number[]>({
   key: 'fifthState',
-  default: ""
+  default: []
 })

@@ -1,19 +1,25 @@
 import styled from "styled-components";
 import { white, black, mainColor, grey, blue } from "../../../styles/Colors";
 
-export const StyledButton = styled.button`
+interface StyledButtonProps {
+  isActive: boolean;
+}
+
+export const StyledButton = styled.button<StyledButtonProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 10px 88px;
-  background-color: ${grey[300]};
+  background-color:  ${(props) => (props.isActive ? mainColor : grey[300])};
   border-radius: 16px;
   margin-top: 52px;
   margin-bottom: 32px;
   margin-left: auto;
   margin-right: auto;
   width: 220px;
+  transition: background-color 0.3s ease;
+  cursor: ${(props) => (props.isActive ? "pointer" : "default")};
 `;
 
 export const ButtonText = styled.span`

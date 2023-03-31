@@ -48,8 +48,34 @@ export const getRecEntertainmentApi = async (contentTypeId: number) =>
   });
 
 // POST //
+// 취향설문
+export const postSurveyApi = async (
+  finalFirstState: string,
+  secondState: string,
+  thirdState: string,
+  fourthState: string,
+  fifthState: number[]
+) =>
+  await customAxios2.post(
+    `user/survey`,
+    {
+      barrier: finalFirstState,
+      departure: secondState,
+      preferredTime: thirdState,
+      densePopulation: fourthState,
+      visitLocation: fifthState,
+    },
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
 // 식당 & 숙박 추천
-export const getRecEtcApi = async (
+export const postRecEtcApi = async (
   titleType: string,
   recentContentId: number
 ) =>
