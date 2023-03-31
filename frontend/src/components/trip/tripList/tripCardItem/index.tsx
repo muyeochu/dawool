@@ -76,7 +76,7 @@ function TripCardItem({ contents, type }: TripCardItemProps) {
       </ImageContainer>
       <CardBottomContainer>
         <CardText onClick={handleClick}>{contents.title}</CardText>
-        {type === "list" && <LikedIcStyle />}
+        {/* {type === "list" && <LikedIcStyle />} */}
       </CardBottomContainer>
     </CardContainer>
   );

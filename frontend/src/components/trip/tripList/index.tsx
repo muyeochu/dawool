@@ -138,7 +138,7 @@ function TripList({ titleType }: TripListProps) {
     <>
       <TripListContainer id="trip-list-container">
         <TripListTitle>
-          {cityName} {typeText} 목록
+          <span>{cityName}</span>{typeText}
         </TripListTitle>
         <ButtonGroup>
           {/* 무장애 필터링 버튼 */}

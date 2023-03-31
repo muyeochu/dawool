@@ -138,25 +138,24 @@ export const InfoBox = styled.div`
   }
 
   ::-webkit-scrollbar {
-    width: 12px;
-  }
+  width: 10px; /* 세로 스크롤바와 같은 값으로 조절 */
+  height: 10px; /* 원하는 굵기로 조절 */
+}
 
-  ::-webkit-scrollbar-track {
-    background-color: #f5f5f5;
-    border-radius: 10px;
-  }
+::-webkit-scrollbar-track {
+  background-color: ${grey[100]};
+  border-radius: 10px;
+}
 
-  ::-webkit-scrollbar-thumb {
-    background-color: #c1c1c1;
-    border-radius: 10px;
-    border: 2px solid #f5f5f5;
-  }
+::-webkit-scrollbar-thumb {
+  background-color:  ${grey[200]};
+  border-radius: 10px;
+}
 
-  /* 스크롤바 썸네일 마우스 오버 시 스타일 지정 */
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #a8a8a8;
-    border-radius: 10px;
-  }
+/* 스크롤바 썸네일 마우스 오버 시 스타일 지정 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: ${grey[300]};
+}
 `;
 
 export const InfoMainFontStyle = styled.b`

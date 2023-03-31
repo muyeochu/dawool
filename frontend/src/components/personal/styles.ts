@@ -76,6 +76,10 @@ export const UserFontStyle = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 30px;
+
+  span {
+    margin-left: 1px;
+  }
 `;
 
 export const LineStyle = styled.div`
