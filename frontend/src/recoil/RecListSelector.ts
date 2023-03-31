@@ -1,5 +1,5 @@
 import { selectorFamily, SerializableParam } from "recoil";
-import { getRecEntertainmentApi, getRecEtcApi } from "./Api";
+import { getRecEntertainmentApi, postRecEtcApi } from "./Api";
 import { RecListType, recommendListType } from "../types/recListTypes";
 
 interface getRecEntertainmentSelectorProps {
@@ -45,7 +45,7 @@ export const getRecEtcSelector = selectorFamily<
     ({ titleType, recentContentId }) =>
     async () => {
       try {
-        const response = await getRecEtcApi(titleType, recentContentId);
+        const response = await postRecEtcApi(titleType, recentContentId);
         // console.log(response.data.contents);
         return response.data.contents.map((item: recommendListType) => ({
           ...item,

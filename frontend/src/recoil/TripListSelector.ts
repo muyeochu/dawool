@@ -3,7 +3,6 @@ import { atom } from "recoil";
 interface ListBarrierTypes {
   barrier: string;
 }
-
 // 목록 무장애 태그 상태관리
 export const listBarrierState = atom<ListBarrierTypes>({
   key: "listBarrierState",

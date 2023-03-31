@@ -6,89 +6,142 @@ import {
   black,
   blue,
 } from "../../../../../styles/Colors";
+import { ReactComponent as UpdownIc } from "../../../../../assets/icon/updownIc.svg";
 
+interface DropdownProps {
+  isclicked: string;
+}
+
+// 광역시도 & 시군구 container
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  gap: 20px;
 `;
 
-export const DropdownContainer = styled.div`
-  background-color: red;
-  margin: 20px;
-`;
-
-export const Dropdown = styled.select`
-  background-color: blue;
+// 드랍다운 버튼
+export const DropdownContainer = styled.button<DropdownProps>`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: center;
+  position: relative;
+  padding: 12px 28px;
+  gap: 8px;
+  background-color: ${blue[100]};
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+
+  &:hover:enabled {
+    background-color: ${blue[300]};
+    transition: background-color 0.3s ease;
+  }
 `;
 
-export const AlertMessage = styled.div`
-  color: red;
+export const DropdownBtnText = styled.span<DropdownProps>`
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: ${black};
 `;
 
-export const DropdownButton = styled.div`
-`
+export const DropdownBtnIcStyle = styled(UpdownIc)<DropdownProps>`
+  width: 14px;
+  height: 14px;
+  margin-left: 6px;
+  transition: transform 0.2s ease-in-out;
+  transform: ${({ isclicked }) =>
+    isclicked === "true" ? "rotate(180deg)" : "none"};
+`;
 
-// export const DropdownContanier = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 12px 28px;
-//   gap: 5px;
+export const DropdownItemContainer = styled.div`
+  position: absolute;
+  text-align: center;
+  /* z-index: 1; */
+  overflow: auto;
+  background-color: ${blue[100]};
+  margin: 10px auto;
+  width: 112px;
+  border-radius: 6px;
+  padding: 10px;
+  max-height: 310px;
 
-//   background-color: ${grey[50]};
-//   border: none;
-//   border-radius: 20px;
-//   cursor: pointer;
-//   transition: background-color 0.3s ease, color 0.3s ease;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 
-//   &:hover:enabled {
-//     background-color: ${grey[400]};
-//     border: none;
-//     color: black;
-//   }
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
 
-//   &:disabled {
-//     opacity: 0.5;
-//     cursor: not-allowed;
-//   }
-// `;
+  &::-webkit-scrollbar-track {
+    background-color: ${blue[100]};
+    border-radius: 14px;
+  }
 
-// // dropdown 안의 텍스트 스타일 지정
-// export const DropdownText = styled.span`
-//   font-family: "SUIT";
-//   font-style: normal;
-//   font-weight: 500;
-//   font-size: 15px;
-//   line-height: 19px;
-//   display: flex;
-//   align-items: center;
-//   text-align: center;
-//   color: black;
-// `;
+  &::-webkit-scrollbar-thumb {
+    background-color: ${grey[400]};
+    border-radius: 14px;
+  }
 
-// // dropdown 안의 이미지 스타일 지정
-// export const DropdownIcon = styled.img`
-//   width: 20px;
-//   height: 20px;
-// `;
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: ${mainColor};
+  }
+`;
 
-// export const Dropdown = styled.select`
-//   font-family: "SUIT";
+export const DropdownItem = styled.ul`
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 19px;
+  list-style: none;
+  width: auto;
+  padding: 8px 0 8px 0;
+  cursor: pointer;
 
-//   margin: 0 1px;
-//   padding: 0.5px;
-//   font-style: normal;
-//   font-weight: 500;
-//   font-size: 15px;
-//   line-height: 19px;
-//   display: flex;
-//   align-items: center;
-//   text-align: center;
-//   color: black;
-//   background-color: red;
-// `;
+  @keyframes dropdown {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  animation: dropdown 0.5s ease;
+
+  &:hover {
+    font-weight: 800;
+    cursor: pointer;
+  }
+`;
+
+// 광역시 dropdown 버튼
+export const CityDropdownContainer = styled(DropdownContainer)<DropdownProps>`
+  position: relative;
+
+  ${DropdownItemContainer} {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+`;
+
+// 시군구 dropdown 버튼
+export const DistrictDropdownContainer = styled(DropdownContainer)<DropdownProps>`
+  position: relative;
+
+  ${DropdownItemContainer} {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+`;

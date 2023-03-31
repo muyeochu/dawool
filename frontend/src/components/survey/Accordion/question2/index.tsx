@@ -1,12 +1,13 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { HangjungdongContanier } from "./styles";
-import DropDown from './dropdown/index'
+import RegionDropdown from "./dropdown";
 
 const SecondQuestion = () => {
-  return <HangjungdongContanier>
-    <DropDown/>
-  </HangjungdongContanier>;
+  return (
+    <HangjungdongContanier>
+      <RegionDropdown/>
+    </HangjungdongContanier>
+  );
 };
 
 export default SecondQuestion;

@@ -5,7 +5,7 @@ import { buttonState } from "./ButtonState";
 
 // 버튼 컴포넌트의 props를 정의한 인터페이스
 interface ButtonProps {
-  id: number;
+  id: string;
   onClick: () => void;
   children: React.ReactNode;
   isClicked?: boolean;
@@ -14,7 +14,6 @@ interface ButtonProps {
 export default function Q1Button({ id, onClick, children, isClicked }: ButtonProps) {
   // 클릭여부 상태값 관리 (기본값 'false')
   const [isClickedState, setIsClickedState] = useState(false);
-  // console.log(isClicked)
 
   // Recoil의 'buttonState' 값을 가져와 button과 setButton을 반환
   const [button, setButton] = useRecoilState(buttonState);

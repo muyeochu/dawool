@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainColor, white, black, blue, grey } from "../../../styles/Colors";
+import { mainColor, black, blue, grey } from "../../../styles/Colors";
 import { ReactComponent as UpdownIc } from "../../../assets/icon/updownIc.svg";
 
 interface DropdownProps {
@@ -42,7 +42,8 @@ export const DropdownBtnIcStyle = styled(UpdownIc)<DropdownProps>`
   width: 14px;
   height: 14px;
   transition: transform 0.2s ease-in-out;
-  transform: ${({ isclicked }) => (isclicked === "true" ? "rotate(180deg)" : "none")};
+  transform: ${({ isclicked }) =>
+    isclicked === "true" ? "rotate(180deg)" : "none"};
 `;
 
 export const DropdownItemContainer = styled.div`
