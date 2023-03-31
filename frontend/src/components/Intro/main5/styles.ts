@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { ReactComponent as main5Img } from "../../../assets/images/main5Img.svg";
-import { mainColor, blue } from "../../../styles/Colors";
+import { mainColor, blue, grey, black } from "../../../styles/Colors";
 
 export const MainFifthContainer = styled.div`
   height: 100vh;
@@ -58,8 +58,10 @@ export const SideFontStyle = styled.div`
   font-size: 18px;
   line-height: 32px;
   text-decoration: underline;
+  color: ${grey[600]};
 
   &:hover {
     cursor: pointer;
+    color: black;
   }
 `;

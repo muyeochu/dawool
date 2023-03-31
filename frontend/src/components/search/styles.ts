@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainColor, grey } from "../../styles/Colors";
+import { mainColor, grey, blue, black } from "../../styles/Colors";
 
 import { ReactComponent as SearchIc } from "../../assets/icon/searchSquareIc.svg";
 import { ReactComponent as NonSearchImg } from "../../assets/images/nonSearchImg.svg";
@@ -82,4 +82,72 @@ export const NonDataContainer = styled.div`
 export const NonSearchImgStyle = styled(NonSearchImg)`
   width: 250px;
   height: 250px;
+`;
+
+// Mic
+
+export const MicContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+`;
+
+export const SpeakFontStyle = styled.div`
+  height: 100px;
+  width: 300px;
+  text-align: center;
+
+  p {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 50px;
+    color: ${black};
+  }
+`;
+
+export const GuideFontStyle = styled.div`
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 50px;
+  color: ${grey[500]};
+`;
+
+export const BtnStyle = styled.div`
+  transition: transform 0.2s ease-in-out;
+
+  width: 150px;
+  height: 46px;
+  background-color: ${mainColor};
+  color: white;
+  border: none;
+  border-radius: 18px;
+  text-align: center;
+  margin-top: 20px;
+
+  p {
+    margin-top: 2px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 40px;
+    color: white;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: ${blue[500]};
+  }
+`;
+
+export const SideFontStyle = styled.div`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 32px;
+  text-decoration: underline;
+  color: ${grey[500]};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

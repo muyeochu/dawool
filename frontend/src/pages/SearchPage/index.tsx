@@ -19,6 +19,8 @@ const SearchPage = () => {
   const word: string = location.state;
   const pageEnd: any = useRef();
 
+  console.log("검색어는?", word)
+
   const [searchStateValue, setSearchStateValue] = useRecoilState(searchState); // 무장애 태그 상태
   const [searchData, setSearchData] = useState([]); // 받아온 데이터를 저장
   const [page, setPage] = useState(0);
@@ -67,7 +69,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     getSearchDatas(page);
-  }, [page, searchStateValue]);
+  }, [page, searchStateValue, word]);
 
   const loadMore = () => {
     setPage((prev) => prev + 1);

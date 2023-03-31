@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 
 import useModal from "../../utils/useModal";
 
+import MicAnimation from "../Mic";
+
 import {
   ModalDimmer,
   ModalContainer,
@@ -17,6 +19,7 @@ import {
   BtnStyle,
   BtnFontStyle,
   SideFontStyle,
+  ModalMicContainer,
 } from "./styles";
 
 const Modal = () => {
@@ -93,31 +96,10 @@ const Modal = () => {
 
       {modalDataState.isOpen && modalDataState.type === "mic" && (
         <ModalDimmer>
-          <ModalLargeContainer>
-            <CloseBtnStyle onClick={closeModal} />
+          <ModalMicContainer>
+            <CloseBtnStyle className="mic" onClick={closeModal} />
             <ModalLargeContents>{modalDataState.content}</ModalLargeContents>
-            <MainFontStyle>
-              말하세요
-            </MainFontStyle>
-            <BtnStyle>
-              <BtnFontStyle
-                onClick={() => {
-                  goSurvey();
-                  closeModal();
-                }}
-              >
-                추천받기
-              </BtnFontStyle>
-            </BtnStyle>
-            <SideFontStyle
-              onClick={() => {
-                goRestaurant();
-                closeModal();
-              }}
-            >
-              둘러볼래요
-            </SideFontStyle>
-          </ModalLargeContainer>
+          </ModalMicContainer>
         </ModalDimmer>
       )}
     </>

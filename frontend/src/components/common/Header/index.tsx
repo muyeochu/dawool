@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { searchState } from "../../../recoil/SearchSelector";
-import useModal from "../../utils/useModal";
 
 // styles
 import {
@@ -34,6 +33,10 @@ import { ReactComponent as PersonIc2 } from "../../../assets/icon/person2Ic.svg"
 
 // sidebar
 import SideBar from "../../personal";
+
+// modal
+import useModal from "../../utils/useModal";
+import Mic from "../../search/Mic";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -135,7 +138,7 @@ const Header = () => {
 
   const ModalData = {
     type: "mic",
-    content: "아아악",
+    content: <Mic/>,
     callback: () => {
       closeModal();
     },

@@ -22,6 +22,7 @@ import {
   BookmarkPage,
   ModalTest,
   ButtonTest,
+  MicTest,
 } from "./pages/index";
 import Header from "./components/common/Header";
 import ScrollToTop from "./components/utils/ScrollToTop";
@@ -178,6 +179,7 @@ function App() {
               {/* 테스트 페이지 */}
               <Route path="/modaltest" element={<ModalTest />} />
               <Route path="/btntest" element={<ButtonTest />} />
+              <Route path="/mictest" element={<MicTest />} />
             </Routes>
           </GridContainer>
         </BoxMainContainer>
