@@ -125,6 +125,8 @@ export const ModalLargeContainer = styled.div`
   background-color: white;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+
+  z-index: 9999;
 `;
 
 export const CloseBtnStyle = styled(CloseIc)`
@@ -137,6 +139,14 @@ export const CloseBtnStyle = styled(CloseIc)`
 
   &:hover {
     cursor: pointer;
+  }
+
+  &.mic {
+    width: 16px;
+    height: 16px;
+
+    top: 2%;
+    right: 2.5%;
   }
 `;
 
@@ -189,4 +199,19 @@ export const SideFontStyle = styled.div`
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const ModalMicContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  height: 570px;
+  background-color: white;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  margin-top: 20px;
+
+  z-index: 9999;
 `;

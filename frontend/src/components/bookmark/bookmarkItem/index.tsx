@@ -62,7 +62,7 @@ function BookmarkCardItem({ contents }: BookmarkProps) {
       </ImageContainer>
       <CardBottomContainer>
         <CardText onClick={handleClick}>{contents.title}</CardText>
-        {contents.liked ? <HeartIcStyle /> : <LikedIcStyle />}
+        {/* {contents.liked ? <HeartIcStyle /> : <LikedIcStyle />} */}
       </CardBottomContainer>
     </CardContainer>
   );
