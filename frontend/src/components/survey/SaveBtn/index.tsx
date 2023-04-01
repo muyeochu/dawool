@@ -9,6 +9,7 @@ import {
   fifthState,
 } from "../../../recoil/SurveyState";
 import { postSurveyApi } from "../../../recoil/Api";
+import { useNavigate } from "react-router";
 
 interface SaveBtnProps {
   checkedIcCount: number;
@@ -21,6 +22,8 @@ const SaveBtn = ({ checkedIcCount }: SaveBtnProps) => {
   const thirdStateValue = useRecoilValue(thirdState);
   const fourthStateValue = useRecoilValue(fourthState);
   const fifthStateValue = useRecoilValue(fifthState);
+
+  const navigate = useNavigate();
 
   const postSurveyData = async () => {
     const surveyQuery = {
@@ -37,9 +40,10 @@ const SaveBtn = ({ checkedIcCount }: SaveBtnProps) => {
   const handleClick = () => {
     if (isActive) {
       postSurveyData();
-      alert("설문이 완료되었습니다.");
+      alert("설문이 완료되었습니다! 🤗");
+      navigate("/tourspot");  // 관광지 페이지로 이동
     } else {
-      alert("설문을 완료해주세요!");
+      alert("설문을 완료해주세요! 😢");
     }
   };
 
