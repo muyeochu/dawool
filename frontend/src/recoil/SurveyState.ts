@@ -6,12 +6,6 @@ export const firstState = atom<string[]>({
   default: [],
 });
 
-// 첫 번째 취향설문 string으로 변환
-export const finalFirstState = atom<string>({
-  key: 'finalFirstState',
-  default: ""
-})
-
 // 두 번째 취향설문
 export const secondState = atom<string>({
   key: 'secondState',
