@@ -18,6 +18,7 @@ import {
   XIc,
 } from "./styles";
 import useModal from "../../../../utils/useModal";
+import { modalState } from "../../../../../recoil/ModalState";
 import { clickedState } from "../../../../../recoil/ClickedCourse";
 declare global {
   interface Window {
@@ -28,6 +29,7 @@ export const CourseList = () => {
   const [folderState, setFolderState] = useRecoilState(FolderState);
   const { openModal, closeModal } = useModal();
   const [clState, setClState] = useRecoilState(clickedState);
+  const [mdState, setModalState] = useRecoilState(modalState);
 
   useEffect(() => {}, []);
 
@@ -145,7 +147,9 @@ export const CourseList = () => {
   }
 
   myFunction().then((courseList) => {
-    createTag(courseList);
+    if (!mdState.isOpen) {
+      createTag(courseList);
+    }
   });
 
   return (
