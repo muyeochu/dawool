@@ -105,8 +105,8 @@ export const CourseList = () => {
     console.log(e.target.parentNode.getAttribute("mapX"));
     setClState({
       isClicked: true,
-      mapX: mapX,
-      mapY: mapY,
+      mapX: mapY,
+      mapY: mapX,
     });
   }
 
