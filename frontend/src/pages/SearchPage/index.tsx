@@ -1,11 +1,14 @@
 import { useEffect, useState, useRef, Suspense } from "react";
-import Loading from "../../components/common/Loading";
 import { useLocation } from "react-router-dom";
+
+import Loading from "../../components/common/Loading";
 import SearchList from "../../components/search/index";
+import { MoveToTop } from "../../components/utils/MoveToTop";
 
 import { useRecoilState } from "recoil";
 import { getSearchApi } from "../../recoil/Api";
 import { searchState } from "../../recoil/SearchSelector";
+
 
 import {
   MainGridItems,
@@ -18,8 +21,6 @@ const SearchPage = () => {
   const location = useLocation();
   const word: string = location.state;
   const pageEnd: any = useRef();
-
-  console.log("검색어는?", word);
 
   const [searchStateValue, setSearchStateValue] = useRecoilState(searchState); // 무장애 태그 상태
   const [searchData, setSearchData] = useState([]); // 받아온 데이터를 저장
