@@ -23,6 +23,7 @@ export const CardContainer = styled.div<{ isSelected: boolean }>`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: outline 0.1s ease-in-out;
 
   outline: ${({ isSelected }) =>
     isSelected ? `8px solid ${blue[300]}` : "none"};

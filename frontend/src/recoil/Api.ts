@@ -75,30 +75,14 @@ export const getRecEntertainmentApi = async (contentTypeId: number) =>
 
 // POST //
 // 취향설문
-export const postSurveyApi = async (
-  finalFirstState: string,
-  secondState: string,
-  thirdState: string,
-  fourthState: string,
-  fifthState: number[]
-) =>
-  await customAxios2.post(
-    `user/survey`,
-    {
-      barrier: finalFirstState,
-      departure: secondState,
-      preferredTime: thirdState,
-      densePopulation: fourthState,
-      visitLocation: fifthState,
+export const postSurveyApi = async (params:any) =>
+  await customAxios2.post(`user/survey`, params, {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
-    {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  });
 
 // 식당 & 숙박 추천
 export const postRecEtcApi = async (

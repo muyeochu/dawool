@@ -46,6 +46,10 @@ function TripRec({ titleType }: TripRecProps) {
       ? "쇼핑"
       : "기타";
 
+  const linkGrammar1 = ["tourSpot", "leports"].includes(titleType) ? "를" : "을"
+
+  const linkGrammar2 = ["tourSpot", "leports"].includes(titleType) ? "는" : "은"
+
   // 즐길거리 contentTypeId
   const contentTypeId =
     titleType === "restaurant"
@@ -89,19 +93,18 @@ function TripRec({ titleType }: TripRecProps) {
           <>
             <TripRecTitle2>BEST {typeText} 👍</TripRecTitle2>
             <TripRecTitle2>
-              로그인하시면 취향에 맞는 {typeText}을 추천해드려요!
+              로그인하시면 취향에 맞는 {typeText}{linkGrammar1} 추천해드려요!
             </TripRecTitle2>
           </>
         ) : (
           <>
             <TripRecTitle1>{user.nickName}님!</TripRecTitle1>
-            <TripRecTitle2>이런 {typeText}은 어떠세요?</TripRecTitle2>
+            <TripRecTitle2>이런 {typeText}{linkGrammar2} 어떠세요?</TripRecTitle2>
           </>
         )}
       </TripRecTitleContainer>
 
       {/* cards */}
-      {/* <TripRecCardList /> */}
       {RecList && (
         <TripRecCardListContainer>
           {RecList.map((item: recommendListType) => (
