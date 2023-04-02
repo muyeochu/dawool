@@ -24,7 +24,7 @@ export const getRecEntertainmentSelector = selectorFamily<
     async () => {
       try {
         const response = await getRecEntertainmentApi(contentTypeId);
-        console.log(response.data);
+        // console.log(response.data);
         return response.data.contents.map((item: recommendListType) => ({
           ...item
         }));
