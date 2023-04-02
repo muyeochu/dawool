@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import TripList from "../components/trip/tripList";
 import TripRec from "../components/trip/tripRec";
+import useModal from "../components/utils/useModal";
+
+import {ReactComponent as SurveyModalImg} from "../assets/images/surveyModalImg.svg"
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
@@ -23,6 +26,20 @@ export const RowGridItems = styled.div`
 `;
 
 const TourSpotPage = () => {
+  const token = localStorage.getItem("token");
+  const { openModal, closeModal } = useModal();
+
+  if (token !== null && localStorage.getItem("recentContentId") === null) {
+    const modalDataL = {
+      type: "survey",
+      content: <SurveyModalImg />,
+      callback: () => {
+        closeModal();
+      },
+    };
+    openModal(modalDataL);
+  }
+
   return (
     <>
       {/* 추천 관광지 */}

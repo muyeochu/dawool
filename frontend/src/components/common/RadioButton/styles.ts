@@ -32,7 +32,7 @@ export const Radio = styled.input`
     border-radius: 50%;
     width: 12px;
     height: 12px;
-    margin: 7px;
+    margin: 7.5px auto;
   }
   /* 선택됐을 때 */
   :checked {

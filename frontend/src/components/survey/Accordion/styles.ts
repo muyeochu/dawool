@@ -26,7 +26,7 @@ export const AccordionItemContainer = styled.div<ContainerProps>`
   border-radius: 5px;
   margin-bottom: 21px;
   overflow: hidden;
-  transition: height 1s ease-in-out;
+  transition: height 0.5s ease;
   height: ${(props) => (props.isopen === "true" ? "auto" : "68px")};
 `;
 
