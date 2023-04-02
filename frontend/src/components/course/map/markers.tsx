@@ -60,10 +60,8 @@ const Markers = () => {
         }
         myFunction().then((courseList) => {
           window.xyList = [];
-          console.log(courseList["course"][0]["mapX"]);
           window.len = courseList["course"].length;
-          console.log(typeof courseList["course"]);
-
+          if (window.len === 0) return;
           var mapContainer = document.getElementById("markers"), // 지도를 표시할 div
             mapOption = {
               center: new window.kakao.maps.LatLng(
