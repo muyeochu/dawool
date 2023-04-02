@@ -113,7 +113,8 @@ export const CourseList = () => {
   function createTag(courseList: any) {
     const div = document.getElementById("myCourseInfolder");
     const div2 = document.getElementById("CourseContainer");
-    console.log(courseList);
+    console.log(div2?.childNodes);
+    if (div2?.childNodes.length !== 0) return;
     for (let i = 0; i < courseList["course"].length; i++) {
       const course = courseList["course"][i];
       const idI = i.toString();
