@@ -8,9 +8,12 @@ import { ReactComponent as likedIc } from "../../assets/icon/likedIc.svg";
 import { grey } from "../../styles/Colors";
 
 export const VolumeIcStyle = styled(VolumeIc)`
-  width: 48px;
-  height: 41px;
-  margin-left: -10px;
+  min-width: 18px;
+  max-width: 18px;
+  min-height: 18px;
+  max-height: 18px;
+  margin-left: 5px;
+  cursor: pointer;
 `;
 
 export const FolderIcStyle = styled(FolderIc)`
@@ -138,31 +141,32 @@ export const InfoBox = styled.div`
   }
 
   ::-webkit-scrollbar {
-  width: 10px; /* 세로 스크롤바와 같은 값으로 조절 */
-  height: 10px; /* 원하는 굵기로 조절 */
-}
+    width: 10px; /* 세로 스크롤바와 같은 값으로 조절 */
+    height: 10px; /* 원하는 굵기로 조절 */
+  }
 
-::-webkit-scrollbar-track {
-  background-color: ${grey[100]};
-  border-radius: 10px;
-}
+  ::-webkit-scrollbar-track {
+    background-color: ${grey[100]};
+    border-radius: 10px;
+  }
 
-::-webkit-scrollbar-thumb {
-  background-color:  ${grey[200]};
-  border-radius: 10px;
-}
+  ::-webkit-scrollbar-thumb {
+    background-color: ${grey[200]};
+    border-radius: 10px;
+  }
 
-/* 스크롤바 썸네일 마우스 오버 시 스타일 지정 */
-::-webkit-scrollbar-thumb:hover {
-  background-color: ${grey[300]};
-}
+  /* 스크롤바 썸네일 마우스 오버 시 스타일 지정 */
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: ${grey[300]};
+  }
 `;
 
 export const InfoMainFontStyle = styled.b`
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding-right: 20px;
   letter-spacing: 0.2px;
-  width: 150px;
+  width: 170px;
 `;
 
 export const InfoFontStyle = styled.span`
