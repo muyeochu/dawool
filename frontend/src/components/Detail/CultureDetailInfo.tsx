@@ -1,117 +1,80 @@
-import { InfoBox, InfoMainFontStyle, InfoFontStyle } from "./styles";
+import { useEffect } from "react";
+import { getSpeech } from "../utils/getSpeech";
+
+import {
+  InfoBox,
+  InfoMainFontStyle,
+  InfoFontStyle,
+  VolumeIcStyle,
+} from "./styles";
 
 const CultureDetailInfo = ({ myData }: any) => {
+  const addValue = myData.info.addr1 === "0" ? "없음" : myData.info.addr1;
+  const homepageValue =
+    myData.info.homepage === "0" ? "없음" : myData.info.homepage;
+  const isBabyCarriageValue = myData.info.isBabyCarriage ? "가능" : "불가능";
+  const isPetValue = myData.info.isPet ? "가능" : "불가능";
+  const discountInfoValue =
+    myData.info.discountInfo === "0" ? "없음" : myData.info.discountInfo;
+  const infoCenterValue =
+    myData.info.infoCenter === "0" ? "없음" : myData.info.infoCenter;
+  const commonParkingValue =
+    myData.info.commonParking === "0" ? "없음" : myData.info.commonParking;
+  const parkingFeeValue =
+    myData.info.parkingFee === "0" ? "문의 필요" : myData.info.parkingFee;
+  const useFeeValue =
+    myData.info.useFee === "0" ? "문의 필요" : myData.info.useFee;
+  const useTimeValue =
+    myData.info.useTime === "0" ? "문의 필요" : myData.info.useTime;
+  const restDateValue =
+    myData.info.restDate === "0" ? "없음" : myData.info.restDate;
+
+  const detailValue = {
+    주소: addValue,
+    홈페이지: homepageValue,
+    "유모차 대여": isBabyCarriageValue,
+    "애완동물 동반": isPetValue,
+    할인정보: discountInfoValue,
+    "문의 및 안내": infoCenterValue,
+    주차시설: commonParkingValue,
+    주차요금: parkingFeeValue,
+    이용요금: useFeeValue,
+    이용시간: useTimeValue,
+    쉬는날: restDateValue,
+  };
+
+  //음성 변환 목소리 preload
+  useEffect(() => {
+    window.speechSynthesis.getVoices();
+  }, []);
+
+  const handleButton = (newValue: string) => {
+    getSpeech(newValue);
+  };
+
+  const handleValue = (tempKey: string, tempValue: string) => {
+    const newValue = tempKey + `\t` + tempValue;
+    handleButton(newValue);
+  };
+
   return (
     <InfoBox>
       <ul>
-        <li>
-          <InfoMainFontStyle>주소</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.addr1 === "0" ? (
-              "없음"
-            ) : (
-              <span dangerouslySetInnerHTML={{ __html: myData.info.addr1 }} />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>홈페이지</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.homepage === "0" ? (
-              "없음"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.homepage }}
+        {Object.entries(detailValue).map(([key, value]) => (
+          <li key={key}>
+            <InfoMainFontStyle>
+              {key}
+              <VolumeIcStyle
+                onClick={() => {
+                  handleValue(key, value);
+                }}
               />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>유모차 대여</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.isBabyCarriage ? "가능" : "불가능"}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>애완동물 동반</InfoMainFontStyle>
-          <InfoFontStyle>{myData.info.isPet ? "가능" : "불가능"}</InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>할인정보</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.discountInfo === "0"
-              ? "없음"
-              : myData.info.discountInfo}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>문의 및 안내</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.infoCenter === "0" ? (
-              "없음"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.infoCenter }}
-              />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>주차시설</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.commonParking === "0" ? (
-              "없음"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.commonParking }}
-              />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>주차요금</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.parkingFee === "0" ? (
-              "문의 필요"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.parkingFee }}
-              />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>이용요금</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.useFee === "0" ? (
-              "문의 필요"
-            ) : (
-              <span dangerouslySetInnerHTML={{ __html: myData.info.useFee }} />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>이용시간</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.useTime === "0" ? (
-              "문의 필요"
-            ) : (
-              <span dangerouslySetInnerHTML={{ __html: myData.info.useTime }} />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>쉬는날</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.restDate === "0" ? (
-              "없음"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.restDate }}
-              />
-            )}
-          </InfoFontStyle>
-        </li>
+            </InfoMainFontStyle>
+            <InfoFontStyle>
+              <span dangerouslySetInnerHTML={{ __html: value }} />
+            </InfoFontStyle>
+          </li>
+        ))}
       </ul>
     </InfoBox>
   );

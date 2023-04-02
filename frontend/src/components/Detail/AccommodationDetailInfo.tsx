@@ -1,11 +1,12 @@
+import { useEffect } from "react";
+import { getSpeech } from "../utils/getSpeech";
+
 import {
   InfoBox,
   InfoMainFontStyle,
   InfoFontStyle,
   VolumeIcStyle,
 } from "./styles";
-import { useState, useEffect } from "react";
-import { getSpeech } from "../utils/getSpeech";
 
 const AccommodationDetailInfo = ({ myData }: any) => {
   const addValue = myData.info.addr1 === "0" ? "없음" : myData.info.addr1;
