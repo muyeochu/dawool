@@ -6,6 +6,8 @@ import {
   InfoMainFontStyle,
   InfoFontStyle,
   VolumeIcStyle,
+  StopSoundIcStyle,
+  InfoBoxContainer,
 } from "./styles";
 
 const TourSpotDetailInfo = ({ myData }: any) => {
@@ -49,6 +51,8 @@ const TourSpotDetailInfo = ({ myData }: any) => {
     쉬는날: restDateValue,
   };
 
+  const synth = window.speechSynthesis;
+
   //음성 변환 목소리 preload
   useEffect(() => {
     window.speechSynthesis.getVoices();
@@ -59,30 +63,41 @@ const TourSpotDetailInfo = ({ myData }: any) => {
   };
 
   const handleValue = (tempKey: string, tempValue: string) => {
-    const newValue = tempKey + `\t` + tempValue;
+    const newValue = tempKey + tempValue;
     handleButton(newValue);
   };
 
+  const handleMute = () => {
+    synth.cancel();
+  };
+
   return (
-    <InfoBox>
-      <ul>
-        {Object.entries(detailValue).map(([key, value]) => (
-          <li key={key}>
-            <InfoMainFontStyle>
-              {key}
-              <VolumeIcStyle
-                onClick={() => {
-                  handleValue(key, value);
-                }}
-              />
-            </InfoMainFontStyle>
-            <InfoFontStyle>
-              <span dangerouslySetInnerHTML={{ __html: value }} />
-            </InfoFontStyle>
-          </li>
-        ))}
-      </ul>
-    </InfoBox>
+    <InfoBoxContainer>
+      <InfoBox>
+        <ul>
+          {Object.entries(detailValue).map(([key, value]) => (
+            <li key={key}>
+              <InfoMainFontStyle>
+                {key}
+                <VolumeIcStyle
+                  onClick={() => {
+                    handleValue(key, value);
+                  }}
+                />
+              </InfoMainFontStyle>
+              <InfoFontStyle>
+                <span dangerouslySetInnerHTML={{ __html: value }} />
+              </InfoFontStyle>
+            </li>
+          ))}
+        </ul>
+        <StopSoundIcStyle
+          onClick={() => {
+            handleMute();
+          }}
+        />
+      </InfoBox>
+    </InfoBoxContainer>
   );
 };
 

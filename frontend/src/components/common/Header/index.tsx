@@ -138,7 +138,7 @@ const Header = () => {
 
   const ModalData = {
     type: "mic",
-    content: <Mic/>,
+    content: <Mic />,
     callback: () => {
       closeModal();
     },
@@ -192,7 +192,12 @@ const Header = () => {
                   <SearchIc />
                 </SearchIcContainer>
               </SearchBarContainer>
-              <MicIcStyle headercolor={headerColor} onClick={()=> {openModal(ModalData)}}/>
+              <MicIcStyle
+                headercolor={headerColor}
+                onClick={() => {
+                  openModal(ModalData);
+                }}
+              />
             </LogoToMic>
             <ListToMy>
               <DropDownIcContainer
