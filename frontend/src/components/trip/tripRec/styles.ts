@@ -24,7 +24,7 @@ export const TripRecContainer = styled.div`
   height: 92vh;
   width: 100vw;
   padding: 150px 184px;
-  background-image: url(${RecBackgroundImg});
+  background-image: linear-gradient(to bottom, #ffffff, #dfe3f2, #b6cbe5, #83b5d5, #3fa0bf);
   background-size: cover;
 `;
 
