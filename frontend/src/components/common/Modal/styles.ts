@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { mainColor, blue, grey } from "../../../styles/Colors";
 import { ReactComponent as CloseIc } from "../../../assets/icon/closeIc.svg";
+import { ReactComponent as VolumeIc } from "../../../assets/icon/volumeIc.svg";
 
 // 모달 화면을 어둡게 함
 export const ModalDimmer = styled.div`
@@ -40,6 +41,8 @@ export const ModalTitle = styled.div`
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
+  display: inline-flex;
+  align-items: center;
 `;
 
 export const ModalCourseTitle = styled.div`
@@ -70,7 +73,7 @@ export const ModalCourseContainer = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background-color: ${grey[200]};
   }
-`
+`;
 
 export const ModalContents = styled.div`
   padding-left: 1.4rem;
@@ -214,4 +217,18 @@ export const ModalMicContainer = styled.div`
   margin-top: 20px;
 
   z-index: 9999;
+`;
+
+export const VolumeIcStyle = styled(VolumeIc)`
+  fill: ${mainColor};
+  min-width: 18px;
+  max-width: 18px;
+  min-height: 18px;
+  max-height: 18px;
+  margin-left: 5px;
+
+  &:hover {
+    fill: ${blue[500]};
+    cursor: pointer;
+  }
 `;

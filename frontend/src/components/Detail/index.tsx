@@ -14,6 +14,8 @@ import {
   MainBtnContainer,
 } from "./styles";
 
+import exampleImg from "../../assets/images/exampleImg.png";
+
 import AccommodationDetailInfo from "./AccommodationDetailInfo";
 import CultureDetailInfo from "./CultureDetailInfo";
 import TourSpotDetailInfo from "./TourSpotDetailInfo";
@@ -25,7 +27,6 @@ import Map from "./Map";
 import DetailBtn from "../common/DetailBtn";
 import { bookmark } from "../../recoil/BookmarkSelector";
 import useModal from "../utils/useModal";
-import logo from "../../assets/icon/logoIc.svg";
 
 const DetailComponent = ({
   myData,
@@ -99,7 +100,7 @@ const DetailComponent = ({
       <MainInfoContainer>
         <MainImgContainer>
           {myData.info.firstImage === "0" ? (
-            <MaingImgStyle src={logo} alt={"로고 이미지"} />
+            <MaingImgStyle src={exampleImg} alt={"로고 이미지"} />
           ) : (
             <MaingImgStyle src={myData.info.firstImage} alt={"대표 이미지"} />
           )}

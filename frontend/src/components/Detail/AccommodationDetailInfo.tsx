@@ -6,6 +6,8 @@ import {
   InfoMainFontStyle,
   InfoFontStyle,
   VolumeIcStyle,
+  StopSoundIcStyle,
+  InfoBoxContainer,
 } from "./styles";
 
 const AccommodationDetailInfo = ({ myData }: any) => {
@@ -68,6 +70,8 @@ const AccommodationDetailInfo = ({ myData }: any) => {
     환불규정: refundRegulationValue,
   };
 
+  const synth = window.speechSynthesis;
+
   //음성 변환 목소리 preload
   useEffect(() => {
     window.speechSynthesis.getVoices();
@@ -78,30 +82,41 @@ const AccommodationDetailInfo = ({ myData }: any) => {
   };
 
   const handleValue = (tempKey: string, tempValue: string) => {
-    const newValue = tempKey + `\t` + tempValue;
+    const newValue = tempKey + tempValue;
     handleButton(newValue);
   };
 
+  const handleMute = () => {
+    synth.cancel();
+  };
+
   return (
-    <InfoBox>
-      <ul>
-        {Object.entries(detailValue).map(([key, value]) => (
-          <li key={key}>
-            <InfoMainFontStyle>
-              {key}
-              <VolumeIcStyle
-                onClick={() => {
-                  handleValue(key, value);
-                }}
-              />
-            </InfoMainFontStyle>
-            <InfoFontStyle>
-              <span dangerouslySetInnerHTML={{ __html: value }} />
-            </InfoFontStyle>
-          </li>
-        ))}
-      </ul>
-    </InfoBox>
+    <InfoBoxContainer>
+      <InfoBox>
+        <ul>
+          {Object.entries(detailValue).map(([key, value]) => (
+            <li key={key}>
+              <InfoMainFontStyle>
+                {key}
+                <VolumeIcStyle
+                  onClick={() => {
+                    handleValue(key, value);
+                  }}
+                />
+              </InfoMainFontStyle>
+              <InfoFontStyle>
+                <span dangerouslySetInnerHTML={{ __html: value }} />
+              </InfoFontStyle>
+            </li>
+          ))}
+        </ul>
+      </InfoBox>
+      <StopSoundIcStyle
+        onClick={() => {
+          handleMute();
+        }}
+      />
+    </InfoBoxContainer>
   );
 };
 
