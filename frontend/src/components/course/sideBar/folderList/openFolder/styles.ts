@@ -10,7 +10,7 @@ import {ReactComponent as X} from "../../../../../assets/icon/xIc.svg"
 import {ReactComponent as Circle} from "../../../../../assets/icon/circleIc.svg"
 import { grey } from "../../../../../styles/Colors";
 import {ReactComponent as Memo} from "../../../../../assets/icon/memoIc.svg";
-import { CourseList } from "./courseList";
+import  CourseList  from "./courseList";
 
 export const ExitFolderContainer = styled.div`
 flex-direction: row;
@@ -132,4 +132,6 @@ export const CourseContainer = styled.div`
     padding: 10px;
     gap: 10px;
     border-bottom:1px solid ${grey[300]};
+    cursor: pointer;
+
 `
