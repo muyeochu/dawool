@@ -8,6 +8,7 @@ import {
   ButtonList,
   TripCardListContainer,
   EndBlock,
+  ToUpIcStyle,
 } from "./styles";
 import TripCardItem from "./tripCardItem";
 import { TripListTitleType } from "../../../types/tripListTypes";
@@ -19,6 +20,8 @@ import { listBarrierState } from "../../../recoil/TripListSelector";
 
 import { getContentTypeId } from "../../../recoil/TripListSelector";
 import { getListApi } from "../../../recoil/Api";
+
+import { MoveToTop } from "../../utils/MoveToTop";
 
 export interface TripListProps {
   titleType: TripListTitleType["titleType"];
@@ -36,6 +39,29 @@ function TripList({ titleType }: TripListProps) {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const pageEnd: any = useRef(); // 페이지의 끝부분
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isUpBtn, SetIsUpBtn] = useState(false)
+
+  // 일정 스크롤이 내려가야 위로 올라가는 버튼이 보임
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", updateScroll);
+    return () => {
+      window.removeEventListener("scroll", updateScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (scrollPosition > 400) {
+      SetIsUpBtn(true);
+    } else {
+      SetIsUpBtn(false);
+    }
+  }, [scrollPosition]);
 
   const contentTypeId = getContentTypeId(titleType);
 
@@ -168,6 +194,7 @@ function TripList({ titleType }: TripListProps) {
           </TripCardListContainer>
         )}
       </TripListContainer>
+      {isUpBtn && <ToUpIcStyle onClick={MoveToTop}/>}
       <EndBlock ref={pageEnd} />
     </>
   );

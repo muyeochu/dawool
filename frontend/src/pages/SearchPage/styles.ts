@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const MainGridItems = styled.div`
   grid-column: 2 / span 1;
   height: 100%;
@@ -19,4 +18,5 @@ export const RowGridItems = styled.div`
 
 export const EndBlock = styled.div`
   visibility: hidden;
-`
+  /* background-color: pink; */
+`;
