@@ -34,6 +34,7 @@ import {
   GridContainer,
   BoxMainContainer,
 } from "./styles/appStyles";
+import CourseModal from "./components/common/Modal/courseModal";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Header />
         <BoxMainContainer>
           <GridContainer>
+            <CourseModal/>
             <Modal />
             <Routes>
               <Route path="/" element={<IntroPage />} />

@@ -50,7 +50,7 @@ const DetailComponent = ({
   function createTage(){
     const div = document.getElementById("ExpContainer");
     div?.setAttribute("contentId",myData.info.contentId);
-    div?.setAttribute("TypeId",myData.info.TypeId);
+    div?.setAttribute("contentTypeId",myData.info.contentTypeId);
     div?.setAttribute("title",myData.info.title);
     div?.setAttribute("mapX",myData.info.mapX);
     div?.setAttribute("mapY",myData.info.mapY)
