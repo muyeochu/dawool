@@ -1,0 +1,61 @@
+body {
+  font-family: "SUIT";
+  /* font-weight: 900; */
+}
+
+@font-face {
+  font-family: "SUIT";
+  font-weight: 100;
+  src: local("SUIT Thin"), url("./fonts/SUIT-Thin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SUIT";
+  font-weight: 200;
+  src: local("SUIT ExtraLight"),
+    url("./fonts/SUIT-ExtraLight.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SUIT";
+  font-weight: 300;
+  src: local("SUIT Light"), url("./fonts/SUIT-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SUIT";
+  font-weight: 400;
+  src: local("SUIT Regular"), url("./fonts/SUIT-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SUIT";
+  font-weight: 500;
+  src: local("SUIT Medium"), url("./fonts/SUIT-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SUIT";
+  font-weight: 600;
+  src: local("SUIT SemiBold"),
+    url("./fonts/SUIT-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SUIT";
+  font-weight: 700;
+  src: local("SUIT Bold"), url("./fonts/SUIT-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SUIT";
+  font-weight: 800;
+  src: local("SUIT ExtraBold"),
+    url("./fonts/SUIT-ExtraBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SUIT";
+  font-weight: 900;
+  src: local("SUIT Heavy"), url("./fonts/SUIT-Heavy.woff2") format("woff2");
+}

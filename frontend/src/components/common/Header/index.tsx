@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { NavLink, Link, useNavigate } from "react-router-dom";
-
-// type
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { searchState } from "../../../recoil/SearchSelector";
 
 // styles
 import {
+  HeaderFont,
   HeaderContainer,
+  InvisibleBox,
   GridItems,
   ElementContainer,
   LogoToMic,
@@ -14,7 +16,11 @@ import {
   SearchBarContainer,
   SearchBarInput,
   SearchIcContainer,
+  MicIcStyle,
   NavStyle,
+  DropDownIcContainer,
+  DropDownContainer,
+  DropDownContent,
   PersonIcContainer,
 } from "./styles";
 
@@ -23,59 +29,146 @@ import { ReactComponent as LogoIc } from "../../../assets/icon/logoIc.svg";
 import { ReactComponent as SearchIc } from "../../../assets/icon/searchIc.svg";
 import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
 import { ReactComponent as PersonIc } from "../../../assets/icon/personIc.svg";
+import { ReactComponent as PersonIc2 } from "../../../assets/icon/person2Ic.svg";
 
-interface Props {
-  searchBar?: boolean;
-  mike?: boolean;
-  tourSpot?: boolean;
-  restaurant?: boolean;
-  accommodation?: boolean;
-  myPage?: boolean;
-}
+// sidebar
+import SideBar from "../../personal";
 
-const Header = ({
-  searchBar,
-  mike,
-  tourSpot,
-  restaurant,
-  accommodation,
-  myPage,
-}: Props) => {
+// modal
+import useModal from "../../utils/useModal";
+import Mic from "../../search/Mic";
+
+const Header = () => {
   const navigate = useNavigate();
+  const ref = useRef<HTMLDivElement>(null);
+  let currentUrl = window.location.pathname;
+
+  const [searchInput, setSearchInput] = useRecoilState(searchState);
+
+  const resetSearchInput = useResetRecoilState(searchState);
 
   const [search, setSearch] = useState("");
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [headerColor, setHeaderColor] = useState("#ffffff");
+  const [isPageOpen, setIsPageOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+  // Scroll 위치를 감지
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
 
-  const clickLogoIc = (e: React.MouseEvent) => {
+  useEffect(() => {
+    window.addEventListener("scroll", updateScroll);
+    return () => {
+      window.removeEventListener("scroll", updateScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (currentUrl === "/" && scrollPosition < 100) {
+      setHeaderColor("transparent"); // scrollPosition이 100보다 작으면 headerColor를 변경
+    } else {
+      setHeaderColor("#ffffff"); // 그 외의 경우에는 초기값으로 변경
+    }
+  }, [scrollPosition, currentUrl]);
+
+  // 로고 클릭시 Intro 페이지로 이동
+  const clickLogoIc = () => {
     window.location.href = "/";
+  };
+
+  // 검색창
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
   };
 
   const handleSearchIc = (
     e: React.MouseEvent | React.KeyboardEvent<HTMLInputElement>
   ) => {
     // 공백 검사
-    const blank_pattern = /^\s+|\s+$/g;
-    if (search.replace(blank_pattern, "") === "") {
+    const blankPattern = /^\s+|\s+$/g;
+    if (search.replace(blankPattern, "") === "") {
+      alert("공백은 입력할 수 없습니다!");
       console.log("아무것도 입력되지 않음!");
+      resetSearchInput();
       setSearch("");
       return;
     }
+
+    // 특수문자 검사
+    const specialPattern = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
+    if (specialPattern.test(search) === true) {
+      alert("특수문자는 입력할 수 없습니다!");
+      console.log("특수문자 입력됨!");
+      resetSearchInput();
+      setSearch("");
+      return;
+    }
+    setSearchInput({ ...searchInput, title: search, barrier: "00000" });
     navigate("/search", { state: search });
+    window.location.reload();
   };
 
-  // 엔터키 확인
   const onCheckEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSearchIc(e);
     }
   };
 
+  // 드롭다운 메뉴 이외 공간 클릭 탐지
+  useEffect(() => {
+    const handleClickOutside: EventListener = (e: Event) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setIsMenuOpen(!isMenuOpen);
+      }
+    };
+
+    if (isMenuOpen) {
+      window.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  // 음성인식 모달창 열기
+  const { openModal, closeModal } = useModal();
+
+  const ModalData = {
+    type: "mic",
+    content: <Mic/>,
+    callback: () => {
+      closeModal();
+    },
+  };
+
+  // 즐길거리 각 페이지로 이동
+  const goTourSpot = () => {
+    navigate("/tourspot");
+    setIsMenuOpen(false);
+  };
+
+  const goCulture = () => {
+    navigate("/culture");
+    setIsMenuOpen(false);
+  };
+
+  const goLeports = () => {
+    navigate("/leports");
+    setIsMenuOpen(false);
+  };
+
+  const goShopping = () => {
+    navigate("/shopping");
+    setIsMenuOpen(false);
+  };
+
   return (
-    <header>
-      <HeaderContainer>
+    <HeaderFont>
+      {currentUrl !== "/" && <InvisibleBox />}
+      <HeaderContainer headercolor={headerColor}>
         <GridItems>
           <ElementContainer>
             <LogoToMic>
@@ -85,35 +178,55 @@ const Header = ({
 
               <SearchBarContainer>
                 <SearchBarInput
+                  headercolor={headerColor}
                   placeholder="여행지를 검색해보세요"
                   type="text"
                   value={search}
                   onChange={handleSearchInput}
                   onKeyDown={(e) => onCheckEnter(e)}
                 />
-                <SearchIcContainer onClick={handleSearchIc}>
+                <SearchIcContainer
+                  headercolor={headerColor}
+                  onClick={handleSearchIc}
+                >
                   <SearchIc />
                 </SearchIcContainer>
               </SearchBarContainer>
-
-              <MicIc />
+              <MicIcStyle headercolor={headerColor} onClick={()=> {openModal(ModalData)}}/>
             </LogoToMic>
             <ListToMy>
-              <NavStyle to="/tourspot">관광지</NavStyle>
+              <DropDownIcContainer
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                ismenuopen={isMenuOpen.toString()}
+              >
+                즐길거리
+                {/* <DropDownIcStyle ismenuopen={isMenuOpen.toString()} /> */}
+              </DropDownIcContainer>
+
+              {isMenuOpen === true && (
+                <DropDownContainer ref={ref}>
+                  <DropDownContent>
+                    <li onClick={goTourSpot}>관광지</li>
+                    <li onClick={goCulture}>문화시설</li>
+                    <li onClick={goLeports}>레포츠</li>
+                    <li onClick={goShopping}>쇼핑</li>
+                  </DropDownContent>
+                </DropDownContainer>
+              )}
+
               <NavStyle to="/restaurant">식당</NavStyle>
               <NavStyle to="/accommodation">숙박</NavStyle>
 
-              <PersonIcContainer>
-                <PersonIc />
+              <PersonIcContainer onClick={() => setIsPageOpen(true)}>
+                {headerColor === "transparent" ? <PersonIc2 /> : <PersonIc />}
               </PersonIcContainer>
             </ListToMy>
           </ElementContainer>
         </GridItems>
+        <SideBar isOpen={isPageOpen} setIsOpen={setIsPageOpen} />
       </HeaderContainer>
-    </header>
+    </HeaderFont>
   );
 };
 
 export default Header;
-
-Header.defaultProps = {};
