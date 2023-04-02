@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   Container,
@@ -17,10 +17,22 @@ import {
   selectedDistrictState,
 } from "../../../../../recoil/SurveyState";
 
-const RegionDropdown = () => {
+interface Props {
+  isCityClicked: boolean;
+  setIsCityClicked: (isClicked: boolean) => void;
+  isDistrictClicked: boolean;
+  setIsDistrictClicked: (isClicked: boolean) => void;
+}
+
+const RegionDropdown = ({
+  isCityClicked,
+  setIsCityClicked,
+  isDistrictClicked,
+  setIsDistrictClicked,
+}: Props) => {
   // 현재 선택된 광역시도와 시군구 저장
-  const [isCityClicked, setIsCityClicked] = useState(false);
-  const [isDistrictClicked, setIsDistrictClicked] = useState(false);
+  // const [isCityClicked, setIsCityClicked] = useState(false);
+  // const [isDistrictClicked, setIsDistrictClicked] = useState(false);
 
   // ref 생성
   const cityDropdownRef = useRef<HTMLButtonElement>(null);
@@ -52,9 +64,6 @@ const RegionDropdown = () => {
     setIsCityClicked(false);
   }
 
-  // console.log("최종값은?", second)
-  // console.log("광역시도 누르고 나서 변화!! 광역시도=", selectedCity, "시군구=",selectedDistrict)
-
   // 시군구 드롭다운을 클릭할 때 호출
   function handleDistrictClick() {
     setIsCityClicked(false);
@@ -71,7 +80,12 @@ const RegionDropdown = () => {
   // 바깥쪽 영역을 클릭할 때 호출
   function handleOutsideClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (cityDropdownRef.current && !cityDropdownRef.current.contains(target) && districtDropdownRef.current &&  !districtDropdownRef.current.contains(target)) {
+    if (
+      cityDropdownRef.current &&
+      !cityDropdownRef.current.contains(target) &&
+      districtDropdownRef.current &&
+      !districtDropdownRef.current.contains(target)
+    ) {
       setIsCityClicked(false);
       setIsDistrictClicked(false);
     }
