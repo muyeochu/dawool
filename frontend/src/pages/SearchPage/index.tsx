@@ -1,11 +1,14 @@
 import { useEffect, useState, useRef, Suspense } from "react";
-import Loading from "../../components/common/Loading";
 import { useLocation } from "react-router-dom";
+
+import Loading from "../../components/common/Loading";
 import SearchList from "../../components/search/index";
+import { MoveToTop } from "../../components/utils/MoveToTop";
 
 import { useRecoilState } from "recoil";
 import { getSearchApi } from "../../recoil/Api";
 import { searchState } from "../../recoil/SearchSelector";
+
 
 import {
   MainGridItems,
@@ -19,12 +22,12 @@ const SearchPage = () => {
   const word: string = location.state;
   const pageEnd: any = useRef();
 
-  console.log("검색어는?", word)
-
   const [searchStateValue, setSearchStateValue] = useRecoilState(searchState); // 무장애 태그 상태
   const [searchData, setSearchData] = useState([]); // 받아온 데이터를 저장
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [prevPage, setPrevPage] = useState(0); // 이전 페이지 상태를 저장
+  const [prevBarrier, setPrevBarrier] = useState("00000"); // 이전 버튼 상태를 저장
 
   // 새로고침 할때마다 searchState 값 초기화 필요
   useEffect(() => {
@@ -43,7 +46,11 @@ const SearchPage = () => {
     const data = await res.data.contents;
 
     if (data === "No Content") {
-      setSearchData(data);
+      if (searchData) {
+        console.log("마지막 결과 페이지입니다");
+      } else {
+        setSearchData(data); // 검색결과가 없는 경우
+      }
     } else {
       // 페이지가 이동시에만 무한스크롤 구현(버튼 무한스크롤x)
       if (page > prevPage) {
@@ -63,9 +70,6 @@ const SearchPage = () => {
 
     setLoading(true);
   };
-
-  const [prevPage, setPrevPage] = useState(0); // 이전 페이지 상태를 저장
-  const [prevBarrier, setPrevBarrier] = useState("00000"); // 이전 버튼 상태를 저장
 
   useEffect(() => {
     getSearchDatas(page);
@@ -91,7 +95,6 @@ const SearchPage = () => {
     }
   }, [loading]);
 
-
   return (
     <>
       <MainGridItems>
@@ -102,8 +105,8 @@ const SearchPage = () => {
             </Suspense>
           </RowGridItems>
         </RowGridContainer>
+        <EndBlock ref={pageEnd}></EndBlock>
       </MainGridItems>
-      <EndBlock ref={pageEnd}></EndBlock>
     </>
   );
 };

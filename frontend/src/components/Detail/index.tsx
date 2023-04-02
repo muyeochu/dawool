@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  VolumeIcStyle,
   FolderIcStyle,
   HeartIcStyle,
   LikedIcStyle,
@@ -41,24 +40,21 @@ const DetailComponent = ({
     mapY: myData.info.mapY,
   };
 
-  
   const navigate = useNavigate();
   const [heart, setHeart] = useState<boolean>(myData.info.liked);
   const token = localStorage.getItem("token") || "0";
   const { openModal, closeModal } = useModal();
 
-  function createTage(){
+  function createTage() {
     const div = document.getElementById("ExpContainer");
-    div?.setAttribute("contentId",myData.info.contentId);
-    div?.setAttribute("TypeId",myData.info.TypeId);
-    div?.setAttribute("title",myData.info.title);
-    div?.setAttribute("mapX",myData.info.mapX);
-    div?.setAttribute("mapY",myData.info.mapY)
+    div?.setAttribute("contentId", myData.info.contentId);
+    div?.setAttribute("TypeId", myData.info.TypeId);
+    div?.setAttribute("title", myData.info.title);
+    div?.setAttribute("mapX", myData.info.mapX);
+    div?.setAttribute("mapY", myData.info.mapY);
   }
   createTage();
 
-
-  
   const modalDataL = {
     type: "course",
     content: <></>,
@@ -71,14 +67,17 @@ const DetailComponent = ({
       <TitleContainer title={myData.info.title}>
         <TitleIcContainer>
           <p>{myData.info.title}</p>
-          <VolumeIcStyle />
         </TitleIcContainer>
         <TitleIcContainer>
           <div id="ExpContainer">
-          <IcExpContainer onClick={()=>{openModal(modalDataL)}}> 
-            <FolderIcStyle />
-            <p>코스 추가</p>
-          </IcExpContainer>
+            <IcExpContainer
+              onClick={() => {
+                openModal(modalDataL);
+              }}
+            >
+              <FolderIcStyle />
+              <p>코스 추가</p>
+            </IcExpContainer>
           </div>
           <IcExpContainer
             onClick={async () => {

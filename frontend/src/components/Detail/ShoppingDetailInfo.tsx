@@ -1,135 +1,83 @@
-import { InfoBox, InfoMainFontStyle, InfoFontStyle } from "./styles";
+import { useEffect } from "react";
+import { getSpeech } from "../utils/getSpeech";
+
+import {
+  InfoBox,
+  InfoMainFontStyle,
+  InfoFontStyle,
+  VolumeIcStyle,
+} from "./styles";
 
 const ShoppingDetailInfo = ({ myData }: any) => {
+  const addValue = myData.info.addr1 === "0" ? "없음" : myData.info.addr1;
+  const homepageValue =
+    myData.info.homepage === "0" ? "없음" : myData.info.homepage;
+  const isBabyCarriageValue = myData.info.isBabyCarriage ? "가능" : "불가능";
+  const isPetValue = myData.info.isPet ? "가능" : "불가능";
+  const fairDayValue =
+    myData.info.fairDay === "0" ? "없음" : myData.info.fairDay;
+  const infoCenterValue =
+    myData.info.infoCenter === "0" ? "없음" : myData.info.infoCenter;
+  const openTimeValue =
+    myData.info.openTime === "0" ? "없음" : myData.info.openTime;
+  const commonParkingValue =
+    myData.info.commonParking === "0" ? "없음" : myData.info.commonParking;
+  const restroomValue =
+    myData.info.restroom === "0" ? "없음" : myData.info.restroom;
+  const saleItemValue =
+    myData.info.saleItem === "0" ? "문의 필요" : myData.info.saleItem;
+  const shopGuideValue =
+    myData.info.shopGuide === "0" ? "없음" : myData.info.shopGuide;
+  const restDateValue =
+    myData.info.restDate === "0" ? "없음" : myData.info.restDate;
+
+  const detailValue = {
+    주소: addValue,
+    홈페이지: homepageValue,
+    "유모차 대여": isBabyCarriageValue,
+    "애완동물 동반": isPetValue,
+    장서는날: fairDayValue,
+    "문의 및 안내": infoCenterValue,
+    영업시간: openTimeValue,
+    주차시설: commonParkingValue,
+    쉬는날: restDateValue,
+    화장실: restroomValue,
+    판매품목: saleItemValue,
+    매장안내: shopGuideValue,
+  };
+
+  //음성 변환 목소리 preload
+  useEffect(() => {
+    window.speechSynthesis.getVoices();
+  }, []);
+
+  const handleButton = (newValue: string) => {
+    getSpeech(newValue);
+  };
+
+  const handleValue = (tempKey: string, tempValue: string) => {
+    const newValue = tempKey + `\t` + tempValue;
+    handleButton(newValue);
+  };
+
   return (
     <InfoBox>
       <ul>
-        <li>
-          <InfoMainFontStyle>주소</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.addr1 === "0" ? (
-              "없음"
-            ) : (
-              <span dangerouslySetInnerHTML={{ __html: myData.info.addr1 }} />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>홈페이지</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.homepage === "0" ? (
-              "없음"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.homepage }}
+        {Object.entries(detailValue).map(([key, value]) => (
+          <li key={key}>
+            <InfoMainFontStyle>
+              {key}
+              <VolumeIcStyle
+                onClick={() => {
+                  handleValue(key, value);
+                }}
               />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>유모차 대여</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.isBabyCarriage ? "가능" : "불가능"}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>애완동물 동반</InfoMainFontStyle>
-          <InfoFontStyle>{myData.info.isPet ? "가능" : "불가능"}</InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>장서는날</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.fairDay === "0" ? (
-              "없음"
-            ) : (
-              <span dangerouslySetInnerHTML={{ __html: myData.info.fairDay }} />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>문의 및 안내</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.infoCenter === "0" ? (
-              "없음"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.infoCenter }}
-              />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>영업시간</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.openTime === "0" ? (
-              "없음"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.openTime }}
-              />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>주차시설</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.commonParking === "0" ? (
-              "없음"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.commonParking }}
-              />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>쉬는날</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.restDate === "0" ? (
-              "없음"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.restDate }}
-              />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>화장실</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.restroom === "0" ? (
-              "없음"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.restroom }}
-              />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>판매품목</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.saleItem === "0" ? (
-              "문의 필요"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.saleItem }}
-              />
-            )}
-          </InfoFontStyle>
-        </li>
-        <li>
-          <InfoMainFontStyle>매장안내</InfoMainFontStyle>
-          <InfoFontStyle>
-            {myData.info.shopGuide === "0" ? (
-              "없음"
-            ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: myData.info.shopGuide }}
-              />
-            )}
-          </InfoFontStyle>
-        </li>
+            </InfoMainFontStyle>
+            <InfoFontStyle>
+              <span dangerouslySetInnerHTML={{ __html: value }} />
+            </InfoFontStyle>
+          </li>
+        ))}
       </ul>
     </InfoBox>
   );

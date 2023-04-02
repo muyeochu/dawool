@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { black, mainColor } from "../../../styles/Colors";
+import { black, mainColor, blue } from "../../../styles/Colors";
+
+import { ReactComponent as ToUpIc } from "../../../assets/icon/toUpIc.svg";
 
 export const TripListContainer = styled.div``;
 
@@ -14,7 +16,7 @@ export const TripListTitle = styled.h1`
 
   color: ${black};
 
-  span{
+  span {
     color: ${mainColor};
     margin-right: 12px;
   }
@@ -46,4 +48,19 @@ export const TripCardListContainer = styled.div`
 
 export const EndBlock = styled.div`
   visibility: hidden;
-`
+  /* background-color: pink; */
+`;
+
+export const ToUpIcStyle = styled(ToUpIc)`
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 30px;
+  right: 50px;
+  fill: ${mainColor};
+
+  &:hover {
+    cursor: pointer;
+    fill: ${blue[500]};
+  }
+`;
