@@ -6,7 +6,7 @@ import { useState, useRef } from "react";
 import useModal from "../../../../../components/utils/useModal";
 import { modalState } from "../../../../../recoil/ModalState";
 import { mockComponent } from "react-dom/test-utils";
-import { CourseList } from "./courseList";
+import  CourseList  from "./courseList";
 import { customAxios2 } from "../../../../../recoil/customAxios";
 // import axios from "axios";
 
@@ -14,7 +14,6 @@ import { customAxios2 } from "../../../../../recoil/customAxios";
 export const FolderInside=()=>{
     const { openModal, closeModal } = useModal();
     const [mdState, setModalState] = useRecoilState(modalState);
-    const [memo, setMemo] = useState('');
     const [folderState, setFolderState] = useRecoilState(FolderState);
     
     const deleteCourseFolderData = ()=>
@@ -57,9 +56,7 @@ export const FolderInside=()=>{
         });
     }
 
-    function handleTextAreaChange(e:any) {
-        setMemo(e.target.value);
-      }
+    
     return(<>
     <ExitFolderContainer>
         <ExitFolderButton onClick={exitFolder}><ArrowIc/>전체 코스 보기</ExitFolderButton>
