@@ -4,16 +4,22 @@ import { ReactComponent as VolumeIc } from "../../assets/icon/volumeIc.svg";
 import { ReactComponent as FolderIc } from "../../assets/icon/folderIc.svg";
 import { ReactComponent as HeartIc } from "../../assets/icon/heartIc.svg";
 import { ReactComponent as likedIc } from "../../assets/icon/likedIc.svg";
+import { ReactComponent as MuteIc } from "../../assets/icon/muteIc.svg";
 
-import { grey } from "../../styles/Colors";
+import { grey, blue, mainColor } from "../../styles/Colors";
 
 export const VolumeIcStyle = styled(VolumeIc)`
+  fill: ${mainColor};
   min-width: 18px;
   max-width: 18px;
   min-height: 18px;
   max-height: 18px;
   margin-left: 5px;
-  cursor: pointer;
+
+  &:hover {
+    fill: ${blue[500]};
+    cursor: pointer;
+  }
 `;
 
 export const FolderIcStyle = styled(FolderIc)`
@@ -109,6 +115,10 @@ export const MainBtnContainer = styled.div`
   gap: 16px;
 `;
 
+export const InfoBoxContainer = styled.div`
+  position: relative;
+`;
+
 export const InfoBox = styled.div`
   width: 850px;
   height: auto;
@@ -141,8 +151,8 @@ export const InfoBox = styled.div`
   }
 
   ::-webkit-scrollbar {
-    width: 10px; /* 세로 스크롤바와 같은 값으로 조절 */
-    height: 10px; /* 원하는 굵기로 조절 */
+    width: 10px;
+    height: 10px;
   }
 
   ::-webkit-scrollbar-track {
@@ -155,9 +165,22 @@ export const InfoBox = styled.div`
     border-radius: 10px;
   }
 
-  /* 스크롤바 썸네일 마우스 오버 시 스타일 지정 */
   ::-webkit-scrollbar-thumb:hover {
     background-color: ${grey[300]};
+  }
+`;
+
+export const StopSoundIcStyle = styled(MuteIc)`
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  bottom: 20px;
+  right: 25px;
+  fill: ${mainColor};
+
+  &:hover {
+    fill: ${blue[500]};
+    cursor: pointer;
   }
 `;
 

@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
-
 import useModal from "../../utils/useModal";
-
-import MicAnimation from "../Mic";
+import { useEffect } from "react";
+import { getSpeech } from "../../utils/getSpeech";
 
 import {
   ModalDimmer,
@@ -20,6 +19,7 @@ import {
   BtnFontStyle,
   SideFontStyle,
   ModalMicContainer,
+  VolumeIcStyle,
 } from "./styles";
 
 const Modal = () => {
@@ -33,6 +33,30 @@ const Modal = () => {
   // 식당페이지로 넘김 (임시)
   const goRestaurant = () => {
     navigate("/restaurant");
+  };
+
+  const synth = window.speechSynthesis;
+
+  //음성 변환 목소리 preload
+  useEffect(() => {
+    window.speechSynthesis.getVoices();
+  }, []);
+
+  const handleButton = (newValue: string) => {
+    getSpeech(newValue);
+  };
+
+  const handleValue = (
+    tempKey: string | undefined,
+    tempValue: string | JSX.Element
+  ) => {
+    const newValue = tempKey && tempValue ? tempKey + tempValue : "";
+    handleButton(newValue);
+  };
+
+  const handleMute = () => {
+    synth.cancel();
+    closeModal();
   };
 
   return (
@@ -53,12 +77,25 @@ const Modal = () => {
       {modalDataState.isOpen && modalDataState.type === "barrier" && (
         <ModalDimmer>
           <ModalContainer className="barrier">
-            <ModalTitle>{modalDataState.title}</ModalTitle>
+            <ModalTitle>
+              {modalDataState.title}
+              <VolumeIcStyle
+                onClick={() => {
+                  handleValue(modalDataState.title, modalDataState.content);
+                }}
+              />
+            </ModalTitle>
             <ModalContents className="barrier">
               {modalDataState.content}
             </ModalContents>
             <ModalFooter className="barrier">
-              <ModalBtn onClick={closeModal}>닫기</ModalBtn>
+              <ModalBtn
+                onClick={() => {
+                  handleMute();
+                }}
+              >
+                닫기
+              </ModalBtn>
             </ModalFooter>
           </ModalContainer>
         </ModalDimmer>
