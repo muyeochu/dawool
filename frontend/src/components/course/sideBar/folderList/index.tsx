@@ -97,9 +97,8 @@ export const Folders = () => {
 
   function createTag(folderList: any) {
     const div = document.getElementById("folder");
-    const div2 = document.createElement("div");
-    div2.className = "FolderContainer";
-    console.log(div2);
+    const div2 = document.getElementById("FolderContainer");
+    if (div2?.childNodes.length !== 0) return;
     for (let i = 0; i < folderList["myCourse"].length; i++) {
       const folder = folderList["myCourse"][i];
       const element = () => (
@@ -245,7 +244,9 @@ export const Folders = () => {
 
       {/* 백이랑 통신 후 아래 주석 코드 사용해서 폴더 출력하기 
 selector 로 리스트 받아오기*/}
-      <div id="folder"></div>
+      <div id="folder">
+        <div id="FolderContainer"></div>
+      </div>
       {/* {data.map((da)=>{
         return(
             <FolderContainer onClick={intoFolder}><FolderYellowIc/>{" "+da.name }</FolderContainer>
