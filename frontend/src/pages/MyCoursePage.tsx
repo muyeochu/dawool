@@ -6,6 +6,7 @@ import {
   SideHeaderText,
   MapIcStyle,
 } from "../components/course/styles";
+import React, { useEffect } from "react";
 import KakaoMap from "../components/course/map";
 import MyCourseSideBar from "../components/course/sideBar/index";
 import { FolderState } from "../recoil/CourseFolderState";
@@ -34,6 +35,12 @@ const MyCoursePage = () => {
   //   mapX =clState.mapX.toString();
   //   mapY = clState.mapY.toString();
   // }
+  useEffect(() => {
+    if (clState.mapX !== mapX) {
+      // mapX=clState.mapX;
+      console.log("mapX갱신");
+    }
+  }, [clState.mapX]);
   return (
     <CourseContainer>
       <SideItem>
@@ -49,8 +56,14 @@ const MyCoursePage = () => {
         {folderState.isOpen ? (
           mdState.isOpen ? (
             <></>
+          ) : clState.mapX !== mapX ? (
+            <>
+              <ClickedKakaoMap></ClickedKakaoMap>
+              {(mapX = clState.mapX)}
+              {console.log("실행됨kfmsldmflkm")}
+              {console.log(clState.mapX)}
+            </>
           ) : (
-            // 클릭 시 그 위치로 지도 옮기는 기능 설정하기
             <Markers></Markers>
           )
         ) : (
