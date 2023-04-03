@@ -91,6 +91,7 @@ const Markers = () => {
             const mapX = courseList["course"][i]["mapY"];
             const mapY = courseList["course"][i]["mapX"];
             positions.push({
+              title: courseList["course"][i]["title"],
               latlng: new window.kakao.maps.LatLng(Number(mapX), Number(mapY)),
             });
             // window.xyList.push(mapX);
