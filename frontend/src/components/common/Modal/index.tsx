@@ -30,7 +30,7 @@ const Modal = () => {
     navigate("/survey");
   };
 
-  // 식당페이지로 넘김 (임시)
+  // 관광지페이지로 넘김
   const goTourSpot = () => {
     navigate("/tourSpot");
   };
