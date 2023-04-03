@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist(); // localStorage에 저장됨
@@ -6,7 +6,7 @@ const { persistAtom } = recoilPersist(); // localStorage에 저장됨
 //  key:"sessionKey",
 //  storage:sessionStorage,
 // });
-interface UserType {
+export interface UserType {
   accessToken: String;
   accessTokenExpiresIn: number;
   grantType: String;
@@ -28,12 +28,13 @@ export const userState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const isSurveyState = atom({
+export const isSurveyState = selector({
   key: "isSurveyState",
-  default: {
-    isSurvey: false
-  }
-})
+  get: ({ get }) => {
+    const user = get(userState);
+    return user.isSurvey;
+  },
+});
 
 //recoil-persist : 새로고침해도 로그인정보 남아있게 하기
 //로그아웃 - 로컬스토리지 지워지게 됨 퍼지?
