@@ -103,6 +103,7 @@ function TripList({ titleType }: TripListProps) {
   const [prevPage, setPrevPage] = useState(0);
   const [prevCity, setPrevCity] = useState(1);
   const [prevBarrier, setPrevBarrier] = useState("00000");
+  
 
   useEffect(() => {
     getListDatas(page);
