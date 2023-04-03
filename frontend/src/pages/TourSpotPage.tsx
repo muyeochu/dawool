@@ -30,9 +30,9 @@ export const RowGridItems = styled.div`
 const TourSpotPage = () => {
   const token = localStorage.getItem("token");
   const { openModal, closeModal } = useModal();
-  const isSurvey = useRecoilValue(isSurveyState);
+  // const isSurvey = useRecoilValue(isSurveyState);
 
-  if (token !== null && !isSurvey.isSurvey) {
+  if (token !== null) {
     const modalDataL = {
       type: "survey",
       content: <SurveyModalImg />,
