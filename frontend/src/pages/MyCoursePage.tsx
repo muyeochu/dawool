@@ -58,17 +58,19 @@ const MyCoursePage = () => {
         {folderState.isOpen ? (
           mdState.isOpen ? (
             <></>
-          ) : clState.mapX !== "" ? (
-            <>
-              <ClickedKakaoMap></ClickedKakaoMap>
-              {(mapX = clState.mapX)}
-              {console.log("실행됨kfmsldmflkm")}
-              {console.log(clState.mapX)}
-            </>
           ) : (
+            // clState.mapX !== "" ? (
+            //   <>
+            //     <ClickedKakaoMap></ClickedKakaoMap>
+            //     {(mapX = clState.mapX)}
+            //     {console.log("실행됨kfmsldmflkm")}
+            //     {console.log(clState.mapX)}
+            //   </>
+            // ) : (
             <Markers></Markers>
           )
         ) : (
+          // )
           <>
             <GuideText>코스를 선택해주세요</GuideText>
             <GuideManStyle />

@@ -81,8 +81,10 @@ const CourseModal = () => {
 
   function createTag(folderList: any) {
     const div = document.getElementById("modalFolder");
-    const div2 = document.createElement("div");
-    div2.className = "FolderContainer";
+    const div2 = document.getElementById("modalFolderContainer");
+    // const div2 = document.createElement("div");
+    // div2.className = "FolderContainer";
+    if (div2?.childNodes.length !== 0) return;
     console.log(div2);
     for (let i = 0; i < folderList["myCourse"].length; i++) {
       const folder = folderList["myCourse"][i];
@@ -148,7 +150,9 @@ const CourseModal = () => {
           <ModalLargeContainer>
             <ModalCourseTitle>저장할 코스를 선택해주세요.</ModalCourseTitle>
             <ModalCourseContainer>
-              <div id="modalFolder"></div>
+              <div id="modalFolder">
+                <div id="modalFolderContainer"></div>
+              </div>
             </ModalCourseContainer>
             <CloseBtnStyle onClick={closeModal} />
             <BtnStyle>
