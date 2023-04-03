@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import Button from "../../common/Button";
 import {
   TripListContainer,

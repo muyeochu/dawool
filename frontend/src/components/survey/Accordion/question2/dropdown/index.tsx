@@ -30,9 +30,6 @@ const RegionDropdown = ({
   isDistrictClicked,
   setIsDistrictClicked,
 }: Props) => {
-  // 현재 선택된 광역시도와 시군구 저장
-  // const [isCityClicked, setIsCityClicked] = useState(false);
-  // const [isDistrictClicked, setIsDistrictClicked] = useState(false);
 
   // ref 생성
   const cityDropdownRef = useRef<HTMLButtonElement>(null);
