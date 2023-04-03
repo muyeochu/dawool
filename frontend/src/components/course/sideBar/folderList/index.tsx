@@ -30,17 +30,17 @@ import { useNavigate } from "react-router-dom";
 //     }
 // ]
 
-export const getCourseFolderData = (): Promise<ListType[]> =>
-  customAxios2
-    .get(`user/my-course`)
-    .then((res) => {
-      console.log(res);
-      return res.data;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 export const Folders = () => {
+  const getCourseFolderData = (): Promise<ListType[]> =>
+    customAxios2
+      .get(`user/my-course`)
+      .then((res) => {
+        console.log(res);
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   const navigate = useNavigate();
   // const baseURL = "http://j8d105.p.ssafy.io:8888";
   const baseURL = process.env.BASE_URL;

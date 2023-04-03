@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { getCourseFolderData } from "../../course/sideBar/folderList";
+// import { getCourseFolderData } from "../../course/sideBar/folderList";
 import ReactDOM from "react-dom";
 import { customAxios2 } from "../../../recoil/customAxios";
 import useModal from "../../utils/useModal";
@@ -21,7 +21,7 @@ import {
   FolderYellowIc,
 } from "../../course/sideBar/folderList/styles";
 import { insertCourseType } from "../../../types/courseListTypes";
-
+import { ListType } from "../../../types/courseFolderTypes";
 declare global {
   interface Window {
     targetCourse: string;
@@ -36,7 +36,17 @@ const CourseModal = () => {
   const navigate = useNavigate();
   const { modalDataState, closeModal } = useModal();
 
-  getCourseFolderData();
+  const getCourseFolderData = (): Promise<ListType[]> =>
+    customAxios2
+      .get(`user/my-course`)
+      .then((res) => {
+        console.log(res);
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
   async function myFunction() {
     try {
       let folderList = await getCourseFolderData();
