@@ -74,7 +74,8 @@ const Markers = () => {
             };
 
           let map = new window.kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
+          var zoomControl = new window.kakao.maps.ZoomControl();
+          map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
           // 마커가 표시될 위치입니다
           let positions: any = [
             // new window.kakao.maps.LatLng(33.450705, 126.570677),
