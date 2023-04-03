@@ -48,6 +48,8 @@ const CourseModal = () => {
       });
 
   async function myFunction() {
+    let nowURL = new URL(window.location.href).href.includes("detail");
+    if (!nowURL) return;
     try {
       let folderList = await getCourseFolderData();
       return folderList;
