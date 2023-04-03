@@ -27,6 +27,7 @@ const ClickedKakaoMap = () => {
   const key = process.env.REACT_APP_KAKAOMAP_API_KEY; //key 받아오기
   useEffect(() => {
     // window.onload=()=>{
+    console.log("여기까지 들어옴");
     const mapScript = document.createElement("script");
     mapScript.async = true;
     mapScript.type = "text/javascript";
@@ -67,7 +68,15 @@ const ClickedKakaoMap = () => {
             };
 
           let map = new window.kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
+          // function setMarkers(map: any) {
+          //   for (var i = 0; i < positions.length; i++) {
+          //     positions[i].setMap(map);
+          //   }
+          // }
+          // function hideMarkers() {
+          //   setMarkers(null);
+          // }
+          // hideMarkers();
           // 마커가 표시될 위치입니다
           let positions: any = [];
           var imageSrc =
@@ -111,7 +120,7 @@ const ClickedKakaoMap = () => {
     mapScript.addEventListener("load", onLoadKakaoMap);
 
     return () => {
-      // mapScript.removeEventListener("load", onLoadKakaoMap);
+      mapScript.removeEventListener("load", onLoadKakaoMap);
       setClState({
         isClicked: false,
         mapX: "",
@@ -119,7 +128,7 @@ const ClickedKakaoMap = () => {
       });
     };
     // }
-  }, []);
+  }, [clState.mapX]);
   return <MapContainer id="clickedMap"></MapContainer>;
 };
 
