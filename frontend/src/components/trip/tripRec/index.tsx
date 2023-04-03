@@ -3,7 +3,10 @@ import {
   TripRecContainer,
   TripRecTitleContainer,
   TripRecTitle1,
+  ThumbsUpStyle,
   TripRecTitle2,
+  TripRecTitle3Container,
+  InformationIcStyle,
   TripRecTitle3,
   TripRecCardListContainer,
   RecDonwArrowIcContainer,
@@ -95,7 +98,9 @@ function TripRec({ titleType }: TripRecProps) {
       <TripRecTitleContainer>
         {token === null ? (
           <>
-            <TripRecTitle2>BEST {typeText} 👍</TripRecTitle2>
+            <TripRecTitle1>
+              BEST {typeText} <ThumbsUpStyle>👍</ThumbsUpStyle>
+            </TripRecTitle1>
             <TripRecTitle2>
               로그인하시면 취향에 맞는 {typeText}
               {linkGrammar1} 추천해드려요!
@@ -108,9 +113,14 @@ function TripRec({ titleType }: TripRecProps) {
               이런 {typeText}
               {linkGrammar2} 어떠세요?
             </TripRecTitle2>
-            <TripRecTitle3>
-              최근 본 여행지 기반으로 추천해드려요!
-            </TripRecTitle3>
+            {titleType === "restaurant" || titleType === "accommodation" ? (
+              <TripRecTitle3Container>
+                <InformationIcStyle />
+                <TripRecTitle3>
+                  최근 본 여행지 기반으로 추천해드려요!
+                </TripRecTitle3>
+              </TripRecTitle3Container>
+            ) : null}
           </>
         )}
       </TripRecTitleContainer>
