@@ -71,6 +71,8 @@ export const Folders = () => {
   // let folderLists = console.log(useRecoilValue<ListType[]>(UniqueFolderListSelector));
   async function myFunction() {
     try {
+      let nowURL = new URL(window.location.href).href.includes("my");
+      if (!nowURL) return;
       let folderList = await getCourseFolderData();
       return folderList;
     } catch (err) {

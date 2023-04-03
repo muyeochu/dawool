@@ -36,6 +36,8 @@ export const FolderInside = () => {
 
   async function myFunction() {
     try {
+      let nowURL = new URL(window.location.href).href.includes("my");
+      if (!nowURL) return;
       await deleteCourseFolderData();
     } catch (err) {
       throw err;
