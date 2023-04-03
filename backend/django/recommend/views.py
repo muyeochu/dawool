@@ -54,7 +54,6 @@ def spot_list(request, spot_id):
 
             # 사용자가 취향 설문을 했을 때 
             try:
-                print(user)
                  # 갔던곳, 선호 관광지 배열 > 여러 개 
                 visitLocation = user['survey']['visitLocation']
                 # 선호 시간 > 1시간 50000
@@ -72,6 +71,7 @@ def spot_list(request, spot_id):
                 result_data = result_data[result_data['contentTypeId']==int(spot_id)]
 
                 user_heart =get_heart(object_id, int(spot_id))
+               
 
 
                 if len(user_heart) != 0:
@@ -91,7 +91,6 @@ def spot_list(request, spot_id):
                 dict_data = popular_sorted(int(spot_id))
 
 
-            print(dict_data)
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
@@ -204,16 +203,8 @@ def recommend_logic(request, contenttypeid):
          # 필요한 컬럼만 추출
         selected_column = result_data.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl','areacode':'areaCode'})
 
-        if len(user_heart) != 0:
-            dict_data = selected_column[:3].to_dict(orient='records')
-            content_id = user_heart['contentid']
-            user_recommend_data = RecommendTour.objects.filter(contentid=content_id)
-            se = PopularTourSerializer(user_recommend_data, many=True)
-            dictionary = dict(se.data[0])
-            dict_data.append(dictionary)
-         
-        else:
-            dict_data = selected_column[:4].to_dict(orient='records')
+        dict_data = selected_column[:4].to_dict(orient='records')
+        return dict_data
     
     # 취향 설문 안했을때 근처에서 인기순, 근처 거리에 관광지가 없을때 그냥 인기순 
     except:
@@ -222,9 +213,11 @@ def recommend_logic(request, contenttypeid):
         selected_data = selected_data.loc[:, ['contentid', 'title','contenttypeid','firstimage', 'areacode','contenttypeid']]
         selected_column = selected_data.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl','areacode':'areaCode'})
         dict_data = selected_column[:4].to_dict(orient='records')
+        
+        return dict_data
     
 
-    return dict_data
+    
 
 
 
@@ -447,16 +440,13 @@ def get_heart(object_id, contenttypeid):
         arr[i] = -np.inf
         max_index = np.argmax(arr)
         li.append((df_index[i],df_index[max_index]))
-
     # 내가 좋아요 누르지 않은 관광지, 식당, 숙박 고르기 
-    for tup in li:
-        if object_id in tup[0]:
-   
-            target_list = list(pivot_df.loc[tup[1]][pivot_df.loc[tup[1]] == 1].index)
-     
-            user_list = list(pivot_df.loc[tup[0]][pivot_df.loc[tup[0]] == 1].index)
-     
-            try:
+    try:
+        for tup in li:
+            if object_id in tup[0]:
+                target_list = list(pivot_df.loc[tup[1]][pivot_df.loc[tup[1]] == 1].index)
+                user_list = list(pivot_df.loc[tup[0]][pivot_df.loc[tup[0]] == 1].index)   
+               
                 result = [x for x in target_list if x not in user_list]
                 another_liked = []
                 for i in result:
@@ -464,13 +454,14 @@ def get_heart(object_id, contenttypeid):
                     if data_one['contenttypeid'] == contenttypeid:
                         another_liked.append(data_one)
 
-                if another_liked != 0:
+                if len(another_liked) != 0:
                     random_element = random.choice(another_liked)
                     return random_element
-                else:
-                    random_element = []
-                    return random_element
-            except:
-                random_element = []
-    
-    return random_element
+                
+            random_element = []
+            return random_element
+    except:
+        random_element = []
+        return random_element
+       
+   
