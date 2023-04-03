@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import KakaoImg from "../../assets/images/kakao_login_large_wide.png"
 import BackImg from "../../assets/images/loginBackImg.png"
+import BackgroundImg from "../../assets/images/kakaoLoginImg.png"
 
 
 export const BackgroundContainer = styled.div`
@@ -9,7 +10,7 @@ export const BackgroundContainer = styled.div`
     position: absolute;
     height : 92vh;
     width: 100%;
-    background-image:url(${BackImg});
+    background-image:url(${BackgroundImg});
     background-size:cover;
 `
 
