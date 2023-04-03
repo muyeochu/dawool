@@ -35,7 +35,9 @@ const MyCoursePage = () => {
   //   mapX =clState.mapX.toString();
   //   mapY = clState.mapY.toString();
   // }
+  console.log("여기는되나");
   useEffect(() => {
+    console.log("여기는되나22");
     if (clState.mapX !== mapX) {
       // mapX=clState.mapX;
       console.log("mapX갱신");
@@ -56,7 +58,7 @@ const MyCoursePage = () => {
         {folderState.isOpen ? (
           mdState.isOpen ? (
             <></>
-          ) : clState.mapX !== mapX ? (
+          ) : clState.mapX !== "" ? (
             <>
               <ClickedKakaoMap></ClickedKakaoMap>
               {(mapX = clState.mapX)}
