@@ -113,8 +113,7 @@ def food_list(request):
     if(request.method == 'POST'):
         try:
             dict_data = recommend_logic(request, 39)
- 
-           
+
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
@@ -201,7 +200,19 @@ def recommend_logic(request, contenttypeid):
         # 취향 설문 >  무장애 타입, 갔던 관광지, 인기관광지 여부 
         result_data = survey_recommend(user, contenttypeid, result_df, visitLocation)
          # 필요한 컬럼만 추출
-        selected_column = result_data.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl','areacode':'areaCode'})
+        
+        if len(result_data) <4:
+            preferredTime = 35000
+            result_df = neartime_find(preferredTime, departure, target_collection)
+            result_data = survey_recommend(user, contenttypeid, result_df, visitLocation)
+            selected_column = result_data.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl','areacode':'areaCode'})
+            if len(result_data) <4:
+                preferredTime = 45000
+                result_df = neartime_find(preferredTime, departure, target_collection)
+                result_data = survey_recommend(user, contenttypeid, result_df, visitLocation)
+                selected_column = result_data.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl','areacode':'areaCode'})
+        else:
+            selected_column = result_data.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl','areacode':'areaCode'})
 
         dict_data = selected_column[:4].to_dict(orient='records')
         return dict_data
