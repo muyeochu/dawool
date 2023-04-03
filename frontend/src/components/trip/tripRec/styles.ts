@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import { mainColor, white, grey, blue, black } from "../../../styles/Colors";
-import RecBackgroundImg from "../../../assets/images/recBackgroundImg.png";
 import { ReactComponent as DownArrowIc } from "../../../assets/icon/downarrowIc.svg";
+import { ReactComponent as InformationIc } from "../../../assets/icon/informationIc.svg";
 
 export const bounce = keyframes`
   0% {
@@ -51,6 +51,11 @@ export const TripRecTitle1 = styled.div`
   color: ${black};
 `;
 
+export const ThumbsUpStyle = styled.div`
+  margin-bottom: 10px;
+  margin-left: 5px;
+`;
+
 export const TripRecTitle2 = styled.div`
   display: flex;
   align-items: center;
@@ -61,15 +66,29 @@ export const TripRecTitle2 = styled.div`
   color: ${black};
 `;
 
+export const TripRecTitle3Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+`;
+
+export const InformationIcStyle = styled(InformationIc)`
+  width: 20px;
+  height: 20px;
+  fill: ${grey[500]};
+`;
+
 export const TripRecTitle3 = styled.div`
   display: flex;
   align-items: center;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  line-height: 30px;
-  color: ${black};
-  margin-top: 10px;
+  /* line-height: 30px; */
+  color: ${grey[500]};
 `;
 
 export const TripRecCardListContainer = styled.div`

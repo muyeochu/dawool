@@ -1,8 +1,10 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import TripList from "../components/trip/tripList";
 import TripRec from "../components/trip/tripRec";
 import useModal from "../components/utils/useModal";
+import { isSurveyState } from "../recoil/UserState";
 
 import {ReactComponent as SurveyModalImg} from "../assets/images/surveyModalImg.svg"
 
@@ -28,8 +30,9 @@ export const RowGridItems = styled.div`
 const TourSpotPage = () => {
   const token = localStorage.getItem("token");
   const { openModal, closeModal } = useModal();
+  const isSurvey = useRecoilValue(isSurveyState);
 
-  if (token !== null && localStorage.getItem("recentContentId") === null) {
+  if (token !== null && !isSurvey.isSurvey) {
     const modalDataL = {
       type: "survey",
       content: <SurveyModalImg />,
