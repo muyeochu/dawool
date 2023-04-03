@@ -22,3 +22,8 @@ export const grey = {
   600: "#3D3D3D",
   700: "#373737",
 };
+
+export const red = {
+  100: "#D7443E",
+  200: "#B62F2A",
+};

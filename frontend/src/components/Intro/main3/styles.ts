@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { ReactComponent as Main3Img } from "../../../assets/images/main3Img.svg";
 import { blue } from "../../../styles/Colors";
@@ -14,16 +14,37 @@ export const MainThirdContainer = styled.div`
 
 export const FontContainer = styled.div`
   text-align: center;
-  margin-top: 55px;
+  margin-top: 10px;
 `;
 
-export const MainFontStyle = styled.div`
+export const MainFontStyle = styled.div<{ isAnimation: string }>`
   font-weight: 700;
   font-size: 40px;
   line-height: 62px;
   letter-spacing: 0.02em;
+  opacity: 0;
+
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  ${({ isAnimation }) =>
+    isAnimation === "true" &&
+    css`
+      opacity: 1;
+      transform: translateY(70%);
+    `}
+`;
+
+export const MainImgContainer = styled.div<{ isAnimation: string }>`
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  ${({ isAnimation }) =>
+    isAnimation === "true" &&
+    css`
+      opacity: 1;
+      transition-delay: 0.1s;
+    `}
 `;
 
 export const Main3ImgStyle = styled(Main3Img)`
-  margin-top: 50px;
+  margin-top: 90px;
 `;

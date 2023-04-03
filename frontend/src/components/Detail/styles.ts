@@ -6,7 +6,7 @@ import { ReactComponent as HeartIc } from "../../assets/icon/heartIc.svg";
 import { ReactComponent as likedIc } from "../../assets/icon/likedIc.svg";
 import { ReactComponent as MuteIc } from "../../assets/icon/muteIc.svg";
 
-import { grey, blue, mainColor } from "../../styles/Colors";
+import { grey, blue, mainColor, red } from "../../styles/Colors";
 
 export const VolumeIcStyle = styled(VolumeIc)`
   fill: ${mainColor};
@@ -176,10 +176,10 @@ export const StopSoundIcStyle = styled(MuteIc)`
   height: 35px;
   bottom: 20px;
   right: 25px;
-  fill: ${mainColor};
+  fill: ${red[100]};
 
   &:hover {
-    fill: ${blue[500]};
+    fill: ${red[200]};
     cursor: pointer;
   }
 `;

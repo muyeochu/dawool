@@ -27,12 +27,11 @@ const Mic = () => {
   } = useSpeechRecognition();
 
   const [isReset, setIsReset] = useState(false);
-  const [isReset2, setIsRest2] = useState(false)
+  const [isReset2, setIsRest2] = useState(false);
 
   useEffect(() => {
     SpeechRecognition.startListening();
   }, []);
-  
 
   if (isReset) {
     SpeechRecognition.startListening();
@@ -44,9 +43,9 @@ const Mic = () => {
     closeModal();
   };
 
-  if (!browserSupportsSpeechRecognition) {
-    return <span>해당 브라우저는 음성 인식을 지원하지 않습니다.</span>;
-  }
+  // if (!browserSupportsSpeechRecognition) {
+  //   return <span>해당 브라우저는 음성 인식을 지원하지 않습니다.</span>;
+  // }
 
   setTimeout(() => {
     if (!listening && transcript.length > 0) {
@@ -54,7 +53,7 @@ const Mic = () => {
     }
   }, 1000);
 
-  console.log("입력단어?", transcript)
+  console.log("입력단어?", transcript);
 
   return (
     <>
@@ -64,13 +63,13 @@ const Mic = () => {
         </SpeakFontStyle>
         <MicAnimation />
 
-        <GuideFontStyle>
+        {browserSupportsSpeechRecognition && <GuideFontStyle>
           {listening
             ? "말하는 중입니다..."
             : transcript.length === 0
             ? "다시 말해보세요"
             : "입력 완료"}
-        </GuideFontStyle>
+        </GuideFontStyle>}
 
         {/* <GuideFontStyle>
           {listening
@@ -84,14 +83,22 @@ const Mic = () => {
           <p>검색하기</p>
         </BtnStyle> */}
 
-        {!listening && transcript.length === 0 && <BtnStyle
-          onClick={() => {
-            resetTranscript();
-            setIsReset(true);
-          }}
-        >
-          <p>다시 말하기</p>
-        </BtnStyle>}
+        {!browserSupportsSpeechRecognition && (
+          <GuideFontStyle>
+            해당 브라우저는 음성 인식을 지원하지 않습니다.
+          </GuideFontStyle>
+        )}
+
+        {!listening && transcript.length === 0 && (
+          <BtnStyle
+            onClick={() => {
+              resetTranscript();
+              setIsReset(true);
+            }}
+          >
+            <p>다시 말하기</p>
+          </BtnStyle>
+        )}
       </MicContainer>
     </>
   );
