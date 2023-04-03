@@ -9,7 +9,6 @@ import { useRecoilState } from "recoil";
 import { getSearchApi } from "../../recoil/Api";
 import { searchState } from "../../recoil/SearchSelector";
 
-
 import {
   MainGridItems,
   RowGridContainer,
@@ -46,8 +45,9 @@ const SearchPage = () => {
     const data = await res.data.contents;
 
     if (data === "No Content") {
-      if (searchData) {
+      if (searchData.length > 0) {
         console.log("마지막 결과 페이지입니다");
+        console.log("서치데이터가 몬데..", searchData);
       } else {
         setSearchData(data); // 검색결과가 없는 경우
       }
