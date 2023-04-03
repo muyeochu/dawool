@@ -4,6 +4,7 @@ import {
   TripRecTitleContainer,
   TripRecTitle1,
   TripRecTitle2,
+  TripRecTitle3,
   TripRecCardListContainer,
   RecDonwArrowIcContainer,
   RecDonwArrowIcStyle,
@@ -46,9 +47,13 @@ function TripRec({ titleType }: TripRecProps) {
       ? "쇼핑"
       : "기타";
 
-  const linkGrammar1 = ["tourSpot", "leports"].includes(titleType) ? "를" : "을"
+  const linkGrammar1 = ["tourSpot", "leports"].includes(titleType)
+    ? "를"
+    : "을";
 
-  const linkGrammar2 = ["tourSpot", "leports"].includes(titleType) ? "는" : "은"
+  const linkGrammar2 = ["tourSpot", "leports"].includes(titleType)
+    ? "는"
+    : "은";
 
   // 즐길거리 contentTypeId
   const contentTypeId =
@@ -75,13 +80,12 @@ function TripRec({ titleType }: TripRecProps) {
       : "";
 
   // 즐길거리 or (식당&숙박) selector 호출
-  const selectorPick =
-    [12, 14, 28, 38].includes(contentTypeId)
-      ? getRecEntertainmentSelector({ titleType, contentTypeId: contentTypeId })
-      : getRecEtcSelector({
-          titleType: recTitle,
-          recentContentId: recentContentId,
-        });
+  const selectorPick = [12, 14, 28, 38].includes(contentTypeId)
+    ? getRecEntertainmentSelector({ titleType, contentTypeId: contentTypeId })
+    : getRecEtcSelector({
+        titleType: recTitle,
+        recentContentId: recentContentId,
+      });
   const RecList = useRecoilValue(selectorPick);
   // console.log("추천목록!", RecList);
 
@@ -93,13 +97,20 @@ function TripRec({ titleType }: TripRecProps) {
           <>
             <TripRecTitle2>BEST {typeText} 👍</TripRecTitle2>
             <TripRecTitle2>
-              로그인하시면 취향에 맞는 {typeText}{linkGrammar1} 추천해드려요!
+              로그인하시면 취향에 맞는 {typeText}
+              {linkGrammar1} 추천해드려요!
             </TripRecTitle2>
           </>
         ) : (
           <>
             <TripRecTitle1>{user.nickName}님!</TripRecTitle1>
-            <TripRecTitle2>이런 {typeText}{linkGrammar2} 어떠세요?</TripRecTitle2>
+            <TripRecTitle2>
+              이런 {typeText}
+              {linkGrammar2} 어떠세요?
+            </TripRecTitle2>
+            <TripRecTitle3>
+              최근 본 여행지 기반으로 추천해드려요!
+            </TripRecTitle3>
           </>
         )}
       </TripRecTitleContainer>

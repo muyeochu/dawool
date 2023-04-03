@@ -24,29 +24,52 @@ export const TripRecContainer = styled.div`
   height: 92vh;
   width: 100vw;
   padding: 150px 184px;
-  background-image: linear-gradient(to bottom, #ffffff, #dfe3f2, #b6cbe5, #83b5d5, #3fa0bf);
+  background-image: linear-gradient(
+    to bottom,
+    #ffffff,
+    #dfe3f2,
+    #b6cbe5,
+    #83b5d5,
+    #3fa0bf
+  );
   background-size: cover;
 `;
 
 export const TripRecTitleContainer = styled.div`
   text-align: left;
   font-family: "SUIT";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 35px;
-  line-height: 45px;
-  color: ${black};
   margin-bottom: 55px;
 `;
 
 export const TripRecTitle1 = styled.div`
   display: flex;
   align-items: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 45px;
+  color: ${black};
 `;
 
 export const TripRecTitle2 = styled.div`
   display: flex;
   align-items: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 45px;
+  color: ${black};
+`;
+
+export const TripRecTitle3 = styled.div`
+  display: flex;
+  align-items: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: ${black};
+  margin-top: 10px;
 `;
 
 export const TripRecCardListContainer = styled.div`
