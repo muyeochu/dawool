@@ -36,6 +36,8 @@ const ClickedKakaoMap = () => {
 
     const onLoadKakaoMap = () => {
       window.kakao.maps.load(() => {
+        let nowURL = new URL(window.location.href).href.includes("my");
+        if (!nowURL) return;
         const getCourseFileData = (): Promise<ListType[]> =>
           customAxios2
             .get(`user/my-course/${folderState.courseId}`)

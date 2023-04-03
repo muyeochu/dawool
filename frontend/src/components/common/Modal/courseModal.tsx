@@ -99,6 +99,8 @@ const CourseModal = () => {
 
   function insertCourse(e: any) {
     e.preventDefault();
+    let nowURL = new URL(window.location.href).href.includes("detail");
+    if (!nowURL) return;
     const postCourseFolderData = async (): Promise<insertCourseType> => {
       try {
         const response = await customAxios2.post<insertCourseType>(
