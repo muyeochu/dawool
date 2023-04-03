@@ -16,7 +16,6 @@ import {
   ModalCourseContainer,
 } from "./styles";
 import { grey } from "../../../styles/Colors";
-
 import {
   FolderContainer,
   FolderYellowIc,
@@ -94,7 +93,8 @@ const CourseModal = () => {
   }
 
   myFunction().then((folderList) => {
-    createTag(folderList);
+    let nowURL = new URL(window.location.href).href.includes("detail");
+    if (nowURL) createTag(folderList);
   });
 
   function insertCourse(e: any) {
@@ -119,7 +119,8 @@ const CourseModal = () => {
       }
     };
     myFunction().then((folderList) => {
-      createTag(folderList);
+      let nowURL = new URL(window.location.href).href.includes("detail");
+      if (nowURL) createTag(folderList);
     });
     postCourseFolderData().then(() => {
       window.location.reload();

@@ -82,7 +82,7 @@ const ClickedKakaoMap = () => {
           var imageSrc =
             "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
           for (let i = 0; i < window.len; i++) {
-            var imageSize = new window.kakao.maps.Size(24, 35);
+            var imageSize = new window.kakao.maps.Size(30, 41);
             var markerImage = new window.kakao.maps.MarkerImage(
               imageSrc,
               imageSize
