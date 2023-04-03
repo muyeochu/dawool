@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import TripList from "../components/trip/tripList";
@@ -6,7 +6,7 @@ import TripRec from "../components/trip/tripRec";
 import useModal from "../components/utils/useModal";
 import { isSurveyState } from "../recoil/UserState";
 
-import {ReactComponent as SurveyModalImg} from "../assets/images/surveyModalImg.svg"
+import { ReactComponent as SurveyModalImg } from "../assets/images/surveyModalImg.svg";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
@@ -30,24 +30,27 @@ export const RowGridItems = styled.div`
 const TourSpotPage = () => {
   const token = localStorage.getItem("token");
   const { openModal, closeModal } = useModal();
-  // const isSurvey = useRecoilValue(isSurveyState);
+  const isSurvey = useRecoilValue(isSurveyState);
+  console.log("설문 결과는?", isSurvey);
 
-  if (token !== null) {
-    const modalDataL = {
-      type: "survey",
-      content: <SurveyModalImg />,
-      callback: () => {
-        closeModal();
-      },
-    };
-    openModal(modalDataL);
-  }
+  useEffect(() => {
+    if (token && !isSurvey) {
+      const modalData = {
+        type: "survey",
+        content: <SurveyModalImg />,
+        callback: () => {
+          closeModal();
+        },
+      };
+      openModal(modalData);
+    }
+  }, [token, isSurvey, closeModal, openModal]);
 
   return (
     <>
       {/* 추천 관광지 */}
       <MainGridItems>
-      <TripRec titleType="tourSpot" />
+        <TripRec titleType="tourSpot" />
       </MainGridItems>
 
       {/* 관광지 목록 list */}
