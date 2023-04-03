@@ -32,7 +32,6 @@ function TripList({ titleType }: TripListProps) {
   const [citySelected, setCitySelected] =
     useRecoilState<number>(citySelectedState); // 선택된 도시의 ID 값 나타내는 상태값
   const [cityList, setCityList] = useRecoilState<City[]>(citiesState); // 지역 정보를 관리하는 citiesState recoil atom의 상태값
-  const selectedCity = cityList?.find((city) => city.id) ?? { id: 1 };
 
   const [listStateValue, setListStateValue] = useRecoilState(listBarrierState); // 무장애 태그 상태
   const [listData, setListData] = useState([]); // 받아온 데이터를 저장
@@ -68,7 +67,8 @@ function TripList({ titleType }: TripListProps) {
   // 새로고침 할때마다 searchState 값 초기화 필요
   useEffect(() => {
     setListStateValue({ barrier: "00000" });
-  }, []);
+    setCitySelected(cityList[0].id);
+  }, [cityList]);
 
   const getListDatas = async (page: number) => {
     console.log("page는?", page);
