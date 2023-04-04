@@ -1,9 +1,9 @@
 package com.dawool.api.service;
 
+import com.dawool.api.dto.SurveyReqDto;
 import com.dawool.api.dto.user.ReissueTokenReqDto;
 import com.dawool.api.dto.user.ReissueTokenResDto;
 import com.dawool.api.dto.user.TokenResDto;
-import com.dawool.api.dto.SurveyReqDto;
 import com.dawool.api.entity.Survey;
 import com.dawool.api.entity.User;
 import com.dawool.api.jwt.JwtTokenProvider;
@@ -22,12 +22,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
-import reactor.core.publisher.Mono;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 회원 Service
