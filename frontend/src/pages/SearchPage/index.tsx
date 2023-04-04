@@ -15,6 +15,7 @@ import {
   RowGridItems,
   EndBlock,
 } from "./styles";
+import { setDefaultResultOrder } from "dns/promises";
 
 const SearchPage = () => {
   const location = useLocation();
@@ -31,6 +32,7 @@ const SearchPage = () => {
   // 새로고침 할때마다 searchState 값 초기화 필요
   useEffect(() => {
     setSearchStateValue({ ...searchStateValue, title: word, barrier: "00000" });
+    setSearchData([])
   }, []);
 
   useEffect(() => {
