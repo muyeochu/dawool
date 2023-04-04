@@ -66,7 +66,7 @@ export const BtnStyle = styled.button<{ isAnimation: string }>`
     isAnimation === "true" &&
     css`
       animation: fadeIn 1s ease-out forwards;
-      animation-delay: 0.4s;
+      animation-delay: 0.1s;
     `}
 
   @keyframes fadeIn {

@@ -43,9 +43,6 @@ const MainFourth = () => {
     }
   }, [scrollPosition]);
 
-  console.log("애니메이션?", isAnimation);
-  console.log("애니메이션2?", isBoxAnimation);
-
   return (
     <MainFourthContainer>
       <MainFontStyle isAnimation={isAnimation.toString()}>
