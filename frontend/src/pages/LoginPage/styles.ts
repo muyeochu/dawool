@@ -16,7 +16,6 @@ export const BackgroundImgStyle = styled.img`
   object-fit: fill;
 `;
 
-
 export const MainFontStyle = styled.div`
   font-weight: 700;
   font-size: 42px;
@@ -25,8 +24,8 @@ export const MainFontStyle = styled.div`
 
   position: absolute;
   text-align: center;
-  top: 160px; 
-  left: 50%; 
+  top: 160px;
+  left: 50%;
   transform: translate(-50%, 50%);
 `;
 
@@ -39,8 +38,8 @@ export const KakaoButton = styled.img.attrs({
   position: absolute;
   text-align: center;
   top: 350px;
-  left: 50%; 
-  transform: translate(-50%, 50%); 
+  left: 50%;
+  transform: translate(-50%, 50%);
 
   cursor: pointer;
 `;

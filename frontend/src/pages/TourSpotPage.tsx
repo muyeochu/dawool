@@ -34,10 +34,9 @@ const TourSpotPage = () => {
   const isSurvey = useRecoilValue(isSurveyState);
   const location = useLocation();
   const pathArray = location.pathname.split("/");
-  // console.log(pathArray[1])
 
   useEffect(() => {
-    if (token && !isSurvey && pathArray[1] !== "tourspot") {
+    if (token && !isSurvey) {
       const modalData = {
         type: "survey",
         content: <SurveyModalImg />,
@@ -47,6 +46,12 @@ const TourSpotPage = () => {
       };
       openModal(modalData);
     }
+
+    return () => {
+      if (pathArray[1] !== "tourspot") {
+        closeModal();
+      }
+    };
   }, [token, isSurvey, pathArray, closeModal, openModal]);
 
   return (
