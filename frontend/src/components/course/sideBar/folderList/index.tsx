@@ -240,6 +240,7 @@ export const Folders = () => {
               required={true}
               defaultValue={input}
             ></InputFolderName>
+            <button>추가</button>
             {/* onChange={changeFolder} */}
           </label>
         </form>
