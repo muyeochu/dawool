@@ -80,10 +80,31 @@ export const IcExpContainer = styled.div`
   }
 `;
 
+export const CateBtnStyle = styled.button`
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  max-width: 269px;
+  max-height: 40px;
+  padding: 10px 22px;
+  gap: 5px;
+  border: 3px solid ${grey[300]};
+  border-radius: 18px;
+  background-color: white;
+
+  span {
+    color: ${grey[500]};
+    font-weight: 500;
+    font-size: 15px;
+  }
+`;
+
 export const MainInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 60px;
+  margin-top: 30px;
   width: 100%;
   gap: 22px;
 `;
