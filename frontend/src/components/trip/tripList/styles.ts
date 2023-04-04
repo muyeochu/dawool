@@ -3,7 +3,8 @@ import { black, mainColor, blue } from "../../../styles/Colors";
 
 import { ReactComponent as ToUpIc } from "../../../assets/icon/toUpIc.svg";
 
-export const TripListContainer = styled.div``;
+export const TripListContainer = styled.div`
+`;
 
 export const TripListTitle = styled.h1`
   font-family: "SUIT";
