@@ -5,7 +5,7 @@ import TripList from "../components/trip/tripList";
 import TripRec from "../components/trip/tripRec";
 import useModal from "../components/utils/useModal";
 import { isSurveyState } from "../recoil/UserState";
-import { useLocation } from "react-router-dom";
+import { isJustLook } from "../recoil/SurveyState";
 
 import { ReactComponent as SurveyModalImg } from "../assets/images/surveyModalImg.svg";
 
@@ -32,27 +32,24 @@ const TourSpotPage = () => {
   const token = localStorage.getItem("token");
   const { openModal, closeModal } = useModal();
   const isSurvey = useRecoilValue(isSurveyState);
-  const location = useLocation();
-  const pathArray = location.pathname.split("/");
+  const justLook = useRecoilValue(isJustLook)
+
+  const modalData = {
+    type: "survey",
+    content: <SurveyModalImg />,
+    callback: () => {
+      closeModal();
+    },
+  };
 
   useEffect(() => {
-    if (token && !isSurvey) {
-      const modalData = {
-        type: "survey",
-        content: <SurveyModalImg />,
-        callback: () => {
-          closeModal();
-        },
-      };
+    if (token && !isSurvey && !justLook) {
       openModal(modalData);
     }
-
     return () => {
-      if (pathArray[1] !== "tourspot") {
-        closeModal();
-      }
-    };
-  }, [token, isSurvey, pathArray, closeModal, openModal]);
+      closeModal()
+    }
+  }, [token, isSurvey, justLook]);
 
   return (
     <>
