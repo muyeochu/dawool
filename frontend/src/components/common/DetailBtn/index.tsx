@@ -15,7 +15,8 @@ interface ButtonProps {
 }
 
 const DetailBtn = ({ type, text, icType, disable, onClick }: ButtonProps) => {
-  const btnType = type === "info" ? type : "default";
+  const btnType =
+    type === "info" ? "info" : type === "default" ? "default" : "category";
 
   let icSrc =
     icType === "ear"
@@ -39,7 +40,7 @@ const DetailBtn = ({ type, text, icType, disable, onClick }: ButtonProps) => {
       {btnType === "default" && (
         <ButtonIc src={icSrc} disable={disable?.toString()} />
       )}
-      <ButtonText disable={disable?.toString()}>{text}</ButtonText>
+      <ButtonText className={`DetailBtn_${btnType}`} disable={disable?.toString()}>{text}</ButtonText>
     </ButtonStyle>
   );
 };
