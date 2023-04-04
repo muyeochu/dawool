@@ -12,7 +12,7 @@ export interface UserType {
   grantType: String;
   nickName: String;
   refreshToken: String;
-  isSurvey: boolean;
+  isSurveyed: boolean;
 }
 export const User = (): UserType => ({
   accessToken: "",
@@ -20,7 +20,7 @@ export const User = (): UserType => ({
   grantType: "",
   nickName: "",
   refreshToken: "",
-  isSurvey: false,
+  isSurveyed: false,
 });
 export const userState = atom({
   key: "userState",
@@ -32,7 +32,7 @@ export const isSurveyState = selector({
   key: "isSurveyState",
   get: ({ get }) => {
     const user = get(userState);
-    return user.isSurvey;
+    return user.isSurveyed;
   },
 });
 
