@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainColor, white, blue } from "../../../styles/Colors";
+import { mainColor, white, blue, grey } from "../../../styles/Colors";
 
 interface ButtonStyleProps {
   disable?: string | undefined;
@@ -29,19 +29,37 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     border-radius: 20px;
     background-color: white;
   }
+
+  &.DetailBtn_category {
+    margin-top: 2px;
+    min-width: 72px;
+    max-width: 269px;
+    max-height: 40px;
+    padding: 10px 22px;
+    gap: 5px;
+    border: 3px solid ${grey[300]};
+    border-radius: 18px;
+    background-color: white;
+  }
 `;
 
 export const ButtonText = styled.span<ButtonStyleProps>`
-  font-family: "SUIT";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 19px;
-  display: flex;
-  align-items: center;
-  text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
 
-  color: ${({ disable }) => (disable === "1" ? "white" : "black")};
+  &.DetailBtn_default {
+    color: ${({ disable }) => (disable === "1" ? "white" : "black")};
+  }
+
+  &.DetailBtn_category {
+    color: ${grey[500]};
+    font-weight: 500;
+    font-size: 15px;
+  }
 `;
 
 export const ButtonIc = styled.img<ButtonStyleProps>`
