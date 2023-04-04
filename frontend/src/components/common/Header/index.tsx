@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { searchState } from "../../../recoil/SearchSelector";
 
@@ -90,7 +90,6 @@ const Header = () => {
     const blankPattern = /^\s+|\s+$/g;
     if (search.replace(blankPattern, "") === "") {
       alert("공백은 입력할 수 없습니다!");
-      console.log("아무것도 입력되지 않음!");
       resetSearchInput();
       setSearch("");
       return;
@@ -100,7 +99,6 @@ const Header = () => {
     const specialPattern = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
     if (specialPattern.test(search) === true) {
       alert("특수문자는 입력할 수 없습니다!");
-      console.log("특수문자 입력됨!");
       resetSearchInput();
       setSearch("");
       return;
