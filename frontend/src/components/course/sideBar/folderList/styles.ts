@@ -17,6 +17,15 @@ export const FolderHeaderContainer = styled.div`
   align-items: center;
   padding: 0px 0px 10px 10px;
 `;
+
+export const FolderHeaderContainerModal = styled.div`
+  border-bottom: 1px solid ${grey[300]};
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 0px 10px 10px;
+  width: 59%;
+  justify-content: space-between;
+`;
 export const FolderGreyIc = styled(FolderGrey)`
   margin-left: 5%;
 `;
@@ -30,10 +39,21 @@ export const InputFolderName = styled.input.attrs({
 })`
   display: inline-block;
   margin-left: 3%;
-  border: 1px solid rgb(149, 149, 149);
+  border: 3px solid rgb(149, 149, 149);
   border-radius: 5px;
   width: 65%;
 `;
+
+export const InputFolderNameModal = styled.input.attrs({
+  placeholder: "새 코스명을 입력해주세요.",
+})`
+  display: inline-block;
+  margin-left: 3%;
+  border: 3px solid rgb(149, 149, 149);
+  border-radius: 5px;
+  width: 70%;
+`;
+
 export const FolderContainer = styled.div`
   display: flex;
   flex-direction: row;

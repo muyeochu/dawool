@@ -52,24 +52,30 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
 
   &.DetailBtn_add {
     margin-top: 2px;
+    margin-left: 3%;
     min-width: 60px;
     max-height: 35px;
-    padding: 6px 16px;
+    padding: 3px 15px;
     gap: 5px;
     border: 3px solid ${mainColor};
     border-radius: 18px;
     background-color: white;
+    display: inherit;
+    /* float: right; */
   }
 
   &.DetailBtn_delete {
     margin-top: 2px;
+    right: 20%;
     min-width: 60px;
     max-height: 35px;
-    padding: 6px 16px;
+    padding: 3px 15px;
     gap: 5px;
     border: 3px solid ${red[100]};
     border-radius: 18px;
     background-color: white;
+    /* display: inline-block; */
+    float: right;
   }
 `;
 
