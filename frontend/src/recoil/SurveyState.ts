@@ -3,15 +3,15 @@ import { City, District } from "../types/regionTypes";
 
 // 첫 번째 취향설문
 export const firstState = atom<string[]>({
-  key: 'firstState',
+  key: "firstState",
   default: [],
 });
 
 // 두 번째 취향설문
 export const secondState = atom<string>({
-  key: 'secondState',
-  default: ""
-})
+  key: "secondState",
+  default: "",
+});
 
 // 두 번째 설문에서 선택한 광역시도
 export const selectedCityState = atom<City | undefined>({
@@ -27,18 +27,24 @@ export const selectedDistrictState = atom<District | undefined>({
 
 // 세 번째 취향설문
 export const thirdState = atom<string>({
-  key: 'thirdState',
+  key: "thirdState",
   default: "",
 });
 
 // 네 번째 취향설문
 export const fourthState = atom<string>({
-  key: 'fourthState',
-  default: ""
-})
+  key: "fourthState",
+  default: "",
+});
 
 // 다섯 번째 취향설문
 export const fifthState = atom<number[]>({
-  key: 'fifthState',
-  default: []
-})
+  key: "fifthState",
+  default: [],
+});
+
+// survey 모달에서 둘러보기 눌렀는지 여부
+export const isJustLook = atom<boolean>({
+  key: "isJustLook",
+  default: false,
+});
