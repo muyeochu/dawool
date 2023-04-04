@@ -5,13 +5,13 @@ import {
   CardImage,
   CardBottomContainer,
   CardText,
-  LikedIcStyle,
   BarrierIconContainer,
   BathchairIcStyle,
   EyeIcStyle,
   EarIcStyle,
   OldmanIcStyle,
   ToddlerIcStyle,
+  CategoryText,
 } from "./styles";
 import { ListType } from "../../../../types/tripListTypes";
 import exampleImg from "../../../../assets/images/exampleImg.png";
@@ -22,9 +22,10 @@ interface TripCardItemProps {
   type: string;
 }
 
-function TripCardItem({ contents, type }: TripCardItemProps) {
+function TripCardItem({ contents }: TripCardItemProps) {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  // console.log(contents)
 
   const handleClick = () => {
     // 로그인 유저 & 즐길거리인 경우 -> 최근 본 관광지 contentId를 local에 저장
@@ -73,10 +74,10 @@ function TripCardItem({ contents, type }: TripCardItemProps) {
           {contents.old ? <OldmanIcStyle /> : null}
           {contents.infant ? <ToddlerIcStyle /> : null}
         </BarrierIconContainer>
+        <CategoryText>#{contents.category}</CategoryText>
       </ImageContainer>
       <CardBottomContainer>
         <CardText onClick={handleClick}>{contents.title}</CardText>
-        {/* {type === "list" && <LikedIcStyle />} */}
       </CardBottomContainer>
     </CardContainer>
   );

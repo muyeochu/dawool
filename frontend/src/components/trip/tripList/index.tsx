@@ -17,6 +17,7 @@ import { City } from "../../../types/regionTypes";
 import { citiesState, citySelectedState } from "../../../recoil/RegionState";
 import { ListType } from "../../../types/tripListTypes";
 import { listBarrierState } from "../../../recoil/TripListSelector";
+import { useLocation } from "react-router-dom";
 
 import { getContentTypeId } from "../../../recoil/TripListSelector";
 import { getListApi } from "../../../recoil/Api";
@@ -40,7 +41,7 @@ function TripList({ titleType }: TripListProps) {
   const pageEnd: any = useRef(); // 페이지의 끝부분
 
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [isUpBtn, SetIsUpBtn] = useState(false)
+  const [isUpBtn, SetIsUpBtn] = useState(false);
 
   // 일정 스크롤이 내려가야 위로 올라가는 버튼이 보임
   const updateScroll = () => {
@@ -67,8 +68,17 @@ function TripList({ titleType }: TripListProps) {
   // 새로고침 할때마다 searchState 값 초기화 필요
   useEffect(() => {
     setListStateValue({ barrier: "00000" });
-    setCitySelected(cityList[0].id);
-  }, [cityList]);
+  }, []);
+
+  const location = useLocation();
+  const pathArray = location.pathname.split("/");
+  // console.log("주소!", pathArray);
+  // console.log(cityList[0].id)
+
+  // path 바뀔 때만 선택된 지역 변경
+  // useEffect(() => {
+  //   setCitySelected(cityList[0].id);
+  // }, [pathArray]);
 
   const getListDatas = async (page: number) => {
     console.log("page는?", page);
@@ -132,7 +142,6 @@ function TripList({ titleType }: TripListProps) {
 
   // 드롭다운에서 도시 선택할 때 호출
   const onCitySelected = (city: string | TripListTitleType) => {
-    // const selectedCity = Number(city as TripListTitleType);
     setIsClicked(false);
   };
 
@@ -164,7 +173,8 @@ function TripList({ titleType }: TripListProps) {
     <>
       <TripListContainer id="trip-list-container">
         <TripListTitle>
-          <span>{cityName}</span>{typeText}
+          <span>{cityName}</span>
+          {typeText}
         </TripListTitle>
         <ButtonGroup>
           {/* 무장애 필터링 버튼 */}
@@ -194,7 +204,7 @@ function TripList({ titleType }: TripListProps) {
           </TripCardListContainer>
         )}
       </TripListContainer>
-      {isUpBtn && <ToUpIcStyle onClick={MoveToTop}/>}
+      {isUpBtn && <ToUpIcStyle onClick={MoveToTop} />}
       <EndBlock ref={pageEnd} />
     </>
   );

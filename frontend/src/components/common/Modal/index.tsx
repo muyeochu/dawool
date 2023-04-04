@@ -30,9 +30,9 @@ const Modal = () => {
     navigate("/survey");
   };
 
-  // 식당페이지로 넘김 (임시)
-  const goRestaurant = () => {
-    navigate("/restaurant");
+  // 관광지페이지로 넘김
+  const goTourSpot = () => {
+    navigate("/tourSpot");
   };
 
   const synth = window.speechSynthesis;
@@ -121,7 +121,7 @@ const Modal = () => {
             </BtnStyle>
             <SideFontStyle
               onClick={() => {
-                goRestaurant();
+                goTourSpot();
                 closeModal();
               }}
             >
