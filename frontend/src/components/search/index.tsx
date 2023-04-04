@@ -36,16 +36,16 @@ const SearchList = ({ word, data }: PropTypes) => {
         <span className="keyword">{word}</span>
         <span>검색결과</span>
       </TitleContainer>
+      <ButtonList>
+        {buttons.map(({ id, label, icType, btType }) => (
+          <Button key={id} id={id} icType={icType} btType={btType}>
+            {label}
+          </Button>
+        ))}
+      </ButtonList>
 
       {noData === "no" && data.length >= 1 && (
         <>
-          <ButtonList>
-            {buttons.map(({ id, label, icType, btType }) => (
-              <Button key={id} id={id} icType={icType} btType={btType}>
-                {label}
-              </Button>
-            ))}
-          </ButtonList>
           <TripCardListContainer>
             {data.map((item: ListType) => (
               <TripCardItem
@@ -57,13 +57,14 @@ const SearchList = ({ word, data }: PropTypes) => {
           </TripCardListContainer>
         </>
       )}
-      {noData === "yes" &&  <>
-        <NonDataContainer>
-          <p>검색 결과가 없습니다.</p>
-          <NonSearchImgStyle />
-        </NonDataContainer>
-      </>}
-     
+      {noData === "yes" && (
+        <>
+          <NonDataContainer>
+            <NonSearchImgStyle />
+            <p>검색 결과가 없습니다.</p>
+          </NonDataContainer>
+        </>
+      )}
     </>
   );
 };
