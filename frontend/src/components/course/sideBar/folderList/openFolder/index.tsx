@@ -9,7 +9,9 @@ import {
   MemoContainer,
   UpdateIc,
   CourseListContainer,
+  FolderNameContainer,
 } from "./styles";
+import DetailBtn from "../../../../common/DetailBtn";
 import { FolderYellowIc, MemoIc } from "../styles";
 import { useState, useRef } from "react";
 import useModal from "../../../../../components/utils/useModal";
@@ -77,16 +79,26 @@ export const FolderInside = () => {
         </ExitFolderButton>
       </ExitFolderContainer>
       <FolderContainer>
-        <FolderYellowIc />
-        {folderState.opendFolder}
+        <FolderNameContainer>
+          <FolderYellowIc />
+          {folderState.opendFolder}
+        </FolderNameContainer>
         {mdState.isOpen ? (
-          <DeleteIc style={{ zIndex: -1 }} />
+          <DetailBtn type={"delete"} text={"삭제"}></DetailBtn>
         ) : (
-          <DeleteIc
+          <DetailBtn
+            type={"delete"}
+            text={"삭제"}
             onClick={() => {
               openModal(modalDataS);
             }}
-          />
+          ></DetailBtn>
+          // <DeleteIc style={{ zIndex: -1 }} />
+          // <DeleteIc
+          //   onClick={() => {
+          //     openModal(modalDataS);
+          //   }}
+          // />
         )}
       </FolderContainer>
       <CourseListContainer />

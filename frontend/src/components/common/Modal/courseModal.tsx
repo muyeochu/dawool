@@ -15,10 +15,11 @@ import {
   ModalCourseTitle,
   ModalCourseContainer,
 } from "./styles";
+import DetailBtn from "../DetailBtn";
 import {
-  FolderHeaderContainer,
+  FolderHeaderContainerModal,
   FolderGreyIc,
-  InputFolderName,
+  InputFolderNameModal,
 } from "../../course/sideBar/folderList/styles";
 import { useState } from "react";
 import { grey } from "../../../styles/Colors";
@@ -213,26 +214,28 @@ const CourseModal = () => {
         <ModalDimmer>
           <ModalLargeContainer>
             <ModalCourseTitle>저장할 코스를 선택해주세요.</ModalCourseTitle>
-            <FolderHeaderContainer>
+            <FolderHeaderContainerModal>
               <form onSubmit={insertFolder}>
                 {/* 백엔드와 통신 시 아래 코드 사용 */}
                 {/* onSubmit={insertFolder} */}
-                <label>
+                <label style={{ display: "flex" }}>
                   <FolderGreyIc />
                   {/* <input placeholder="새 코스명을 입력해주세요." ></input> */}
                   {/* <FolderHeaderFont>새 코스명을 입력해주세요.</FolderHeaderFont> */}
                   {/* 엔터 누를 때마다 백한테 보내기. 해당 코드는 https://www.youtube.com/watch?v=gZddSM-byRE&list=PLkaAEQyMpRg-k-PZDKvqw7EChwJQXxhkI&index=3 참고하기 */}
-                  <InputFolderName
+                  <InputFolderNameModal
                     id="inputName"
                     type="text"
                     required={true}
                     defaultValue={input}
-                  ></InputFolderName>
+                  ></InputFolderNameModal>
+                  <DetailBtn type={"add"} text={"추가"}></DetailBtn>
+
                   {/* <button>추가</button> */}
                   {/* onChange={changeFolder} */}
                 </label>
               </form>
-            </FolderHeaderContainer>
+            </FolderHeaderContainerModal>
 
             <ModalCourseContainer>
               <div id="modalFolder">
