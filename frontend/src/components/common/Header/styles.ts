@@ -131,6 +131,8 @@ export const MicIcStyle = styled(MicIc)<{ headercolor: string }>`
 
 export const NavStyle = styled(NavLink)`
   text-decoration: none;
+  color: black;
+
   &:link {
     text-decoration: none;
   }
