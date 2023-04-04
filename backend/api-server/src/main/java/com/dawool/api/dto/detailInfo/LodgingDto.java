@@ -103,7 +103,7 @@ public class LodgingDto extends CommonInfoDto{
                 // 공통정보
                 .contentId(lodging.getContentid())
                 .contentTypeId(lodging.getContenttypeid())
-                .addr1(lodging.getAddr1())
+                .addr1(lodging.getAddr1().equals("0") ? lodging.getAddr2() : lodging.getAddr1())
                 .title(lodging.getTitle())
                 .category(Category.valueOf(lodging.getCat3()).getCategory())
                 .deaf(lodging.getDeaf())
@@ -112,7 +112,7 @@ public class LodgingDto extends CommonInfoDto{
                 .old(lodging.getOld())
                 .infant(lodging.getInfant())
                 .isLiked(liked)
-                .firstImage(lodging.getFirstimage())
+                .firstImage(lodging.getFirstimage().equals("0") ? lodging.getFirstimage2() : lodging.getFirstimage())
                 .homepage(lodging.getHomepage())
                 .mapX(lodging.getMapx())
                 .mapY(lodging.getMapy())
