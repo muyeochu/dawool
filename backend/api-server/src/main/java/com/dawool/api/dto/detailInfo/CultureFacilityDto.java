@@ -53,7 +53,7 @@ public class CultureFacilityDto extends CommonInfoDto{
                 // 공통정보
                 .contentId(cultureFacility.getContentid())
                 .contentTypeId(cultureFacility.getContenttypeid())
-                .addr1(cultureFacility.getAddr1())
+                .addr1(cultureFacility.getAddr1().equals("0") ? cultureFacility.getAddr2() : cultureFacility.getAddr1())
                 .title(cultureFacility.getTitle())
                 .category(Category.valueOf(cultureFacility.getCat3()).getCategory())
                 .deaf(cultureFacility.getDeaf())
@@ -62,7 +62,7 @@ public class CultureFacilityDto extends CommonInfoDto{
                 .old(cultureFacility.getOld())
                 .infant(cultureFacility.getInfant())
                 .isLiked(liked)
-                .firstImage(cultureFacility.getFirstimage())
+                .firstImage(cultureFacility.getFirstimage().equals("0") ? cultureFacility.getFirstimage2() : cultureFacility.getFirstimage())
                 .homepage(cultureFacility.getHomepage())
                 .mapX(cultureFacility.getMapx())
                 .mapY(cultureFacility.getMapy())

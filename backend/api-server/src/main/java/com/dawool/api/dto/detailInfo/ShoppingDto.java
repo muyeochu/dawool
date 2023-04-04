@@ -68,7 +68,7 @@ public class ShoppingDto extends CommonInfoDto{
                 // 공통정보
                 .contentId(shopping.getContentid())
                 .contentTypeId(shopping.getContenttypeid())
-                .addr1(shopping.getAddr1())
+                .addr1(shopping.getAddr1().equals("0") ? shopping.getAddr2() : shopping.getAddr1())
                 .title(shopping.getTitle())
                 .category(Category.valueOf(shopping.getCat3()).getCategory())
                 .deaf(shopping.getDeaf())
@@ -77,7 +77,7 @@ public class ShoppingDto extends CommonInfoDto{
                 .old(shopping.getOld())
                 .infant(shopping.getInfant())
                 .isLiked(liked)
-                .firstImage(shopping.getFirstimage())
+                .firstImage(shopping.getFirstimage().equals("0") ? shopping.getFirstimage2() : shopping.getFirstimage())
                 .homepage(shopping.getHomepage())
                 .mapX(shopping.getMapx())
                 .mapY(shopping.getMapy())
