@@ -40,6 +40,7 @@ const Mic = () => {
 
   const handleSearch = () => {
     navigate("/search", { state: transcript });
+    window.location.reload();
     closeModal();
   };
 
@@ -63,13 +64,15 @@ const Mic = () => {
         </SpeakFontStyle>
         <MicAnimation />
 
-        {browserSupportsSpeechRecognition && <GuideFontStyle>
-          {listening
-            ? "말하는 중입니다..."
-            : transcript.length === 0
-            ? "다시 말해보세요"
-            : "입력 완료"}
-        </GuideFontStyle>}
+        {browserSupportsSpeechRecognition && (
+          <GuideFontStyle>
+            {listening
+              ? "말하는 중입니다..."
+              : transcript.length === 0
+              ? "다시 말해보세요"
+              : "입력 완료"}
+          </GuideFontStyle>
+        )}
 
         {/* <GuideFontStyle>
           {listening
