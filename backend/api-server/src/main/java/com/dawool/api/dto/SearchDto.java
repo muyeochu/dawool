@@ -48,7 +48,7 @@ public class SearchDto {
                 .contentId(info.getContentid())
                 .contentTypeId(info.getContenttypeid())
                 .title(info.getTitle())
-                .imageUrl(info.getFirstimage())
+                .imageUrl(info.getFirstimage().equals("0") ? info.getFirstimage2() : info.getFirstimage())
                 .category(Category.valueOf(info.getCat3()).getCategory())
                 .deaf(info.getDeaf())
                 .visuallyImpaired(info.getVisual_impaired())
