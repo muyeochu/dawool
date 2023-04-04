@@ -15,7 +15,14 @@ import {
   ModalCourseTitle,
   ModalCourseContainer,
 } from "./styles";
+import {
+  FolderHeaderContainer,
+  FolderGreyIc,
+  InputFolderName,
+} from "../../course/sideBar/folderList/styles";
+import { useState } from "react";
 import { grey } from "../../../styles/Colors";
+import { CreateListType } from "../../../types/courseFolderTypes";
 import {
   FolderContainer,
   FolderYellowIc,
@@ -35,6 +42,7 @@ declare global {
 const CourseModal = () => {
   const navigate = useNavigate();
   const { modalDataState, closeModal } = useModal();
+  const [input, setInput] = useState("");
 
   const getCourseFolderData = (): Promise<ListType[]> =>
     customAxios2
@@ -111,6 +119,61 @@ const CourseModal = () => {
     if (nowURL) createTag(folderList);
   });
 
+  function insertFolder(e: any) {
+    e.preventDefault();
+    let folderinput = document.getElementById(
+      "inputName"
+    ) as HTMLInputElement | null;
+    const postCourseFolderData = async (
+      name: string
+    ): Promise<CreateListType> => {
+      try {
+        const response = await customAxios2.post<CreateListType>(
+          `user/my-course`,
+          { courseName: name }
+        );
+        console.log(response);
+        return response.data;
+      } catch (err) {
+        console.log(err);
+        throw new Error("error");
+      }
+    };
+    myFunction().then((folderList) => {
+      createTag(folderList);
+    });
+    let inputText = folderinput?.value;
+    if (inputText) {
+      postCourseFolderData(inputText).then(() => {
+        window.location.reload();
+      });
+    }
+    if (folderinput) {
+      folderinput.value = "";
+    }
+    // customAxios2.post(`user/my-course`,{name})
+    // .then((res)=>{
+    //     console.log(res);
+    // }).catch((err)=>{
+    //     console.log(err);
+    // })
+    // const insertFolder = async()=>{
+    //     await axios
+    //     .post(baseURL+"/api/course",{
+    //         folderName:input
+    //     })
+    //     .then((res)=>{
+    //         console.log(res.data);
+    //         setInput(e.target.value);
+    //         // myFunction();
+    //         // getFolders();
+    //     })
+    //     .catch((err)=>{
+    //         console.log(err);
+    //     })
+    // }
+    // insertFolder();
+  }
   function insertCourse(e: any) {
     e.preventDefault();
     let nowURL = new URL(window.location.href).href.includes("detail");
@@ -134,6 +197,7 @@ const CourseModal = () => {
         throw new Error("error");
       }
     };
+
     myFunction().then((folderList) => {
       let nowURL = new URL(window.location.href).href.includes("detail");
       if (nowURL) createTag(folderList);
@@ -149,6 +213,27 @@ const CourseModal = () => {
         <ModalDimmer>
           <ModalLargeContainer>
             <ModalCourseTitle>저장할 코스를 선택해주세요.</ModalCourseTitle>
+            <FolderHeaderContainer>
+              <form onSubmit={insertFolder}>
+                {/* 백엔드와 통신 시 아래 코드 사용 */}
+                {/* onSubmit={insertFolder} */}
+                <label>
+                  <FolderGreyIc />
+                  {/* <input placeholder="새 코스명을 입력해주세요." ></input> */}
+                  {/* <FolderHeaderFont>새 코스명을 입력해주세요.</FolderHeaderFont> */}
+                  {/* 엔터 누를 때마다 백한테 보내기. 해당 코드는 https://www.youtube.com/watch?v=gZddSM-byRE&list=PLkaAEQyMpRg-k-PZDKvqw7EChwJQXxhkI&index=3 참고하기 */}
+                  <InputFolderName
+                    id="inputName"
+                    type="text"
+                    required={true}
+                    defaultValue={input}
+                  ></InputFolderName>
+                  {/* <button>추가</button> */}
+                  {/* onChange={changeFolder} */}
+                </label>
+              </form>
+            </FolderHeaderContainer>
+
             <ModalCourseContainer>
               <div id="modalFolder">
                 <div id="modalFolderContainer"></div>
