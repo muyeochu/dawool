@@ -22,6 +22,7 @@ import { userState } from "../../../../recoil/UserState";
 import React from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
+import DetailBtn from "../../../common/DetailBtn";
 //폴더 생성 실험용 데이터
 // const data=[
 //     {id:1, name:"111"},
@@ -229,7 +230,7 @@ export const Folders = () => {
         <form onSubmit={insertFolder}>
           {/* 백엔드와 통신 시 아래 코드 사용 */}
           {/* onSubmit={insertFolder} */}
-          <label>
+          <label style={{ display: "flex" }}>
             <FolderGreyIc />
             {/* <input placeholder="새 코스명을 입력해주세요." ></input> */}
             {/* <FolderHeaderFont>새 코스명을 입력해주세요.</FolderHeaderFont> */}
@@ -240,7 +241,8 @@ export const Folders = () => {
               required={true}
               defaultValue={input}
             ></InputFolderName>
-            <button>추가</button>
+            <DetailBtn type={"add"} text={"추가"}></DetailBtn>
+            {/* <button>추가</button> */}
             {/* onChange={changeFolder} */}
           </label>
         </form>
