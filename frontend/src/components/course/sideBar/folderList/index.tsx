@@ -31,8 +31,9 @@ import { useNavigate } from "react-router-dom";
 // ]
 
 export const Folders = () => {
-  const getCourseFolderData = (): Promise<ListType[]> =>
-    customAxios2
+  //비동기(promise)에서 동기(async await로 변경)
+  const getCourseFolderData = async () =>
+    await customAxios2
       .get(`user/my-course`)
       .then((res) => {
         console.log(res);

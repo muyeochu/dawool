@@ -43,7 +43,10 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
 
   // 내 코스 관리로 이동
   const goMyCours = () => {
-    if (!checkLogin()) navigate("/mycourse");
+    if (!checkLogin()) {
+      navigate("/mycourse");
+      window.location.reload();
+    }
   };
 
   // 관심 여행지 관리로 이동
@@ -61,7 +64,7 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
       grantType: "",
       nickName: "",
       refreshToken: "",
-      isSurvey: false,
+      isSurveyed: false,
     });
     alert("로그아웃 되었습니다!");
     navigate("/");
@@ -71,11 +74,13 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
     if (user.accessToken === "") {
       alert("로그인이 필요한 서비스입니다.");
       navigate("/login");
+      window.location.reload();
       return true;
     } else return false;
   };
   const goLogin = () => {
     navigate("/login");
+    window.location.reload();
     closeSideBar();
     const bfLogin = document.getElementById("beforeLogin");
   };

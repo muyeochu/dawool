@@ -110,7 +110,9 @@ export const CourseList = () => {
         if (nowCourse.contentTypeId === 39) {
           navigate(`/detail/restaurant/${courseList["course"][i].contentId}`);
         } else if (nowCourse.contentTypeId === 32) {
-          navigate(`/detail/accomodation/${courseList["course"][i].contentId}`);
+          navigate(
+            `/detail/accommodation/${courseList["course"][i].contentId}`
+          );
         } else if (nowCourse.contentTypeId === 12) {
           navigate(`/detail/tourspot/${courseList["course"][i].contentId}`);
         } else if (nowCourse.contentTypeId === 14) {
