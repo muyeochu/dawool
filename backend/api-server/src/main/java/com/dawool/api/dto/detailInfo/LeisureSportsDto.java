@@ -70,7 +70,7 @@ public class LeisureSportsDto extends CommonInfoDto{
                 // 공통정보
                 .contentId(leisureSports.getContentid())
                 .contentTypeId(leisureSports.getContenttypeid())
-                .addr1(leisureSports.getAddr1())
+                .addr1(leisureSports.getAddr1().equals("0") ? leisureSports.getAddr2() : leisureSports.getAddr1())
                 .title(leisureSports.getTitle())
                 .category(Category.valueOf(leisureSports.getCat3()).getCategory())
                 .deaf(leisureSports.getDeaf())
@@ -79,7 +79,7 @@ public class LeisureSportsDto extends CommonInfoDto{
                 .old(leisureSports.getOld())
                 .infant(leisureSports.getInfant())
                 .isLiked(liked)
-                .firstImage(leisureSports.getFirstimage())
+                .firstImage(leisureSports.getFirstimage().equals("0") ? leisureSports.getFirstimage2() : leisureSports.getFirstimage())
                 .homepage(leisureSports.getHomepage())
                 .mapX(leisureSports.getMapx())
                 .mapY(leisureSports.getMapy())

@@ -71,7 +71,7 @@ public class RestaurantDto extends CommonInfoDto{
                 // 공통정보
                 .contentId(restaurant.getContentid())
                 .contentTypeId(restaurant.getContenttypeid())
-                .addr1(restaurant.getAddr1())
+                .addr1(restaurant.getAddr1().equals("0") ? restaurant.getAddr2() : restaurant.getAddr1())
                 .title(restaurant.getTitle())
                 .category(Category.valueOf(restaurant.getCat3()).getCategory())
                 .deaf(restaurant.getDeaf())
@@ -80,7 +80,7 @@ public class RestaurantDto extends CommonInfoDto{
                 .old(restaurant.getOld())
                 .infant(restaurant.getInfant())
                 .isLiked(liked)
-                .firstImage(restaurant.getFirstimage())
+                .firstImage(restaurant.getFirstimage().equals("0") ? restaurant.getFirstimage2() : restaurant.getFirstimage())
                 .homepage(restaurant.getHomepage())
                 .mapX(restaurant.getMapx())
                 .mapY(restaurant.getMapy())
