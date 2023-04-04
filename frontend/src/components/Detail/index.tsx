@@ -100,7 +100,6 @@ const DetailComponent = ({
       {myData.info.category && (
         <DetailBtn type={"category"} text={`# ${myData.info.category}`} />
       )}
-
       <MainInfoContainer>
         <MainImgContainer>
           {myData.info.firstImage === "0" ? (

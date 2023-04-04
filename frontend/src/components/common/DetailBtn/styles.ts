@@ -1,5 +1,12 @@
 import styled from "styled-components";
-import { mainColor, white, blue, grey } from "../../../styles/Colors";
+import {
+  mainColor,
+  white,
+  black,
+  blue,
+  grey,
+  red,
+} from "../../../styles/Colors";
 
 interface ButtonStyleProps {
   disable?: string | undefined;
@@ -42,6 +49,28 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     background-color: white;
     cursor: default;
   }
+
+  &.DetailBtn_add {
+    margin-top: 2px;
+    min-width: 60px;
+    max-height: 35px;
+    padding: 6px 16px;
+    gap: 5px;
+    border: 3px solid ${mainColor};
+    border-radius: 18px;
+    background-color: white;
+  }
+
+  &.DetailBtn_delete {
+    margin-top: 2px;
+    min-width: 60px;
+    max-height: 35px;
+    padding: 6px 16px;
+    gap: 5px;
+    border: 3px solid ${red[100]};
+    border-radius: 18px;
+    background-color: white;
+  }
 `;
 
 export const ButtonText = styled.span<ButtonStyleProps>`
@@ -51,15 +80,14 @@ export const ButtonText = styled.span<ButtonStyleProps>`
   display: flex;
   align-items: center;
   text-align: center;
+  color: ${grey[500]};
 
   &.DetailBtn_default {
     color: ${({ disable }) => (disable === "1" ? "white" : "black")};
   }
 
-  &.DetailBtn_category {
-    color: ${grey[500]};
-    font-weight: 500;
-    font-size: 15px;
+  &.DetailBtn_delete {
+    color: ${red[100]};
   }
 `;
 
