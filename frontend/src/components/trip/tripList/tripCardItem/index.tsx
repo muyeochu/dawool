@@ -25,7 +25,7 @@ interface TripCardItemProps {
 function TripCardItem({ contents }: TripCardItemProps) {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  console.log(contents)
+  // console.log(contents)
 
   const handleClick = () => {
     // 로그인 유저 & 즐길거리인 경우 -> 최근 본 관광지 contentId를 local에 저장
