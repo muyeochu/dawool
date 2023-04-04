@@ -17,7 +17,6 @@ import { City } from "../../../types/regionTypes";
 import { citiesState, citySelectedState } from "../../../recoil/RegionState";
 import { ListType } from "../../../types/tripListTypes";
 import { listBarrierState } from "../../../recoil/TripListSelector";
-import { useLocation } from "react-router-dom";
 
 import { getContentTypeId } from "../../../recoil/TripListSelector";
 import { getListApi } from "../../../recoil/Api";
@@ -69,16 +68,6 @@ function TripList({ titleType }: TripListProps) {
   useEffect(() => {
     setListStateValue({ barrier: "00000" });
   }, []);
-
-  const location = useLocation();
-  const pathArray = location.pathname.split("/");
-  // console.log("주소!", pathArray);
-  // console.log(cityList[0].id)
-
-  // path 바뀔 때만 선택된 지역 변경
-  // useEffect(() => {
-  //   setCitySelected(cityList[0].id);
-  // }, [pathArray]);
 
   const getListDatas = async (page: number) => {
     console.log("page는?", page);
