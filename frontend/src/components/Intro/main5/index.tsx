@@ -25,6 +25,7 @@ const MainFifth = () => {
       navigate("/tourspot");
     } else {
       navigate("/login");
+      window.location.reload();
     }
   };
 
