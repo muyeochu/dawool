@@ -68,18 +68,18 @@ const MainFifth = () => {
 
   return (
     <MainFifthContainer>
-      <Main5ImgStyle isAnimation={isAnimation.toString()} />
-      <MainFontStyle isAnimation={isFontAnimation.toString()}>
+      <Main5ImgStyle isanimation={isAnimation.toString()} />
+      <MainFontStyle isanimation={isFontAnimation.toString()}>
         다울의 여행지 추천 서비스,
         <br />
         <ColorFontStyle>지금 시작해보세요</ColorFontStyle>
       </MainFontStyle>
-      <BtnStyle isAnimation={isBtnAnimation.toString()}>
+      <BtnStyle isanimation={isBtnAnimation.toString()}>
         <BtnFontStyle onClick={wantRec}>추천받기</BtnFontStyle>
       </BtnStyle>
       <SideFontStyle
         onClick={justLookAround}
-        isAnimation={isBtnAnimation.toString()}
+        isanimation={isBtnAnimation.toString()}
       >
         그냥 둘러볼래요
       </SideFontStyle>

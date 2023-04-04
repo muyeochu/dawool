@@ -34,8 +34,8 @@ const MainSecond = () => {
 
   return (
     <MainSecondContainer id="main-second">
-      <Main2ImgStyle isAnimation={isAnimation.toString()} />
-      <FontContainer isAnimation={isAnimation.toString()}>
+      <Main2ImgStyle isanimation={isAnimation.toString()} />
+      <FontContainer isanimation={isAnimation.toString()}>
         <MainFontStyle>무장애 여행은요</MainFontStyle>
         <SideFontStyle>
           신체적 제약 때문에 관광활동을 자유롭게 하지 못하는

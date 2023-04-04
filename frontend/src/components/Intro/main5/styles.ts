@@ -13,19 +13,19 @@ export const MainFifthContainer = styled.div`
   background-color: ${blue[100]};
 `;
 
-export const Main5ImgStyle = styled(main5Img)<{ isAnimation: string }>`
+export const Main5ImgStyle = styled(main5Img)<{ isanimation: string }>`
   margin-bottom: 50px;
   opacity: 0;
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  ${({ isAnimation }) =>
-    isAnimation === "true" &&
+  ${({ isanimation }) =>
+    isanimation === "true" &&
     css`
       opacity: 1;
       transform: translateY(10%);
     `}
 `;
 
-export const MainFontStyle = styled.div<{ isAnimation: string }>`
+export const MainFontStyle = styled.div<{ isanimation: string }>`
   font-weight: 700;
   font-size: 36px;
   line-height: 1.4;
@@ -33,8 +33,8 @@ export const MainFontStyle = styled.div<{ isAnimation: string }>`
 
   opacity: 0;
   transition: opacity 1s ease-out;
-  ${({ isAnimation }) =>
-    isAnimation === "true" &&
+  ${({ isanimation }) =>
+    isanimation === "true" &&
     css`
       opacity: 1;
       transition-delay: 0.3s;
@@ -45,7 +45,7 @@ export const ColorFontStyle = styled.div`
   color: ${blue[600]};
 `;
 
-export const BtnStyle = styled.button<{ isAnimation: string }>`
+export const BtnStyle = styled.button<{ isanimation: string }>`
   width: 330px;
   height: 60px;
   background-color: ${mainColor};
@@ -62,8 +62,8 @@ export const BtnStyle = styled.button<{ isAnimation: string }>`
     background-color: ${blue[500]};
   }
 
-  ${({ isAnimation }) =>
-    isAnimation === "true" &&
+  ${({ isanimation }) =>
+    isanimation === "true" &&
     css`
       animation: fadeIn 1s ease-out forwards;
       animation-delay: 0.1s;
@@ -87,7 +87,7 @@ export const BtnFontStyle = styled.div`
   line-height: 40px;
 `;
 
-export const SideFontStyle = styled.div<{ isAnimation: string }>`
+export const SideFontStyle = styled.div<{ isanimation: string }>`
   font-weight: 600;
   font-size: 18px;
   line-height: 32px;
@@ -100,8 +100,8 @@ export const SideFontStyle = styled.div<{ isAnimation: string }>`
     color: black;
   }
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  ${({ isAnimation }) =>
-    isAnimation === "true" &&
+  ${({ isanimation }) =>
+    isanimation === "true" &&
     css`
       opacity: 1;
       transition-delay: 0.8s;

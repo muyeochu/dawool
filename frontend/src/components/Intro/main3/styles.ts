@@ -17,7 +17,7 @@ export const FontContainer = styled.div`
   margin-top: 10px;
 `;
 
-export const MainFontStyle = styled.div<{ isAnimation: string }>`
+export const MainFontStyle = styled.div<{ isanimation: string }>`
   font-weight: 700;
   font-size: 40px;
   line-height: 62px;
@@ -26,19 +26,19 @@ export const MainFontStyle = styled.div<{ isAnimation: string }>`
 
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 
-  ${({ isAnimation }) =>
-    isAnimation === "true" &&
+  ${({ isanimation }) =>
+    isanimation === "true" &&
     css`
       opacity: 1;
       transform: translateY(70%);
     `}
 `;
 
-export const MainImgContainer = styled.div<{ isAnimation: string }>`
+export const MainImgContainer = styled.div<{ isanimation: string }>`
   opacity: 0;
   transition: opacity 1s ease-out;
-  ${({ isAnimation }) =>
-    isAnimation === "true" &&
+  ${({ isanimation }) =>
+    isanimation === "true" &&
     css`
       opacity: 1;
       transition-delay: 0.1s;

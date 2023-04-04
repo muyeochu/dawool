@@ -7,7 +7,7 @@ export const MainSecondContainer = styled.div`
   position: relative;
 `;
 
-export const Main2ImgStyle = styled(Main2Img)<{ isAnimation: string }>`
+export const Main2ImgStyle = styled(Main2Img)<{ isanimation: string }>`
   position: absolute;
   top: 50%;
   left: 30%;
@@ -16,15 +16,15 @@ export const Main2ImgStyle = styled(Main2Img)<{ isAnimation: string }>`
 
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 
-  ${({ isAnimation }) =>
-    isAnimation === "true" &&
+  ${({ isanimation }) =>
+    isanimation === "true" &&
     css`
       opacity: 1;
       transform: translate(-50%, -50%);
     `}
 `;
 
-export const FontContainer = styled.div<{ isAnimation: string }>`
+export const FontContainer = styled.div<{ isanimation: string }>`
   position: absolute;
   top: 50%;
   right: 30%;
@@ -33,8 +33,8 @@ export const FontContainer = styled.div<{ isAnimation: string }>`
 
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 
-  ${({ isAnimation }) =>
-    isAnimation === "true" &&
+  ${({ isanimation }) =>
+    isanimation === "true" &&
     css`
       opacity: 1;
       transform: translate(50%, -50%);

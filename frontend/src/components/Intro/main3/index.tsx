@@ -44,11 +44,11 @@ const MainThird = () => {
   return (
     <MainThirdContainer>
       <FontContainer>
-        <MainFontStyle isAnimation={isAnimation.toString()}>
+        <MainFontStyle isanimation={isAnimation.toString()}>
           여행지는 정하셨나요?
         </MainFontStyle>
       </FontContainer>
-      <MainImgContainer isAnimation={isImgAnimation.toString()}>
+      <MainImgContainer isanimation={isImgAnimation.toString()}>
         <Main3ImgStyle />
       </MainImgContainer>
     </MainThirdContainer>

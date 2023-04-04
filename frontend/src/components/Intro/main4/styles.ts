@@ -8,7 +8,7 @@ export const MainFourthContainer = styled.div`
   align-items: center;
 `;
 
-export const MainFontStyle = styled.div<{ isAnimation: string }>`
+export const MainFontStyle = styled.div<{ isanimation: string }>`
   font-weight: 700;
   font-size: 40px;
   line-height: 62px;
@@ -19,15 +19,15 @@ export const MainFontStyle = styled.div<{ isAnimation: string }>`
 
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 
-  ${({ isAnimation }) =>
-    isAnimation === "true" &&
+  ${({ isanimation }) =>
+    isanimation === "true" &&
     css`
       opacity: 1;
       transform: translateY(100%);
     `}
 `;
 
-export const SideFontStyle = styled.div<{ isAnimation: string }>`
+export const SideFontStyle = styled.div<{ isanimation: string }>`
   font-weight: 400;
   font-size: 24px;
   line-height: 30px;
@@ -39,8 +39,8 @@ export const SideFontStyle = styled.div<{ isAnimation: string }>`
   opacity: 0;
   transition: opacity 1s ease-out;
 
-  ${({ isAnimation }) =>
-    isAnimation === "true" &&
+  ${({ isanimation }) =>
+    isanimation === "true" &&
     css`
       opacity: 1;
       transition-delay: 0.5s;
@@ -54,7 +54,7 @@ export const CardsContainer = styled.div`
   gap: 50px;
 `;
 
-export const CardBox = styled.div<{ isAnimation: string }>`
+export const CardBox = styled.div<{ isanimation: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,8 +62,8 @@ export const CardBox = styled.div<{ isAnimation: string }>`
   opacity: 0;
 
   &.box1 {
-    ${({ isAnimation }) =>
-      isAnimation === "true" &&
+    ${({ isanimation }) =>
+      isanimation === "true" &&
       css`
         animation: fadeIn4 1s ease-out forwards;
         animation-delay: 0.3s;
@@ -71,8 +71,8 @@ export const CardBox = styled.div<{ isAnimation: string }>`
   }
 
   &.box2 {
-    ${({ isAnimation }) =>
-      isAnimation === "true" &&
+    ${({ isanimation }) =>
+      isanimation === "true" &&
       css`
         animation: fadeIn4 1s ease-out forwards;
         animation-delay: 0.6s;
@@ -80,8 +80,8 @@ export const CardBox = styled.div<{ isAnimation: string }>`
   }
 
   &.box3 {
-    ${({ isAnimation }) =>
-      isAnimation === "true" &&
+    ${({ isanimation }) =>
+      isanimation === "true" &&
       css`
         animation: fadeIn4 1s ease-out forwards;
         animation-delay: 0.9s;
