@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { mainColor, white, grey, blue, black } from "../../../styles/Colors";
+import { grey, black } from "../../../styles/Colors";
 import { ReactComponent as DownArrowIc } from "../../../assets/icon/downarrowIc.svg";
 import { ReactComponent as InformationIc } from "../../../assets/icon/informationIc.svg";
 

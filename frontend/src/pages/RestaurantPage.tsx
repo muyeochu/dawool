@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import TripRec from "../components/trip/tripRec";
 import TripList from "../components/trip/tripList";

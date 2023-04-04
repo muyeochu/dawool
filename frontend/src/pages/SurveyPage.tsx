@@ -1,4 +1,3 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
 import { SurveyTitle } from "../components/survey/SurveyTitle/styles";
 import { AccordionListContainer } from "../components/survey/Accordion/styles";

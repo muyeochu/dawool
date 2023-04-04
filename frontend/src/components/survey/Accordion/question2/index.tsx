@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { HangjungdongContainer } from "./styles";
 import RegionDropdown from "./dropdown";
-import styled from "styled-components";
 
 const SecondQuestion = () => {
   const [isCityClicked, setIsCityClicked] = useState(false);

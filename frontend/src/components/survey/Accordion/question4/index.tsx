@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useRecoilState } from "recoil";
 import { RadioButtonContainer } from "./styles";
 import RadioButtonGroup from "../../../common/RadioButton/RadioButtonGroup";
@@ -25,7 +25,6 @@ const FourthQuestion = () => {
   function radioGroupHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setSelectedValue(event.target.value);
   }
-  // console.log(selectedValue)
 
   return (
     <RadioButtonContainer>

@@ -1,6 +1,5 @@
-import React from "react";
 import { StyledButton, ButtonText } from "./styles";
-import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import {
   firstState,
   secondState,

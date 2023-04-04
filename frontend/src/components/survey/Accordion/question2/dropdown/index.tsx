@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   Container,
@@ -44,8 +44,6 @@ const RegionDropdown = ({
     District | undefined
   >(selectedDistrictState); // 선택된 시군구 저장
   const [second, setSecond] = useRecoilState<string>(secondState); // SurveyState의 secondState 가져오기
-
-  console.log("저장되는 값=", second);
 
   // 광역시도 드롭다운 클릭할 때 호출
   function handleCityClick() {

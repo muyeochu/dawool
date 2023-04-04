@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainColor, grey, blue, white, black } from "../../../../styles/Colors";
+import { white } from "../../../../styles/Colors";
 
 export const RecCardContainer = styled.div`
   height: 350px;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import TripList from "../components/trip/tripList";
@@ -31,7 +31,6 @@ const TourSpotPage = () => {
   const token = localStorage.getItem("token");
   const { openModal, closeModal } = useModal();
   const isSurvey = useRecoilValue(isSurveyState);
-  console.log("설문 결과는?", isSurvey);
 
   useEffect(() => {
     if (token && !isSurvey) {

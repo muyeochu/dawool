@@ -46,10 +46,3 @@ export const ButtonText = styled.span<StyledButtonProps>`
 
   color: ${({ isclicked }) => (isclicked ? white : grey[500])};
 `;
-
-// 버튼 안의 이미지 스타일 지정
-// export const ButtonIcon = styled.img<StyledButtonProps>`
-//   width: 20px;
-//   height: 20px;
-//   filter: ${({ isClicked }) => (isClicked ? "brightness(100%)" : "brightness(0%)")};
-// `;

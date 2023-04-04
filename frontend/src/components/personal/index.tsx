@@ -118,7 +118,7 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
                     closeSideBar();
                   }}
                 >
-                  <SurveyIcStyle /> <MenuFont>취향 설문 수정</MenuFont>
+                  <SurveyIcStyle /> <MenuFont>취향 설문</MenuFont>
                 </IconMenuContainer>
                 <IconMenuContainer
                   onClick={() => {
