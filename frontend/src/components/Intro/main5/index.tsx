@@ -52,7 +52,7 @@ const MainFifth = () => {
       setIsAnimation(false);
     }
 
-    if (scrollPosition > 2700) {
+    if (scrollPosition > 2600) {
       setIsFontAnimation(true);
     } else {
       setIsFontAnimation(false);

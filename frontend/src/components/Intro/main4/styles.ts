@@ -75,7 +75,7 @@ export const CardBox = styled.div<{ isAnimation: string }>`
       isAnimation === "true" &&
       css`
         animation: fadeIn4 1s ease-out forwards;
-        animation-delay: 0.8s;
+        animation-delay: 0.6s;
       `}
   }
 
@@ -84,7 +84,7 @@ export const CardBox = styled.div<{ isAnimation: string }>`
       isAnimation === "true" &&
       css`
         animation: fadeIn4 1s ease-out forwards;
-        animation-delay: 1.3s;
+        animation-delay: 0.9s;
       `}
   }
 
