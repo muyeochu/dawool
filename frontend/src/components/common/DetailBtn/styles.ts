@@ -40,16 +40,17 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     border: 3px solid ${grey[300]};
     border-radius: 18px;
     background-color: white;
+    cursor: default;
   }
 `;
 
 export const ButtonText = styled.span<ButtonStyleProps>`
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 19px;
-    display: flex;
-    align-items: center;
-    text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 
   &.DetailBtn_default {
     color: ${({ disable }) => (disable === "1" ? "white" : "black")};
