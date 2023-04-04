@@ -5,6 +5,7 @@ import {
   HeartIcStyle,
   LikedIcStyle,
   TitleContainer,
+  CateBtnStyle,
   TitleIcContainer,
   IcExpContainer,
   MainInfoContainer,
@@ -66,9 +67,8 @@ const DetailComponent = ({
   return (
     <>
       <TitleContainer title={myData.info.title}>
-        <TitleIcContainer>
-          <p>{myData.info.title}</p>
-        </TitleIcContainer>
+        <p>{myData.info.title}</p>
+
         <TitleIcContainer>
           <div id="ExpContainer">
             <IcExpContainer
@@ -97,6 +97,11 @@ const DetailComponent = ({
           </IcExpContainer>
         </TitleIcContainer>
       </TitleContainer>
+      {myData.info.category && (
+        <CateBtnStyle>
+          <span># {myData.info.category}</span>
+        </CateBtnStyle>
+      )}
 
       <MainInfoContainer>
         <MainImgContainer>
