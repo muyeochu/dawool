@@ -8,7 +8,6 @@ export const BackgroundContainer = styled.div`
   width: 100%;
   overflow: hidden;
   position: relative;
-  background-color: pink;
 `;
 
 export const BackgroundImgStyle = styled.img`
