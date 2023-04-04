@@ -33,6 +33,14 @@ const SearchPage = () => {
     setSearchStateValue({ ...searchStateValue, title: word, barrier: "00000" });
   }, []);
 
+  useEffect(() => {
+    if (prevBarrier !== searchStateValue.barrier) {
+      setPage(0);
+      setPrevPage(0);
+      setPrevBarrier(searchStateValue.barrier);
+    }
+  }, [searchStateValue.barrier]);
+
   const getSearchDatas = async (page: number) => {
     const searchQuery = {
       title: word,
@@ -45,10 +53,7 @@ const SearchPage = () => {
     const data = await res.data.contents;
 
     if (data === "No Content") {
-      if (searchData.length > 0) {
-        console.log("마지막 결과 페이지입니다");
-        console.log("서치데이터가 몬데..", searchData);
-      } else {
+      if (page === 0) {
         setSearchData(data); // 검색결과가 없는 경우
       }
     } else {
@@ -57,13 +62,6 @@ const SearchPage = () => {
         setSearchData((prev) => [...prev, ...data] as any);
         setPrevPage(page);
       } else {
-        // 버튼을 클릭할때 페이지 및 데이터 초기화
-        if (prevBarrier !== searchStateValue.barrier) {
-          setPage(0);
-          setPrevPage(0);
-          setSearchData(data);
-          setPrevBarrier(searchStateValue.barrier);
-        }
         setSearchData(data);
       }
     }
