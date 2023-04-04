@@ -68,20 +68,21 @@ export const NonDataContainer = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 20px;
 
   p {
     font-weight: 600;
     font-size: 32px;
     line-height: 54px;
     color: ${grey[500]};
+    margin-top: 20px;
     margin-bottom: 40px;
   }
 `;
 
 export const NonSearchImgStyle = styled(NonSearchImg)`
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
 `;
 
 // Mic
