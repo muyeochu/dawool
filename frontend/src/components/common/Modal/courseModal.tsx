@@ -216,7 +216,7 @@ const CourseModal = () => {
     <>
       {modalDataState.isOpen && modalDataState.type === "course" && (
         <ModalDimmer>
-          <ModalLargeContainer>
+          <ModalLargeContainer className="course">
             <ModalCourseTitle>저장할 코스를 선택해주세요.</ModalCourseTitle>
             <FolderHeaderContainerModal>
               <form onSubmit={insertFolder}>
