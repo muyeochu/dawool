@@ -167,22 +167,22 @@ public class JwtTokenProvider {
      */
     public Claims validateToken(String token) {
         try {
-            System.out.println("THIS COMPLETE");
+            log.info("Token Validated");
             return this.getClaimsByToken(token); // token의 Body가 하기 exception들로 인해 유효하지 않으면 각각에 해당하는 로그 콘솔에 찍음
         }
         catch(SignatureException e) {
-            log.info("Invalid signature.");
+            log.error("Invalid signature.");
         } catch (SecurityException e) {
-            log.info("Invalid JWT signature.");
+            log.error("Invalid JWT signature.");
         } catch (MalformedJwtException e) {
-            log.info("Invalid JWT token.");
+            log.error("Invalid JWT token.");
             // 처음 로그인(/auth/kakao, /auth/google) 시, AccessToken(AppToken) 없이 접근해도 token validate을 체크하기 때문에 exception 터트리지 않고 catch합니다.
         } catch (ExpiredJwtException e) {
-            log.info("Expired JWT token.");
+            log.error("Expired JWT token.");
         } catch (UnsupportedJwtException e) {
-            log.info("Unsupported JWT token.");
+            log.error("Unsupported JWT token.");
         } catch (IllegalArgumentException e) {
-            log.info("JWT token compact of handler are invalid.");
+            log.error("JWT token compact of handler are invalid.");
         }
         return null;
     }
