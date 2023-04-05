@@ -11,7 +11,6 @@ import lombok.experimental.SuperBuilder;
 /**
  * 검색 결과 Dto
  *
- * @author 김정은
  * @author 이준
  */
 @Getter
