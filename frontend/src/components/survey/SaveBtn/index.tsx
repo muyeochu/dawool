@@ -27,7 +27,6 @@ const SaveBtn = ({ checkedIcCount }: SaveBtnProps) => {
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(userState);
 
-
   const postSurveyData = async () => {
     const surveyQuery = {
       barrier: firstStateValue.join(""),
@@ -37,16 +36,17 @@ const SaveBtn = ({ checkedIcCount }: SaveBtnProps) => {
       visitLocation: fifthStateValue,
     };
     const res = await postSurveyApi(surveyQuery);
-    const data = await res;
+    if (res.status === 200) {
+      setUser((prev: UserType) => ({ ...prev, isSurveyed: true }));
+    }
   };
 
   const handleClick = () => {
     if (isActive) {
       postSurveyData();
-      setUser((prev: UserType) => ({ ...prev, isSurvey: true }));
       alert("설문이 완료되었습니다! 🤗");
       navigate("/tourspot");
-      window.location.reload()
+      window.location.reload();
     } else {
       alert("설문을 완료해주세요! 😢");
     }
