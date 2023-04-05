@@ -52,7 +52,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
 
   &.DetailBtn_add {
     margin-top: 2px;
-    margin-left: 3%;
+    margin-left: 2%;
     min-width: 60px;
     max-height: 35px;
     padding: 3px;
@@ -66,11 +66,11 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
 
   &.DetailBtn_delete {
     margin-top: 2px;
-    margin-right: 2%;
+    margin-right: 5%;
     right: 20%;
     min-width: 60px;
     max-height: 35px;
-    padding: 3px 15px;
+    padding: 3px;
     gap: 5px;
     border: 3px solid ${red[100]};
     border-radius: 18px;
@@ -95,6 +95,9 @@ export const ButtonText = styled.span<ButtonStyleProps>`
 
   &.DetailBtn_delete {
     color: ${red[100]};
+  }
+  &.DetailBtn_add {
+    color: ${grey[300]};
   }
 `;
 
