@@ -45,7 +45,8 @@ const SaveBtn = ({ checkedIcCount }: SaveBtnProps) => {
       postSurveyData();
       setUser((prev: UserType) => ({ ...prev, isSurvey: true }));
       alert("설문이 완료되었습니다! 🤗");
-      navigate("/tourspot");  // 관광지 페이지로 이동
+      navigate("/tourspot");
+      window.location.reload()
     } else {
       alert("설문을 완료해주세요! 😢");
     }
