@@ -149,6 +149,7 @@ const CourseModal = () => {
     let inputText = folderinput?.value;
     if (inputText) {
       postCourseFolderData(inputText).then(() => {
+        alert("코스가 추가되었습니다.");
         window.location.reload();
       });
     }
@@ -208,6 +209,7 @@ const CourseModal = () => {
       createTag(folderList);
     });
     postCourseFolderData().then(() => {
+      alert("여행지가 추가되었습니다.");
       window.location.reload();
     });
   }
