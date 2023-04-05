@@ -1,4 +1,10 @@
-import { TripCardListContainer, TripListTitle } from "./styles";
+import {
+  TripCardListContainer,
+  TripListTitle,
+  NoBoxContainer,
+  NoContainer,
+  NonBookmarkImgStyle,
+} from "./styles";
 import BookmarkCardItem from "./bookmarkItem";
 import { BookmarkItemType } from "../../types/BookmarkItemTypes";
 
@@ -11,9 +17,20 @@ export const BookmarkList = ({ contents }: BookmarkProps) => {
     <>
       <TripListTitle>관심 여행지</TripListTitle>
       <TripCardListContainer>
-        {contents.map((item: BookmarkItemType) => (
-          <BookmarkCardItem contents={item} />
-        ))}
+        {contents.length > 0 ? (
+          <>
+            {contents.map((item: BookmarkItemType) => (
+              <BookmarkCardItem contents={item} />
+            ))}
+          </>
+        ) : (
+          <NoBoxContainer>
+            <NoContainer>
+              <NonBookmarkImgStyle />
+              <p>관심 여행지가 없습니다.</p>
+            </NoContainer>
+          </NoBoxContainer>
+        )}
       </TripCardListContainer>
     </>
   );
