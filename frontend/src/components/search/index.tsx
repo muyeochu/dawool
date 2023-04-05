@@ -5,11 +5,13 @@ import {
   TripCardListContainer,
   NonDataContainer,
   NonSearchImgStyle,
+  ToUpIcStyle,
 } from "./styles";
 import Button from "../common/Button";
 
 import TripCardItem from "../trip/tripList/tripCardItem";
 import { ListType } from "../../types/tripListTypes";
+import { MoveToTop } from "../utils/MoveToTop";
 
 interface PropTypes {
   word: string;
@@ -55,6 +57,7 @@ const SearchList = ({ word, data }: PropTypes) => {
               />
             ))}
           </TripCardListContainer>
+          <ToUpIcStyle onClick={MoveToTop} />
         </>
       )}
       {noData === "yes" && (
