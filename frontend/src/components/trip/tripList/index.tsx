@@ -47,6 +47,7 @@ function TripList({ titleType }: TripListProps) {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
 
+
   useEffect(() => {
     window.addEventListener("scroll", updateScroll);
     return () => {
@@ -64,13 +65,20 @@ function TripList({ titleType }: TripListProps) {
 
   const contentTypeId = getContentTypeId(titleType);
 
-  // 새로고침 할때마다 searchState 값 초기화 필요
+  // 새로고침 할때마다 State 값 초기화 필요
   useEffect(() => {
     setListStateValue({ barrier: "00000" });
+    setListData([])
   }, []);
 
-
-
+  // 무장애 버튼 클릭할때마다 Page 초기화
+  useEffect(() => {
+    if (prevBarrier !== listStateValue.barrier) {
+      setPage(0);
+      setPrevPage(0);
+      setPrevBarrier(listStateValue.barrier);
+    }
+  }, [listStateValue.barrier]);
 
   const getListDatas = async (page: number) => {
    
