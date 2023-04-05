@@ -33,6 +33,7 @@ const TourSpotPage = () => {
   const { openModal, closeModal } = useModal();
   const isSurvey = useRecoilValue(isSurveyState);
   const justLook = useRecoilValue(isJustLook)
+  console.log(isSurvey)
 
   const modalData = {
     type: "survey",
