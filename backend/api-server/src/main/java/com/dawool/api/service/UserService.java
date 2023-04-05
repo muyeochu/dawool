@@ -52,7 +52,7 @@ public class UserService {
     public TokenResDto getKakaoAccessToken(String code) {
         String accessToken = "";
         String refreshToken = "";
-        String redirectURI = "http://localhost:3000/callback";
+        String redirectURI = "https://j8d105.p.ssafy.io/callback";
 
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
         data.add("grant_type", "authorization_code");
