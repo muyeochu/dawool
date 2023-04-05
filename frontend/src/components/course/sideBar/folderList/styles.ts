@@ -23,11 +23,13 @@ export const FolderHeaderContainerModal = styled.div`
   flex-direction: row;
   align-items: center;
   padding: 0px 0px 10px 10px;
-  width: 59%;
+  width: 63%;
   justify-content: space-between;
 `;
 export const FolderGreyIc = styled(FolderGrey)`
-  margin-left: 5%;
+  margin-left: 4.5%;
+  width: 30px;
+  height: 24px;
 `;
 // export const FolderHeaderFont = styled(MenuFont)`
 //     margin-left: 3%;
@@ -35,7 +37,8 @@ export const FolderGreyIc = styled(FolderGrey)`
 // `
 
 export const InputFolderName = styled.input.attrs({
-  placeholder: "새 코스명을 입력해주세요.",
+  placeholder: " 새 코스명을 입력해주세요.",
+  maxLength: 20,
 })`
   display: inline-block;
   margin-left: 3%;
