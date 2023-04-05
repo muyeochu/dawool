@@ -25,6 +25,7 @@ export const Radio = styled.input`
   border: 1.5px solid ${mainColor};
   border-radius: 50%;
   transition: all 0.1s ease-in-out;
+  cursor: pointer;
   /* 내부 점 */
   ::after {
     content: "";
@@ -89,4 +90,5 @@ export const Label = styled.label`
   display: flex;
   align-items: center;
   color: ${black};
+  cursor: pointer;
 `;
