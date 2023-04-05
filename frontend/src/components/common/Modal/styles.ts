@@ -47,7 +47,7 @@ export const ModalTitle = styled.div`
 `;
 
 export const ModalCourseTitle = styled.div`
-  padding: 1.2rem 1.4rem 2rem 1.4rem;
+  padding: 0.8rem 1.4rem 4.2rem 1.4rem;
   font-weight: 700;
   font-size: 25px;
   line-height: 20px;
@@ -126,8 +126,8 @@ export const ModalLargeContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 600px;
-  height: 500px;
+  width: 470px;
+  height: 530px;
   background-color: white;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
