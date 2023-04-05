@@ -21,22 +21,44 @@ const KakaoAuthHandle = () => {
       await axios
         .get(baseURL + `/api/user/kakao/callback?code=${code}`)
         .then((res) => {
-          console.log(res);
-          localStorage.setItem("token", res.data.accessToken);
-          localStorage.setItem("recentContentId", "0");
-          console.log(userState); //잘들어옴
-          setUserState({
-            accessToken: res.data.accessToken,
-            accessTokenExpiresIn: res.data.accessTokenExpiresIn,
-            grantType: res.data.grantType,
-            nickName: res.data.nickName,
-            refreshToken: res.data.refreshToken,
-            isSurveyed: res.data.surveyed,
-          });
-          //
-          navigate("/tourspot");
+          if (res.status === 200) {
+            console.log(res);
+            localStorage.setItem("token", res.data.accessToken);
+            localStorage.setItem("recentContentId", "0");
+            console.log(userState); //잘들어옴
+            setUserState({
+              accessToken: res.data.accessToken,
+              accessTokenExpiresIn: res.data.accessTokenExpiresIn,
+              grantType: res.data.grantType,
+              nickName: res.data.nickName,
+              refreshToken: res.data.refreshToken,
+              isSurveyed: res.data.surveyed,
+            });
+            //
+            navigate("/tourspot");
+            window.location.reload();
+            //리코일에 데이터 담고 바로 메인페이지로 보내기
+          } else {
+            window.localStorage.clear();
+            setUser({
+              accessToken: "",
+              accessTokenExpiresIn: 0,
+              grantType: "",
+              nickName: "",
+              refreshToken: "",
+              isSurveyed: false,
+            });
+            alert(
+              "로그인 에러가 발생했습니다. 다시 로그인 해 주시기 바랍니다."
+            );
+            navigate("/login");
+            window.location.reload();
+          }
+        })
+        .catch((e) => {
+          alert("로그인 에러가 발생했습니다. 다시 로그인 해 주시기 바랍니다.");
+          navigate("/login");
           window.location.reload();
-          //리코일에 데이터 담고 바로 메인페이지로 보내기
         });
     };
     kakaoLogin();
