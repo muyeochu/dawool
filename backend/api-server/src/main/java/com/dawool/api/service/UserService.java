@@ -39,7 +39,6 @@ import java.util.Date;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final CourseRepository courseRepository;
     private final JwtTokenProvider jwtTokenProvider;
     @Value("${kakao.restapi.key}")
     private String kakaoAPIKey;
@@ -135,7 +134,7 @@ public class UserService {
     /**
      * 토큰 생성
      *
-     * @param objectId
+     * @param objectId 유저 ObjectId
      * @return TokenResDto
      */
     public TokenResDto createToken(String objectId) {
@@ -184,17 +183,13 @@ public class UserService {
     /**
      * 취향 설문 저장
      *
-     * @param survey
+     * @param survey 설문조사 정보
      */
     public void survey(SurveyReqDto survey) {
         String userId = UserService.getLoginUser();
 
         // 무장애정보
-        String mobilityWeak = "0";
-        String visualImpaired = "0";
-        String deaf = "0";
-        String old = "0";
-        String infant = "0";
+        String mobilityWeak = "0", visualImpaired = "0", deaf = "0", old = "0", infant = "0";
         if (survey.getBarrier().contains("2")) {
             mobilityWeak = "1";
         }
