@@ -7,7 +7,7 @@ import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
 // import { ReactComponent as DropDownIc } from "../../../assets/icon/ddIc.svg";
 import { ReactComponent as DropDownIc } from "../../../assets/icon/downarrowIc.svg";
 
-import { mainColor, blue, grey, white } from "../../../styles/Colors";
+import { mainColor, blue, grey, white, black } from "../../../styles/Colors";
 
 export const HeaderFont = styled.div`
   font-weight: 500;
@@ -182,8 +182,9 @@ export const DropDownIcStyle = styled(DropDownIc)<{ ismenuopen: string }>`
 
 export const DropDownContainer = styled.div`
   position: absolute;
-  top: 90%;
-  right: 395px;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 5%);
   text-align: center;
   overflow: hidden;
 `;
@@ -195,6 +196,7 @@ export const DropDownContent = styled.ul`
   padding: 8px 0 8px 0;
   border-radius: 4px;
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
+  color: ${black};
 
   @keyframes dropdown {
     0% {
@@ -218,8 +220,10 @@ export const DropDownContent = styled.ul`
 `;
 
 export const PersonIcContainer = styled.div`
-  width: 33px;
-  height: 33px;
+  max-width: 33px;
+  max-height: 33px;
+  min-width: 33px;
+  min-height: 33px;
 
   &:hover {
     cursor: pointer;
