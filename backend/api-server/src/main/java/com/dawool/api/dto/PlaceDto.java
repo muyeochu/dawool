@@ -19,27 +19,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class PlaceDto {
-
-    // ObjectId
-    private String spotId;
-    private int contentId;
-    // 분류
-    private int contentTypeId;
-    // 제목
-    private String title;
-    // 이미지 경로
-    private String imageUrl;
-    // 소분류
-    private String category;
-    private int mobilityWeak;
-    private int visuallyImpaired;
-    private int deaf;
-    private int old;
-    private int infant;
+public class PlaceDto extends SearchDto{
     private boolean isLiked;
+
+    @Builder
+    public PlaceDto(String spotId, int contentId, int contentTypeId, String title, String imageUrl, String category,
+                    int mobilityWeak, int visuallyImpaired, int deaf, int old, int infant, boolean isLiked) {
+        super(spotId, contentId, contentTypeId, title, imageUrl, category, mobilityWeak, visuallyImpaired, deaf, old, infant);
+        this.isLiked = isLiked;
+    }
 
     /**
      * CommonInfo Entity -> PlaceDto
