@@ -89,24 +89,10 @@ public class CourseService {
         }
 
         course.getSpots().add(new Spot().of(myCourse));
-
         courseRepository.save(course);
 
         return HttpStatus.OK;
     }
-    // 차후 수정 내용
-//    public HttpStatus modifyCourse(String courseId, String memo) {
-//        String userId = getLoginUser();
-//        Course course = courseRepository.findById(courseId).orElseThrow();
-//        if (!course.getUserid().equals(userId)) {
-//           return HttpStatus.FORBIDDEN;
-//        }
-//        JSONObject jsonObject = new JSONObject(memo);
-//        course.setMemo(jsonObject.getString("memo"));
-//
-//        courseRepository.save(course);
-//        return HttpStatus.OK;
-//    }
 
     /**
      * 코스 삭제
