@@ -92,15 +92,15 @@ export const UpdateIc = styled(UpdateMemo)`
 `;
 
 export const AccomodationIc = styled(Accomodation)`
-  margin-right: 5%;
+  margin: 0% 5%;
   display: inline-block;
 `;
 export const EntertainmentIc = styled(Entertainment)`
-  margin-right: 5%;
+  margin: 0% 5%;
   display: inline-block;
 `;
 export const RestaurantIc = styled(Restaurant)`
-  margin-right: 5%;
+  margin: 0% 5%;
   display: inline-block;
 `;
 export const CircleIc = styled(Circle)`
@@ -117,7 +117,7 @@ export const XIc = styled(X)`
   position: absolute;
   text-align: center;
   overflow: hidden;
-  margin-left: 21.5%;
+  margin-left: 23.23%;
   cursor: pointer;
 `;
 export const CourseListContainer = styled(CourseList)`
