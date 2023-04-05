@@ -214,6 +214,12 @@ export const BarrierContainer = styled.div`
       margin-bottom: 20px;
       color: ${grey[400]};
     }
+
+    &.no {
+      font-weight: 500;
+      font-size: 18px;
+      color: ${grey[400]};
+    }
   }
 `;
 

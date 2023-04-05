@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 
 import Loading from "../../components/common/Loading";
 import SearchList from "../../components/search/index";
-import { MoveToTop } from "../../components/utils/MoveToTop";
 
 import { useRecoilState } from "recoil";
 import { getSearchApi } from "../../recoil/Api";
@@ -15,7 +14,6 @@ import {
   RowGridItems,
   EndBlock,
 } from "./styles";
-import { setDefaultResultOrder } from "dns/promises";
 
 const SearchPage = () => {
   const location = useLocation();
@@ -32,9 +30,10 @@ const SearchPage = () => {
   // 새로고침 할때마다 searchState 값 초기화 필요
   useEffect(() => {
     setSearchStateValue({ ...searchStateValue, title: word, barrier: "00000" });
-    setSearchData([])
+    setSearchData([]);
   }, []);
 
+  // 무장애 버튼 클릭할때마다 Page 초기화
   useEffect(() => {
     if (prevBarrier !== searchStateValue.barrier) {
       setPage(0);
