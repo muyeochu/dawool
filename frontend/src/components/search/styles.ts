@@ -3,6 +3,7 @@ import { mainColor, grey, blue, black } from "../../styles/Colors";
 
 import { ReactComponent as SearchIc } from "../../assets/icon/searchSquareIc.svg";
 import { ReactComponent as NonSearchImg } from "../../assets/images/nonSearchImg.svg";
+import { ReactComponent as ToUpIc } from "../../assets/icon/toUpIc.svg";
 
 export const MainGridItems = styled.div`
   grid-column: 2 / span 1;
@@ -150,5 +151,19 @@ export const SideFontStyle = styled.div`
 
   &:hover {
     cursor: pointer;
+  }
+`;
+
+export const ToUpIcStyle = styled(ToUpIc)`
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 30px;
+  right: 50px;
+  fill: ${mainColor};
+
+  &:hover {
+    cursor: pointer;
+    fill: ${blue[500]};
   }
 `;

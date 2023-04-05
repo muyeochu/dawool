@@ -57,6 +57,9 @@ const BarrierTag = ({ barrierInfo }: { barrierInfo: BarrierInfoTypes }) => {
     });
   });
 
+  const isEmpty = Object.values(newBarrierInfo).every((value) => value === "");
+  console.log("맞냐고ㅡㅡ", isEmpty);
+
   return (
     <BarrierContainer>
       <p>무장애 정보</p>
@@ -65,23 +68,31 @@ const BarrierTag = ({ barrierInfo }: { barrierInfo: BarrierInfoTypes }) => {
       </p>
       <InfoBox className="barrier">
         <BarrierBtnContainer>
-          {Object.entries(newBarrierInfo).map(([key, value], index) =>
-            value.length > 0 ? (
-              <DetailBtn
-                key={key + index}
-                type={"info"}
-                text={key}
-                onClick={() => {
-                  openModal({
-                    type: "barrier",
-                    title: key,
-                    content: value,
-                  });
-                }}
-              />
-            ) : (
-              <React.Fragment key={key + index} />
-            )
+          {isEmpty ? (
+            <>
+              <p className="no">무장애 정보가 없습니다.</p>
+            </>
+          ) : (
+            <>
+              {Object.entries(newBarrierInfo).map(([key, value], index) =>
+                value.length > 0 ? (
+                  <DetailBtn
+                    key={key + index}
+                    type={"info"}
+                    text={key}
+                    onClick={() => {
+                      openModal({
+                        type: "barrier",
+                        title: key,
+                        content: value,
+                      });
+                    }}
+                  />
+                ) : (
+                  <React.Fragment key={key + index} />
+                )
+              )}
+            </>
           )}
         </BarrierBtnContainer>
       </InfoBox>
