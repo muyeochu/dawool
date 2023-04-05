@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { white } from "../../../../styles/Colors";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 export const RecCardContainer = styled.div`
   height: 350px;
   display: flex;
@@ -24,9 +26,9 @@ export const RecImageContainer = styled.div`
   }
 `;
 
-export const RecCardImage = styled.img`
-  width: 100%;
-  height: 100%;
+export const RecCardImage = styled(LazyLoadImage)`
+  width: 270px;
+  height: 340px;
   object-fit: cover;
 
   ${RecImageContainer}:hover & {

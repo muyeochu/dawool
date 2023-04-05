@@ -82,7 +82,7 @@ const OptionCards = () => {
           onClick={() => handleCardClick(card.id)}
           isSelected={fifthSurvey.includes(card.id)}
         >
-          <CardImage src={card.image} />
+          <CardImage src={card.image} effect="blur"/>
           <CardText>{card.text}</CardText>
         </CardContainer>
       ))}

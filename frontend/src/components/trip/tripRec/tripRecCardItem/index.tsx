@@ -53,11 +53,11 @@ const TripRecCardItem = ({ item }: TripRecCardItemProps) => {
   return (
     <RecCardContainer>
       <RecImageContainer onClick={handleClick}>
-        {item.imageUrl === "0" ? (
-          <RecCardImage src={exampleImg} alt={"대표 이미지"} />
-        ) : (
-          <RecCardImage src={item.imageUrl} alt={"대표 이미지"} />
-        )}
+        <RecCardImage
+          src={item.imageUrl === "0" ? exampleImg : item.imageUrl}
+          alt={"대표 이미지"}
+          effect="blur"
+        />
         <RecCardTitleContainer>{item.title}</RecCardTitleContainer>
         <RecCardAreaContainer>#{areaName}</RecCardAreaContainer>
       </RecImageContainer>

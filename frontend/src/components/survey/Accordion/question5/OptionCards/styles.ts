@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { white, blue } from "../../../../../styles/Colors";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 export const CardListContainer = styled.div`
   margin-top: 40px;
   margin-bottom: 40px;
@@ -29,9 +31,9 @@ export const CardContainer = styled.div<{ isSelected: boolean }>`
     isSelected ? `8px solid ${blue[300]}` : "none"};
 `;
 
-export const CardImage = styled.img`
-  width: 120%;
-  height: 120%;
+export const CardImage = styled(LazyLoadImage)`
+  width: 200px;
+  height: 292px;
   filter: brightness(70%);
   object-fit: cover;
 `;
