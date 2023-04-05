@@ -31,7 +31,7 @@ export const FolderHeaderContainerModal = styled.div`
   justify-content: space-between;
 `;
 export const FolderGreyIc = styled(FolderGrey)`
-  margin-left: 4.5%;
+  margin-left: 3.1%;
   width: 30px;
   height: 24px;
 `;
@@ -71,6 +71,7 @@ export const FolderContainer = styled.div`
   flex-direction: row;
   align-items: center;
   padding: 10px;
+  padding-left: 5px;
   gap: 10px;
   color: ${black};
   /* border-bottom: 1px solid ${grey[300]}; */
