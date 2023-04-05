@@ -15,11 +15,14 @@ import {
   ModalCourseTitle,
   ModalCourseContainer,
 } from "./styles";
+import DetailBtn from "../DetailBtn";
 import {
-  FolderHeaderContainer,
+  FolderHeaderContainerModal,
   FolderGreyIc,
-  InputFolderName,
+  InputFolderNameModal,
 } from "../../course/sideBar/folderList/styles";
+import { useRecoilState } from "recoil";
+import { userState } from "../../../recoil/UserState";
 import { useState } from "react";
 import { grey } from "../../../styles/Colors";
 import { CreateListType } from "../../../types/courseFolderTypes";
@@ -43,6 +46,7 @@ const CourseModal = () => {
   const navigate = useNavigate();
   const { modalDataState, closeModal } = useModal();
   const [input, setInput] = useState("");
+  const [user, setUser] = useRecoilState(userState);
 
   const getCourseFolderData = (): Promise<ListType[]> =>
     customAxios2
@@ -57,7 +61,7 @@ const CourseModal = () => {
 
   async function myFunction() {
     let nowURL = new URL(window.location.href).href.includes("detail");
-    if (!nowURL) return;
+    if (!nowURL || user.accessToken === "") return;
     try {
       let folderList = await getCourseFolderData();
       return folderList;
@@ -177,7 +181,7 @@ const CourseModal = () => {
   function insertCourse(e: any) {
     e.preventDefault();
     let nowURL = new URL(window.location.href).href.includes("detail");
-    if (!nowURL) return;
+    if (!nowURL || user.accessToken === "") return;
     const postCourseFolderData = async (): Promise<insertCourseType> => {
       try {
         const response = await customAxios2.post<insertCourseType>(
@@ -200,7 +204,8 @@ const CourseModal = () => {
 
     myFunction().then((folderList) => {
       let nowURL = new URL(window.location.href).href.includes("detail");
-      if (nowURL) createTag(folderList);
+      if (!nowURL || user.accessToken === "") return;
+      createTag(folderList);
     });
     postCourseFolderData().then(() => {
       window.location.reload();
@@ -213,26 +218,28 @@ const CourseModal = () => {
         <ModalDimmer>
           <ModalLargeContainer>
             <ModalCourseTitle>저장할 코스를 선택해주세요.</ModalCourseTitle>
-            <FolderHeaderContainer>
+            <FolderHeaderContainerModal>
               <form onSubmit={insertFolder}>
                 {/* 백엔드와 통신 시 아래 코드 사용 */}
                 {/* onSubmit={insertFolder} */}
-                <label>
+                <label style={{ display: "flex" }}>
                   <FolderGreyIc />
                   {/* <input placeholder="새 코스명을 입력해주세요." ></input> */}
                   {/* <FolderHeaderFont>새 코스명을 입력해주세요.</FolderHeaderFont> */}
                   {/* 엔터 누를 때마다 백한테 보내기. 해당 코드는 https://www.youtube.com/watch?v=gZddSM-byRE&list=PLkaAEQyMpRg-k-PZDKvqw7EChwJQXxhkI&index=3 참고하기 */}
-                  <InputFolderName
+                  <InputFolderNameModal
                     id="inputName"
                     type="text"
                     required={true}
                     defaultValue={input}
-                  ></InputFolderName>
+                  ></InputFolderNameModal>
+                  <DetailBtn type={"add"} text={"추가"}></DetailBtn>
+
                   {/* <button>추가</button> */}
                   {/* onChange={changeFolder} */}
                 </label>
               </form>
-            </FolderHeaderContainer>
+            </FolderHeaderContainerModal>
 
             <ModalCourseContainer>
               <div id="modalFolder">

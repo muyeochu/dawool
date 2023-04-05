@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import useModal from "../../utils/useModal";
 import { useEffect } from "react";
 import { getSpeech } from "../../utils/getSpeech";
+import { isJustLook } from "../../../recoil/SurveyState";
 
 import {
   ModalDimmer,
@@ -25,6 +27,7 @@ import {
 const Modal = () => {
   const navigate = useNavigate();
   const { modalDataState, closeModal } = useModal();
+  const setIsJustLook = useSetRecoilState(isJustLook);
 
   const goSurvey = () => {
     navigate("/survey");
@@ -33,6 +36,7 @@ const Modal = () => {
   // 관광지페이지로 넘김
   const goTourSpot = () => {
     navigate("/tourSpot");
+    setIsJustLook(true);
   };
 
   const synth = window.speechSynthesis;
@@ -104,7 +108,7 @@ const Modal = () => {
       {modalDataState.isOpen && modalDataState.type === "survey" && (
         <ModalDimmer>
           <ModalLargeContainer>
-            <CloseBtnStyle onClick={closeModal} />
+            <CloseBtnStyle onClick={() => closeModal()} />
             <ModalLargeContents>{modalDataState.content}</ModalLargeContents>
             <MainFontStyle>
               설문에 참여하고 취향에 맞는 관광지를 추천받으세요!

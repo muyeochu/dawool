@@ -47,6 +47,7 @@ function TripList({ titleType }: TripListProps) {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
 
+
   useEffect(() => {
     window.addEventListener("scroll", updateScroll);
     return () => {
@@ -64,13 +65,23 @@ function TripList({ titleType }: TripListProps) {
 
   const contentTypeId = getContentTypeId(titleType);
 
-  // 새로고침 할때마다 searchState 값 초기화 필요
+  // 새로고침 할때마다 State 값 초기화 필요
   useEffect(() => {
     setListStateValue({ barrier: "00000" });
+    setListData([])
   }, []);
 
+  // 무장애 버튼 클릭할때마다 Page 초기화
+  useEffect(() => {
+    if (prevBarrier !== listStateValue.barrier) {
+      setPage(0);
+      setPrevPage(0);
+      setPrevBarrier(listStateValue.barrier);
+    }
+  }, [listStateValue.barrier]);
+
   const getListDatas = async (page: number) => {
-    console.log("page는?", page);
+   
     const listQuery = {
       contentTypeId: contentTypeId,
       area: citySelected,
@@ -78,23 +89,23 @@ function TripList({ titleType }: TripListProps) {
       page: page,
       size: 10,
     };
+
     const res = await getListApi(listQuery);
     const data = await res.data.contents;
 
-    // 페이지가 이동시에만 무한스크롤 구현(버튼 무한스크롤x)
-    if (page > prevPage) {
-      setListData((prev) => [...prev, ...data] as any);
-      setPrevPage(page);
-    } else {
-      // 무장애 태그를 클릭할때 페이지 및 데이터 초기화
-      if (prevBarrier !== listStateValue.barrier || prevCity !== citySelected) {
-        setPage(0);
-        setPrevPage(0);
-        setListData(data);
-        setPrevBarrier(listStateValue.barrier);
-        setPrevCity(citySelected);
+
+    // 페이지가 이동시에만 무한스크롤
+    if (data.length === 0) {
+      if (page === 0) {
+        setListData(data); // 검색결과가 없는 경우
       }
-      setListData(data);
+    } else {
+      if (page > prevPage) {
+        setListData((prev) => [...prev, ...data] as any);
+        setPrevPage(page);
+      } else {
+        setListData(data);
+      }
     }
     setLoading(true);
   };
@@ -102,7 +113,6 @@ function TripList({ titleType }: TripListProps) {
   const [prevPage, setPrevPage] = useState(0);
   const [prevCity, setPrevCity] = useState(1);
   const [prevBarrier, setPrevBarrier] = useState("00000");
-  
 
   useEffect(() => {
     getListDatas(page);

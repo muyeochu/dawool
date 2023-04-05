@@ -21,7 +21,6 @@ const TripRecCardItem = ({ item }: TripRecCardItemProps) => {
   const cities = useRecoilValue(citiesState);
   // cities 배열에서 해당 id의 name을 가져옴
   const areaName = cities.find((city) => city.id === item.areaCode)?.name;
-  // console.log("item=", item);
 
   const handleClick = () => {
     if (token !== null && [12, 14, 28, 38].includes(item.contentTypeId)) {

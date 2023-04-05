@@ -17,8 +17,6 @@ const AccommodationDetailPage = () => {
     getDataSelector({ contentId: contentId, location: 32 })
   );
 
-  console.log("myData 원본은?", myData);
-
   return (
     <MainGridItems>
       <RowGridContainer>

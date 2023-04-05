@@ -89,7 +89,6 @@ function TripRec({ titleType }: TripRecProps) {
         recentContentId: recentContentId,
       });
   const RecList = useRecoilValue(selectorPick);
-  // console.log("추천목록!", RecList);
 
   return (
     <TripRecContainer>
