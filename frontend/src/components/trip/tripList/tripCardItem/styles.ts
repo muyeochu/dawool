@@ -8,6 +8,8 @@ import { ReactComponent as earIc } from "../../../../assets/icon/earIc.svg";
 import { ReactComponent as oldmanIc } from "../../../../assets/icon/oldmanIc.svg";
 import { ReactComponent as toddlerIc } from "../../../../assets/icon/toddlerIc.svg";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 export const CardContainer = styled.div`
   width: 196px;
   height: 318px;
@@ -35,10 +37,11 @@ export const ImageContainer = styled.div`
   }
 `;
 
-export const CardImage = styled.img`
-  width: 100%;
-  height: 100%;
+export const CardImage = styled(LazyLoadImage)`
+  width: 196px;
+  height: 285px;
   object-fit: cover;
+  transition: filter 0.2s ease-in-out;
 
   ${ImageContainer}:hover & {
     -webkit-filter: blur(3px);
