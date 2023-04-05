@@ -55,7 +55,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     margin-left: 3%;
     min-width: 60px;
     max-height: 35px;
-    padding: 3px 15px;
+    padding: 3px;
     gap: 5px;
     border: 3px solid ${mainColor};
     border-radius: 18px;
@@ -66,6 +66,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
 
   &.DetailBtn_delete {
     margin-top: 2px;
+    margin-right: 2%;
     right: 20%;
     min-width: 60px;
     max-height: 35px;
