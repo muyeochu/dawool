@@ -220,8 +220,10 @@ export const DropDownContent = styled.ul`
 `;
 
 export const PersonIcContainer = styled.div`
-  width: 33px;
-  height: 33px;
+  max-width: 33px;
+  max-height: 33px;
+  min-width: 33px;
+  min-height: 33px;
 
   &:hover {
     cursor: pointer;
