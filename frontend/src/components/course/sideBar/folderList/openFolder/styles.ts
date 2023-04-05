@@ -21,10 +21,11 @@ export const ExitFolderContainer = styled.div`
 export const ExitFolderButton = styled.button`
   box-sizing: border-box;
   /* Auto layout */
-  display: inline-block;
+  display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 14px 34px;
+  margin-left: 29%;
+  padding: 10px 34px;
   gap: 10px;
   /* position: absolute; */
   border: 1px solid #959595;
@@ -32,10 +33,10 @@ export const ExitFolderButton = styled.button`
   background-color: white;
 `;
 export const ArrowIc = styled(Arrow)`
-  display: inline-block;
+  display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 5px 0px 0px 0px;
+  /* padding: 5px 0px 0px 0px; */
 `;
 // export const DotIc = styled(Dot)`
 //     margin-left: 60%;
@@ -117,7 +118,7 @@ export const XIc = styled(X)`
   position: absolute;
   text-align: center;
   overflow: hidden;
-  margin-left: 23.23%;
+  margin-left: 22%;
   cursor: pointer;
 `;
 export const CourseListContainer = styled(CourseList)`
