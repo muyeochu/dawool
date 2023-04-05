@@ -27,7 +27,6 @@ import {
 // icon
 import { ReactComponent as LogoIc } from "../../../assets/icon/logoIc.svg";
 import { ReactComponent as SearchIc } from "../../../assets/icon/searchIc.svg";
-import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
 import { ReactComponent as PersonIc } from "../../../assets/icon/personIc.svg";
 import { ReactComponent as PersonIc2 } from "../../../assets/icon/person2Ic.svg";
 
@@ -203,19 +202,17 @@ const Header = () => {
                 ismenuopen={isMenuOpen.toString()}
               >
                 즐길거리
-                {/* <DropDownIcStyle ismenuopen={isMenuOpen.toString()} /> */}
+                {isMenuOpen === true && (
+                  <DropDownContainer ref={ref}>
+                    <DropDownContent>
+                      <li onClick={goTourSpot}>관광지</li>
+                      <li onClick={goCulture}>문화시설</li>
+                      <li onClick={goLeports}>레포츠</li>
+                      <li onClick={goShopping}>쇼핑</li>
+                    </DropDownContent>
+                  </DropDownContainer>
+                )}
               </DropDownIcContainer>
-
-              {isMenuOpen === true && (
-                <DropDownContainer ref={ref}>
-                  <DropDownContent>
-                    <li onClick={goTourSpot}>관광지</li>
-                    <li onClick={goCulture}>문화시설</li>
-                    <li onClick={goLeports}>레포츠</li>
-                    <li onClick={goShopping}>쇼핑</li>
-                  </DropDownContent>
-                </DropDownContainer>
-              )}
 
               <NavStyle to="/restaurant">식당</NavStyle>
               <NavStyle to="/accommodation">숙박</NavStyle>
