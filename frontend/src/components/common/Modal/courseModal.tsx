@@ -222,7 +222,7 @@ const CourseModal = () => {
               <form onSubmit={insertFolder}>
                 {/* 백엔드와 통신 시 아래 코드 사용 */}
                 {/* onSubmit={insertFolder} */}
-                <label style={{ display: "flex" }}>
+                <label style={{ display: "flex", alignItems: "center" }}>
                   <FolderGreyIc />
                   {/* <input placeholder="새 코스명을 입력해주세요." ></input> */}
                   {/* <FolderHeaderFont>새 코스명을 입력해주세요.</FolderHeaderFont> */}
