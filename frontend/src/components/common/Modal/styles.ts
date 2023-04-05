@@ -126,13 +126,19 @@ export const ModalLargeContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 470px;
-  height: 530px;
+  width: 750px;
+  height: 520px;
+
   background-color: white;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 
   z-index: 9999;
+
+  &.course {
+    width: 470px;
+    height: 530px;
+  }
 `;
 
 export const CloseBtnStyle = styled(CloseIc)`
