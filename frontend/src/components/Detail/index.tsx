@@ -73,7 +73,13 @@ const DetailComponent = ({
           <div id="ExpContainer">
             <IcExpContainer
               onClick={() => {
-                openModal(modalDataL);
+                if (token !== "0") {
+                  openModal(modalDataL);
+                } else {
+                  alert("로그인이 필요합니다.");
+                  navigate("/login");
+                  window.location.reload();
+                }
               }}
             >
               <FolderIcStyle />

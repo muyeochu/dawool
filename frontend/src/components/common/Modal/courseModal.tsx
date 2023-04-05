@@ -21,6 +21,8 @@ import {
   FolderGreyIc,
   InputFolderNameModal,
 } from "../../course/sideBar/folderList/styles";
+import { useRecoilState } from "recoil";
+import { userState } from "../../../recoil/UserState";
 import { useState } from "react";
 import { grey } from "../../../styles/Colors";
 import { CreateListType } from "../../../types/courseFolderTypes";
@@ -44,6 +46,7 @@ const CourseModal = () => {
   const navigate = useNavigate();
   const { modalDataState, closeModal } = useModal();
   const [input, setInput] = useState("");
+  const [user, setUser] = useRecoilState(userState);
 
   const getCourseFolderData = (): Promise<ListType[]> =>
     customAxios2
@@ -58,7 +61,7 @@ const CourseModal = () => {
 
   async function myFunction() {
     let nowURL = new URL(window.location.href).href.includes("detail");
-    if (!nowURL) return;
+    if (!nowURL || user.accessToken === "") return;
     try {
       let folderList = await getCourseFolderData();
       return folderList;
@@ -178,7 +181,7 @@ const CourseModal = () => {
   function insertCourse(e: any) {
     e.preventDefault();
     let nowURL = new URL(window.location.href).href.includes("detail");
-    if (!nowURL) return;
+    if (!nowURL || user.accessToken === "") return;
     const postCourseFolderData = async (): Promise<insertCourseType> => {
       try {
         const response = await customAxios2.post<insertCourseType>(
@@ -201,7 +204,8 @@ const CourseModal = () => {
 
     myFunction().then((folderList) => {
       let nowURL = new URL(window.location.href).href.includes("detail");
-      if (nowURL) createTag(folderList);
+      if (!nowURL || user.accessToken === "") return;
+      createTag(folderList);
     });
     postCourseFolderData().then(() => {
       window.location.reload();
