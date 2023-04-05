@@ -14,7 +14,7 @@ import java.io.IOException;
 public class SecurityAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        log.error("에에에에에엥에에에에엥에에에에에엥   에에에에에에엥에에엥 에러발생! 에러발생! 에러발생! 에에에에에엥에에에엥에에엥");
+        log.error("**********Error**********");
         response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
     }
 }
