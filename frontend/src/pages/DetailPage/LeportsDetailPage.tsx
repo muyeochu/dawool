@@ -16,7 +16,6 @@ const LeportsDetailPage = () => {
     getDataSelector({ contentId: contentId, location: 28 })
   );
 
-  console.log("myData 원본은?", myData);
 
   return (
     <MainGridItems>

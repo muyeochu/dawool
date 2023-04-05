@@ -90,15 +90,11 @@ function TripList({ titleType }: TripListProps) {
       size: 10,
     };
 
-    console.log("page는?", page);
-    console.log("query는?", listQuery)
-
     const res = await getListApi(listQuery);
     const data = await res.data.contents;
 
-    console.log("받아온 데이터는?", data)
 
-    // 페이지가 이동시에만 무한스크롤 구현(버튼 무한스크롤x)
+    // 페이지가 이동시에만 무한스크롤
     if (data.length === 0) {
       if (page === 0) {
         setListData(data); // 검색결과가 없는 경우

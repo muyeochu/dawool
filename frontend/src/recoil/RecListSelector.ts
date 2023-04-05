@@ -24,7 +24,6 @@ export const getRecEntertainmentSelector = selectorFamily<
     async () => {
       try {
         const response = await getRecEntertainmentApi(contentTypeId);
-        // console.log(response.data);
         return response.data.contents.map((item: recommendListType) => ({
           ...item
         }));
@@ -46,7 +45,6 @@ export const getRecEtcSelector = selectorFamily<
     async () => {
       try {
         const response = await postRecEtcApi(titleType, recentContentId);
-        // console.log(response.data.contents);
         return response.data.contents.map((item: recommendListType) => ({
           ...item,
           category: titleType,

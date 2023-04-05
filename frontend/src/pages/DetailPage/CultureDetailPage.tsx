@@ -16,7 +16,6 @@ const CultureDetailPage = () => {
     getDataSelector({ contentId: contentId, location: 14 })
   );
 
-  console.log("myData 원본은?", myData);
 
   return (
     <MainGridItems>

@@ -16,7 +16,6 @@ const ShoppingDetailPage = () => {
     getDataSelector({ contentId: contentId, location: 38 })
   );
 
-  console.log("myData 원본은?", myData);
 
   return (
     <MainGridItems>

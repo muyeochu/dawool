@@ -16,7 +16,6 @@ const RestaurantDetailPage = () => {
     getDataSelector({ contentId: contentId, location: 39 })
   );
 
-  console.log("myData 원본은?", myData);
 
   return (
     <MainGridItems>

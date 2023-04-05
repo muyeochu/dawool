@@ -43,7 +43,7 @@ const newBarrierInfo: { [key: string]: string } = {};
 
 const BarrierTag = ({ barrierInfo }: { barrierInfo: BarrierInfoTypes }) => {
   // 모달창
-  const { openModal, closeModal } = useModal();
+  const { openModal } = useModal();
 
   // 배리어 데이터를 새 배열로 정리하기 위한 작업
   const barrierKeys = Object.keys(barrierInfo);
@@ -58,7 +58,6 @@ const BarrierTag = ({ barrierInfo }: { barrierInfo: BarrierInfoTypes }) => {
   });
 
   const isEmpty = Object.values(newBarrierInfo).every((value) => value === "");
-  console.log("맞냐고ㅡㅡ", isEmpty);
 
   return (
     <BarrierContainer>
