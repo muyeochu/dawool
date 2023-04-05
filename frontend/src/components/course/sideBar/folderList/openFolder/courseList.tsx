@@ -144,8 +144,6 @@ export const CourseList = () => {
           id={idI}
           onClick={(event) => setMapXY(event, courseList)}
         >
-          <CircleIc></CircleIc>
-          {course.title}
           {course.contentTypeId === 32 ? (
             <AccomodationIc />
           ) : course.contentTypeId === 39 ? (
@@ -153,6 +151,7 @@ export const CourseList = () => {
           ) : (
             <EntertainmentIc />
           )}
+          {course.title}
           <XIc
             onClick={(event) => {
               contentId(event);

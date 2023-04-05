@@ -37,7 +37,8 @@ export const ModalContainer = styled.div`
 
 export const ModalTitle = styled.div`
   // 상우하좌
-  padding: 1.4rem 1.4rem 1.2rem 1.4rem;
+  padding: 1.4rem 1.4rem 1.4rem 1.4rem;
+  /* padding-bottom: 30px; */
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
@@ -46,15 +47,15 @@ export const ModalTitle = styled.div`
 `;
 
 export const ModalCourseTitle = styled.div`
-  padding: 1.2rem 1.4rem 1.2rem 1.4rem;
+  padding: 1.2rem 1.4rem 2rem 1.4rem;
   font-weight: 700;
   font-size: 25px;
   line-height: 20px;
 `;
 
 export const ModalCourseContainer = styled.div`
-  width: 500px;
-  height: 320px;
+  width: 380px;
+  height: 280px;
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 10px;
@@ -118,13 +119,15 @@ export const ModalYesBtn = styled(ModalBtn)`
 
 // 큰모달
 export const ModalLargeContainer = styled.div`
+  padding-top: 50px;
+  padding-bottom: 50px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 846.83px;
-  height: 539.39px;
+  width: 600px;
+  height: 500px;
   background-color: white;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
