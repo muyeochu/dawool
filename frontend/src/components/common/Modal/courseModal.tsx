@@ -18,17 +18,17 @@ import {
 import DetailBtn from "../DetailBtn";
 import {
   FolderHeaderContainerModal,
-  FolderGreyIc,
+  ModalFolderGreyIc,
   InputFolderNameModal,
 } from "../../course/sideBar/folderList/styles";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../recoil/UserState";
 import { useState } from "react";
-import { grey } from "../../../styles/Colors";
+import { grey, mainColor, blue } from "../../../styles/Colors";
 import { CreateListType } from "../../../types/courseFolderTypes";
 import {
   FolderContainer,
-  FolderYellowIc,
+  ModalFolderYellowIc,
 } from "../../course/sideBar/folderList/styles";
 import { insertCourseType } from "../../../types/courseListTypes";
 import { ListType } from "../../../types/courseFolderTypes";
@@ -88,7 +88,7 @@ const CourseModal = () => {
     for (var i = 0; i < parent.childNodes.length; i++) {
       parent.childNodes[i].style.backgroundColor = "white";
     }
-    e.target.parentNode.style.backgroundColor = `${grey[100]}`;
+    e.target.parentNode.style.backgroundColor = `${blue[100]}`;
   }
 
   function createTag(folderList: any) {
@@ -105,7 +105,7 @@ const CourseModal = () => {
           id={folder.courseId}
           onClick={(event) => setCourseIdIntoTar(event)}
         >
-          <FolderYellowIc />
+          <ModalFolderYellowIc />
           {folder.courseName}
         </FolderContainer>
       );
@@ -223,7 +223,7 @@ const CourseModal = () => {
                 {/* 백엔드와 통신 시 아래 코드 사용 */}
                 {/* onSubmit={insertFolder} */}
                 <label style={{ display: "flex", alignItems: "center" }}>
-                  <FolderGreyIc />
+                  <ModalFolderGreyIc />
                   {/* <input placeholder="새 코스명을 입력해주세요." ></input> */}
                   {/* <FolderHeaderFont>새 코스명을 입력해주세요.</FolderHeaderFont> */}
                   {/* 엔터 누를 때마다 백한테 보내기. 해당 코드는 https://www.youtube.com/watch?v=gZddSM-byRE&list=PLkaAEQyMpRg-k-PZDKvqw7EChwJQXxhkI&index=3 참고하기 */}

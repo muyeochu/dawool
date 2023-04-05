@@ -3,14 +3,18 @@ import { ReactComponent as FolderYellow } from "../../../../assets/icon/folderYe
 import { ReactComponent as Memo } from "../../../../assets/icon/memoIc.svg";
 import styled from "styled-components";
 import { MenuFont } from "../../../personal/styles";
-import { grey, black } from "../../../../styles/Colors";
+import { grey, black, mainColor, blue } from "../../../../styles/Colors";
 
 export const FolderYellowIc = styled(FolderYellow)`
   margin-left: 5%;
   margin-right: 5%;
   display: inline-block;
 `;
-
+export const ModalFolderYellowIc = styled(FolderYellow)`
+  /* margin-left: 5%; */
+  margin-right: 5%;
+  display: inline-block;
+`;
 export const FolderHeaderContainer = styled.div`
   border-bottom: 1px solid ${grey[300]};
   flex-direction: row;
@@ -19,15 +23,20 @@ export const FolderHeaderContainer = styled.div`
 `;
 
 export const FolderHeaderContainerModal = styled.div`
-  border-bottom: 1px solid ${grey[300]};
+  /* border-bottom: 1px solid ${grey[300]}; */
   flex-direction: row;
   align-items: center;
-  padding: 0px 0px 10px 10px;
-  width: 63%;
+  padding: 0px 0px 20px 0px;
+  width: 363px;
   justify-content: space-between;
 `;
 export const FolderGreyIc = styled(FolderGrey)`
   margin-left: 4.5%;
+  width: 30px;
+  height: 24px;
+`;
+export const ModalFolderGreyIc = styled(FolderGrey)`
+  /* margin-left: 4.5%; */
   width: 30px;
   height: 24px;
 `;
@@ -63,11 +72,11 @@ export const FolderContainer = styled.div`
   align-items: center;
   padding: 10px;
   gap: 10px;
-  color: ${grey[300]};
-  border-bottom: 1px solid ${grey[300]};
+  color: ${black};
+  /* border-bottom: 1px solid ${grey[300]}; */
   cursor: pointer; //생성된 폴더 목록 클릭 가능하게 표시.(마우스 커서 변환)
   &:hover {
-    color: ${black};
+    background-color: ${blue[100]};
   }
 `;
 export const FolderContainerWrapper = styled.div`
