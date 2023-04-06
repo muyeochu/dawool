@@ -22,7 +22,7 @@ import { modalState } from "../../../../../recoil/ModalState";
 import { clickedState } from "../../../../../recoil/ClickedCourse";
 declare global {
   interface Window {
-    tar: number;
+    tar: string;
   }
 }
 export const CourseList = () => {
@@ -56,6 +56,7 @@ export const CourseList = () => {
   const contentId = function courseIdFun(event: any) {
     const tar = event.target.parentNode.id;
     window.tar = tar;
+    console.log(window.tar);
     return setFolderState;
   };
 
@@ -69,7 +70,7 @@ export const CourseList = () => {
 
   const deleteCourseOneData = () => {
     customAxios2
-      .delete(`user/my-course/${folderState.courseId}/${window.tar}`)
+      .delete(`user/my-course/${folderState.courseId}/${Number(window.tar)}`)
       .then(() => {
         console.log("여행지 하나 삭제됨");
       })
@@ -102,7 +103,7 @@ export const CourseList = () => {
   function setMapXY(e: any, courseList: any) {
     const mapX = e.target.parentNode.getAttribute("mapX");
     const mapY = e.target.parentNode.getAttribute("mapY");
-    e.target.parentNode.id = "클릭";
+    // e.target.parentNode.id = "클릭";
     console.log(e.target.parentNode.getAttribute("mapX"));
     for (let i = 0; i < courseList["course"].length; i++) {
       if (courseList["course"][i].mapX === mapX) {
@@ -155,7 +156,9 @@ export const CourseList = () => {
           <XIc
             onClick={(event) => {
               contentId(event);
-              openModal(modalDataS);
+              if (window.tar !== "") {
+                openModal(modalDataS);
+              }
             }}
           />
         </CourseContainer>
