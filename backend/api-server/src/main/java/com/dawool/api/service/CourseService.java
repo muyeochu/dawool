@@ -7,6 +7,7 @@ import com.dawool.api.entity.Course;
 import com.dawool.api.entity.Spot;
 import com.dawool.api.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.List;
  * @author 이준
  */
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class CourseService {
 

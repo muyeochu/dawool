@@ -13,6 +13,7 @@ public enum ErrorCode {
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
     INTER_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버에서 오류가 발생했습니다."),
+    EXPIRED_JWT_TOKEN(HttpStatus.INTERNAL_SERVER_ERROR, "서버에서 오류가 발생했습니다."),
     FAIL_AUTHENTICATION(HttpStatus.UNAUTHORIZED, "인증되지 않은 요청입니다."),
     FAIL_AUTHORIZATION(HttpStatus.FORBIDDEN, "권한이 없는 요청입니다."),
     ;

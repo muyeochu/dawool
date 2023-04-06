@@ -2,59 +2,53 @@ package com.dawool.api.dto;
 
 import com.dawool.api.code.Category;
 import com.dawool.api.entity.CommonInfo;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 /**
- * 검색 결과 Dto
+ * 관광지, 숙박, 식당 공통
+ * 장소 목록 DTO
  *
+ * @author 김정은
  * @author 이준
  */
+
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @SuperBuilder
-public class PlaceDto {
-    // ObjectId
-    private String spotId;
-    private int contentId;
-    // 분류
-    private int contentTypeId;
-    // 제목
-    private String title;
-    // 이미지 경로
-    private String imageUrl;
-    // 소분류
-    private String category;
-    private int mobilityWeak;
-    private int visuallyImpaired;
-    private int deaf;
-    private int old;
-    private int infant;
+public class PlaceListDto extends PlaceDto {
+    private boolean isLiked;
+
+    public PlaceListDto(String spotId, int contentId, int contentTypeId, String title, String imageUrl, String category,
+                        int mobilityWeak, int visuallyImpaired, int deaf, int old, int infant, boolean isLiked) {
+        super(spotId, contentId, contentTypeId, title, imageUrl, category, mobilityWeak, visuallyImpaired, deaf, old, infant);
+        this.isLiked = isLiked;
+    }
 
     /**
-     * CommonInfo Entity -> PlaceDto
+     * CommonInfo Entity -> PlaceListDto
      *
      * @param info
      * @return
      */
-    public PlaceDto of(CommonInfo info){
-        return PlaceDto.builder()
+    public PlaceListDto of(CommonInfo info, boolean liked){
+        return PlaceListDto.builder()
                 .spotId(info.getId())
                 .contentId(info.getContentid())
                 .contentTypeId(info.getContenttypeid())
                 .title(info.getTitle())
                 .imageUrl(info.getFirstimage().equals("0") ? info.getFirstimage2() : info.getFirstimage())
                 .category(Category.valueOf(info.getCat3()).getCategory())
-                .deaf(info.getDeaf())
-                .visuallyImpaired(info.getVisual_impaired())
                 .mobilityWeak(info.getMobility_weak())
+                .visuallyImpaired(info.getVisual_impaired())
+                .deaf(info.getDeaf())
                 .old(info.getOld())
                 .infant(info.getInfant())
+                .isLiked(liked)
                 .build();
     }
+
 }

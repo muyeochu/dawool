@@ -1,7 +1,7 @@
 package com.dawool.api.controller;
 
 import com.dawool.api.dto.HeartReqDto;
-import com.dawool.api.dto.PlaceDto;
+import com.dawool.api.dto.PlaceListDto;
 import com.dawool.api.dto.detailInfo.CultureFacilityDto;
 import com.dawool.api.dto.detailInfo.EntertainmentDto;
 import com.dawool.api.dto.detailInfo.LeisureSportsDto;
@@ -71,7 +71,7 @@ public class PlaceController {
             int page, int size){
 
         String userId = UserService.getLoginUser();
-        List<PlaceDto> placeList = new ArrayList<>();
+        List<PlaceListDto> placeList = new ArrayList<>();
         switch (type){
             case 12:
                 placeList =
@@ -99,7 +99,7 @@ public class PlaceController {
                 break;
         }
 
-        Map<String, List<PlaceDto>> response = new HashMap<>();
+        Map<String, List<PlaceListDto>> response = new HashMap<>();
         response.put("contents", placeList);
         return ResponseEntity.ok(response);
     }
@@ -172,8 +172,12 @@ public class PlaceController {
      */
     @GetMapping("/bookmark")
     public ResponseEntity<?> getHeartList(int page, int size){
-        List<PlaceDto> list = placeService.getHeartList(page, size);
-        Map<String, List<PlaceDto>> response = new HashMap<>();
+        List<PlaceListDto> list = placeService.getHeartList(page, size);
+        Map<String, Object> response = new HashMap<>();
+        if (list.isEmpty()) {
+            response.put("contents", "No Content");
+            return ResponseEntity.ok(response);
+        }
         response.put("contents", list);
         return ResponseEntity.ok(response);
     }

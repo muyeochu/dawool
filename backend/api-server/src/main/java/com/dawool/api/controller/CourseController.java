@@ -5,6 +5,7 @@ import com.dawool.api.dto.user.MyCourseDto;
 import com.dawool.api.dto.user.MyCourseListDto;
 import com.dawool.api.service.CourseService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,6 +26,7 @@ import java.util.Map;
  * @author 이준
  */
 @RestController
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/user/my-course")
 public class CourseController {

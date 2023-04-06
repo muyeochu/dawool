@@ -3,6 +3,7 @@ package com.dawool.api.jwt;
 import com.dawool.api.dto.user.TokenResDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -172,19 +173,24 @@ public class JwtTokenProvider {
         }
         catch(SignatureException e) {
             log.error("Invalid signature.");
+            throw new JwtException("Invalid signature. 발생");
         } catch (SecurityException e) {
-            log.error("Invalid JWT signature.");
+            log.error("Security Error.");
+            throw new JwtException("Invalid JWT signature. 발생");
         } catch (MalformedJwtException e) {
-            log.error("Invalid JWT token.");
+            log.error("Not Correctly JWT.");
             // 처음 로그인(/auth/kakao, /auth/google) 시, AccessToken(AppToken) 없이 접근해도 token validate을 체크하기 때문에 exception 터트리지 않고 catch합니다.
+            throw new JwtException("Not Correctly JWT.");
         } catch (ExpiredJwtException e) {
             log.error("Expired JWT token.");
+            throw new JwtException("Expired JWT token.");
         } catch (UnsupportedJwtException e) {
             log.error("Unsupported JWT token.");
+            throw new JwtException("Expired JWT token.");
         } catch (IllegalArgumentException e) {
             log.error("JWT token compact of handler are invalid.");
+            throw new JwtException("JWT token compact of handler are invalid.");
         }
-        return null;
     }
 
 }
