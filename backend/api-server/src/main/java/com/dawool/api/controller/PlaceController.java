@@ -173,7 +173,11 @@ public class PlaceController {
     @GetMapping("/bookmark")
     public ResponseEntity<?> getHeartList(int page, int size){
         List<PlaceListDto> list = placeService.getHeartList(page, size);
-        Map<String, List<PlaceListDto>> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
+        if (list.isEmpty()) {
+            response.put("contents", "No Content");
+            return ResponseEntity.ok(response);
+        }
         response.put("contents", list);
         return ResponseEntity.ok(response);
     }
