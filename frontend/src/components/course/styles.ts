@@ -26,12 +26,12 @@ const SideHeader = styled.div`
 const SideHeaderText = styled.h2`
   color: ${white};
   margin-left: 6%;
-  font-size: 30px;
+  font-size: 28px;
   padding-top: 1%;
 `;
 const MapIcStyle = styled(MapIc)`
-  width: 25px;
-  height: 25px;
+  width: 23px;
+  height: 23px;
   fill: ${white};
 `;
 export {
