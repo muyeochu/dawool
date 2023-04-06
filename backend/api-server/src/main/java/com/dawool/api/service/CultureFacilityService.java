@@ -1,6 +1,6 @@
 package com.dawool.api.service;
 
-import com.dawool.api.dto.PlaceDto;
+import com.dawool.api.dto.PlaceListDto;
 import com.dawool.api.dto.detailInfo.CultureFacilityDto;
 import com.dawool.api.entity.Barrier;
 import com.dawool.api.entity.CommonInfo;
@@ -44,19 +44,19 @@ public class CultureFacilityService {
      * @param size
      * @return
      */
-    public List<PlaceDto> getCultureFacilityList(String userId, int areaCode, String barrierCode, int page, int size) {
+    public List<PlaceListDto> getCultureFacilityList(String userId, int areaCode, String barrierCode, int page, int size) {
 
         String[] barrier = barrierCode.split("");
 
         List<CultureFacility> list = getPlaceList(areaCode, barrier, page, size);
 
-        List<PlaceDto> cultureFacilityList = new ArrayList<>();
+        List<PlaceListDto> cultureFacilityList = new ArrayList<>();
         for (CommonInfo cultureFacility : list) {
             boolean liked = false;
             if(!userId.equals("anonymousUser")){
                 liked = heartRepository.existsBySpotidAndUserid(cultureFacility.getId(), userId);
             }
-            PlaceDto place = new PlaceDto().of(cultureFacility, liked);
+            PlaceListDto place = new PlaceListDto().of(cultureFacility, liked);
             cultureFacilityList.add(place);
         }
         return cultureFacilityList;
