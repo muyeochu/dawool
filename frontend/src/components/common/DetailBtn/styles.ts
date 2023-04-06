@@ -75,7 +75,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     right: 20%;
     min-width: 60px;
     max-height: 35px;
-    padding: 3px;
+    padding: 4px 3px 3px 3px;
     gap: 5px;
     border: 3px solid ${red[100]};
     border-radius: 18px;
