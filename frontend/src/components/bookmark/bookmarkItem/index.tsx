@@ -6,9 +6,14 @@ import {
   CardImage,
   CardBottomContainer,
   CardText,
-  LikedIcStyle,
-  HeartIcStyle,
-} from "./styles";
+  BarrierIconContainer,
+  BathchairIcStyle,
+  EyeIcStyle,
+  EarIcStyle,
+  OldmanIcStyle,
+  ToddlerIcStyle,
+  CategoryText,
+} from "../../trip/tripList/tripCardItem/styles";
 import exampleImg from "../../../assets/images/exampleImg.png";
 import { useNavigate } from "react-router";
 import { BookmarkItemType } from "../../../types/BookmarkItemTypes";
@@ -19,14 +24,8 @@ interface BookmarkProps {
 
 function BookmarkCardItem({ contents }: BookmarkProps) {
   const navigate = useNavigate();
-  const [user, setUser] = useRecoilState(userState);
 
   const handleClick = () => {
-    // 로그인한 경우 -> 최근 본 관광지 contentId를 local에 저장
-    if (user.accessToken !== "") {
-      localStorage.setItem("recentContentId", contents.contentId.toString());
-    }
-
     switch (contents.contentTypeId) {
       case 39:
         navigate(`/detail/restaurant/${contents.contentId}`);
@@ -54,15 +53,22 @@ function BookmarkCardItem({ contents }: BookmarkProps) {
   return (
     <CardContainer>
       <ImageContainer onClick={handleClick}>
-        {contents.imageUrl === "0" ? (
-          <CardImage src={exampleImg} alt={"대표 이미지"} />
-        ) : (
-          <CardImage src={contents.imageUrl} alt={"대표 이미지"} />
-        )}
+        <CardImage
+          src={contents.imageUrl === "0" ? exampleImg : contents.imageUrl}
+          alt={"대표 이미지"}
+          effect="blur"
+        />
+        <BarrierIconContainer>
+          {contents.mobilityWeak ? <BathchairIcStyle /> : null}
+          {contents.visuallyImpaired ? <EyeIcStyle /> : null}
+          {contents.deaf ? <EarIcStyle /> : null}
+          {contents.old ? <OldmanIcStyle /> : null}
+          {contents.infant ? <ToddlerIcStyle /> : null}
+        </BarrierIconContainer>
+        <CategoryText>#{contents.category}</CategoryText>
       </ImageContainer>
       <CardBottomContainer>
         <CardText onClick={handleClick}>{contents.title}</CardText>
-        {/* {contents.liked ? <HeartIcStyle /> : <LikedIcStyle />} */}
       </CardBottomContainer>
     </CardContainer>
   );

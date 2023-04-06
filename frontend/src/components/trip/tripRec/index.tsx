@@ -32,7 +32,7 @@ function TripRec({ titleType }: TripRecProps) {
   const recentContentId = parseInt(
     localStorage.getItem("recentContentId") || "0"
   );
-  // console.log("최근 본 콘텐츠id=", recentContentId);
+
 
   const typeText =
     titleType === "restaurant"

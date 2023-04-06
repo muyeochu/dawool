@@ -90,7 +90,11 @@ const Modal = () => {
               />
             </ModalTitle>
             <ModalContents className="barrier">
-              {modalDataState.content}
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: modalDataState.content.toString(),
+                }}
+              />
             </ModalContents>
             <ModalFooter className="barrier">
               <ModalBtn
