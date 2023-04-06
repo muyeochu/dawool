@@ -22,8 +22,7 @@ const RestaurantDetailPage = () => {
       const res = await getDetailApi(detailQuery);
       const data = await res.data;
       setDetailData(data);
-      console.log("데이터몬데..", data);
-      console.log("setData좀", detailData);
+
     };
     getDetailData();
   }, [contentId]);

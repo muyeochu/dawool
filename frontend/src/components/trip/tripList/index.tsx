@@ -94,7 +94,6 @@ function TripList({ titleType }: TripListProps) {
     const res = await getListApi(listQuery);
     const data = await res.data.contents;
 
-    console.log("받아온 데이터는?", data)
 
     // 페이지가 이동시에만 무한스크롤
     if (data.length === 0) {
