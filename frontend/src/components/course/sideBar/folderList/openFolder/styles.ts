@@ -56,6 +56,7 @@ export const FolderNameContainer = styled.div`
   align-items: center;
   gap: 10px;
   width: 80%;
+  font-weight: 700;
 `;
 export const DeleteIc = styled(DeleteFolder)`
   position: absolute;
@@ -120,6 +121,10 @@ export const XIc = styled(X)`
   overflow: hidden;
   margin-left: 22%;
   cursor: pointer;
+  &:hover {
+    width: 20px;
+    height: 20px;
+  }
 `;
 export const CourseListContainer = styled(CourseList)`
   display: flex;
