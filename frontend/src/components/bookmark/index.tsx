@@ -1,6 +1,8 @@
 import {
   TripCardListContainer,
   TripListTitle,
+  ExpTitleStyle,
+  BookMarkPgIcStyle,
   NoBoxContainer,
   NoContainer,
   NonBookmarkImgStyle,
@@ -19,7 +21,11 @@ export const BookmarkList = ({ contents }: BookmarkProps) => {
 
   return (
     <>
-      <TripListTitle>관심 여행지</TripListTitle>
+      <TripListTitle>
+        <BookMarkPgIcStyle />
+        <p>관심 여행지</p>
+      </TripListTitle>
+      <ExpTitleStyle>관심있는 여행지를 한 눈에 확인하세요.</ExpTitleStyle>
       <TripCardListContainer>
         {noData === "no" && contents.length >= 1 && (
           <>

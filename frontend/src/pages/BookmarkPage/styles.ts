@@ -6,7 +6,7 @@ export const TripListGridItems = styled.div`
 
 export const RowGridContainer = styled.div`
   display: grid;
-  grid-template-rows: 110px auto 110px;
+  grid-template-rows: 90px auto 90px;
   width: 100%;
   height: 100%;
 `;

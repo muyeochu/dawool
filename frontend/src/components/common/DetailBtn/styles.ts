@@ -39,6 +39,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
 
     &:hover {
       background-color: ${blue[300]};
+      color: ${black};
     }
   }
 
