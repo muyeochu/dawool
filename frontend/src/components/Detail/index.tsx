@@ -35,6 +35,8 @@ const DetailComponent = ({
   myData: any;
   location: number;
 }) => {
+
+  console.log("받아온 데이터는?", myData)
   // 맵 좌표
   const mapInfo = {
     mapX: myData.info.mapX,
