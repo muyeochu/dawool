@@ -44,9 +44,6 @@ const Mic = () => {
     closeModal();
   };
 
-  // if (!browserSupportsSpeechRecognition) {
-  //   return <span>해당 브라우저는 음성 인식을 지원하지 않습니다.</span>;
-  // }
 
   setTimeout(() => {
     if (!listening && transcript.length > 0) {

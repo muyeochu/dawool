@@ -7,6 +7,7 @@ interface OpenModalType {
   type: string;
   title?: string;
   content: JSX.Element | string;
+  // content: React.ReactNode;
   callback?: () => any;
 }
 
