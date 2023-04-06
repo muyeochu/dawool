@@ -6,6 +6,7 @@ import {
   CardImage,
   CardText,
 } from "./styles";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 // card 이미지
 const cards = [
@@ -82,7 +83,7 @@ const OptionCards = () => {
           onClick={() => handleCardClick(card.id)}
           isSelected={fifthSurvey.includes(card.id)}
         >
-          <CardImage src={card.image} effect="blur"/>
+          <CardImage src={card.image} effect="blur" alt={"선택 이미지"}/>
           <CardText>{card.text}</CardText>
         </CardContainer>
       ))}
