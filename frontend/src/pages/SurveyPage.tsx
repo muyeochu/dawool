@@ -34,8 +34,8 @@ const SurveyPage = () => {
       <SurveyTitle>취향설문</SurveyTitle>
 
       <AccordionListContainer>
-        <Accordion title="누구와 여행을 할 계획인가요?" id="firstAccordion">
-          <FirstQuestion />
+        <Accordion title="누구와 여행을 할 계획인가요?" id="firstAccordion" isOpen={true} >
+          <FirstQuestion/>
         </Accordion>
 
         <Accordion title="어디서 출발하나요?" id="secondAccordion">
