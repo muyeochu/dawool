@@ -5,7 +5,7 @@ import { customAxios2 } from "../../../recoil/customAxios";
 import useModal from "../../utils/useModal";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { getDataSelector } from "../../../recoil/DetailSelectors";
+
 import {
   ModalDimmer,
   ModalLargeContainer,
