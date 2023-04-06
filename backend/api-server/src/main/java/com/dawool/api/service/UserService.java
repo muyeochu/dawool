@@ -6,8 +6,9 @@ import com.dawool.api.dto.user.ReissueTokenResDto;
 import com.dawool.api.dto.user.TokenResDto;
 import com.dawool.api.entity.Survey;
 import com.dawool.api.entity.User;
+import com.dawool.api.error.CustomException;
+import com.dawool.api.error.ErrorCode;
 import com.dawool.api.jwt.JwtTokenProvider;
-import com.dawool.api.repository.CourseRepository;
 import com.dawool.api.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
@@ -71,8 +72,12 @@ public class UserService {
 
         JSONObject info = new JSONObject(mono.block());
 
+        if(!info.has("access_token")) {
+            log.error(info.toString());
+            throw new CustomException(ErrorCode.INTER_SERVER_ERROR);
+        }
+
         accessToken = info.getString("access_token");
-        refreshToken = info.getString("refresh_token");
 
         TokenResDto resDto = this.getKakaoUserInfoByToken(accessToken);
         log.info(resDto.getAccessToken());
