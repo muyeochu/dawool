@@ -45,7 +45,7 @@ const BarrierTag = ({ barrierInfo }: { barrierInfo: BarrierInfoTypes }) => {
   // 모달창
   const { openModal } = useModal();
 
-  // 배리어 데이터를 새 배열로 정리하기 위한 작업
+  // 배리어 데이터를 새 배열로 정리
   const barrierKeys = Object.keys(barrierInfo);
   const fieldKeys = Object.keys(BarrierFields);
 

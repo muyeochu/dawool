@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import TripList from "../components/trip/tripList";
-import TripRec from "../components/trip/tripRec";
-import useModal from "../components/utils/useModal";
-import { isSurveyState } from "../recoil/UserState";
-import { isJustLook } from "../recoil/SurveyState";
+import TripList from "../../components/trip/tripList";
+import TripRec from "../../components/trip/tripRec";
+import useModal from "../../components/utils/useModal";
+import { isSurveyState } from "../../recoil/UserState";
+import { isJustLook } from "../../recoil/SurveyState";
 
-import { ReactComponent as SurveyModalImg } from "../assets/images/surveyModalImg.svg";
+import { ReactComponent as SurveyModalImg } from "../../assets/images/surveyModalImg.svg";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
@@ -32,8 +32,7 @@ const TourSpotPage = () => {
   const token = localStorage.getItem("token");
   const { openModal, closeModal } = useModal();
   const isSurvey = useRecoilValue(isSurveyState);
-  const justLook = useRecoilValue(isJustLook)
-  console.log(isSurvey)
+  const justLook = useRecoilValue(isJustLook);
 
   const modalData = {
     type: "survey",
@@ -48,8 +47,8 @@ const TourSpotPage = () => {
       openModal(modalData);
     }
     return () => {
-      closeModal()
-    }
+      closeModal();
+    };
   }, [token, isSurvey, justLook]);
 
   return (

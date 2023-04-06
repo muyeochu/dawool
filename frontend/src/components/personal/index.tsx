@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { userState } from "../../recoil/UserState";
 import { useRecoilState } from "recoil";
-import { useResetRecoilState } from "recoil";
 import {
   MyPageDimmer,
   SidebarStyle,
@@ -56,7 +55,6 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
 
   // 로그아웃
   const handleLogout = () => {
-    // 로그아웃 로직 작성
     window.localStorage.clear();
     setUser({
       accessToken: "",
@@ -82,7 +80,6 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
     navigate("/login");
     window.location.reload();
     closeSideBar();
-    const bfLogin = document.getElementById("beforeLogin");
   };
 
   return (

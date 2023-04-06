@@ -8,7 +8,7 @@ import {
   NonBookmarkImgStyle,
 } from "./styles";
 import BookmarkCardItem from "./bookmarkItem";
-import { BookmarkItemType } from "../../types/BookmarkItemTypes";
+import { BookmarkItemType } from "../../types/BookmarkTypes";
 
 interface BookmarkProps {
   contents: any;

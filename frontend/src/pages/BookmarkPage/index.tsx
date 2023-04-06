@@ -12,10 +12,10 @@ import {
 const BookmarkPage = () => {
   const pageEnd: any = useRef();
 
-  const [bookmarkData, setBookmarkData] = useState([]); // 받아온 데이터를 저장
+  const [bookmarkData, setBookmarkData] = useState([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [prevPage, setPrevPage] = useState(0); // 이전 페이지 상태를 저장
+  const [prevPage, setPrevPage] = useState(0);
 
   const getBookmarkData = async (page: number) => {
     const bookmarkQuery = {

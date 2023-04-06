@@ -76,7 +76,6 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     border: 3px solid ${red[100]};
     border-radius: 18px;
     background-color: white;
-    /* display: inline-block; */
     float: right;
   }
 `;

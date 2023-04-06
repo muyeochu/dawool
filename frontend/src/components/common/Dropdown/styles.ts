@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainColor, black, blue, grey } from "../../../styles/Colors";
+import { black, blue, grey } from "../../../styles/Colors";
 import { ReactComponent as UpdownIc } from "../../../assets/icon/updownIc.svg";
 
 interface DropdownProps {
