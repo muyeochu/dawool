@@ -1,7 +1,12 @@
 import { customAxios, customAxios2, customAxiosRec } from "./customAxios";
 
 // 타입
-export interface searchQueryTypes {
+interface detailQueryTypes {
+  contentId: string;
+  location: number;
+}
+
+interface searchQueryTypes {
   title: string;
   type: number;
   barrier: string;
@@ -9,7 +14,7 @@ export interface searchQueryTypes {
   size: number;
 }
 
-export interface listQueryTypes {
+interface listQueryTypes {
   contentTypeId: number;
   area: number;
   citySelected?: number;
@@ -18,8 +23,14 @@ export interface listQueryTypes {
   size: number;
 }
 
+interface bookmarkQueryTypes {
+  page: number;
+  size: number;
+}
+
 // GET //
-export const getDetailApi = async (contentId: number, location: number) =>
+// 상세정보 요청
+export const getDetailApi = async ({ contentId, location }: detailQueryTypes) =>
   await customAxios2.get(`location/${location}/${contentId}`, {
     withCredentials: true,
     headers: {
@@ -75,7 +86,7 @@ export const getRecEntertainmentApi = async (contentTypeId: number) =>
 
 // POST //
 // 취향설문
-export const postSurveyApi = async (params:any) =>
+export const postSurveyApi = async (params: any) =>
   await customAxios2.post(`user/survey`, params, {
     withCredentials: true,
     headers: {
@@ -126,7 +137,7 @@ export const bookmarkApi = async (info: any) =>
   );
 
 // 북마크 목록 불러오기
-export const getBookmarkListApi = async (page: number, size: number) =>
+export const getBookmarkListApi = async ({page, size}: bookmarkQueryTypes) =>
   await customAxios.get(`location/bookmark?page=${page}&size=${size}`, {
     withCredentials: true,
     headers: {

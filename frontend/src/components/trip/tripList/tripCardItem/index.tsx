@@ -36,21 +36,27 @@ function TripCardItem({ contents }: TripCardItemProps) {
     switch (contents.contentTypeId) {
       case 39:
         navigate(`/detail/restaurant/${contents.contentId}`);
+
         break;
       case 32:
         navigate(`/detail/accommodation/${contents.contentId}`);
+
         break;
       case 12:
         navigate(`/detail/tourspot/${contents.contentId}`);
+
         break;
       case 14:
         navigate(`/detail/culture/${contents.contentId}`);
+
         break;
       case 28:
         navigate(`/detail/leports/${contents.contentId}`);
+
         break;
       case 38:
         navigate(`/detail/shopping/${contents.contentId}`);
+
         break;
       default:
         break;

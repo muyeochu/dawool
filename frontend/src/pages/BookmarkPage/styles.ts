@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
-export const MainGridItems = styled.div`
+export const TripListGridItems = styled.div`
   grid-column: 2 / span 1;
-  height: 100%;
 `;
 
 export const RowGridContainer = styled.div`
   display: grid;
-  grid-template-rows: 90px auto 90px;
+  grid-template-rows: 110px auto 110px;
   width: 100%;
   height: 100%;
 `;

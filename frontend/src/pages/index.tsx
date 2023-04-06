@@ -16,7 +16,7 @@ import TourSpotPage from "./TourSpotPage";
 import CulturePage from "./CulturePage";
 import LeportsPage from "./LeportsPage";
 import ShoppingPage from "./ShoppingPage";
-import BookmarkPage from "./BookmarkPage"
+import BookmarkPage from "./BookmarkPage";
 
 export {
   AccommodationPage,
