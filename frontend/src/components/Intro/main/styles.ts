@@ -45,8 +45,21 @@ export const MainFontStyle = styled.div`
   font-size: 100px;
   line-height: 125px;
   letter-spacing: 0.02em;
-
   color: white;
+  animation: fadeIn1 1s ease-out forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+
+  @keyframes fadeIn1 {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 export const SideFontStyle = styled.div`
@@ -54,10 +67,22 @@ export const SideFontStyle = styled.div`
   font-size: 24px;
   line-height: 30px;
   margin-top: 20px;
+  opacity: 0;
 
   color: white;
   &:hover {
     cursor: pointer;
+  }
+  animation: fadeIn11 1s ease-out forwards;
+  animation-delay: 1s;
+
+  @keyframes fadeIn11 {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 `;
 
