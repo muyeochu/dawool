@@ -10,6 +10,11 @@ export const FolderYellowIc = styled(FolderYellow)`
   margin-right: 5%;
   display: inline-block;
 `;
+export const CourseFolderYellowIc = styled(FolderYellow)`
+  margin-left: 5%;
+  display: inline-block;
+  margin-right: 7px;
+`;
 export const ModalFolderYellowIc = styled(FolderYellow)`
   /* margin-left: 5%; */
   margin-right: 5%;
@@ -74,6 +79,7 @@ export const FolderContainer = styled.div`
   padding-left: 5px;
   gap: 10px;
   color: ${black};
+  /* font-weight: 500; */
   /* border-bottom: 1px solid ${grey[300]}; */
   cursor: pointer; //생성된 폴더 목록 클릭 가능하게 표시.(마우스 커서 변환)
   &:hover {
