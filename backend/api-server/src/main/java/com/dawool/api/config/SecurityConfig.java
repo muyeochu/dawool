@@ -36,15 +36,15 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .csrf().disable()
                 .cors().and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new SecurityAuthenticationEntryPoint())
+                .and()
                 .authorizeRequests()
-                .antMatchers("/api/user/my-course", "/api/user/bookmark").authenticated() // kakao 로그인 토큰 받기 언제나 가능
+                .antMatchers("/api/user/my-course", "/api/location/bookmark").authenticated() // kakao 로그인 토큰 받기 언제나 가능
                 .antMatchers("/api/**").permitAll()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt 사용하는 경우 사용
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(new SecurityAuthenticationEntryPoint())
                 .and()
                 // 받은 토큰을 복호
                 .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
