@@ -35,6 +35,11 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     border: 3px solid ${blue[300]};
     border-radius: 20px;
     background-color: white;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: ${blue[300]};
+    }
   }
 
   &.DetailBtn_category {
