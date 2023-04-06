@@ -33,7 +33,7 @@ const MainFirst = () => {
       />
       <DonwArrowIcContainer>
         <Link
-          to="main-second" // MainSecond 컴포넌트로 이동
+          to="main-second"
           smooth={true}
           duration={300}
         >

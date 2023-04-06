@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { white, black, mainColor, grey, blue } from "../../../styles/Colors";
+import { white, black, mainColor, blue } from "../../../styles/Colors";
 
 // radio button group wrapping
 export const Wrapper = styled.div`

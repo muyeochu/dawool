@@ -11,3 +11,7 @@ export interface BookmarkType{
   old: number;
   infant: number;
 }
+
+export interface BookmarkItemType extends BookmarkType {
+  liked: boolean;
+}

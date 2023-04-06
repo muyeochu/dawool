@@ -23,7 +23,4 @@ export const searchState = atom<ParamTypes>({
   },
 });
 
-export const searchDatas = atom<SearchDataTypes[]>({
-  key: "searchDatas",
-  default: [],
-});
+

@@ -10,7 +10,7 @@ interface ThirdQuestionProps {
 }
 
 const ThirdQuestion: React.FC<ThirdQuestionProps> = ({ isOpen }) => {
-  const [mark, setMark] = useRecoilState(thirdState); // thirdState와 연결된 mark 상태 변수 만들기
+  const [mark, setMark] = useRecoilState(thirdState);
 
   useEffect(() => {
     if (!isOpen) {
@@ -27,7 +27,7 @@ const ThirdQuestion: React.FC<ThirdQuestionProps> = ({ isOpen }) => {
       return (
         <span
           onClick={() => {
-            setMark(mark.toString()); // markState 업데이트
+            setMark(mark.toString());
           }}
         >
           {mark}시간

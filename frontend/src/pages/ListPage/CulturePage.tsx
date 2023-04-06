@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import TripList from "../components/trip/tripList";
-import TripRec from "../components/trip/tripRec";
+import TripList from "../../components/trip/tripList";
+import TripRec from "../../components/trip/tripRec";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
@@ -21,19 +21,19 @@ export const RowGridItems = styled.div`
   grid-row: 2 / span 1;
 `;
 
-const LeportsPage = () => {
+const CulturePage = () => {
   return (
     <>
-      {/* 추천 레포츠 */}
+      {/* 추천 문화시설 */}
       <MainGridItems>
-      <TripRec titleType="leports" />
+        <TripRec titleType="culture" />
       </MainGridItems>
 
-      {/* 레포츠 목록 list */}
+      {/* 문화시설 목록 list */}
       <TripListGridItems>
         <RowGridContainer>
           <RowGridItems>
-            <TripList titleType="leports" />
+            <TripList titleType="culture" />
           </RowGridItems>
         </RowGridContainer>
       </TripListGridItems>
@@ -41,4 +41,4 @@ const LeportsPage = () => {
   );
 };
 
-export default LeportsPage;
+export default CulturePage;
