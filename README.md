@@ -5,14 +5,15 @@
 ## == Contents ==
 
 1. [개요](#개요)
-2. [프로젝트 소개](#✨-프로젝트-소개)
-3. [주요기능](#✨-주요-기능)
-4. [프로젝트 실행방법](#✨-프로젝트-실행-방법)
+2. [프로젝트 소개](#프로젝트-소개)
+3. [주요기능](#주요-기능)
+4. [프로젝트 실행방법](#프로젝트-실행-방법)
 5. [기술스택](#🔧-기술-스택)
    1. [Front-End](#front-end)
    2. [Back-End](#back-end)
-6. [프로젝트 구조도](#📁-프로젝트-구조도)
-7. [TEAM](#👪-team)
+6. [프로젝트 구조도](#프로젝트-구조도)
+7. [Design](#design)
+8. [TEAM](#team)
 
 <br><br>
 
@@ -22,7 +23,7 @@
 
 <br><br>
 
-## ✨ 프로젝트 소개
+## 프로젝트 소개
 ![intro page](./wiki/gif/intro_page.gif)
 
 무장애 여행지 추천 서비스
@@ -30,7 +31,7 @@
 
 <br><br>
 
-## ✨ 주요 기능
+## 주요 기능
 
 ### 1. 무장애 필터링
 ![filtering](./wiki/gif/filtering.gif)
@@ -55,7 +56,7 @@
 
 <br><br>
 
-## ✨ 프로젝트 실행 방법
+## 프로젝트 실행 방법
 
 
 
@@ -83,7 +84,6 @@
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
 <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=Django&logoColor=white">
 <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=Pandas&logoColor=white">
-<img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=Pandas&logoColor=white">
 <img src="https://img.shields.io/badge/Selenium-F7931E?style=for-the-badge&logo=Selenium&logoColor=white">
 
 #### DB
@@ -108,7 +108,7 @@
 
 <br><br>
 
-## 📁 프로젝트 구조도
+## 프로젝트 구조도
 
 ```
 └─📂backend
@@ -148,7 +148,7 @@
 
 <br><br>
 
-## 🎨 Design
+## Design
 ### 시스템 구조도
 ![Architecture](./wiki/img/architecture.png)
 
@@ -159,7 +159,7 @@
 
 <br><br>
 
-## 👪 TEAM
+## TEAM
 ### Front-end
 <table class="tg">
 <thead>
