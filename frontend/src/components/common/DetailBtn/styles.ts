@@ -39,6 +39,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
 
     &:hover {
       background-color: ${blue[300]};
+      color: ${white};
     }
   }
 
@@ -95,6 +96,7 @@ export const ButtonText = styled.span<ButtonStyleProps>`
   color: ${grey[500]};
 
   &.DetailBtn_info {
+    color: ${grey[500]};
     &:hover {
       color: ${white};
     }
