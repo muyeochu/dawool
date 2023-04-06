@@ -11,16 +11,15 @@ import { dropdownState } from "../../../recoil/ButtonState";
 import { TripListTitleType } from "../../../types/tripListTypes";
 import { citiesState, citySelectedState } from "../../../recoil/RegionState";
 
-// 드롭다운이 받아야 할 props 정의
 export interface DropdownProps {
   itemList: string[] | TripListTitleType[];
-  children: React.ReactNode; //드롭다운 컴포넌트에 내부적으로 렌더링할 자식 요소
-  onSelected?: (item: string | TripListTitleType) => void; // onSelected 함수를 props로 받음
+  children: React.ReactNode; 
+  onSelected?: (item: string | TripListTitleType) => void; 
 }
 
 export default function Dropdown({ itemList, onSelected }: DropdownProps) {
   const [isClicked, setIsClicked] = useState(false);
-  const dropdownRef = useRef<HTMLButtonElement>(null); // dropdownRef 생성
+  const dropdownRef = useRef<HTMLButtonElement>(null); 
   const cities = useRecoilValue(citiesState);
 
   // 선택한 item -> recoil에 저장
@@ -79,7 +78,6 @@ export default function Dropdown({ itemList, onSelected }: DropdownProps) {
       onClick={handleClick}
       isclicked={isClicked.toString()}
     >
-      {/* 수정된 부분 */}
       <DropdownBtnText isclicked={isClicked.toString()}>
         <span>{cityName}</span>
       </DropdownBtnText>

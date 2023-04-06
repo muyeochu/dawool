@@ -5,7 +5,6 @@ import { useRecoilState } from "recoil";
 import { firstState } from "../../../../recoil/SurveyState";
 
 const FirstQuestion = () => {
-  // surveyState와 그 값을 가져와서 클릭 이벤트가 발생할 때마다 클릭한 버튼의 id 값을 surveyState에 저장
   const [clickedButtons, setClickedButtons] = useRecoilState(firstState);
 
   const handleButtonClick = useCallback(

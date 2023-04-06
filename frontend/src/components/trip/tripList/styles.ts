@@ -3,8 +3,7 @@ import { black, mainColor, blue } from "../../../styles/Colors";
 
 import { ReactComponent as ToUpIc } from "../../../assets/icon/toUpIc.svg";
 
-export const TripListContainer = styled.div`
-`;
+export const TripListContainer = styled.div``;
 
 export const TripListTitle = styled.h1`
   font-family: "SUIT";
@@ -41,7 +40,7 @@ export const ButtonList = styled.div`
 export const TripCardListContainer = styled.div`
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
+
   align-items: center;
   flex-flow: row wrap;
   gap: 43px;
@@ -49,7 +48,6 @@ export const TripCardListContainer = styled.div`
 
 export const EndBlock = styled.div`
   visibility: hidden;
-  /* background-color: pink; */
 `;
 
 export const ToUpIcStyle = styled(ToUpIc)`

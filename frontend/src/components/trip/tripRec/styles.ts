@@ -18,7 +18,6 @@ export const bounce = keyframes`
 export const TripRecContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: center;
   position: relative;
   height: 92vh;
@@ -87,7 +86,6 @@ export const TripRecTitle3 = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  /* line-height: 30px; */
   color: ${grey[500]};
 `;
 
