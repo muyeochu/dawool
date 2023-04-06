@@ -6,7 +6,7 @@ import {
   FolderContainer,
   InputFolderName,
   FolderGreyIc,
-  FolderYellowIc,
+  CourseFolderYellowIc,
   FolderHeaderContainer,
   FolderContainerWrapper,
 } from "./styles";
@@ -110,7 +110,7 @@ export const Folders = () => {
           id={folder.courseId}
           onClick={(event) => intoFolder(event, i)}
         >
-          <FolderYellowIc />
+          <CourseFolderYellowIc />
           {folder.courseName}
         </FolderContainer>
       );
