@@ -36,11 +36,6 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     border-radius: 20px;
     background-color: white;
     transition: background-color 0.2s ease-in-out;
-
-    &:hover {
-      background-color: ${blue[300]};
-      color: ${white};
-    }
   }
 
   &.DetailBtn_category {
@@ -95,12 +90,6 @@ export const ButtonText = styled.span<ButtonStyleProps>`
   text-align: center;
   color: ${grey[500]};
 
-  &.DetailBtn_info {
-    color: ${grey[500]};
-    &:hover {
-      color: ${white};
-    }
-  }
   &.DetailBtn_default {
     color: ${({ disable }) => (disable === "1" ? "white" : "black")};
   }
