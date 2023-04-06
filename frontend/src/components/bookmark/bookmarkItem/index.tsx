@@ -1,5 +1,3 @@
-import { useRecoilState } from "recoil";
-import { userState } from "../../../recoil/UserState";
 import {
   CardContainer,
   ImageContainer,
@@ -16,7 +14,7 @@ import {
 } from "../../trip/tripList/tripCardItem/styles";
 import exampleImg from "../../../assets/images/exampleImg.png";
 import { useNavigate } from "react-router";
-import { BookmarkItemType } from "../../../types/BookmarkItemTypes";
+import { BookmarkItemType } from "../../../types/BookmarkTypes";
 
 interface BookmarkProps {
   contents: BookmarkItemType;

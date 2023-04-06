@@ -36,9 +36,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalTitle = styled.div`
-  // 상우하좌
   padding: 1.4rem 1.4rem 1.4rem 1.4rem;
-  /* padding-bottom: 30px; */
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;

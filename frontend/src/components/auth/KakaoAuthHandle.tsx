@@ -1,13 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState, useRecoilState } from "recoil";
-import { userState, User } from "../../recoil/UserState";
+import { userState } from "../../recoil/UserState";
 import Loading from "../common/Loading";
 
 const KakaoAuthHandle = () => {
-  // const setUser = useSetRecoilState(userState);
   const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
   const setUserState = useSetRecoilState(userState);
@@ -15,17 +14,15 @@ const KakaoAuthHandle = () => {
   useEffect(() => {
     let code = new URL(window.location.href).searchParams.get("code");
     const baseURL = process.env.REACT_APP_API_BASE_URL;
-    console.log(baseURL);
+
     const kakaoLogin = async () => {
-      // await axios.get(`http://localhost:8888/api/user/kakao/callback?code=${code}`)
       await axios
         .get(baseURL + `/api/user/kakao/callback?code=${code}`)
         .then((res) => {
           if (res.status === 200) {
-            console.log(res);
             localStorage.setItem("token", res.data.accessToken);
             localStorage.setItem("recentContentId", "0");
-            console.log(userState); //잘들어옴
+
             setUserState({
               accessToken: res.data.accessToken,
               accessTokenExpiresIn: res.data.accessTokenExpiresIn,
@@ -63,7 +60,7 @@ const KakaoAuthHandle = () => {
     };
     kakaoLogin();
   }, []);
-  console.log(user);
+
   return (
     <>
       <Loading />
@@ -71,10 +68,3 @@ const KakaoAuthHandle = () => {
   );
 };
 export default KakaoAuthHandle;
-const Container = styled.div`
-  width: 100vwm;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;

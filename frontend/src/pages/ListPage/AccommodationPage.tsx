@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import TripList from "../components/trip/tripList";
-import TripRec from "../components/trip/tripRec";
+import TripRec from "../../components/trip/tripRec";
+import TripList from "../../components/trip/tripList";
 
 const MainGridItems = styled.div`
   grid-column: 1 / span 3;
@@ -21,19 +21,19 @@ export const RowGridItems = styled.div`
   grid-row: 2 / span 1;
 `;
 
-const ShoppingPage = () => {
+const AccommodationPage = () => {
   return (
     <>
-      {/* 추천 쇼핑 */}
+      {/* 추천 숙박 */}
       <MainGridItems>
-      <TripRec titleType="shopping" />
+        <TripRec titleType="accommodation" />
       </MainGridItems>
 
-      {/* 쇼핑 목록 list */}
+      {/* 숙박 목록 list */}
       <TripListGridItems>
         <RowGridContainer>
           <RowGridItems>
-            <TripList titleType="shopping" />
+            <TripList titleType="accommodation" />
           </RowGridItems>
         </RowGridContainer>
       </TripListGridItems>
@@ -41,4 +41,4 @@ const ShoppingPage = () => {
   );
 };
 
-export default ShoppingPage;
+export default AccommodationPage;

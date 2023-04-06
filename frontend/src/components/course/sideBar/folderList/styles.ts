@@ -2,8 +2,7 @@ import { ReactComponent as FolderGrey } from "../../../../assets/icon/folderGrey
 import { ReactComponent as FolderYellow } from "../../../../assets/icon/folderYellow.svg";
 import { ReactComponent as Memo } from "../../../../assets/icon/memoIc.svg";
 import styled from "styled-components";
-import { MenuFont } from "../../../personal/styles";
-import { grey, black, mainColor, blue } from "../../../../styles/Colors";
+import { grey, black, blue } from "../../../../styles/Colors";
 
 export const FolderYellowIc = styled(FolderYellow)`
   margin-left: 5%;
@@ -11,7 +10,6 @@ export const FolderYellowIc = styled(FolderYellow)`
   display: inline-block;
 `;
 export const ModalFolderYellowIc = styled(FolderYellow)`
-  /* margin-left: 5%; */
   margin-right: 5%;
   display: inline-block;
 `;
@@ -23,7 +21,6 @@ export const FolderHeaderContainer = styled.div`
 `;
 
 export const FolderHeaderContainerModal = styled.div`
-  /* border-bottom: 1px solid ${grey[300]}; */
   flex-direction: row;
   align-items: center;
   padding: 0px 0px 20px 0px;
@@ -36,14 +33,9 @@ export const FolderGreyIc = styled(FolderGrey)`
   height: 24px;
 `;
 export const ModalFolderGreyIc = styled(FolderGrey)`
-  /* margin-left: 4.5%; */
   width: 30px;
   height: 24px;
 `;
-// export const FolderHeaderFont = styled(MenuFont)`
-//     margin-left: 3%;
-//     color:${grey[300]}
-// `
 
 export const InputFolderName = styled.input.attrs({
   placeholder: " 새 코스명을 입력해주세요.",
@@ -74,8 +66,8 @@ export const FolderContainer = styled.div`
   padding-left: 5px;
   gap: 10px;
   color: ${black};
-  /* border-bottom: 1px solid ${grey[300]}; */
-  cursor: pointer; //생성된 폴더 목록 클릭 가능하게 표시.(마우스 커서 변환)
+
+  cursor: pointer;
   &:hover {
     background-color: ${blue[100]};
   }

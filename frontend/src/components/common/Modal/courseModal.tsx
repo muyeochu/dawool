@@ -1,10 +1,6 @@
-import { useNavigate } from "react-router-dom";
-// import { getCourseFolderData } from "../../course/sideBar/folderList";
 import ReactDOM from "react-dom";
 import { customAxios2 } from "../../../recoil/customAxios";
 import useModal from "../../utils/useModal";
-import { useLocation } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 
 import {
   ModalDimmer,
@@ -24,7 +20,7 @@ import {
 import { useRecoilState } from "recoil";
 import { userState } from "../../../recoil/UserState";
 import { useState } from "react";
-import { grey, mainColor, blue } from "../../../styles/Colors";
+import { blue } from "../../../styles/Colors";
 import { CreateListType } from "../../../types/courseFolderTypes";
 import {
   FolderContainer,
@@ -32,6 +28,7 @@ import {
 } from "../../course/sideBar/folderList/styles";
 import { insertCourseType } from "../../../types/courseListTypes";
 import { ListType } from "../../../types/courseFolderTypes";
+
 declare global {
   interface Window {
     targetCourse: string;
@@ -43,7 +40,6 @@ declare global {
   }
 }
 const CourseModal = () => {
-  const navigate = useNavigate();
   const { modalDataState, closeModal } = useModal();
   const [input, setInput] = useState("");
   const [user, setUser] = useRecoilState(userState);
@@ -52,7 +48,7 @@ const CourseModal = () => {
     customAxios2
       .get(`user/my-course`)
       .then((res) => {
-        console.log(res);
+  
         return res.data;
       })
       .catch((err) => {
@@ -82,7 +78,7 @@ const CourseModal = () => {
     window.title = goToGrandChild.getAttribute("title");
     window.mapX = goToGrandChild.getAttribute("mapX");
     window.mapY = goToGrandChild.getAttribute("mapY");
-    console.log(window.targetCourse);
+
     const parent = e.target.parentNode.parentNode;
 
     for (var i = 0; i < parent.childNodes.length; i++) {
@@ -94,10 +90,9 @@ const CourseModal = () => {
   function createTag(folderList: any) {
     const div = document.getElementById("modalFolder");
     const div2 = document.getElementById("modalFolderContainer");
-    // const div2 = document.createElement("div");
-    // div2.className = "FolderContainer";
+
     if (div2?.childNodes.length !== 0) return;
-    console.log(div2);
+
     for (let i = 0; i < folderList["myCourse"].length; i++) {
       const folder = folderList["myCourse"][i];
       const element = () => (
@@ -114,7 +109,7 @@ const CourseModal = () => {
       div2.appendChild(fdContainer);
     }
     div?.appendChild(div2);
-    console.log(div);
+  
     return div;
   }
 
@@ -136,7 +131,7 @@ const CourseModal = () => {
           `user/my-course`,
           { courseName: name }
         );
-        console.log(response);
+     
         return response.data;
       } catch (err) {
         console.log(err);
@@ -156,28 +151,6 @@ const CourseModal = () => {
     if (folderinput) {
       folderinput.value = "";
     }
-    // customAxios2.post(`user/my-course`,{name})
-    // .then((res)=>{
-    //     console.log(res);
-    // }).catch((err)=>{
-    //     console.log(err);
-    // })
-    // const insertFolder = async()=>{
-    //     await axios
-    //     .post(baseURL+"/api/course",{
-    //         folderName:input
-    //     })
-    //     .then((res)=>{
-    //         console.log(res.data);
-    //         setInput(e.target.value);
-    //         // myFunction();
-    //         // getFolders();
-    //     })
-    //     .catch((err)=>{
-    //         console.log(err);
-    //     })
-    // }
-    // insertFolder();
   }
   function insertCourse(e: any) {
     e.preventDefault();
@@ -195,7 +168,7 @@ const CourseModal = () => {
             mapY: window.mapY,
           }
         );
-        console.log(response);
+  
         return response.data;
       } catch (err) {
         console.log(err);
@@ -222,13 +195,9 @@ const CourseModal = () => {
             <ModalCourseTitle>저장할 코스를 선택해주세요.</ModalCourseTitle>
             <FolderHeaderContainerModal>
               <form onSubmit={insertFolder}>
-                {/* 백엔드와 통신 시 아래 코드 사용 */}
-                {/* onSubmit={insertFolder} */}
                 <label style={{ display: "flex", alignItems: "center" }}>
                   <ModalFolderGreyIc />
-                  {/* <input placeholder="새 코스명을 입력해주세요." ></input> */}
-                  {/* <FolderHeaderFont>새 코스명을 입력해주세요.</FolderHeaderFont> */}
-                  {/* 엔터 누를 때마다 백한테 보내기. 해당 코드는 https://www.youtube.com/watch?v=gZddSM-byRE&list=PLkaAEQyMpRg-k-PZDKvqw7EChwJQXxhkI&index=3 참고하기 */}
+
                   <InputFolderNameModal
                     id="inputName"
                     type="text"
@@ -236,9 +205,6 @@ const CourseModal = () => {
                     defaultValue={input}
                   ></InputFolderNameModal>
                   <DetailBtn type={"add"} text={"추가"}></DetailBtn>
-
-                  {/* <button>추가</button> */}
-                  {/* onChange={changeFolder} */}
                 </label>
               </form>
             </FolderHeaderContainerModal>
