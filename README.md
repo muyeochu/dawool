@@ -27,7 +27,7 @@
 
 ![intro page](./wiki/gif/intro_page.gif)
 
-- 6가지 여행지(관광지, 문화시설, 레포츠, 쇼핑, 식당, 숙박)의 편의 시설의 정보를 무장애 태그(지체, 시각, 청각 장애인, 노인, 영유아)로 나누어 여행지를 추천해주는 서비스
+- 6가지 여행지(관광지, 문화시설, 레포츠, 쇼핑, 식당, 숙박)의 편의 시설의 정보를 무장애 태그(지체, 시각, 청각 장애인, 노인, 영유아)로 나누어 여행지를 추천해주는 빅데이터 기반 추천 프로젝트
 
 <br><br>
 
@@ -62,12 +62,69 @@
 
 ![recommend](./wiki/gif/recommend.gif)
 
-- 취향 설문과 최근 본 여행지를 기반으로 사용자 맞춤형 여행지를 추천
-- 로그인을 하지 않았다면 컨텐츠 기반 추천, 로그인을 했다면 사용자 기반 추천
+- 취향 설문을 기반해 즐길거리(관광지,레포츠,문화시설, 쇼핑)를 추천
+- 최근 본 즐길거리를 기반으로 취향설문을 결합해 근처 식당&숙박 추천 
+- 로그인을 하지 않았다면 콘텐츠 기반(인기순/최근 본 관광지 기반) 추천
+- 로그인을 했다면 (콘텐츠 기반 + 사용자 기반) 하이브리드 추천
+- 빅데이터 활용
+
+  - 공공데이터 
+
+    - 한국 무장애 관광 데이터 5만건
+    - 한국 국문 관광 데이터 25만건 
+  - 별도 수집 데이터(한국데이터랩/크롤링) 
+
+    - 네이게이션 검색 건수 데이터 21만건 
+    - 네이버 후기 데이터 13만건
 
 <br><br>
 
 ## 프로젝트 실행 방법
+### client 실행
+
+1. **원격 저장소 복제**
+
+```bash
+$ git clone https://lab.ssafy.com/s08-bigdata-recom-sub2/S08P22D105.git
+```
+
+2. **프로젝트 폴더로 이동**
+
+```bash
+$ cd frontend
+```
+
+3. **필요한 node_modules 설치**
+
+```bash
+$ npm install
+```
+
+4. **개발 서버 실행**
+
+```bash
+$ npm start
+```
+
+<br />
+
+### server 실행
+
+1. **원격 저장소 복제**
+
+```bash
+$ git clone https://lab.ssafy.com/s08-bigdata-recom-sub2/S08P22D105.git
+```
+
+2. **프로젝트 폴더로 이동**
+
+```bash
+$ cd backend
+```
+
+3. **main 메서드 실행하기**
+
+
 
 <br><br>
 
@@ -124,7 +181,9 @@
 └─📂frontend
 ```
 
-### Front-End
+<details>
+<summary>Front-End</summary>
+<div markdown="1">
 
 ```
 ┗📦src
@@ -192,8 +251,13 @@
   ┣ 📜index.css
   ┣ 📜index.tsx
 ```
+</div>
+</details>
 
-### Back-End
+
+<details>
+<summary>Back-End</summary>
+<div markdown="1">
 
 ```
 └─📂 src
@@ -219,6 +283,8 @@
 └─🐘 build.gradle
 └─🐘 settings.gradle
 ```
+</div>
+</details>
 
 <br><br>
 
