@@ -3,22 +3,26 @@
 ![logo](./wiki/img/logo.png)
 
 ## == Contents ==
+
 1. [개요](#개요)
 2. [프로젝트 소개](#프로젝트-소개)
 3. [주요 기능](#주요-기능)
 4. [프로젝트 실행방법](#프로젝트-실행-방법)
 5. [기술스택](#기술-스택)
-    1. [Front-End](#front-end)
-    2. [Back-End](#back-end)
+   1. [Front-End](#front-end)
+   2. [Back-End](#back-end)
 6. [프로젝트 구조도](#프로젝트-구조도)
 
 ## 개요
+
 > 개발 기간: 2023.03 ~ 2023.04
 
 ## 프로젝트 소개
+
 무장애인들을 위한 여행지 추천 사이트
 
 - 무장애 종류
+
 1. 지체장애인
 2. 시각장애인
 3. 청각장애인
@@ -26,6 +30,7 @@
 5. 영유아
 
 ## 주요 기능
+
 1. 사용자 맞춤 여행지 추천
 2. 무장애 필터링
 
@@ -34,18 +39,22 @@
 ## 기술 스택
 
 ### Front-End
+
 <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white">
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
 <img src="https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=.ENV&logoColor=black">
 <img src="https://img.shields.io/badge/KAKAO-FFCD00?style=for-the-badge&logo=Kakao&logoColor=black">
 
 ### Back-End
+
 #### API 서버
+
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white">
 <img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=for-the-badge&logo=SpringSecurity&logoColor=white">
 <img src="https://img.shields.io/badge/KAKAO-FFCD00?style=for-the-badge&logo=Kakao&logoColor=black">
 
 #### 추천 시스템 서버
+
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
 <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=Django&logoColor=white">
 <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=Pandas&logoColor=white">
@@ -53,22 +62,24 @@
 <img src="https://img.shields.io/badge/Selenium-F7931E?style=for-the-badge&logo=Selenium&logoColor=white">
 
 #### DB
+
 <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">
 
 ### Deployment
+
 <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=Ubuntu&logoColor=white">
 <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=black">
 <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
 <img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=Nginx&logoColor=white">
 
 ### Communication
+
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white">
 <img src="https://img.shields.io/badge/Gitlab-FC6D26?style=for-the-badge&logo=Gitlab&logoColor=white">
 <img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=JiraSoftware&logoColor=white">
 <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white">
 <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
 <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white">
-
 
 ## 프로젝트 구조도
 
@@ -81,7 +92,75 @@
 
 ### Front-End
 
+```
+📦src
+ ┣ 📂assets
+ ┃ ┣ 📂icon
+ ┃ ┣ 📂images
+ ┃ ┗ 📂lottie
+ ┣ 📂components
+ ┃ ┣ 📂auth
+ ┃ ┣ 📂bookmark
+ ┃ ┃ ┣ 📂bookmarkItem
+ ┃ ┣ 📂common
+ ┃ ┃ ┣ 📂Button
+ ┃ ┃ ┣ 📂DetailBtn
+ ┃ ┃ ┣ 📂Dropdown
+ ┃ ┃ ┣ 📂Footer
+ ┃ ┃ ┣ 📂Header
+ ┃ ┃ ┣ 📂Loading
+ ┃ ┃ ┣ 📂Mic
+ ┃ ┃ ┣ 📂Modal
+ ┃ ┃ ┗ 📂RadioButton
+ ┃ ┣ 📂course
+ ┃ ┃ ┣ 📂map
+ ┃ ┃ ┣ 📂sideBar
+ ┃ ┃ ┃ ┣ 📂folderList
+ ┃ ┃ ┃ ┃ ┣ 📂openFolder
+ ┃ ┣ 📂Detail
+ ┃ ┣ 📂Intro
+ ┃ ┃ ┣ 📂main
+ ┃ ┃ ┣ 📂main2
+ ┃ ┃ ┣ 📂main3
+ ┃ ┃ ┣ 📂main4
+ ┃ ┃ ┣ 📂main5
+ ┃ ┣ 📂personal
+ ┃ ┣ 📂search
+ ┃ ┣ 📂survey
+ ┃ ┃ ┣ 📂Accordion
+ ┃ ┃ ┃ ┣ 📂question1
+ ┃ ┃ ┃ ┃ ┣ 📂Button
+ ┃ ┃ ┃ ┣ 📂question2
+ ┃ ┃ ┃ ┃ ┣ 📂dropdown
+ ┃ ┃ ┃ ┣ 📂question3
+ ┃ ┃ ┃ ┣ 📂question4
+ ┃ ┃ ┃ ┣ 📂question5
+ ┃ ┃ ┃ ┃ ┣ 📂OptionCards
+ ┃ ┃ ┣ 📂SaveBtn
+ ┃ ┃ ┗ 📂SurveyTitle
+ ┃ ┣ 📂trip
+ ┃ ┃ ┣ 📂tripList
+ ┃ ┃ ┃ ┣ 📂tripCardItem
+ ┃ ┃ ┗ 📂tripRec
+ ┃ ┃ ┃ ┣ 📂tripRecCardItem
+ ┃ ┗ 📂utils
+ ┣ 📂fonts
+ ┣ 📂pages
+ ┃ ┣ 📂BookmarkPage
+ ┃ ┣ 📂DetailPage
+ ┃ ┣ 📂ListPage
+ ┃ ┣ 📂LoginPage
+ ┃ ┣ 📂SearchPage
+ ┣ 📂recoil
+ ┣ 📂styles
+ ┣ 📂types
+ ┣ 📜App.tsx
+ ┣ 📜index.css
+ ┣ 📜index.tsx
+```
+
 ### Back-End
+
 ```
 └─📂 src
     ├─📂 main
@@ -108,6 +187,7 @@
 ```
 
 ## TEAM
+
 <table class="tg">
 <thead>
   <tr>
