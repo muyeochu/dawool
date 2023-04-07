@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { white, black, mainColor, grey, blue } from "../../../styles/Colors";
+import { white, black, mainColor, blue } from "../../../styles/Colors";
 
 // radio button group wrapping
 export const Wrapper = styled.div`
@@ -25,6 +25,7 @@ export const Radio = styled.input`
   border: 1.5px solid ${mainColor};
   border-radius: 50%;
   transition: all 0.1s ease-in-out;
+  cursor: pointer;
   /* 내부 점 */
   ::after {
     content: "";
@@ -89,4 +90,5 @@ export const Label = styled.label`
   display: flex;
   align-items: center;
   color: ${black};
+  cursor: pointer;
 `;

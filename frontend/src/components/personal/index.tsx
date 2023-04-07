@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { userState } from "../../recoil/UserState";
 import { useRecoilState } from "recoil";
-
 import {
   MyPageDimmer,
   SidebarStyle,
@@ -43,7 +42,10 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
 
   // 내 코스 관리로 이동
   const goMyCours = () => {
-    if (!checkLogin()) navigate("/mycourse");
+    if (!checkLogin()) {
+      navigate("/mycourse");
+      window.location.reload();
+    }
   };
 
   // 관심 여행지 관리로 이동
@@ -53,7 +55,15 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
 
   // 로그아웃
   const handleLogout = () => {
-    // 로그아웃 로직 작성
+    window.localStorage.clear();
+    setUser({
+      accessToken: "",
+      accessTokenExpiresIn: 0,
+      grantType: "",
+      nickName: "",
+      refreshToken: "",
+      isSurveyed: false,
+    });
     alert("로그아웃 되었습니다!");
     navigate("/");
   };
@@ -62,13 +72,14 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
     if (user.accessToken === "") {
       alert("로그인이 필요한 서비스입니다.");
       navigate("/login");
+      window.location.reload();
       return true;
     } else return false;
   };
   const goLogin = () => {
     navigate("/login");
+    window.location.reload();
     closeSideBar();
-    const bfLogin = document.getElementById("beforeLogin");
   };
 
   return (
@@ -104,7 +115,7 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
                     closeSideBar();
                   }}
                 >
-                  <SurveyIcStyle /> <MenuFont>취향 설문 수정</MenuFont>
+                  <SurveyIcStyle /> <MenuFont>취향 설문</MenuFont>
                 </IconMenuContainer>
                 <IconMenuContainer
                   onClick={() => {

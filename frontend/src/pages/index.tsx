@@ -1,5 +1,3 @@
-import AccommodationPage from "./AccommodationPage";
-
 import AccommodationDetailPage from "./DetailPage/AccommodationDetailPage";
 import CultureDetailPage from "./DetailPage/CultureDetailPage";
 import LeportsDetailPage from "./DetailPage/LeportsDetailPage";
@@ -7,21 +5,18 @@ import RestaurantDetailPage from "./DetailPage/RestaurantDetailPage";
 import ShoppingDetailPage from "./DetailPage/ShoppingDetailPage";
 import TourSpotDetailPage from "./DetailPage/TourSpotDetailPage";
 
-import IntroPage from "./IntroPage";
+import AccommodationPage from "./ListPage/AccommodationPage";
+import IntroPage from "./ListPage/IntroPage";
 import LoginPage from "./LoginPage";
 import MyCoursePage from "./MyCoursePage";
-import RestaurantPage from "./RestaurantPage";
+import RestaurantPage from "./ListPage/RestaurantPage";
 import SearchPage from "./SearchPage";
 import SurveyPage from "./SurveyPage";
-import TourSpotPage from "./TourSpotPage";
-import CulturePage from "./CulturePage";
-import LeportsPage from "./LeportsPage";
-import ShoppingPage from "./ShoppingPage";
-import BookmarkPage from "./BookmarkPage"
-
-import ModalTest from "./TestPage/ModalTest";
-import ButtonTest from "./TestPage/ButtonTest";
-import MicTest from "./TestPage/MicTest";
+import TourSpotPage from "./ListPage/TourSpotPage";
+import CulturePage from "./ListPage/CulturePage";
+import LeportsPage from "./ListPage/LeportsPage";
+import ShoppingPage from "./ListPage/ShoppingPage";
+import BookmarkPage from "./BookmarkPage";
 
 export {
   AccommodationPage,
@@ -42,7 +37,4 @@ export {
   LeportsPage,
   ShoppingPage,
   BookmarkPage,
-  ModalTest,
-  ButtonTest,
-  MicTest,
 };

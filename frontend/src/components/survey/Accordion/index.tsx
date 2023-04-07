@@ -24,9 +24,15 @@ interface AccordionProps {
   title: string;
   children: React.ReactNode;
   id: string;
+  isOpen?: boolean;
 }
 
-const Accordion: React.FC<AccordionProps> = ({ title, children, id }) => {
+const Accordion: React.FC<AccordionProps> = ({
+  title,
+  children,
+  id,
+  isOpen = false,
+}) => {
   const first = useRecoilValue(firstState);
   const second = useRecoilValue(secondState);
   const third = useRecoilValue(thirdState);
@@ -45,15 +51,19 @@ const Accordion: React.FC<AccordionProps> = ({ title, children, id }) => {
       : fifth;
 
   // Accordion이 열려있는지, 닫혀있는지 여부
-  const [isOpen, setIsOpen] = useState(false);
-  //  Accordion의 Header를 클릭 -> isOpen 값 반전
+  const [isAccordionOpen, setIsAccordionOpen] = useState(
+    id === "firstAccordion" ? true : isOpen
+  );
   const toggleAccordion = () => {
-    setIsOpen(!isOpen);
+    setIsAccordionOpen(!isAccordionOpen);
   };
 
   return (
-    <AccordionItemContainer isopen={isOpen.toString()}>
-      <HeaderContainer onClick={toggleAccordion} isopen={isOpen.toString()}>
+    <AccordionItemContainer isopen={isAccordionOpen.toString()}>
+      <HeaderContainer
+        onClick={toggleAccordion}
+        isopen={isAccordionOpen.toString()}
+      >
         <HeaderCheckTextContainer>
           {stateValue !== "" && stateValue.length !== 0 ? (
             <CheckedIc />
@@ -64,10 +74,10 @@ const Accordion: React.FC<AccordionProps> = ({ title, children, id }) => {
           <HeaderText>{title}</HeaderText>
         </HeaderCheckTextContainer>
 
-        <UpdownIcStyle isopen={isOpen.toString()} />
+        <UpdownIcStyle isopen={isAccordionOpen.toString()} />
       </HeaderContainer>
 
-      {isOpen && <BodyContainer>{children}</BodyContainer>}
+      {isAccordionOpen && <BodyContainer>{children}</BodyContainer>}
     </AccordionItemContainer>
   );
 };

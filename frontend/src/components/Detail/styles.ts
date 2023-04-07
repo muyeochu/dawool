@@ -6,7 +6,7 @@ import { ReactComponent as HeartIc } from "../../assets/icon/heartIc.svg";
 import { ReactComponent as likedIc } from "../../assets/icon/likedIc.svg";
 import { ReactComponent as MuteIc } from "../../assets/icon/muteIc.svg";
 
-import { grey, blue, mainColor } from "../../styles/Colors";
+import { grey, blue, mainColor, red } from "../../styles/Colors";
 
 export const VolumeIcStyle = styled(VolumeIc)`
   fill: ${mainColor};
@@ -35,7 +35,6 @@ export const HeartIcStyle = styled(HeartIc)`
 `;
 
 export const LikedIcStyle = styled(likedIc)`
-  /* 크기 바뀌는 문제 해결하기! */
   width: 37px;
   height: 32px;
   cursor: pointer;
@@ -83,7 +82,7 @@ export const IcExpContainer = styled.div`
 export const MainInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 60px;
+  margin-top: 30px;
   width: 100%;
   gap: 22px;
 `;
@@ -176,10 +175,10 @@ export const StopSoundIcStyle = styled(MuteIc)`
   height: 35px;
   bottom: 20px;
   right: 25px;
-  fill: ${mainColor};
+  fill: ${red[100]};
 
   &:hover {
-    fill: ${blue[500]};
+    fill: ${red[200]};
     cursor: pointer;
   }
 `;
@@ -212,6 +211,12 @@ export const BarrierContainer = styled.div`
       font-weight: 500;
       font-size: 16px;
       margin-bottom: 20px;
+      color: ${grey[400]};
+    }
+
+    &.no {
+      font-weight: 500;
+      font-size: 18px;
       color: ${grey[400]};
     }
   }

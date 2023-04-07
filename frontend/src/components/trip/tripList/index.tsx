@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useState, useEffect, useRef } from "react";
+import { useRecoilState } from "recoil";
 import Button from "../../common/Button";
 import {
   TripListContainer,
@@ -32,7 +32,6 @@ function TripList({ titleType }: TripListProps) {
   const [citySelected, setCitySelected] =
     useRecoilState<number>(citySelectedState); // 선택된 도시의 ID 값 나타내는 상태값
   const [cityList, setCityList] = useRecoilState<City[]>(citiesState); // 지역 정보를 관리하는 citiesState recoil atom의 상태값
-  const selectedCity = cityList?.find((city) => city.id) ?? { id: 1 };
 
   const [listStateValue, setListStateValue] = useRecoilState(listBarrierState); // 무장애 태그 상태
   const [listData, setListData] = useState([]); // 받아온 데이터를 저장
@@ -41,12 +40,13 @@ function TripList({ titleType }: TripListProps) {
   const pageEnd: any = useRef(); // 페이지의 끝부분
 
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [isUpBtn, SetIsUpBtn] = useState(false)
+  const [isUpBtn, SetIsUpBtn] = useState(false);
 
   // 일정 스크롤이 내려가야 위로 올라가는 버튼이 보임
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
+
 
   useEffect(() => {
     window.addEventListener("scroll", updateScroll);
@@ -65,13 +65,23 @@ function TripList({ titleType }: TripListProps) {
 
   const contentTypeId = getContentTypeId(titleType);
 
-  // 새로고침 할때마다 searchState 값 초기화 필요
+  // 새로고침 할때마다 State 값 초기화 필요
   useEffect(() => {
     setListStateValue({ barrier: "00000" });
+    setListData([])
   }, []);
 
+  // 무장애 버튼 클릭할때마다 Page 초기화
+  useEffect(() => {
+    if (prevBarrier !== listStateValue.barrier) {
+      setPage(0);
+      setPrevPage(0);
+      setPrevBarrier(listStateValue.barrier);
+    }
+  }, [listStateValue.barrier]);
+
   const getListDatas = async (page: number) => {
-    console.log("page는?", page);
+   
     const listQuery = {
       contentTypeId: contentTypeId,
       area: citySelected,
@@ -79,23 +89,24 @@ function TripList({ titleType }: TripListProps) {
       page: page,
       size: 10,
     };
+
+
     const res = await getListApi(listQuery);
     const data = await res.data.contents;
 
-    // 페이지가 이동시에만 무한스크롤 구현(버튼 무한스크롤x)
-    if (page > prevPage) {
-      setListData((prev) => [...prev, ...data] as any);
-      setPrevPage(page);
-    } else {
-      // 무장애 태그를 클릭할때 페이지 및 데이터 초기화
-      if (prevBarrier !== listStateValue.barrier || prevCity !== citySelected) {
-        setPage(0);
-        setPrevPage(0);
-        setListData(data);
-        setPrevBarrier(listStateValue.barrier);
-        setPrevCity(citySelected);
+
+    // 페이지가 이동시에만 무한스크롤
+    if (data.length === 0) {
+      if (page === 0) {
+        setListData(data); // 검색결과가 없는 경우
       }
-      setListData(data);
+    } else {
+      if (page > prevPage) {
+        setListData((prev) => [...prev, ...data] as any);
+        setPrevPage(page);
+      } else {
+        setListData(data);
+      }
     }
     setLoading(true);
   };
@@ -132,7 +143,6 @@ function TripList({ titleType }: TripListProps) {
 
   // 드롭다운에서 도시 선택할 때 호출
   const onCitySelected = (city: string | TripListTitleType) => {
-    // const selectedCity = Number(city as TripListTitleType);
     setIsClicked(false);
   };
 
@@ -164,7 +174,8 @@ function TripList({ titleType }: TripListProps) {
     <>
       <TripListContainer id="trip-list-container">
         <TripListTitle>
-          <span>{cityName}</span>{typeText}
+          <span>{cityName}</span>
+          {typeText}
         </TripListTitle>
         <ButtonGroup>
           {/* 무장애 필터링 버튼 */}
@@ -194,7 +205,7 @@ function TripList({ titleType }: TripListProps) {
           </TripCardListContainer>
         )}
       </TripListContainer>
-      {isUpBtn && <ToUpIcStyle onClick={MoveToTop}/>}
+      {isUpBtn && <ToUpIcStyle onClick={MoveToTop} />}
       <EndBlock ref={pageEnd} />
     </>
   );

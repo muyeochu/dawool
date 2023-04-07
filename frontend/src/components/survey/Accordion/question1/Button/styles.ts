@@ -1,10 +1,5 @@
 import styled from "styled-components";
-import {
-  white,
-  mainColor,
-  grey,
-  blue,
-} from "../../../../../styles/Colors";
+import { white, mainColor, blue } from "../../../../../styles/Colors";
 
 interface StyledButtonProps {
   isclicked: boolean;
@@ -24,7 +19,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
   &:hover:enabled {
     background-color: ${blue[300]};
-    color: ${({ isclicked }) => (isclicked ? grey[500] : white)};
+    color: ${white};
   }
 
   &:disabled {
@@ -44,12 +39,5 @@ export const ButtonText = styled.span<StyledButtonProps>`
   align-items: center;
   text-align: center;
 
-  color: ${({ isclicked }) => (isclicked ? white : grey[500])};
+  color: ${({ isclicked }) => (isclicked ? white : "")};
 `;
-
-// 버튼 안의 이미지 스타일 지정
-// export const ButtonIcon = styled.img<StyledButtonProps>`
-//   width: 20px;
-//   height: 20px;
-//   filter: ${({ isClicked }) => (isClicked ? "brightness(100%)" : "brightness(0%)")};
-// `;

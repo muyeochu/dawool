@@ -35,6 +35,8 @@ const DetailComponent = ({
   myData: any;
   location: number;
 }) => {
+
+ 
   // 맵 좌표
   const mapInfo = {
     mapX: myData.info.mapX,
@@ -63,17 +65,23 @@ const DetailComponent = ({
       closeModal();
     },
   };
+
   return (
     <>
       <TitleContainer title={myData.info.title}>
-        <TitleIcContainer>
-          <p>{myData.info.title}</p>
-        </TitleIcContainer>
+        <p>{myData.info.title}</p>
+
         <TitleIcContainer>
           <div id="ExpContainer">
             <IcExpContainer
               onClick={() => {
-                openModal(modalDataL);
+                if (token !== "0") {
+                  openModal(modalDataL);
+                } else {
+                  alert("로그인이 필요합니다.");
+                  navigate("/login");
+                  window.location.reload();
+                }
               }}
             >
               <FolderIcStyle />
@@ -88,6 +96,7 @@ const DetailComponent = ({
               } else {
                 alert("로그인이 필요합니다.");
                 navigate("/login");
+                window.location.reload();
               }
             }}
           >
@@ -96,7 +105,9 @@ const DetailComponent = ({
           </IcExpContainer>
         </TitleIcContainer>
       </TitleContainer>
-
+      {myData.info.category && (
+        <DetailBtn type={"category"} text={`# ${myData.info.category}`} />
+      )}
       <MainInfoContainer>
         <MainImgContainer>
           {myData.info.firstImage === "0" ? (
@@ -107,31 +118,36 @@ const DetailComponent = ({
         </MainImgContainer>
         <MainBtnInfoContainer>
           <MainBtnContainer>
-            {myData.info.mobilityWeak ? (
-              <DetailBtn icType={"bathchair"} text={"지체장애"} disable={1} />
-            ) : (
-              <DetailBtn icType={"bathchair"} text={"지체장애"} disable={0} />
-            )}
-            {myData.info.visuallyImpaired ? (
-              <DetailBtn icType={"eye"} text={"시각장애"} disable={1} />
-            ) : (
-              <DetailBtn icType={"eye"} text={"시각장애"} disable={0} />
-            )}
-            {myData.info.deaf ? (
-              <DetailBtn icType={"ear"} text={"청각장애"} disable={1} />
-            ) : (
-              <DetailBtn icType={"ear"} text={"청각장애"} disable={0} />
-            )}
-            {myData.info.old ? (
-              <DetailBtn icType={"oldman"} text={"노인"} disable={1} />
-            ) : (
-              <DetailBtn icType={"oldman"} text={"노인"} disable={0} />
-            )}
-            {myData.info.infant ? (
-              <DetailBtn icType={"toddler"} text={"영유아"} disable={1} />
-            ) : (
-              <DetailBtn icType={"toddler"} text={"영유아"} disable={0} />
-            )}
+            <DetailBtn
+              type={"default"}
+              icType={"bathchair"}
+              text={"지체장애"}
+              disable={myData.info.mobilityWeak ? 1 : 0}
+            />
+            <DetailBtn
+              type={"default"}
+              icType={"eye"}
+              text={"시각장애"}
+              disable={myData.info.visuallyImpaired ? 1 : 0}
+            />
+            <DetailBtn
+              type={"default"}
+              icType={"ear"}
+              text={"청각장애"}
+              disable={myData.info.deaf ? 1 : 0}
+            />
+            <DetailBtn
+              type={"default"}
+              icType={"oldman"}
+              text={"노인"}
+              disable={myData.info.old ? 1 : 0}
+            />
+            <DetailBtn
+              type={"default"}
+              icType={"toddler"}
+              text={"영유아"}
+              disable={myData.info.infant ? 1 : 0}
+            />
           </MainBtnContainer>
           {location === 32 && <AccommodationDetailInfo myData={myData} />}
           {location === 14 && <CultureDetailInfo myData={myData} />}

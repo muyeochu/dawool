@@ -1,28 +1,36 @@
+import { useEffect, useState } from "react";
 import DetailComponent from "../../components/Detail";
 import { useLocation } from "react-router-dom";
-
-import { useRecoilValue } from "recoil";
-import { getDataSelector } from "../../recoil/DetailSelectors";
+import { getDetailApi } from "../../recoil/Api";
 
 import { MainGridItems, RowGridContainer, RowGridItems } from "./styles";
 
 const ShoppingDetailPage = () => {
   const location = useLocation();
   const pathArray = location.pathname.split("/");
-
   const contentId = pathArray[pathArray.length - 1];
 
-  const myData = useRecoilValue(
-    getDataSelector({ contentId: contentId, location: 38 })
-  );
+  const [detailData, setDetailData] = useState();
 
-  console.log("myData 원본은?", myData);
+  useEffect(() => {
+    const getDetailData = async () => {
+      const detailQuery = {
+        contentId: contentId,
+        location: 38,
+      };
+      const res = await getDetailApi(detailQuery);
+      const data = await res.data;
+      setDetailData(data);
+
+    };
+    getDetailData();
+  }, [contentId]);
 
   return (
     <MainGridItems>
       <RowGridContainer>
         <RowGridItems>
-          {myData && <DetailComponent myData={myData} location={38} />}
+          {detailData && <DetailComponent myData={detailData} location={38} />}
         </RowGridItems>
       </RowGridContainer>
     </MainGridItems>

@@ -1,11 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { getCourseFolderData } from "../../course/sideBar/folderList";
 import ReactDOM from "react-dom";
 import { customAxios2 } from "../../../recoil/customAxios";
 import useModal from "../../utils/useModal";
-import { useLocation } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { getDataSelector } from "../../../recoil/DetailSelectors";
+
 import {
   ModalDimmer,
   ModalLargeContainer,
@@ -15,13 +11,23 @@ import {
   ModalCourseTitle,
   ModalCourseContainer,
 } from "./styles";
-import { grey } from "../../../styles/Colors";
-
+import DetailBtn from "../DetailBtn";
+import {
+  FolderHeaderContainerModal,
+  ModalFolderGreyIc,
+  InputFolderNameModal,
+} from "../../course/sideBar/folderList/styles";
+import { useRecoilState } from "recoil";
+import { userState } from "../../../recoil/UserState";
+import { useState } from "react";
+import { blue } from "../../../styles/Colors";
+import { CreateListType } from "../../../types/courseFolderTypes";
 import {
   FolderContainer,
-  FolderYellowIc,
+  ModalFolderYellowIc,
 } from "../../course/sideBar/folderList/styles";
 import { insertCourseType } from "../../../types/courseListTypes";
+import { ListType } from "../../../types/courseFolderTypes";
 
 declare global {
   interface Window {
@@ -34,11 +40,24 @@ declare global {
   }
 }
 const CourseModal = () => {
-  const navigate = useNavigate();
   const { modalDataState, closeModal } = useModal();
+  const [input, setInput] = useState("");
+  const [user, setUser] = useRecoilState(userState);
 
-  getCourseFolderData();
+  const getCourseFolderData = (): Promise<ListType[]> =>
+    customAxios2
+      .get(`user/my-course`)
+      .then((res) => {
+  
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
   async function myFunction() {
+    let nowURL = new URL(window.location.href).href.includes("detail");
+    if (!nowURL || user.accessToken === "") return;
     try {
       let folderList = await getCourseFolderData();
       return folderList;
@@ -59,20 +78,21 @@ const CourseModal = () => {
     window.title = goToGrandChild.getAttribute("title");
     window.mapX = goToGrandChild.getAttribute("mapX");
     window.mapY = goToGrandChild.getAttribute("mapY");
-    console.log(window.targetCourse);
+
     const parent = e.target.parentNode.parentNode;
 
     for (var i = 0; i < parent.childNodes.length; i++) {
       parent.childNodes[i].style.backgroundColor = "white";
     }
-    e.target.parentNode.style.backgroundColor = `${grey[100]}`;
+    e.target.parentNode.style.backgroundColor = `${blue[100]}`;
   }
 
   function createTag(folderList: any) {
     const div = document.getElementById("modalFolder");
-    const div2 = document.createElement("div");
-    div2.className = "FolderContainer";
-    console.log(div2);
+    const div2 = document.getElementById("modalFolderContainer");
+
+    if (div2?.childNodes.length !== 0) return;
+
     for (let i = 0; i < folderList["myCourse"].length; i++) {
       const folder = folderList["myCourse"][i];
       const element = () => (
@@ -80,7 +100,7 @@ const CourseModal = () => {
           id={folder.courseId}
           onClick={(event) => setCourseIdIntoTar(event)}
         >
-          <FolderYellowIc />
+          <ModalFolderYellowIc />
           {folder.courseName}
         </FolderContainer>
       );
@@ -89,16 +109,53 @@ const CourseModal = () => {
       div2.appendChild(fdContainer);
     }
     div?.appendChild(div2);
-    console.log(div);
+  
     return div;
   }
 
   myFunction().then((folderList) => {
-    createTag(folderList);
+    let nowURL = new URL(window.location.href).href.includes("detail");
+    if (nowURL) createTag(folderList);
   });
 
+  function insertFolder(e: any) {
+    e.preventDefault();
+    let folderinput = document.getElementById(
+      "inputName"
+    ) as HTMLInputElement | null;
+    const postCourseFolderData = async (
+      name: string
+    ): Promise<CreateListType> => {
+      try {
+        const response = await customAxios2.post<CreateListType>(
+          `user/my-course`,
+          { courseName: name }
+        );
+     
+        return response.data;
+      } catch (err) {
+        console.log(err);
+        throw new Error("error");
+      }
+    };
+    myFunction().then((folderList) => {
+      createTag(folderList);
+    });
+    let inputText = folderinput?.value;
+    if (inputText) {
+      postCourseFolderData(inputText).then(() => {
+        alert("코스가 추가되었습니다.");
+        window.location.reload();
+      });
+    }
+    if (folderinput) {
+      folderinput.value = "";
+    }
+  }
   function insertCourse(e: any) {
     e.preventDefault();
+    let nowURL = new URL(window.location.href).href.includes("detail");
+    if (!nowURL || user.accessToken === "") return;
     const postCourseFolderData = async (): Promise<insertCourseType> => {
       try {
         const response = await customAxios2.post<insertCourseType>(
@@ -111,17 +168,21 @@ const CourseModal = () => {
             mapY: window.mapY,
           }
         );
-        console.log(response);
+  
         return response.data;
       } catch (err) {
         console.log(err);
         throw new Error("error");
       }
     };
+
     myFunction().then((folderList) => {
+      let nowURL = new URL(window.location.href).href.includes("detail");
+      if (!nowURL || user.accessToken === "") return;
       createTag(folderList);
     });
     postCourseFolderData().then(() => {
+      alert("여행지가 추가되었습니다.");
       window.location.reload();
     });
   }
@@ -130,10 +191,28 @@ const CourseModal = () => {
     <>
       {modalDataState.isOpen && modalDataState.type === "course" && (
         <ModalDimmer>
-          <ModalLargeContainer>
+          <ModalLargeContainer className="course">
             <ModalCourseTitle>저장할 코스를 선택해주세요.</ModalCourseTitle>
+            <FolderHeaderContainerModal>
+              <form onSubmit={insertFolder}>
+                <label style={{ display: "flex", alignItems: "center" }}>
+                  <ModalFolderGreyIc />
+
+                  <InputFolderNameModal
+                    id="inputName"
+                    type="text"
+                    required={true}
+                    defaultValue={input}
+                  ></InputFolderNameModal>
+                  <DetailBtn type={"add"} text={"추가"}></DetailBtn>
+                </label>
+              </form>
+            </FolderHeaderContainerModal>
+
             <ModalCourseContainer>
-              <div id="modalFolder"></div>
+              <div id="modalFolder">
+                <div id="modalFolderContainer"></div>
+              </div>
             </ModalCourseContainer>
             <CloseBtnStyle onClick={closeModal} />
             <BtnStyle>

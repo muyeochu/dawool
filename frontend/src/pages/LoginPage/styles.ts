@@ -1,61 +1,45 @@
 import styled from "styled-components";
-import KakaoImg from "../../assets/images/kakao_login_large_wide.png"
-import BackImg from "../../assets/images/loginBackImg.png"
-
+import KakaoImg from "../../assets/images/kakao_login_large_wide.png";
+import { white } from "../../styles/Colors";
 
 export const BackgroundContainer = styled.div`
-    grid-column:1/span 3;
-    text-align:center;
-    position: absolute;
-    height : 92vh;
-    width: 100%;
-    background-image:url(${BackImg});
-    background-size:cover;
-`
+  grid-column: 1 / span 3;
+  height: 92vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+`;
 
-export const LoginText = styled.h1`
-position: absolute;
-width: 798px;
-height: 128px;
-left: 400px;
-top: 230px;
+export const BackgroundImgStyle = styled.img`
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
+`;
 
-font-family: 'SUIT';
-font-style: normal;
-font-weight: 700;
-font-size: 43px;
-line-height: 64px;
-/* or 133% */
+export const MainFontStyle = styled.div`
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 60px;
+  color: ${white};
 
-display: inline-block;
-align-items: center;
-text-align: center;
-letter-spacing: -0.019em;
-
-color: #FFFFFF;
-`
+  position: absolute;
+  text-align: center;
+  top: 160px;
+  left: 50%;
+  transform: translate(-50%, 50%);
+`;
 
 export const KakaoButton = styled.img.attrs({
-    src:`${KakaoImg}`
+  src: `${KakaoImg}`,
 })`
-position: absolute;
+  width: 480px;
+  height: 72px;
 
-left: 500px;
-top: 420px;
+  position: absolute;
+  text-align: center;
+  top: 350px;
+  left: 50%;
+  transform: translate(-50%, 50%);
 
-font-family: 'SUIT';
-font-style: normal;
-font-weight: 700;
-font-size: 48px;
-line-height: 64px;
-/* or 133% */
-
-display: inline-block;
-align-items: center;
-text-align: center;
-letter-spacing: -0.019em;
-
-color: #FFFFFF;
-
-cursor:pointer;
-`
+  cursor: pointer;
+`;

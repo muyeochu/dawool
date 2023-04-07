@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { searchState } from "../../../recoil/SearchSelector";
 
@@ -27,7 +27,6 @@ import {
 // icon
 import { ReactComponent as LogoIc } from "../../../assets/icon/logoIc.svg";
 import { ReactComponent as SearchIc } from "../../../assets/icon/searchIc.svg";
-import { ReactComponent as MicIc } from "../../../assets/icon/micIc.svg";
 import { ReactComponent as PersonIc } from "../../../assets/icon/personIc.svg";
 import { ReactComponent as PersonIc2 } from "../../../assets/icon/person2Ic.svg";
 
@@ -67,9 +66,9 @@ const Header = () => {
 
   useEffect(() => {
     if (currentUrl === "/" && scrollPosition < 100) {
-      setHeaderColor("transparent"); // scrollPosition이 100보다 작으면 headerColor를 변경
+      setHeaderColor("transparent"); 
     } else {
-      setHeaderColor("#ffffff"); // 그 외의 경우에는 초기값으로 변경
+      setHeaderColor("#ffffff"); 
     }
   }, [scrollPosition, currentUrl]);
 
@@ -90,7 +89,6 @@ const Header = () => {
     const blankPattern = /^\s+|\s+$/g;
     if (search.replace(blankPattern, "") === "") {
       alert("공백은 입력할 수 없습니다!");
-      console.log("아무것도 입력되지 않음!");
       resetSearchInput();
       setSearch("");
       return;
@@ -100,7 +98,6 @@ const Header = () => {
     const specialPattern = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
     if (specialPattern.test(search) === true) {
       alert("특수문자는 입력할 수 없습니다!");
-      console.log("특수문자 입력됨!");
       resetSearchInput();
       setSearch("");
       return;
@@ -205,19 +202,17 @@ const Header = () => {
                 ismenuopen={isMenuOpen.toString()}
               >
                 즐길거리
-                {/* <DropDownIcStyle ismenuopen={isMenuOpen.toString()} /> */}
+                {isMenuOpen === true && (
+                  <DropDownContainer ref={ref}>
+                    <DropDownContent>
+                      <li onClick={goTourSpot}>관광지</li>
+                      <li onClick={goCulture}>문화시설</li>
+                      <li onClick={goLeports}>레포츠</li>
+                      <li onClick={goShopping}>쇼핑</li>
+                    </DropDownContent>
+                  </DropDownContainer>
+                )}
               </DropDownIcContainer>
-
-              {isMenuOpen === true && (
-                <DropDownContainer ref={ref}>
-                  <DropDownContent>
-                    <li onClick={goTourSpot}>관광지</li>
-                    <li onClick={goCulture}>문화시설</li>
-                    <li onClick={goLeports}>레포츠</li>
-                    <li onClick={goShopping}>쇼핑</li>
-                  </DropDownContent>
-                </DropDownContainer>
-              )}
 
               <NavStyle to="/restaurant">식당</NavStyle>
               <NavStyle to="/accommodation">숙박</NavStyle>

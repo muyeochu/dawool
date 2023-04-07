@@ -5,11 +5,13 @@ import {
   TripCardListContainer,
   NonDataContainer,
   NonSearchImgStyle,
+  ToUpIcStyle,
 } from "./styles";
 import Button from "../common/Button";
 
 import TripCardItem from "../trip/tripList/tripCardItem";
 import { ListType } from "../../types/tripListTypes";
+import { MoveToTop } from "../utils/MoveToTop";
 
 interface PropTypes {
   word: string;
@@ -36,16 +38,16 @@ const SearchList = ({ word, data }: PropTypes) => {
         <span className="keyword">{word}</span>
         <span>검색결과</span>
       </TitleContainer>
+      <ButtonList>
+        {buttons.map(({ id, label, icType, btType }) => (
+          <Button key={id} id={id} icType={icType} btType={btType}>
+            {label}
+          </Button>
+        ))}
+      </ButtonList>
 
       {noData === "no" && data.length >= 1 && (
         <>
-          <ButtonList>
-            {buttons.map(({ id, label, icType, btType }) => (
-              <Button key={id} id={id} icType={icType} btType={btType}>
-                {label}
-              </Button>
-            ))}
-          </ButtonList>
           <TripCardListContainer>
             {data.map((item: ListType) => (
               <TripCardItem
@@ -55,15 +57,17 @@ const SearchList = ({ word, data }: PropTypes) => {
               />
             ))}
           </TripCardListContainer>
+          <ToUpIcStyle onClick={MoveToTop} />
         </>
       )}
-      {noData === "yes" &&  <>
-        <NonDataContainer>
-          <p>검색 결과가 없습니다.</p>
-          <NonSearchImgStyle />
-        </NonDataContainer>
-      </>}
-     
+      {noData === "yes" && (
+        <>
+          <NonDataContainer>
+            <NonSearchImgStyle />
+            <p>검색 결과가 없습니다.</p>
+          </NonDataContainer>
+        </>
+      )}
     </>
   );
 };

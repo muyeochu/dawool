@@ -15,6 +15,9 @@ import base64
 import json
 import time
 from collections import OrderedDict
+from sklearn.metrics.pairwise import euclidean_distances
+import numpy as np
+import random
 
 DATABASE_URL = settings.DATABASES['default']['CLIENT']['host']
 
@@ -32,8 +35,7 @@ collection = db.user # 컬렉션
 def spot_list(request, spot_id):
     logging.basicConfig(level=logging.INFO)
     logging.info('관광지 추천 시작')
-    start = time.time()  # 시작 시간 저장
-    # 나중에는 get으로 전부 바꿔야함 
+
     if(request.method == 'GET'):
         try:
             # JWT 토큰 추출
@@ -44,7 +46,6 @@ def spot_list(request, spot_id):
 
             # JWT 디코딩
             user_id = decode_jwt(token)
-
             object_id = user_id['sub']
 
             user_result = collection.find({'_id': ObjectId(object_id)})       
@@ -53,13 +54,12 @@ def spot_list(request, spot_id):
 
             # 사용자가 취향 설문을 했을 때 
             try:
-                print(user)
                  # 갔던곳, 선호 관광지 배열 > 여러 개 
                 visitLocation = user['survey']['visitLocation']
                 # 선호 시간 > 1시간 50000
                 userTime = user['survey']['preferredTime']
                 logging.info("선호시간 1시간 2시간 3시간")
-                preferredTime = int(userTime) * 50000
+                preferredTime = int(userTime) * 45000
     
                 # 출발지 배열 > 출발지 배열 
                 departure = user['survey']['departure']
@@ -70,13 +70,26 @@ def spot_list(request, spot_id):
                 result_data = survey_recommend(user, int(spot_id), result_df, visitLocation)
                 result_data = result_data[result_data['contentTypeId']==int(spot_id)]
 
-                # # 필요한 컬럼만 추출
-       
-                dict_data = result_data[:4].to_dict(orient='records')
-            
+                user_heart =get_heart(object_id, int(spot_id))
+               
+
+
+                if len(user_heart) != 0:
+                    dict_data = result_data[:3].to_dict(orient='records')
+                    content_id = user_heart['contentid']
+                    user_recommend_data = RecommendTour.objects.filter(contentid=content_id)
+                    se = PopularTourSerializer(user_recommend_data, many=True)
+                    dictionary = dict(se.data[0])
+                    dict_data.append(dictionary)
+                   
+
+                else:
+                    dict_data = result_data[:4].to_dict(orient='records')
+                  
             # 취향 설문 안했을때 인기순
             except:
                 dict_data = popular_sorted(int(spot_id))
+
 
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
@@ -96,10 +109,11 @@ def spot_list(request, spot_id):
 def food_list(request):
     logging.basicConfig(level=logging.INFO)
     logging.info('식당 추천 시작')
-    start = time.time()  # 시작 시간 저장
+    
     if(request.method == 'POST'):
         try:
             dict_data = recommend_logic(request, 39)
+
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
@@ -123,7 +137,7 @@ def stay_list(request):
     if(request.method == 'POST'):
         try:
             dict_data = recommend_logic(request, 32)
-    
+
             return JsonResponse({'contents' : dict_data }, status=status.HTTP_200_OK, safe=False)
         
         # 로그인 안했을때, 인기순
@@ -168,38 +182,53 @@ def recommend_logic(request, contenttypeid):
 
     # 사용자 정보 
     user = list(user_result)[0]
- 
+    # 사용자 기반 알고리즘 
+    user_heart =  get_heart(object_id, contenttypeid)
     # 선호 시간 가장 가까이 30분 거리 
-    logging.info("선호시간 30분")
+    logging.info("30분 거리 데이터")
     preferredTime = 25000
 
     # 30분 거리 
     result_df = neartime_find(preferredTime, departure, target_collection)
+    
 
     # 사용자가 취향 설문을 했을 때 
     try: 
         # 취향설문 갔던곳, 선호 관광지 배열 > 여러 개
-        logging.info('취향설문이 있을때!')
         visitLocation = user['survey']['visitLocation']
+        logging.info('취향설문이 있을때!')
         # 취향 설문 >  무장애 타입, 갔던 관광지, 인기관광지 여부 
         result_data = survey_recommend(user, contenttypeid, result_df, visitLocation)
-
-
          # 필요한 컬럼만 추출
-        selected_column = result_data.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl','areacode':'areaCode'})
-        dict_data = selected_column[:4].to_dict(orient='records')
+        
+        if len(result_data) <4:
+            preferredTime = 35000
+            result_df = neartime_find(preferredTime, departure, target_collection)
+            result_data = survey_recommend(user, contenttypeid, result_df, visitLocation)
+            selected_column = result_data.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl','areacode':'areaCode'})
+            if len(result_data) <4:
+                preferredTime = 45000
+                result_df = neartime_find(preferredTime, departure, target_collection)
+                result_data = survey_recommend(user, contenttypeid, result_df, visitLocation)
+                selected_column = result_data.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl','areacode':'areaCode'})
+        else:
+            selected_column = result_data.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl','areacode':'areaCode'})
 
+        dict_data = selected_column[:4].to_dict(orient='records')
+        return dict_data
     
     # 취향 설문 안했을때 근처에서 인기순, 근처 거리에 관광지가 없을때 그냥 인기순 
     except:
-        logging.info('취향설문이 없는데 숙박/추천 최근 검색어 기반!')
-        selected_data = result_df[result_df['contenttypeid']==contenttypeid].sort_values('searchcount', ascending=False)[:4]
+        logging.info('취향설문이 없는데 숙박/추천 최근 검색어 기반! 인기순')
+        selected_data = result_df[result_df['contenttypeid']==contenttypeid].sort_values('searchcount', ascending=False)
         selected_data = selected_data.loc[:, ['contentid', 'title','contenttypeid','firstimage', 'areacode','contenttypeid']]
         selected_column = selected_data.rename(columns={'contentid': 'contentId','contenttypeid':'contentTypeId','firstimage':'imageUrl','areacode':'areaCode'})
-        dict_data = selected_data.to_dict(orient='records')
+        dict_data = selected_column[:4].to_dict(orient='records')
+        
+        return dict_data
+    
 
-   
-    return dict_data
+    
 
 
 
@@ -220,7 +249,6 @@ def popular_sorted(contenttype_id):
 # 선호 시간(거리)로 데이터 찾기 
 def neartime_find(preferredTime, departure, target_collection):
     logging.info("선호 시간으로 데이터 찾기!!====================")
-
     # 선호시간 거리 계산으로 목록 뽑기 
     query = {
         "location": {
@@ -250,7 +278,6 @@ def neartime_find(preferredTime, departure, target_collection):
 # 취향 설문 있을때 로직 
 def survey_recommend(user, contenttypeid, result_df, visitLocation):
     logging.info("취향 설문 있을 때 추천!!====================")
-
     # 무장애 타입 
     barrier_type = user['survey']['barrier']
 
@@ -356,7 +383,6 @@ def popular_filter(count, Barrier_data, target_data):
         logging.info("비인기관광지 선택!!==========================")
         no_popular_data = Barrier_data[Barrier_data['searchcount'] == 0]
         full_data = popular_concat(no_popular_data, target_data)
-        print(full_data)
         result_list = popular_recommend(full_data, target_data)
 
     return result_list
@@ -374,21 +400,18 @@ def popular_concat(data, target_data):
 def popular_recommend(popular_data, target_data):
     logging.info("인기관광지 여부에 따라 추천 !============")
     target_data = target_data.reset_index(drop=True)
-    print(target_data)
     recommend_result = []
     for i in range(len(target_data)):
         contentid = target_data['contentId'].values[i]  
-        print(contentid) 
         recommend_tour = tfidf_matrix(contentid, popular_data)
         recommend_result.append(recommend_tour)
-    print(recommend_result)
+
     # 중복제거 
     sum_data = sum(recommend_result, [])
 
     recommend_list = [t for i, t in enumerate(sum_data) if t[0] not in [d[0] for d in sum_data[:i]]]
 
     # 유사도가 높은 순서대로 정렬 
-
     result_list = sorted(recommend_list, key = lambda x: x[1], reverse=True)
     logging.info("유사도 높은 순서대로 추천!============")
 
@@ -405,4 +428,51 @@ def Barrier_filter(is_mobility,is_visual, is_deaf, is_old, is_infant, near_conte
     return Barrier_data
 
 
+def get_heart(object_id, contenttypeid):
+    logging.info('사용자 기반 알고리즘 시작')
+    heart_collection = db.heart # 컬렉션 
+    heart_data = heart_collection.find({})
+    heart_df = pd.DataFrame(list(heart_data))
 
+    heart_select = heart_df[['userid', 'spotid']]
+
+    heart_select['value'] = 1
+
+    pivot_df = heart_select.pivot_table(index='userid', columns='spotid', values='value', fill_value=-1)
+    
+    distance = euclidean_distances(pivot_df.iloc[:, :-1])
+    similarity = 1 / (distance + 1e-5)
+
+    # 가장 유사도 높은 user 찾기 
+    li = []
+    for i in range(len(similarity)):
+        df_index = pivot_df.index.tolist()
+        arr = np.array(similarity[i])
+        arr[i] = -np.inf
+        max_index = np.argmax(arr)
+        li.append((df_index[i],df_index[max_index]))
+    # 내가 좋아요 누르지 않은 관광지, 식당, 숙박 고르기 
+    try:
+        for tup in li:
+            if object_id in tup[0]:
+                target_list = list(pivot_df.loc[tup[1]][pivot_df.loc[tup[1]] == 1].index)
+                user_list = list(pivot_df.loc[tup[0]][pivot_df.loc[tup[0]] == 1].index)   
+               
+                result = [x for x in target_list if x not in user_list]
+                another_liked = []
+                for i in result:
+                    data_one = heart_df[heart_df['spotid']==i]['place'].values[0]
+                    if data_one['contenttypeid'] == contenttypeid:
+                        another_liked.append(data_one)
+
+                if len(another_liked) != 0:
+                    random_element = random.choice(another_liked)
+                    return random_element
+                
+            random_element = []
+            return random_element
+    except:
+        random_element = []
+        return random_element
+       
+   

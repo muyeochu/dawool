@@ -3,12 +3,10 @@ import { useLocation } from "react-router-dom";
 
 import Loading from "../../components/common/Loading";
 import SearchList from "../../components/search/index";
-import { MoveToTop } from "../../components/utils/MoveToTop";
 
 import { useRecoilState } from "recoil";
 import { getSearchApi } from "../../recoil/Api";
 import { searchState } from "../../recoil/SearchSelector";
-
 
 import {
   MainGridItems,
@@ -32,7 +30,17 @@ const SearchPage = () => {
   // 새로고침 할때마다 searchState 값 초기화 필요
   useEffect(() => {
     setSearchStateValue({ ...searchStateValue, title: word, barrier: "00000" });
+    setSearchData([]);
   }, []);
+
+  // 무장애 버튼 클릭할때마다 Page 초기화
+  useEffect(() => {
+    if (prevBarrier !== searchStateValue.barrier) {
+      setPage(0);
+      setPrevPage(0);
+      setPrevBarrier(searchStateValue.barrier);
+    }
+  }, [searchStateValue.barrier]);
 
   const getSearchDatas = async (page: number) => {
     const searchQuery = {
@@ -46,9 +54,7 @@ const SearchPage = () => {
     const data = await res.data.contents;
 
     if (data === "No Content") {
-      if (searchData) {
-        console.log("마지막 결과 페이지입니다");
-      } else {
+      if (page === 0) {
         setSearchData(data); // 검색결과가 없는 경우
       }
     } else {
@@ -57,13 +63,6 @@ const SearchPage = () => {
         setSearchData((prev) => [...prev, ...data] as any);
         setPrevPage(page);
       } else {
-        // 버튼을 클릭할때 페이지 및 데이터 초기화
-        if (prevBarrier !== searchStateValue.barrier) {
-          setPage(0);
-          setPrevPage(0);
-          setSearchData(data);
-          setPrevBarrier(searchStateValue.barrier);
-        }
         setSearchData(data);
       }
     }

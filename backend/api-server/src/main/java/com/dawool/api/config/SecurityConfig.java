@@ -36,8 +36,11 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .csrf().disable()
                 .cors().and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new SecurityAuthenticationEntryPoint())
+                .and()
                 .authorizeRequests()
-                .antMatchers("/api/user/my-course", "/api/user/interest").authenticated() // kakao 로그인 토큰 받기 언제나 가능
+                .antMatchers("/api/user/my-course", "/api/location/bookmark").authenticated() // kakao 로그인 토큰 받기 언제나 가능
                 .antMatchers("/api/**").permitAll()
                 .and()
                 .sessionManagement()

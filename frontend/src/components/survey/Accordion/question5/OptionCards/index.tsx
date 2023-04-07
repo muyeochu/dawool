@@ -1,4 +1,3 @@
-import React from "react";
 import { useRecoilState } from "recoil";
 import { fifthState } from "../../../../../recoil/SurveyState";
 import {
@@ -7,6 +6,7 @@ import {
   CardImage,
   CardText,
 } from "./styles";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 // card 이미지
 const cards = [
@@ -60,10 +60,8 @@ const cards = [
 
 const OptionCards = () => {
   const [fifthSurvey, setFifthSurvey] = useRecoilState(fifthState);
-  // console.log("다섯번째", fifthSurvey)
 
   const handleCardClick = (id: number) => {
-    // fifthState 상태 업데이트
     setFifthSurvey((prevFifthSurvey) => {
       if (prevFifthSurvey.includes(id)) {
         return prevFifthSurvey.filter(
@@ -83,7 +81,7 @@ const OptionCards = () => {
           onClick={() => handleCardClick(card.id)}
           isSelected={fifthSurvey.includes(card.id)}
         >
-          <CardImage src={card.image} />
+          <CardImage src={card.image} effect="blur" alt={"선택 이미지"} />
           <CardText>{card.text}</CardText>
         </CardContainer>
       ))}

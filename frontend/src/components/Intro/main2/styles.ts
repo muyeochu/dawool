@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { ReactComponent as Main2Img } from "../../../assets/images/main2Img.svg";
 
@@ -7,18 +7,39 @@ export const MainSecondContainer = styled.div`
   position: relative;
 `;
 
-export const Main2ImgStyle = styled(Main2Img)`
+export const Main2ImgStyle = styled(Main2Img)<{ isanimation: string }>`
   position: absolute;
   top: 50%;
   left: 30%;
-  transform: translate(-50%, -50%);
+  opacity: 0;
+  transform: translate(-55%, -50%);
+
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  ${({ isanimation }) =>
+    isanimation === "true" &&
+    css`
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    `}
 `;
 
-export const FontContainer = styled.div`
+export const FontContainer = styled.div<{ isanimation: string }>`
   position: absolute;
   top: 50%;
   right: 30%;
-  transform: translate(50%, -50%);
+  transform: translate(50%, -70%);
+  opacity: 0;
+
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  ${({ isanimation }) =>
+    isanimation === "true" &&
+    css`
+      opacity: 1;
+      transform: translate(50%, -50%);
+      transition-delay: 0.5s;
+    `}
 `;
 
 export const MainFontStyle = styled.div`

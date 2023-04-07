@@ -1,10 +1,19 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
-import { SurveyTitle } from "../components/survey/SurveyTitle/styles";
+import {
+  SurveyTitle,
+  SurveyPgIcStyle,
+  ExpTitleStyle,
+} from "../components/survey/SurveyTitle/styles";
 import { AccordionListContainer } from "../components/survey/Accordion/styles";
 import styled from "styled-components";
 import Accordion from "../components/survey/Accordion/index";
-import { firstState, secondState, thirdState, fourthState, fifthState } from "../recoil/SurveyState";
+import {
+  firstState,
+  secondState,
+  thirdState,
+  fourthState,
+  fifthState,
+} from "../recoil/SurveyState";
 
 // question 1~5
 import FirstQuestion from "../components/survey/Accordion/question1";
@@ -32,10 +41,20 @@ const SurveyPage = () => {
 
   return (
     <MainGridItems>
-      <SurveyTitle>취향설문</SurveyTitle>
+      <SurveyTitle>
+        <SurveyPgIcStyle />
+        <p>취향 설문</p>
+      </SurveyTitle>
+      <ExpTitleStyle>
+        간단한 설문을 작성하고 취향에 맞는 여행지를 추천받으세요!
+      </ExpTitleStyle>
 
       <AccordionListContainer>
-        <Accordion title="누구와 여행을 할 계획인가요?" id="firstAccordion">
+        <Accordion
+          title="누구와 여행을 할 계획인가요?"
+          id="firstAccordion"
+          isOpen={true}
+        >
           <FirstQuestion />
         </Accordion>
 
@@ -47,11 +66,17 @@ const SurveyPage = () => {
           <ThirdQuestion isOpen={true} />
         </Accordion>
 
-        <Accordion title="인기있는 관광지에 방문하는 것을 선호하나요?" id="fourthAccordion">
+        <Accordion
+          title="인기있는 관광지에 방문하는 것을 선호하나요?"
+          id="fourthAccordion"
+        >
           <FourthQuestion />
         </Accordion>
 
-        <Accordion title="가봤거나 가보고 싶은 곳은 어디인가요?" id="fifthAccordion">
+        <Accordion
+          title="가봤거나 가보고 싶은 곳은 어디인가요?"
+          id="fifthAccordion"
+        >
           <FifthQuestion />
         </Accordion>
 

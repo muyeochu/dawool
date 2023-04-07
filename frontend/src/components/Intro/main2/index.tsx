@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import {
   MainSecondContainer,
   Main2ImgStyle,
@@ -7,10 +9,33 @@ import {
 } from "./styles";
 
 const MainSecond = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isAnimation, setIsAnimation] = useState(false);
+
+  // Scroll 위치를 감지
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", updateScroll);
+    return () => {
+      window.removeEventListener("scroll", updateScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (scrollPosition > 370) {
+      setIsAnimation(true);
+    } else {
+      setIsAnimation(false);
+    }
+  }, [scrollPosition]);
+
   return (
     <MainSecondContainer id="main-second">
-      <Main2ImgStyle></Main2ImgStyle>
-      <FontContainer>
+      <Main2ImgStyle isanimation={isAnimation.toString()} />
+      <FontContainer isanimation={isAnimation.toString()}>
         <MainFontStyle>무장애 여행은요</MainFontStyle>
         <SideFontStyle>
           신체적 제약 때문에 관광활동을 자유롭게 하지 못하는

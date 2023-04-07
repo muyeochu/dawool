@@ -1,13 +1,14 @@
 package com.dawool.api.service;
 
+import com.dawool.api.dto.SurveyReqDto;
 import com.dawool.api.dto.user.ReissueTokenReqDto;
 import com.dawool.api.dto.user.ReissueTokenResDto;
 import com.dawool.api.dto.user.TokenResDto;
-import com.dawool.api.dto.SurveyReqDto;
 import com.dawool.api.entity.Survey;
 import com.dawool.api.entity.User;
+import com.dawool.api.error.CustomException;
+import com.dawool.api.error.ErrorCode;
 import com.dawool.api.jwt.JwtTokenProvider;
-import com.dawool.api.repository.CourseRepository;
 import com.dawool.api.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +23,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
-import reactor.core.publisher.Mono;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 회원 Service
@@ -41,7 +40,6 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final CourseRepository courseRepository;
     private final JwtTokenProvider jwtTokenProvider;
     @Value("${kakao.restapi.key}")
     private String kakaoAPIKey;
@@ -55,7 +53,7 @@ public class UserService {
     public TokenResDto getKakaoAccessToken(String code) {
         String accessToken = "";
         String refreshToken = "";
-        String redirectURI = "http://localhost:3000/callback";
+        String redirectURI = "https://j8d105.p.ssafy.io/callback";
 
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
         data.add("grant_type", "authorization_code");
@@ -74,8 +72,12 @@ public class UserService {
 
         JSONObject info = new JSONObject(mono.block());
 
+        if(!info.has("access_token")) {
+            log.error(info.toString());
+            throw new CustomException(ErrorCode.INTER_SERVER_ERROR);
+        }
+
         accessToken = info.getString("access_token");
-        refreshToken = info.getString("refresh_token");
 
         TokenResDto resDto = this.getKakaoUserInfoByToken(accessToken);
         log.info(resDto.getAccessToken());
@@ -137,7 +139,7 @@ public class UserService {
     /**
      * 토큰 생성
      *
-     * @param objectId
+     * @param objectId 유저 ObjectId
      * @return TokenResDto
      */
     public TokenResDto createToken(String objectId) {
@@ -186,17 +188,13 @@ public class UserService {
     /**
      * 취향 설문 저장
      *
-     * @param survey
+     * @param survey 설문조사 정보
      */
     public void survey(SurveyReqDto survey) {
         String userId = UserService.getLoginUser();
 
         // 무장애정보
-        String mobilityWeak = "0";
-        String visualImpaired = "0";
-        String deaf = "0";
-        String old = "0";
-        String infant = "0";
+        String mobilityWeak = "0", visualImpaired = "0", deaf = "0", old = "0", infant = "0";
         if (survey.getBarrier().contains("2")) {
             mobilityWeak = "1";
         }

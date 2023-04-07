@@ -2,7 +2,7 @@ package com.dawool.api.service;
 
 import com.dawool.api.dto.HeartReqDto;
 import com.dawool.api.dto.PlaceDto;
-import com.dawool.api.dto.SearchDto;
+import com.dawool.api.dto.PlaceListDto;
 import com.dawool.api.entity.CommonInfo;
 import com.dawool.api.entity.CultureFacility;
 import com.dawool.api.entity.Entertainment;
@@ -13,17 +13,10 @@ import com.dawool.api.entity.Place;
 import com.dawool.api.entity.Restaurant;
 import com.dawool.api.entity.Shopping;
 import com.dawool.api.repository.CommonTemplate;
-import com.dawool.api.repository.CultureFacilityRepository;
-import com.dawool.api.repository.EntertainmentRepository;
 import com.dawool.api.repository.HeartRepository;
-import com.dawool.api.repository.LeisureSportsRepository;
-import com.dawool.api.repository.LodgingRepository;
-import com.dawool.api.repository.RestaurantRepository;
-import com.dawool.api.repository.ShoppingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -45,17 +38,17 @@ public class PlaceService {
     /**
      * 타이틀을 카테고리, 무장애 필터링 적용하여 검색
      *
-     * @param title
-     * @param type
-     * @param barrier
-     * @param page
-     * @param size
-     * @return
+     * @param title 검색할 단어
+     * @param type 검색할 타입
+     * @param barrier 무장애정보
+     * @param page 페이지 번호
+     * @param size 페이지마다 보낼 크기
+     * @return 검색된 목록
      */
     public List<?> getSearchList(String title, int type, String barrier, int page, int size) {
         String[] barrierCode = barrier.split("");
-        List<? extends CommonInfo> list = new ArrayList<>();
-        List<SearchDto> searchList = new ArrayList<>();
+        List<? extends CommonInfo> list;
+        List<PlaceDto> searchList = new ArrayList<>();
         Query query = commonTemplate.findByTitleAndBarrierFree(title, barrierCode);
 
         switch (type) {
@@ -101,14 +94,14 @@ public class PlaceService {
     /**
      * Entity -> Dto
      *
-     * @param searchList
-     * @return
+     * @param searchList DB 에서 검색한 목록
+     * @return 검색된 목록 -> DTO
      */
-    public List<SearchDto> getSearchResult(List<? extends CommonInfo> searchList) {
-        List<SearchDto> searchResult= new ArrayList<>();
+    public List<PlaceDto> getSearchResult(List<? extends CommonInfo> searchList) {
+        List<PlaceDto> searchResult= new ArrayList<>();
 
         for (CommonInfo search : searchList) {
-            SearchDto place = new SearchDto().of(search);
+            PlaceDto place = new PlaceDto().of(search);
             searchResult.add(place);
         }
 
@@ -118,10 +111,10 @@ public class PlaceService {
     /**
      * 페이지네이션
      * 
-     * @param list
-     * @param page
-     * @param size
-     * @return
+     * @param list 검색된 목록
+     * @param page 검색할 페이지
+     * @param size 페이지마다 넘길 데이터의 양
+     * @return 페이지네이션한 목록
      */
     public List<?> resultList(List<?> list, int page, int size) {
         int startIndex = page * size;
@@ -136,7 +129,8 @@ public class PlaceService {
     /**
      * 북마크 저장 및 해제
      *
-     * @param heart
+     * @param heart 북마크할 여행지 정보
+     * @return 북마크 여부
      */
     public boolean heartPlace(HeartReqDto heart){
         String objectId = UserService.getLoginUser();
@@ -175,18 +169,18 @@ public class PlaceService {
     /**
      * 사용자 별 북마크 목록
      *
-     * @param page
-     * @param size
-     * @return
+     * @param page 페이지 번호
+     * @param size 페이지마다 데이터의 양
+     * @return 북마크한 목록
      */
-    public List<PlaceDto> getHeartList(int page, int size){
+    public List<PlaceListDto> getHeartList(int page, int size){
         String objectId = UserService.getLoginUser();
 
         List<Heart> heartList = (List<Heart>) resultList(heartRepository.findByUserid(objectId), page, size);
-        List<PlaceDto> list = new ArrayList<>();
+        List<PlaceListDto> list = new ArrayList<>();
         for(Heart heart: heartList){
             Place place = heart.getPlace();
-            PlaceDto dto = PlaceDto.builder()
+            PlaceListDto dto = PlaceListDto.builder()
                     .spotId(heart.getSpotid())
                     .contentId(place.getContentid())
                     .contentTypeId(place.getContenttypeid())

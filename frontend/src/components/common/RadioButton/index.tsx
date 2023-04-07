@@ -1,4 +1,3 @@
-import React from "react";
 import { RadioWrapper, Radio, Label } from "./styles";
 import { InputElementProps } from "./InputInterface";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   RecCardContainer,
   RecImageContainer,
@@ -22,7 +21,6 @@ const TripRecCardItem = ({ item }: TripRecCardItemProps) => {
   const cities = useRecoilValue(citiesState);
   // cities 배열에서 해당 id의 name을 가져옴
   const areaName = cities.find((city) => city.id === item.areaCode)?.name;
-  // console.log("item=", item);
 
   const handleClick = () => {
     if (token !== null && [12, 14, 28, 38].includes(item.contentTypeId)) {
@@ -54,11 +52,11 @@ const TripRecCardItem = ({ item }: TripRecCardItemProps) => {
   return (
     <RecCardContainer>
       <RecImageContainer onClick={handleClick}>
-        {item.imageUrl === "0" ? (
-          <RecCardImage src={exampleImg} alt={"대표 이미지"} />
-        ) : (
-          <RecCardImage src={item.imageUrl} alt={"대표 이미지"} />
-        )}
+        <RecCardImage
+          src={item.imageUrl === "0" ? exampleImg : item.imageUrl}
+          alt={"대표 이미지"}
+          effect="blur"
+        />
         <RecCardTitleContainer>{item.title}</RecCardTitleContainer>
         <RecCardAreaContainer>#{areaName}</RecCardAreaContainer>
       </RecImageContainer>

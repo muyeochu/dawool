@@ -3,6 +3,7 @@ import { mainColor, grey, blue, black } from "../../styles/Colors";
 
 import { ReactComponent as SearchIc } from "../../assets/icon/searchSquareIc.svg";
 import { ReactComponent as NonSearchImg } from "../../assets/images/nonSearchImg.svg";
+import { ReactComponent as ToUpIc } from "../../assets/icon/toUpIc.svg";
 
 export const MainGridItems = styled.div`
   grid-column: 2 / span 1;
@@ -54,7 +55,7 @@ export const ButtonList = styled.div`
 export const TripCardListContainer = styled.div`
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
+
   align-items: center;
   flex-flow: row wrap;
   gap: 43px;
@@ -68,23 +69,22 @@ export const NonDataContainer = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 20px;
 
   p {
     font-weight: 600;
     font-size: 32px;
     line-height: 54px;
     color: ${grey[500]};
+    margin-top: 20px;
     margin-bottom: 40px;
   }
 `;
 
 export const NonSearchImgStyle = styled(NonSearchImg)`
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
 `;
-
-// Mic
 
 export const MicContainer = styled.div`
   display: flex;
@@ -149,5 +149,19 @@ export const SideFontStyle = styled.div`
 
   &:hover {
     cursor: pointer;
+  }
+`;
+
+export const ToUpIcStyle = styled(ToUpIc)`
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 30px;
+  right: 50px;
+  fill: ${mainColor};
+
+  &:hover {
+    cursor: pointer;
+    fill: ${blue[500]};
   }
 `;

@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import {
   MainFourthContainer,
   MainFontStyle,
@@ -11,14 +13,47 @@ import {
 } from "./styles";
 
 const MainFourth = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isAnimation, setIsAnimation] = useState(false);
+  const [isBoxAnimation, setIsBoxAnimation] = useState(false);
+
+  // Scroll 위치를 감지
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", updateScroll);
+    return () => {
+      window.removeEventListener("scroll", updateScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (scrollPosition > 1600) {
+      setIsAnimation(true);
+    } else {
+      setIsAnimation(false);
+    }
+
+    if (scrollPosition > 1900) {
+      setIsBoxAnimation(true);
+    } else {
+      setIsBoxAnimation(false);
+    }
+  }, [scrollPosition]);
+
   return (
     <MainFourthContainer>
-      <MainFontStyle>다울이 취향에 맞는 여행지를 찾아줄게요</MainFontStyle>
-      <SideFontStyle>
+      <MainFontStyle isanimation={isAnimation.toString()}>
+        다울이 취향에 맞는 여행지를 찾아줄게요
+      </MainFontStyle>
+      <SideFontStyle isanimation={isAnimation.toString()}>
         간단한 취향 설문으로 여행지와 식당, 숙박을 추천해드려요!
       </SideFontStyle>
+
       <CardsContainer>
-        <CardBox>
+        <CardBox className="box1" isanimation={isBoxAnimation.toString()}>
           <CardOutFontStyle>여행 취향</CardOutFontStyle>
           <CardStyle>
             <CardInFontStyle>
@@ -29,7 +64,7 @@ const MainFourth = () => {
           </CardStyle>
         </CardBox>
 
-        <CardBox>
+        <CardBox className="box2" isanimation={isBoxAnimation.toString()}>
           <CardOutFontStyle>무장애 포함 여부</CardOutFontStyle>
           <CardStyle>
             <CardInFontStyle>
@@ -40,7 +75,7 @@ const MainFourth = () => {
           </CardStyle>
         </CardBox>
 
-        <CardBox>
+        <CardBox className="box3" isanimation={isBoxAnimation.toString()}>
           <CardOutFontStyle>관심있는 여행지</CardOutFontStyle>
           <CardStyle>
             <CardInFontStyle>

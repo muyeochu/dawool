@@ -7,6 +7,7 @@ import com.dawool.api.entity.Course;
 import com.dawool.api.entity.Spot;
 import com.dawool.api.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.List;
  * @author 이준
  */
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class CourseService {
 
@@ -89,24 +91,10 @@ public class CourseService {
         }
 
         course.getSpots().add(new Spot().of(myCourse));
-
         courseRepository.save(course);
 
         return HttpStatus.OK;
     }
-    // 차후 수정 내용
-//    public HttpStatus modifyCourse(String courseId, String memo) {
-//        String userId = getLoginUser();
-//        Course course = courseRepository.findById(courseId).orElseThrow();
-//        if (!course.getUserid().equals(userId)) {
-//           return HttpStatus.FORBIDDEN;
-//        }
-//        JSONObject jsonObject = new JSONObject(memo);
-//        course.setMemo(jsonObject.getString("memo"));
-//
-//        courseRepository.save(course);
-//        return HttpStatus.OK;
-//    }
 
     /**
      * 코스 삭제

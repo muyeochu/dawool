@@ -18,5 +18,4 @@ export const RowGridItems = styled.div`
 
 export const EndBlock = styled.div`
   visibility: hidden;
-  /* background-color: pink; */
 `;

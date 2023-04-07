@@ -77,7 +77,7 @@ public class EntertainmentDto extends CommonInfoDto{
                 // 공통정보
                 .contentId(entertainment.getContentid())
                 .contentTypeId(entertainment.getContenttypeid())
-                .addr1(entertainment.getAddr1())
+                .addr1(entertainment.getAddr1().equals("0") ? entertainment.getAddr2() : entertainment.getAddr1())
                 .title(entertainment.getTitle())
                 .category(Category.valueOf(entertainment.getCat3()).getCategory())
                 .deaf(entertainment.getDeaf())
@@ -86,7 +86,7 @@ public class EntertainmentDto extends CommonInfoDto{
                 .old(entertainment.getOld())
                 .infant(entertainment.getInfant())
                 .isLiked(liked)
-                .firstImage(entertainment.getFirstimage())
+                .firstImage(entertainment.getFirstimage().equals("0") ? entertainment.getFirstimage2() : entertainment.getFirstimage())
                 .homepage(entertainment.getHomepage())
                 .mapX(entertainment.getMapx())
                 .mapY(entertainment.getMapy())

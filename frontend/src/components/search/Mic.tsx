@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -9,7 +9,6 @@ import {
   SpeakFontStyle,
   GuideFontStyle,
   BtnStyle,
-  SideFontStyle,
 } from "./styles";
 
 import MicAnimation from "../common/Mic";
@@ -27,12 +26,10 @@ const Mic = () => {
   } = useSpeechRecognition();
 
   const [isReset, setIsReset] = useState(false);
-  const [isReset2, setIsRest2] = useState(false)
 
   useEffect(() => {
     SpeechRecognition.startListening();
   }, []);
-  
 
   if (isReset) {
     SpeechRecognition.startListening();
@@ -41,20 +38,15 @@ const Mic = () => {
 
   const handleSearch = () => {
     navigate("/search", { state: transcript });
+    window.location.reload();
     closeModal();
   };
-
-  if (!browserSupportsSpeechRecognition) {
-    return <span>해당 브라우저는 음성 인식을 지원하지 않습니다.</span>;
-  }
 
   setTimeout(() => {
     if (!listening && transcript.length > 0) {
       handleSearch();
     }
   }, 1000);
-
-  console.log("입력단어?", transcript)
 
   return (
     <>
@@ -64,34 +56,32 @@ const Mic = () => {
         </SpeakFontStyle>
         <MicAnimation />
 
-        <GuideFontStyle>
-          {listening
-            ? "말하는 중입니다..."
-            : transcript.length === 0
-            ? "다시 말해보세요"
-            : "입력 완료"}
-        </GuideFontStyle>
+        {browserSupportsSpeechRecognition && (
+          <GuideFontStyle>
+            {listening
+              ? "말하는 중입니다..."
+              : transcript.length === 0
+              ? "다시 말해보세요"
+              : "입력 완료"}
+          </GuideFontStyle>
+        )}
 
-        {/* <GuideFontStyle>
-          {listening
-            ? "말하는 중입니다..."
-            : transcript.length === 0
-            ? "다시 말해보세요"
-            : "검색하시겠습니까?"}
-        </GuideFontStyle> */}
+        {!browserSupportsSpeechRecognition && (
+          <GuideFontStyle>
+            해당 브라우저는 음성 인식을 지원하지 않습니다.
+          </GuideFontStyle>
+        )}
 
-        {/* <BtnStyle onClick={handleSearch}>
-          <p>검색하기</p>
-        </BtnStyle> */}
-
-        {!listening && transcript.length === 0 && <BtnStyle
-          onClick={() => {
-            resetTranscript();
-            setIsReset(true);
-          }}
-        >
-          <p>다시 말하기</p>
-        </BtnStyle>}
+        {!listening && transcript.length === 0 && (
+          <BtnStyle
+            onClick={() => {
+              resetTranscript();
+              setIsReset(true);
+            }}
+          >
+            <p>다시 말하기</p>
+          </BtnStyle>
+        )}
       </MicContainer>
     </>
   );

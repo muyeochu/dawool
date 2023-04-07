@@ -2,12 +2,13 @@ import styled from "styled-components";
 import { white, black } from "../../../../styles/Colors";
 
 // icon
-import { ReactComponent as likedIc } from "../../../../assets/icon/likedIc.svg";
 import { ReactComponent as bathchairIc } from "../../../../assets/icon/bathchairIc.svg";
 import { ReactComponent as eyeIc } from "../../../../assets/icon/eyeIc.svg";
 import { ReactComponent as earIc } from "../../../../assets/icon/earIc.svg";
 import { ReactComponent as oldmanIc } from "../../../../assets/icon/oldmanIc.svg";
 import { ReactComponent as toddlerIc } from "../../../../assets/icon/toddlerIc.svg";
+
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export const CardContainer = styled.div`
   width: 196px;
@@ -36,10 +37,11 @@ export const ImageContainer = styled.div`
   }
 `;
 
-export const CardImage = styled.img`
-  width: 100%;
-  height: 100%;
+export const CardImage = styled(LazyLoadImage)`
+  width: 196px;
+  height: 285px;
   object-fit: cover;
+  transition: filter 0.2s ease-in-out;
 
   ${ImageContainer}:hover & {
     -webkit-filter: blur(3px);
@@ -55,7 +57,7 @@ export const BarrierIconContainer = styled.div`
   position: absolute;
   top: 10%;
   left: 50%;
-  transform: translate( -50%, -50% );
+  transform: translate(-50%, -50%);
   opacity: 0;
   ${ImageContainer}:hover & {
     opacity: 1;
@@ -68,6 +70,26 @@ export const EyeIcStyle = styled(eyeIc)``;
 export const EarIcStyle = styled(earIc)``;
 export const OldmanIcStyle = styled(oldmanIc)``;
 export const ToddlerIcStyle = styled(toddlerIc)``;
+
+export const CategoryText = styled.div`
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  position: absolute;
+  color: ${white};
+  width: 140px;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  ${ImageContainer}:hover & {
+    opacity: 1;
+    transition: transform 0.2s ease-in-out;
+  }
+`;
 
 export const CardBottomContainer = styled.div`
   display: flex;
@@ -90,13 +112,5 @@ export const CardText = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   color: ${black};
-  cursor: pointer;
-`;
-
-export const LikedIcStyle = styled(likedIc)`
-  /* 크기 바뀌는 문제 해결하기! */
-  display: block;
-  width: 23px;
-  height: 23px;
   cursor: pointer;
 `;
