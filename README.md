@@ -9,8 +9,8 @@
 3. [주요기능](#주요-기능)
 4. [프로젝트 실행방법](#프로젝트-실행-방법)
 5. [기술스택](#🔧-기술-스택)
-    1. [Front-End](#front-end)
-    2. [Back-End](#back-end)
+   1. [Front-End](#front-end)
+   2. [Back-End](#back-end)
 6. [프로젝트 구조도](#프로젝트-구조도)
 7. [Design](#design)
 8. [TEAM](#team)
@@ -18,43 +18,56 @@
 <br><br>
 
 ## 개요
+
 > 개발 기간: 2023.03.20 ~ 2023.04.07
 
-## 프로젝트 소개
+<br><br>
+
+### 프로젝트 소개
+
 ![intro page](./wiki/gif/intro_page.gif)
 
-무장애 여행지 추천 서비스
-(설명 더 쓰면 좋을듯..)
+- 6가지 여행지(관광지, 문화시설, 레포츠, 쇼핑, 식당, 숙박)의 편의 시설의 정보를 무장애 태그(지체, 시각, 청각 장애인, 노인, 영유아)로 나누어 여행지를 추천해주는 서비스
 
+<br><br>
 
+> 무장애란?
+
+- 장애인, 노인, 유모차 동반 가족 등 이동과 시설이용 및 정보접근 등의 제약으로 관광, 활동이 어려운 이동(관광) 약자가 안전하고 편리하게 이동할 수 있는 환경
+
+<br><br>
 
 ## 주요 기능
 
-### 1. 무장애 필터링
+### 1. 여행지 목록
+
 ![filtering](./wiki/gif/filtering.gif)
 
-- 지체장애, 시각장애, 청각장애, 노인, 영유아로 필터링하여 사용자 맞춤형 여행지 확인 가능
+- 이동, 관광 약자를 위한 시설이 있는 여행지를 
+  지체장애, 시각장애, 청각장애, 노인, 영유아로 필터링하여 확인 가능
+- 어떤 시설을 제공하는지 상세하게 확인 가능함
 
 <br>
 
-### 2. STT / TTS
+### 2. 검색 / 상세조회
+
 ![STT](./wiki/gif/STT.gif)
 
 - 검색창 뿐만 아니라 음성으로도 검색이 가능
-- 상세 페이지에서 TTS 기능을 통해 여행지의 상세 정보를 음성으로 들을 수 있음
+- 상세 페이지에서 TTS 기능을 사용하여 시각장애인들의 사이트 편리성을 높임.
 
 <br>
 
 ### 3. 여행지 추천
+
 ![recommend](./wiki/gif/recommend.gif)
 
 - 취향 설문과 최근 본 여행지를 기반으로 사용자 맞춤형 여행지를 추천
-- 취향 설문은 5개의 질문으로 구성되어 있음
+- 로그인을 하지 않았다면 컨텐츠 기반 추천, 로그인을 했다면 사용자 기반 추천
 
 <br><br>
 
 ## 프로젝트 실행 방법
-
 
 <br><br>
 
@@ -101,7 +114,6 @@
 <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white">
 <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
 <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white">
-
 
 ## 프로젝트 구조도
 
@@ -211,18 +223,23 @@
 <br><br>
 
 ## Design
+
 ### 시스템 구조도
+
 ![Architecture](./wiki/img/architecture.png)
 
 <br>
 
 ### API 설계
+
 ![API 명세서](./wiki/gif/API_document.gif)
 
 <br><br>
 
 ## TEAM
+
 ### Front-end
+
 <table class="tg">
 <thead>
   <tr>
