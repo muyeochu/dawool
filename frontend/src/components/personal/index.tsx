@@ -66,6 +66,7 @@ const SideBar = ({ isOpen, setIsOpen }: Props) => {
     });
     alert("로그아웃 되었습니다!");
     navigate("/");
+    window.location.reload();
   };
 
   const checkLogin = () => {
