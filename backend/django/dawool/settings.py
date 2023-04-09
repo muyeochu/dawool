@@ -25,7 +25,7 @@ JWT_SECRET_KEY =env('JWT_SECERET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['j8d105.p.ssafy.io', 'localhost']
+ALLOWED_HOSTS = ['j8d105.p.ssafy.io', 'localhost','127.0.0.1','192.168.35.241']
 
 # Application definition
 
@@ -77,6 +77,7 @@ WSGI_APPLICATION = 'dawool.wsgi.application'
 # CORS 관련 추가
 CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:3000',
                          'http://localhost:3000',
+                         'http://192.168.35.241:3000',
                          env('DEPLOYED_URL'),]
 
 CORS_ORIGIN_ALLOW_ALL = True
