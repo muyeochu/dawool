@@ -362,7 +362,7 @@ def tfidf_matrix(contentid,review_data):
 # 인기관광지 여부 
 def popular_filter(count, Barrier_data, target_data):  
     # count : 밀집도 선호도 1이면 인기관광지 
-    if count == 1:
+    if count == 2:
         logging.info("인기관광지 선택!!====================")
         full_data = popular_concat(Barrier_data, target_data)
         popular_data = full_data[[full_data['searchcount']>0]].reset_index(drop= True)
