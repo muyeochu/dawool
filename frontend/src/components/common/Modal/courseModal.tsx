@@ -28,6 +28,7 @@ import {
 } from "../../course/sideBar/folderList/styles";
 import { insertCourseType } from "../../../types/courseListTypes";
 import { ListType } from "../../../types/courseFolderTypes";
+import { useNavigate } from "react-router-dom";
 
 declare global {
   interface Window {
@@ -43,16 +44,30 @@ const CourseModal = () => {
   const { modalDataState, closeModal } = useModal();
   const [input, setInput] = useState("");
   const [user, setUser] = useRecoilState(userState);
+  const navigate = useNavigate();
 
   const getCourseFolderData = (): Promise<ListType[]> =>
     customAxios2
       .get(`user/my-course`)
       .then((res) => {
-  
         return res.data;
       })
       .catch((err) => {
-        console.log(err);
+        console.log("err");
+        if (err.response.data.code === "EXPIRED_JWT_TOKEN") {
+          window.localStorage.clear();
+          setUser({
+            accessToken: "",
+            accessTokenExpiresIn: 0,
+            grantType: "",
+            nickName: "",
+            refreshToken: "",
+            isSurveyed: false,
+          });
+          alert("다시 로그인 해 주시기 바랍니다.");
+          navigate("/");
+          window.location.reload();
+        }
       });
 
   async function myFunction() {
@@ -109,7 +124,7 @@ const CourseModal = () => {
       div2.appendChild(fdContainer);
     }
     div?.appendChild(div2);
-  
+
     return div;
   }
 
@@ -131,10 +146,24 @@ const CourseModal = () => {
           `user/my-course`,
           { courseName: name }
         );
-     
+
         return response.data;
-      } catch (err) {
+      } catch (err: any) {
         console.log(err);
+        if (err.response.data.code === "EXPIRED_JWT_TOKEN") {
+          window.localStorage.clear();
+          setUser({
+            accessToken: "",
+            accessTokenExpiresIn: 0,
+            grantType: "",
+            nickName: "",
+            refreshToken: "",
+            isSurveyed: false,
+          });
+          alert("다시 로그인 해 주시기 바랍니다.");
+          navigate("/");
+          window.location.reload();
+        }
         throw new Error("error");
       }
     };
@@ -144,7 +173,7 @@ const CourseModal = () => {
     let inputText = folderinput?.value;
     if (inputText) {
       postCourseFolderData(inputText).then(() => {
-        alert("코스가 추가되었습니다.");
+        alert("폴더가 추가되었습니다. 다시 여행지를 추가 해 주시기 바랍니다.");
         window.location.reload();
       });
     }
@@ -168,10 +197,23 @@ const CourseModal = () => {
             mapY: window.mapY,
           }
         );
-  
+
         return response.data;
-      } catch (err) {
+      } catch (err: any) {
         console.log(err);
+        if (err.response.data.code === "EXPIRED_JWT_TOKEN") {
+          window.localStorage.clear();
+          setUser({
+            accessToken: "",
+            accessTokenExpiresIn: 0,
+            grantType: "",
+            nickName: "",
+            refreshToken: "",
+            isSurveyed: false,
+          });
+          navigate("/");
+          window.location.reload();
+        }
         throw new Error("error");
       }
     };

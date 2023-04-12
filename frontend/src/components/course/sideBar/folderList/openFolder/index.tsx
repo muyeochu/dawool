@@ -10,16 +10,19 @@ import {
 } from "./styles";
 import DetailBtn from "../../../../common/DetailBtn";
 import { FolderYellowIc } from "../styles";
-
+import { useNavigate } from "react-router-dom";
 import useModal from "../../../../../components/utils/useModal";
 import { modalState } from "../../../../../recoil/ModalState";
 
 import { customAxios2 } from "../../../../../recoil/customAxios";
+import { userState } from "../../../../../recoil/UserState";
 
 export const FolderInside = () => {
   const { openModal, closeModal } = useModal();
   const [mdState, setModalState] = useRecoilState(modalState);
   const [folderState, setFolderState] = useRecoilState(FolderState);
+  const navigate = useNavigate();
+  const [user, setUser] = useRecoilState(userState);
 
   const deleteCourseFolderData = () =>
     customAxios2
@@ -27,6 +30,20 @@ export const FolderInside = () => {
       .then(() => {})
       .catch((err) => {
         console.log(err);
+        if (err.response.data.code === "EXPIRED_JWT_TOKEN") {
+          window.localStorage.clear();
+          setUser({
+            accessToken: "",
+            accessTokenExpiresIn: 0,
+            grantType: "",
+            nickName: "",
+            refreshToken: "",
+            isSurveyed: false,
+          });
+          alert("다시 로그인 해 주시기 바랍니다.");
+          navigate("/");
+          window.location.reload();
+        }
       });
 
   async function myFunction() {
