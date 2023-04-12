@@ -14,8 +14,12 @@ import { customAxios2 } from "../../../../recoil/customAxios";
 
 import ReactDOM from "react-dom";
 import DetailBtn from "../../../common/DetailBtn";
+import { useNavigate } from "react-router-dom";
+import { userState } from "../../../../recoil/UserState";
 
 export const Folders = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useRecoilState(userState);
   const getCourseFolderData = async () =>
     await customAxios2
       .get(`user/my-course`)
@@ -24,6 +28,20 @@ export const Folders = () => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response.data.code === "EXPIRED_JWT_TOKEN") {
+          window.localStorage.clear();
+          setUser({
+            accessToken: "",
+            accessTokenExpiresIn: 0,
+            grantType: "",
+            nickName: "",
+            refreshToken: "",
+            isSurveyed: false,
+          });
+          alert("다시 로그인 해 주시기 바랍니다.");
+          navigate("/");
+          window.location.reload();
+        }
       });
 
   const [folderState, setFolderState] = useRecoilState(FolderState);
@@ -98,8 +116,22 @@ export const Folders = () => {
         );
 
         return response.data;
-      } catch (err) {
+      } catch (err: any) {
         console.log(err);
+        if (err.response.data.code === "EXPIRED_JWT_TOKEN") {
+          window.localStorage.clear();
+          setUser({
+            accessToken: "",
+            accessTokenExpiresIn: 0,
+            grantType: "",
+            nickName: "",
+            refreshToken: "",
+            isSurveyed: false,
+          });
+          alert("다시 로그인 해 주시기 바랍니다.");
+          navigate("/");
+          window.location.reload();
+        }
         throw new Error("error");
       }
     };

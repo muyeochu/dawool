@@ -16,6 +16,7 @@ import {
 } from "./styles";
 import useModal from "../../../../utils/useModal";
 import { modalState } from "../../../../../recoil/ModalState";
+import { userState } from "../../../../../recoil/UserState";
 
 declare global {
   interface Window {
@@ -28,6 +29,7 @@ export const CourseList = () => {
   const { openModal, closeModal } = useModal();
   const [mdState, setModalState] = useRecoilState(modalState);
   const navigate = useNavigate();
+  const [user, setUser] = useRecoilState(userState);
 
   useEffect(() => {}, []);
 
@@ -39,6 +41,20 @@ export const CourseList = () => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response.data.code === "EXPIRED_JWT_TOKEN") {
+          window.localStorage.clear();
+          setUser({
+            accessToken: "",
+            accessTokenExpiresIn: 0,
+            grantType: "",
+            nickName: "",
+            refreshToken: "",
+            isSurveyed: false,
+          });
+          alert("다시 로그인 해 주시기 바랍니다.");
+          navigate("/");
+          window.location.reload();
+        }
       });
   async function myFunction() {
     try {
@@ -70,6 +86,20 @@ export const CourseList = () => {
       .then(() => {})
       .catch((err) => {
         console.log(err);
+        if (err.response.data.code === "EXPIRED_JWT_TOKEN") {
+          window.localStorage.clear();
+          setUser({
+            accessToken: "",
+            accessTokenExpiresIn: 0,
+            grantType: "",
+            nickName: "",
+            refreshToken: "",
+            isSurveyed: false,
+          });
+          alert("다시 로그인 해 주시기 바랍니다.");
+          navigate("/");
+          window.location.reload();
+        }
       });
   };
 

@@ -5,6 +5,8 @@ import styled from "styled-components";
 
 import { ListType } from "../../../types/courseListTypes";
 import { customAxios2 } from "../../../recoil/customAxios";
+import { useNavigate } from "react-router-dom";
+import { userState } from "../../../recoil/UserState";
 
 declare global {
   interface Window {
@@ -21,6 +23,8 @@ const MapContainer = styled.div`
 
 const Markers = () => {
   const [folderState, setFolderState] = useRecoilState(FolderState);
+  const navigate = useNavigate();
+  const [user, setUser] = useRecoilState(userState);
   const key = process.env.REACT_APP_KAKAOMAP_API_KEY;
   useEffect(() => {
     const mapScript = document.createElement("script");
@@ -41,6 +45,20 @@ const Markers = () => {
             })
             .catch((err) => {
               console.log(err);
+              if (err.response.data.code === "EXPIRED_JWT_TOKEN") {
+                window.localStorage.clear();
+                setUser({
+                  accessToken: "",
+                  accessTokenExpiresIn: 0,
+                  grantType: "",
+                  nickName: "",
+                  refreshToken: "",
+                  isSurveyed: false,
+                });
+                alert("다시 로그인 해 주시기 바랍니다.");
+                navigate("/");
+                window.location.reload();
+              }
             });
         async function myFunction() {
           try {
