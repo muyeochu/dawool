@@ -1,35 +1,38 @@
 # 🧳 다울
 
-![logo](./wiki/img/logo.png)
+<img src="./wiki/img/logo.png" height="15%" />
 
 ## == Contents ==
 
-1. [개요](#개요)
-2. [프로젝트 소개](#프로젝트-소개)
-3. [주요기능](#주요-기능)
-4. [프로젝트 실행방법](#프로젝트-실행-방법)
-5. [기술스택](#🔧-기술-스택)
-   1. [Front-End](#front-end)
-   2. [Back-End](#back-end)
-6. [프로젝트 구조도](#프로젝트-구조도)
-7. [Design](#design)
-8. [TEAM](#team)
+1. [개요](#1-개요)
+2. [프로젝트 소개](#2-프로젝트-소개)
+3. [주요기능](#3-주요-기능)
+4. [프로젝트 실행방법](#4-프로젝트-실행-방법)
+5. [기술스택](#5-기술-스택)
+   1. [Front-End](#51-front-end)
+   2. [Back-End](#52-back-end)
+6. [프로젝트 구조도](#6-프로젝트-구조도)
+7. [Design](#7-design)
+8. [TEAM](#8-team)
 
 <br><br>
 
-## 개요
+## 1. 개요
 
-> 개발 기간: 2023.03.20 ~ 2023.04.07
+- 개발 기간: 2023.03.20 ~ 2023.04.07
+- 삼성 청년 소프트웨어 아카데미(SSAFY) 빅데이터 추천 프로젝트
+
+  `#🏆프로젝트우수상` `#1등` `#빅데이터` `#무장애여행지추천`
 
 <br><br>
 
-### 프로젝트 소개
+## 2. 프로젝트 소개
 
 ![intro page](./wiki/gif/intro_page.gif)
 
 - 6가지 여행지(관광지, 문화시설, 레포츠, 쇼핑, 식당, 숙박)의 편의 시설의 정보를 무장애 태그(지체, 시각, 청각 장애인, 노인, 영유아)로 나누어 여행지를 추천해주는 빅데이터 기반 추천 프로젝트
 
-<br><br>
+<br>
 
 > 무장애란?
 
@@ -37,9 +40,9 @@
 
 <br><br>
 
-## 주요 기능
+## 3. 주요 기능
 
-### 1. 여행지 목록
+### 3.1. 여행지 목록
 
 ![filtering](./wiki/gif/filtering.gif)
 
@@ -49,7 +52,7 @@
 
 <br>
 
-### 2. 검색 / 상세조회
+### 3.2. 검색 / 상세조회
 
 ![STT](./wiki/gif/STT.gif)
 
@@ -58,7 +61,7 @@
 
 <br>
 
-### 3. 여행지 추천
+### 3.3. 여행지 추천
 
 ![recommend](./wiki/gif/recommend.gif)
 
@@ -79,8 +82,8 @@
 
 <br><br>
 
-## 프로젝트 실행 방법
-### client 실행
+## 4. 프로젝트 실행 방법
+### 4.1. client 실행
 
 1. **원격 저장소 복제**
 
@@ -108,7 +111,7 @@ $ npm start
 
 <br />
 
-### server 실행
+### 4.2. server 실행
 
 1. **원격 저장소 복제**
 
@@ -128,16 +131,18 @@ $ cd backend
 
 <br><br>
 
-## 🔧 기술 스택
+## 5. 기술 스택
 
-### Front-End
+### 5.1. Front-End
 
 <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white">
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
 <img src="https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=.ENV&logoColor=black">
 <img src="https://img.shields.io/badge/KAKAO-FFCD00?style=for-the-badge&logo=Kakao&logoColor=black">
 
-### Back-End
+<br/>
+
+### 5.2. Back-End
 
 #### API 서버
 
@@ -172,7 +177,9 @@ $ cd backend
 <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
 <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white">
 
-## 프로젝트 구조도
+<br/><br/>
+
+## 6. 프로젝트 구조도
 
 ```
 └─📂backend
@@ -288,23 +295,25 @@ $ cd backend
 
 <br><br>
 
-## Design
+## 7. Design
 
-### 시스템 구조도
+### 7.1. 시스템 구조도
 
 ![Architecture](./wiki/img/architecture.png)
 
 <br>
 
-### API 설계
+### 7.2. API 설계
 
 ![API 명세서](./wiki/gif/API_document.gif)
 
+[API 명세서](https://dodo-elice.notion.site/API-6e8c079e046941eaa35c514dc2f22692)
+
 <br><br>
 
-## TEAM
+## 8. TEAM
 
-### Front-end
+### 8.1. Front-end
 
 <table class="tg">
 <thead>
@@ -344,7 +353,7 @@ $ cd backend
 
 <br>
 
-### Back-end
+### 8.2. Back-end
 
 <table>
 <thead>
