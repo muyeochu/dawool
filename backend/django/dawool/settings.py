@@ -25,7 +25,7 @@ JWT_SECRET_KEY =env('JWT_SECERET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['j8d105.p.ssafy.io', 'localhost']
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
